@@ -1,0 +1,213 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "0",
+                    "typeID": "TabBar",
+                    "zOrder": "8",
+                    "w": "552",
+                    "h": "469",
+                    "measuredW": "404",
+                    "measuredH": "100",
+                    "x": "459",
+                    "y": "226",
+                    "properties": {
+                        "tabHPosition": "center",
+                        "tabVPosition": "top",
+                        "text": "Συναλλαγές,Επεξεργασία Προφίλ",
+                        "size": "24",
+                        "bold": "true",
+                        "selectedIndex": "0"
+                    }
+                },
+                {
+                    "ID": "1",
+                    "typeID": "BrowserWindow",
+                    "zOrder": "0",
+                    "w": "1440",
+                    "h": "720",
+                    "measuredW": "450",
+                    "measuredH": "400",
+                    "x": "15",
+                    "y": "20",
+                    "properties": {
+                        "text": "A Web Page\nhttps://trivago-clone/\n",
+                        "borderStyle": "square"
+                    }
+                },
+                {
+                    "ID": "2",
+                    "typeID": "Canvas",
+                    "zOrder": "1",
+                    "w": "1440",
+                    "h": "80",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "15",
+                    "y": "87",
+                    "properties": {
+                        "color": "2848996",
+                        "borderStyle": "square"
+                    }
+                },
+                {
+                    "ID": "3",
+                    "typeID": "Image",
+                    "zOrder": "2",
+                    "w": "80",
+                    "h": "80",
+                    "measuredW": "680",
+                    "measuredH": "577",
+                    "x": "59",
+                    "y": "87",
+                    "properties": {
+                        "src": {
+                            "ID": "31CDFE42-8759-4312-A70C-494DAC7FBDA2"
+                        }
+                    }
+                },
+                {
+                    "ID": "4",
+                    "typeID": "TextInput",
+                    "zOrder": "3",
+                    "w": "331",
+                    "measuredW": "137",
+                    "measuredH": "27",
+                    "x": "362",
+                    "y": "183",
+                    "properties": {
+                        "text": "Που θα θέλατε να πάτε;",
+                        "borderStyle": "rectangle",
+                        "borderColor": "3355443",
+                        "textColor": "10066329"
+                    }
+                },
+                {
+                    "ID": "5",
+                    "typeID": "TextInput",
+                    "zOrder": "4",
+                    "w": "167",
+                    "measuredW": "40",
+                    "measuredH": "27",
+                    "x": "693",
+                    "y": "183",
+                    "properties": {
+                        "text": "Πότε;",
+                        "borderStyle": "rectangle",
+                        "borderColor": "3355443",
+                        "textColor": "10066329"
+                    }
+                },
+                {
+                    "ID": "6",
+                    "typeID": "TextInput",
+                    "zOrder": "5",
+                    "w": "167",
+                    "measuredW": "47",
+                    "measuredH": "27",
+                    "x": "860",
+                    "y": "183",
+                    "properties": {
+                        "text": "Πόσοι;",
+                        "borderStyle": "rectangle",
+                        "borderColor": "3355443",
+                        "textColor": "10066329"
+                    }
+                },
+                {
+                    "ID": "7",
+                    "typeID": "Button",
+                    "zOrder": "6",
+                    "measuredW": "81",
+                    "measuredH": "24",
+                    "x": "1027",
+                    "y": "183",
+                    "properties": {
+                        "text": "Αναζήτηση",
+                        "color": "2848996"
+                    }
+                },
+                {
+                    "ID": "10",
+                    "typeID": "Icon",
+                    "zOrder": "7",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1361",
+                    "y": "103",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "15658734"
+                    }
+                },
+                {
+                    "ID": "16",
+                    "typeID": "TextArea",
+                    "zOrder": "9",
+                    "w": "526",
+                    "h": "71",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "472",
+                    "y": "290",
+                    "properties": {
+                        "text": "Όνομα: Μπάμπης Σουγιάς\nΞενοδοχείο: Hotel Dalhia\nΔωμάτιο: Τρίκλινο\nΤιμή: 50 €"
+                    }
+                },
+                {
+                    "ID": "17",
+                    "typeID": "TextArea",
+                    "zOrder": "10",
+                    "w": "526",
+                    "h": "71",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "472",
+                    "y": "464",
+                    "properties": {
+                        "text": "Όνομα: Λαυρέντης Μαχαιρίτσας\nΞενοδοχείο: Hotel Dalhia\nΔωμάτιο: Τρίκλινο\nΤιμή: 50 €"
+                    }
+                },
+                {
+                    "ID": "18",
+                    "typeID": "TextArea",
+                    "zOrder": "11",
+                    "w": "526",
+                    "h": "71",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "472",
+                    "y": "377",
+                    "properties": {
+                        "text": "Όνομα: Λευτέρης Λεπίδας\nΞενοδοχείο: Hotel Dalhia\nΔωμάτιο: Τρίκλινο\nΤιμή: 50 €"
+                    }
+                },
+                {
+                    "ID": "19",
+                    "typeID": "Paragraph",
+                    "zOrder": "12",
+                    "w": "92",
+                    "h": "22",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "472",
+                    "y": "661",
+                    "properties": {
+                        "text": "Έσοδα : 150€",
+                        "align": "center"
+                    }
+                }
+            ]
+        },
+        "mockupH": "720",
+        "mockupW": "1440",
+        "measuredW": "1455",
+        "measuredH": "740",
+        "version": "1.0"
+    }
+}

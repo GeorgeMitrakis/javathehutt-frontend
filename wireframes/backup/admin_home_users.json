@@ -1,0 +1,466 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "0",
+                    "typeID": "Canvas",
+                    "zOrder": "2",
+                    "w": "1920",
+                    "h": "132",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "223",
+                    "y": "155",
+                    "properties": {
+                        "color": "2848996",
+                        "borderStyle": "square"
+                    }
+                },
+                {
+                    "ID": "1",
+                    "typeID": "Image",
+                    "zOrder": "3",
+                    "w": "136",
+                    "h": "128",
+                    "measuredW": "680",
+                    "measuredH": "577",
+                    "x": "231",
+                    "y": "157",
+                    "properties": {
+                        "src": {
+                            "ID": "31CDFE42-8759-4312-A70C-494DAC7FBDA2"
+                        }
+                    }
+                },
+                {
+                    "ID": "2",
+                    "typeID": "Icon",
+                    "zOrder": "4",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "3",
+                    "typeID": "Icon",
+                    "zOrder": "5",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "2037",
+                    "y": "197",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "15658734"
+                    }
+                },
+                {
+                    "ID": "4",
+                    "typeID": "Icon",
+                    "zOrder": "6",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "298",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "5",
+                    "typeID": "Icon",
+                    "zOrder": "7",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "308",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "6",
+                    "typeID": "Icon",
+                    "zOrder": "8",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "318",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "7",
+                    "typeID": "Icon",
+                    "zOrder": "9",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "328",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "8",
+                    "typeID": "Icon",
+                    "zOrder": "10",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "9",
+                    "typeID": "Icon",
+                    "zOrder": "11",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "10",
+                    "typeID": "Title",
+                    "zOrder": "12",
+                    "w": "567",
+                    "measuredW": "530",
+                    "measuredH": "64",
+                    "x": "884",
+                    "y": "369",
+                    "properties": {
+                        "bold": "true",
+                        "size": "60",
+                        "text": "I AM THE SENATE!"
+                    }
+                },
+                {
+                    "ID": "17",
+                    "typeID": "TextInput",
+                    "zOrder": "13",
+                    "w": "331",
+                    "measuredW": "59",
+                    "measuredH": "27",
+                    "x": "977",
+                    "y": "522",
+                    "properties": {
+                        "text": "Search...",
+                        "borderStyle": "rectangle",
+                        "borderColor": "3355443",
+                        "textColor": "10066329",
+                        "align": "left"
+                    }
+                },
+                {
+                    "ID": "18",
+                    "typeID": "Button",
+                    "zOrder": "14",
+                    "w": "81",
+                    "h": "24",
+                    "measuredW": "81",
+                    "measuredH": "24",
+                    "x": "1317",
+                    "y": "522",
+                    "properties": {
+                        "text": "Αναζήτηση",
+                        "color": "2848996"
+                    }
+                },
+                {
+                    "ID": "19",
+                    "typeID": "Canvas",
+                    "zOrder": "15",
+                    "w": "532",
+                    "h": "97",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "910",
+                    "y": "594"
+                },
+                {
+                    "ID": "20",
+                    "typeID": "Title",
+                    "zOrder": "16",
+                    "measuredW": "105",
+                    "measuredH": "44",
+                    "x": "942",
+                    "y": "621",
+                    "properties": {
+                        "text": "User1"
+                    }
+                },
+                {
+                    "ID": "21",
+                    "typeID": "Button",
+                    "zOrder": "17",
+                    "w": "78",
+                    "h": "48",
+                    "measuredW": "78",
+                    "measuredH": "41",
+                    "x": "1157",
+                    "y": "619",
+                    "properties": {
+                        "text": "Ban",
+                        "size": "32",
+                        "color": "13369344"
+                    }
+                },
+                {
+                    "ID": "22",
+                    "typeID": "Button",
+                    "zOrder": "18",
+                    "w": "173",
+                    "h": "48",
+                    "measuredW": "112",
+                    "measuredH": "24",
+                    "x": "1245",
+                    "y": "619",
+                    "properties": {
+                        "text": "Αλλαγή ρόλου",
+                        "size": "15",
+                        "color": "16750848"
+                    }
+                },
+                {
+                    "ID": "23",
+                    "typeID": "List",
+                    "zOrder": "23",
+                    "measuredW": "105",
+                    "measuredH": "126",
+                    "x": "1414",
+                    "y": "619",
+                    "properties": {
+                        "text": "Πάροχος\nΙδιώτης\nΔιαχειριστής",
+                        "bold": "true",
+                        "size": "16",
+                        "hasHeader": "false",
+                        "rowHeight": "40",
+                        "underline": "false"
+                    }
+                },
+                {
+                    "ID": "25",
+                    "typeID": "Canvas",
+                    "zOrder": "19",
+                    "w": "532",
+                    "h": "97",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "906",
+                    "y": "718"
+                },
+                {
+                    "ID": "26",
+                    "typeID": "Title",
+                    "zOrder": "20",
+                    "measuredW": "115",
+                    "measuredH": "44",
+                    "x": "938",
+                    "y": "745",
+                    "properties": {
+                        "text": "User2"
+                    }
+                },
+                {
+                    "ID": "27",
+                    "typeID": "Button",
+                    "zOrder": "21",
+                    "w": "78",
+                    "h": "48",
+                    "measuredW": "78",
+                    "measuredH": "41",
+                    "x": "1153",
+                    "y": "743",
+                    "properties": {
+                        "text": "Ban",
+                        "size": "32",
+                        "color": "13369344"
+                    }
+                },
+                {
+                    "ID": "28",
+                    "typeID": "Button",
+                    "zOrder": "22",
+                    "w": "173",
+                    "h": "48",
+                    "measuredW": "112",
+                    "measuredH": "24",
+                    "x": "1241",
+                    "y": "743",
+                    "properties": {
+                        "text": "Αλλαγή ρόλου",
+                        "size": "15",
+                        "color": "16750848"
+                    }
+                },
+                {
+                    "ID": "29",
+                    "typeID": "Canvas",
+                    "zOrder": "24",
+                    "w": "532",
+                    "h": "97",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "906",
+                    "y": "842"
+                },
+                {
+                    "ID": "30",
+                    "typeID": "Title",
+                    "zOrder": "25",
+                    "measuredW": "114",
+                    "measuredH": "44",
+                    "x": "938",
+                    "y": "869",
+                    "properties": {
+                        "text": "User3"
+                    }
+                },
+                {
+                    "ID": "31",
+                    "typeID": "Button",
+                    "zOrder": "26",
+                    "w": "78",
+                    "h": "48",
+                    "measuredW": "78",
+                    "measuredH": "41",
+                    "x": "1153",
+                    "y": "867",
+                    "properties": {
+                        "text": "Ban",
+                        "size": "32",
+                        "color": "13369344"
+                    }
+                },
+                {
+                    "ID": "32",
+                    "typeID": "Button",
+                    "zOrder": "27",
+                    "w": "173",
+                    "h": "48",
+                    "measuredW": "112",
+                    "measuredH": "24",
+                    "x": "1241",
+                    "y": "867",
+                    "properties": {
+                        "text": "Αλλαγή ρόλου",
+                        "size": "15",
+                        "color": "16750848"
+                    }
+                },
+                {
+                    "ID": "33",
+                    "typeID": "TabBar",
+                    "zOrder": "1",
+                    "w": "1020",
+                    "h": "738",
+                    "measuredW": "277",
+                    "measuredH": "100",
+                    "x": "686",
+                    "y": "461",
+                    "properties": {
+                        "tabHPosition": "center",
+                        "tabVPosition": "top",
+                        "text": "Χρήστες, Συναλλαγές",
+                        "size": "24",
+                        "bold": "true",
+                        "selectedIndex": "0"
+                    }
+                },
+                {
+                    "ID": "34",
+                    "typeID": "VerticalScrollBar",
+                    "zOrder": "28",
+                    "h": "568",
+                    "measuredW": "16",
+                    "measuredH": "100",
+                    "x": "1635",
+                    "y": "546"
+                },
+                {
+                    "ID": "35",
+                    "typeID": "LinkBar",
+                    "zOrder": "29",
+                    "measuredW": "318",
+                    "measuredH": "48",
+                    "x": "440",
+                    "y": "226",
+                    "properties": {
+                        "text": "Αρχική, Αναζήτηση",
+                        "size": "40",
+                        "color": "14540253",
+                        "underline": "false",
+                        "selectedIndex": "0",
+                        "borderColor": "16777215"
+                    }
+                },
+                {
+                    "ID": "37",
+                    "typeID": "BrowserWindow",
+                    "zOrder": "0",
+                    "w": "1922",
+                    "h": "1208",
+                    "measuredW": "450",
+                    "measuredH": "400",
+                    "x": "215",
+                    "y": "78"
+                }
+            ]
+        },
+        "mockupH": "1208",
+        "mockupW": "1928",
+        "measuredW": "2143",
+        "measuredH": "1286",
+        "version": "1.0"
+    }
+}

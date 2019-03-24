@@ -1,0 +1,835 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "29",
+                    "typeID": "TabBar",
+                    "zOrder": "0",
+                    "w": "1665",
+                    "h": "1322",
+                    "measuredW": "372",
+                    "measuredH": "100",
+                    "x": "324",
+                    "y": "353",
+                    "properties": {
+                        "tabHPosition": "center",
+                        "tabVPosition": "top",
+                        "text": "Αγαπημένα, Στοιχεία, Ιστορικό",
+                        "size": "24",
+                        "bold": "true",
+                        "selectedIndex": "0"
+                    }
+                },
+                {
+                    "ID": "30",
+                    "typeID": "Canvas",
+                    "zOrder": "1",
+                    "w": "1920",
+                    "h": "132",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "223",
+                    "y": "155",
+                    "properties": {
+                        "color": "2848996",
+                        "borderStyle": "square"
+                    }
+                },
+                {
+                    "ID": "31",
+                    "typeID": "Image",
+                    "zOrder": "2",
+                    "w": "136",
+                    "h": "128",
+                    "measuredW": "680",
+                    "measuredH": "577",
+                    "x": "231",
+                    "y": "157",
+                    "properties": {
+                        "src": {
+                            "ID": "31CDFE42-8759-4312-A70C-494DAC7FBDA2"
+                        }
+                    }
+                },
+                {
+                    "ID": "32",
+                    "typeID": "Icon",
+                    "zOrder": "3",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "33",
+                    "typeID": "Icon",
+                    "zOrder": "4",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "2037",
+                    "y": "197",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "15658734"
+                    }
+                },
+                {
+                    "ID": "34",
+                    "typeID": "Icon",
+                    "zOrder": "5",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "298",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "35",
+                    "typeID": "Icon",
+                    "zOrder": "6",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "308",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "36",
+                    "typeID": "Icon",
+                    "zOrder": "7",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "318",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "37",
+                    "typeID": "Icon",
+                    "zOrder": "8",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "328",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "38",
+                    "typeID": "Icon",
+                    "zOrder": "9",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "39",
+                    "typeID": "Icon",
+                    "zOrder": "10",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "41",
+                    "typeID": "TextInput",
+                    "zOrder": "11",
+                    "w": "541",
+                    "measuredW": "59",
+                    "measuredH": "27",
+                    "x": "811",
+                    "y": "435",
+                    "properties": {
+                        "text": "Search...",
+                        "borderStyle": "rectangle",
+                        "borderColor": "3355443",
+                        "textColor": "10066329",
+                        "align": "left"
+                    }
+                },
+                {
+                    "ID": "42",
+                    "typeID": "Button",
+                    "zOrder": "12",
+                    "w": "133",
+                    "h": "43",
+                    "measuredW": "81",
+                    "measuredH": "24",
+                    "x": "1365",
+                    "y": "435",
+                    "properties": {
+                        "text": "Αναζήτηση",
+                        "color": "2848996"
+                    }
+                },
+                {
+                    "ID": "56",
+                    "typeID": "VerticalScrollBar",
+                    "zOrder": "13",
+                    "h": "647",
+                    "measuredW": "16",
+                    "measuredH": "100",
+                    "x": "1884",
+                    "y": "546"
+                },
+                {
+                    "ID": "57",
+                    "typeID": "LinkBar",
+                    "zOrder": "14",
+                    "measuredW": "522",
+                    "measuredH": "48",
+                    "x": "440",
+                    "y": "226",
+                    "properties": {
+                        "text": "Ο λογαριασμός μου , Αναζήτηση",
+                        "size": "40",
+                        "color": "14540253",
+                        "underline": "false",
+                        "selectedIndex": "0",
+                        "borderColor": "16777215"
+                    }
+                },
+                {
+                    "ID": "99",
+                    "typeID": "Icon",
+                    "zOrder": "15",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "329",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "100",
+                    "typeID": "Icon",
+                    "zOrder": "16",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "342",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "101",
+                    "typeID": "Icon",
+                    "zOrder": "17",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "353",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "102",
+                    "typeID": "Icon",
+                    "zOrder": "18",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "367",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "103",
+                    "typeID": "Icon",
+                    "zOrder": "19",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "380",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "104",
+                    "typeID": "Icon",
+                    "zOrder": "20",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "329",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "105",
+                    "typeID": "Icon",
+                    "zOrder": "21",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1562",
+                    "y": "329",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "106",
+                    "typeID": "Canvas",
+                    "zOrder": "22",
+                    "w": "1118",
+                    "h": "206",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "611",
+                    "y": "545",
+                    "properties": {
+                        "borderStyle": "roundedSolid"
+                    }
+                },
+                {
+                    "ID": "107",
+                    "typeID": "Title",
+                    "zOrder": "23",
+                    "w": "336",
+                    "measuredW": "338",
+                    "measuredH": "44",
+                    "x": "642",
+                    "y": "546",
+                    "properties": {
+                        "text": "Σουπερ δωμάτιο #1",
+                        "size": "40",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "108",
+                    "typeID": "Paragraph",
+                    "zOrder": "24",
+                    "w": "446",
+                    "h": "99",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "647",
+                    "y": "632",
+                    "properties": {
+                        "size": "20",
+                        "text": "A *paragraph* of {color:red}text{color} with an [unassigned link].\nA _second_ &row& of ~text~ with a [web link](https://balsamiq.com/wireframes/desktop/docs/text/#basic-formatting)",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "109",
+                    "typeID": "Icon",
+                    "zOrder": "25",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "997",
+                    "y": "546",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "110",
+                    "typeID": "Icon",
+                    "zOrder": "26",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1082",
+                    "y": "546",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "111",
+                    "typeID": "Icon",
+                    "zOrder": "27",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1117",
+                    "y": "545",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "112",
+                    "typeID": "Icon",
+                    "zOrder": "28",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1040",
+                    "y": "545",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "113",
+                    "typeID": "Icon",
+                    "zOrder": "29",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1160",
+                    "y": "545",
+                    "properties": {
+                        "icon": {
+                            "ID": "thumbs-o-up",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "114",
+                    "typeID": "Icon",
+                    "zOrder": "30",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1248",
+                    "y": "546",
+                    "properties": {
+                        "icon": {
+                            "ID": "percent",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "115",
+                    "typeID": "Paragraph",
+                    "zOrder": "31",
+                    "w": "42",
+                    "h": "30",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "1211",
+                    "y": "552",
+                    "properties": {
+                        "text": "89",
+                        "size": "32"
+                    }
+                },
+                {
+                    "ID": "116",
+                    "typeID": "Paragraph",
+                    "zOrder": "32",
+                    "w": "221",
+                    "h": "69",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "642",
+                    "y": "592",
+                    "properties": {
+                        "text": "Περιοχή",
+                        "size": "28",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "117",
+                    "typeID": "Icon",
+                    "zOrder": "33",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1666",
+                    "y": "701",
+                    "properties": {
+                        "icon": {
+                            "ID": "chevron-circle-down",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "118",
+                    "typeID": "Image",
+                    "zOrder": "34",
+                    "w": "153",
+                    "h": "132",
+                    "measuredW": "77",
+                    "measuredH": "79",
+                    "x": "993",
+                    "y": "597"
+                },
+                {
+                    "ID": "119",
+                    "typeID": "Image",
+                    "zOrder": "35",
+                    "w": "139",
+                    "h": "131",
+                    "measuredW": "77",
+                    "measuredH": "79",
+                    "x": "1312",
+                    "y": "597"
+                },
+                {
+                    "ID": "120",
+                    "typeID": "Image",
+                    "zOrder": "36",
+                    "w": "139",
+                    "h": "131",
+                    "measuredW": "77",
+                    "measuredH": "79",
+                    "x": "1160",
+                    "y": "597"
+                },
+                {
+                    "ID": "121",
+                    "typeID": "Canvas",
+                    "zOrder": "37",
+                    "w": "1118",
+                    "h": "206",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "611",
+                    "y": "777",
+                    "properties": {
+                        "borderStyle": "roundedSolid"
+                    }
+                },
+                {
+                    "ID": "122",
+                    "typeID": "Title",
+                    "zOrder": "38",
+                    "w": "336",
+                    "measuredW": "338",
+                    "measuredH": "44",
+                    "x": "642",
+                    "y": "780",
+                    "properties": {
+                        "text": "Σουπερ δωμάτιο #1",
+                        "size": "40",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "123",
+                    "typeID": "Paragraph",
+                    "zOrder": "39",
+                    "w": "446",
+                    "h": "99",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "647",
+                    "y": "863",
+                    "properties": {
+                        "size": "20",
+                        "text": "A *paragraph* of {color:red}text{color} with an [unassigned link].\nA _second_ &row& of ~text~ with a [web link](https://balsamiq.com/wireframes/desktop/docs/text/#basic-formatting)",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "124",
+                    "typeID": "Icon",
+                    "zOrder": "40",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "997",
+                    "y": "779",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "125",
+                    "typeID": "Icon",
+                    "zOrder": "41",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1082",
+                    "y": "779",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "126",
+                    "typeID": "Icon",
+                    "zOrder": "42",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1117",
+                    "y": "777",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "127",
+                    "typeID": "Icon",
+                    "zOrder": "43",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1040",
+                    "y": "777",
+                    "properties": {
+                        "icon": {
+                            "ID": "star",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "128",
+                    "typeID": "Icon",
+                    "zOrder": "44",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1160",
+                    "y": "777",
+                    "properties": {
+                        "icon": {
+                            "ID": "thumbs-o-up",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "129",
+                    "typeID": "Icon",
+                    "zOrder": "45",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1248",
+                    "y": "780",
+                    "properties": {
+                        "icon": {
+                            "ID": "percent",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "130",
+                    "typeID": "Paragraph",
+                    "zOrder": "46",
+                    "w": "42",
+                    "h": "30",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "1211",
+                    "y": "786",
+                    "properties": {
+                        "text": "89",
+                        "size": "32"
+                    }
+                },
+                {
+                    "ID": "131",
+                    "typeID": "Paragraph",
+                    "zOrder": "47",
+                    "w": "221",
+                    "h": "69",
+                    "measuredW": "275",
+                    "measuredH": "80",
+                    "x": "642",
+                    "y": "824",
+                    "properties": {
+                        "text": "Περιοχή",
+                        "size": "28",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "132",
+                    "typeID": "Icon",
+                    "zOrder": "48",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1666",
+                    "y": "930",
+                    "properties": {
+                        "icon": {
+                            "ID": "chevron-circle-down",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "133",
+                    "typeID": "Image",
+                    "zOrder": "49",
+                    "w": "153",
+                    "h": "132",
+                    "measuredW": "77",
+                    "measuredH": "79",
+                    "x": "993",
+                    "y": "831"
+                },
+                {
+                    "ID": "134",
+                    "typeID": "Image",
+                    "zOrder": "50",
+                    "w": "139",
+                    "h": "131",
+                    "measuredW": "77",
+                    "measuredH": "79",
+                    "x": "1312",
+                    "y": "831"
+                },
+                {
+                    "ID": "135",
+                    "typeID": "Image",
+                    "zOrder": "51",
+                    "w": "139",
+                    "h": "131",
+                    "measuredW": "77",
+                    "measuredH": "79",
+                    "x": "1160",
+                    "y": "831"
+                },
+                {
+                    "ID": "136",
+                    "typeID": "Icon",
+                    "zOrder": "52",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1563",
+                    "y": "567",
+                    "properties": {
+                        "icon": {
+                            "ID": "trash",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "138",
+                    "typeID": "Icon",
+                    "zOrder": "53",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1563",
+                    "y": "811",
+                    "properties": {
+                        "icon": {
+                            "ID": "trash",
+                            "size": "large"
+                        }
+                    }
+                }
+            ]
+        },
+        "mockupH": "1520",
+        "mockupW": "1920",
+        "measuredW": "2143",
+        "measuredH": "1675",
+        "version": "1.0"
+    }
+}

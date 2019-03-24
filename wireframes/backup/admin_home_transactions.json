@@ -1,0 +1,312 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "0",
+                    "typeID": "Canvas",
+                    "zOrder": "2",
+                    "w": "1920",
+                    "h": "132",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "223",
+                    "y": "155",
+                    "properties": {
+                        "color": "2848996",
+                        "borderStyle": "square"
+                    }
+                },
+                {
+                    "ID": "1",
+                    "typeID": "Image",
+                    "zOrder": "3",
+                    "w": "136",
+                    "h": "128",
+                    "measuredW": "680",
+                    "measuredH": "577",
+                    "x": "231",
+                    "y": "157",
+                    "properties": {
+                        "src": {
+                            "ID": "31CDFE42-8759-4312-A70C-494DAC7FBDA2"
+                        }
+                    }
+                },
+                {
+                    "ID": "2",
+                    "typeID": "Icon",
+                    "zOrder": "4",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "3",
+                    "typeID": "Icon",
+                    "zOrder": "5",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "2037",
+                    "y": "197",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "15658734"
+                    }
+                },
+                {
+                    "ID": "4",
+                    "typeID": "Icon",
+                    "zOrder": "6",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "298",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "5",
+                    "typeID": "Icon",
+                    "zOrder": "7",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "308",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "6",
+                    "typeID": "Icon",
+                    "zOrder": "8",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "318",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "7",
+                    "typeID": "Icon",
+                    "zOrder": "9",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "328",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "8",
+                    "typeID": "Icon",
+                    "zOrder": "10",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "9",
+                    "typeID": "Icon",
+                    "zOrder": "11",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1995",
+                    "y": "288",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle-o",
+                            "size": "large"
+                        },
+                        "borderStyle": "none",
+                        "color": "16777215"
+                    }
+                },
+                {
+                    "ID": "10",
+                    "typeID": "Title",
+                    "zOrder": "12",
+                    "w": "567",
+                    "measuredW": "530",
+                    "measuredH": "64",
+                    "x": "878",
+                    "y": "366",
+                    "properties": {
+                        "bold": "true",
+                        "size": "60",
+                        "text": "I AM THE SENATE!"
+                    }
+                },
+                {
+                    "ID": "17",
+                    "typeID": "TextInput",
+                    "zOrder": "13",
+                    "w": "331",
+                    "measuredW": "59",
+                    "measuredH": "27",
+                    "x": "971",
+                    "y": "519",
+                    "properties": {
+                        "text": "Search...",
+                        "borderStyle": "rectangle",
+                        "borderColor": "3355443",
+                        "textColor": "10066329",
+                        "align": "left"
+                    }
+                },
+                {
+                    "ID": "18",
+                    "typeID": "Button",
+                    "zOrder": "14",
+                    "w": "81",
+                    "h": "24",
+                    "measuredW": "81",
+                    "measuredH": "24",
+                    "x": "1311",
+                    "y": "519",
+                    "properties": {
+                        "text": "Αναζήτηση",
+                        "color": "2848996"
+                    }
+                },
+                {
+                    "ID": "33",
+                    "typeID": "TabBar",
+                    "zOrder": "1",
+                    "w": "1020",
+                    "h": "738",
+                    "measuredW": "277",
+                    "measuredH": "100",
+                    "x": "680",
+                    "y": "458",
+                    "properties": {
+                        "tabHPosition": "center",
+                        "tabVPosition": "top",
+                        "text": "Χρήστες, Συναλλαγές",
+                        "size": "24",
+                        "bold": "true",
+                        "selectedIndex": "1"
+                    }
+                },
+                {
+                    "ID": "34",
+                    "typeID": "VerticalScrollBar",
+                    "zOrder": "15",
+                    "h": "522",
+                    "measuredW": "16",
+                    "measuredH": "100",
+                    "x": "1629",
+                    "y": "586"
+                },
+                {
+                    "ID": "35",
+                    "typeID": "DataGrid",
+                    "zOrder": "16",
+                    "w": "860",
+                    "h": "522",
+                    "measuredW": "337",
+                    "measuredH": "64",
+                    "x": "719",
+                    "y": "586",
+                    "properties": {
+                        "text": "Ημερομηνία\\r ^, Χρήστης ^v, Πάροχος, Τιμή v, Κέρδος\n"
+                    }
+                },
+                {
+                    "ID": "36",
+                    "typeID": "Title",
+                    "zOrder": "17",
+                    "measuredW": "185",
+                    "measuredH": "19",
+                    "x": "1442",
+                    "y": "519",
+                    "properties": {
+                        "text": "Συνολικό Κέρδος: 100 units",
+                        "size": "15",
+                        "bold": "true"
+                    }
+                },
+                {
+                    "ID": "37",
+                    "typeID": "LinkBar",
+                    "zOrder": "18",
+                    "measuredW": "463",
+                    "measuredH": "48",
+                    "x": "440",
+                    "y": "226",
+                    "properties": {
+                        "text": "Τα δωμάτιά μου, Αναζήτηση",
+                        "size": "40",
+                        "color": "14540253",
+                        "underline": "false",
+                        "selectedIndex": "0",
+                        "borderColor": "16777215"
+                    }
+                },
+                {
+                    "ID": "39",
+                    "typeID": "BrowserWindow",
+                    "zOrder": "0",
+                    "w": "1918",
+                    "h": "1275",
+                    "measuredW": "450",
+                    "measuredH": "400",
+                    "x": "225",
+                    "y": "83"
+                }
+            ]
+        },
+        "mockupH": "1275",
+        "mockupW": "1920",
+        "measuredW": "2143",
+        "measuredH": "1358",
+        "version": "1.0"
+    }
+}
