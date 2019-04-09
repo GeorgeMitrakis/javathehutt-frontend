@@ -3,4 +3,18 @@
     margin: 0;
     padding: 0;
     font-size: calc(5px + 2vmin);
+    background-color: rgb(242, 247, 242);
+}
+
+
+input {
+    outline: none !important;
+    box-shadow:none !important;
+    border-color: #cccccc !important;
+    border-radius: 0px !important;
+}
+
+button{
+    outline: none !important;
+    box-shadow:none !important;
 }
