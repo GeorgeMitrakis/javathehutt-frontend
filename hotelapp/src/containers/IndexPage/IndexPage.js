@@ -81,61 +81,60 @@ class IndexPage extends React.Component {
                                             <i class="fas fa-user mr-3"></i>                                         
                                             1 ενήλικας - 0 παιδιά {' '}
                                         </DropdownToggle>
-                                        <DropdownMenu>
-                                            <DropdownItem>
-                                                <div className="d-flex align-items-center">                                                
-                                                    <div className="pr-5">
-                                                        Δωμάτια
-                                                    </div> 
-                                                    <div className="pr-3">
-                                                        <button className="form-control"><i class="fas fa-minus"></i></button>
-                                                    </div>
-                                                    <div className="pr-3">
-                                                    2
-                                                    </div>
-                                                    <div className="">
-                                                        <button className="form-control"><i class="fas fa-plus"></i></button>
-                                                    </div>
+                                        <DropdownMenu className="p-2">
+                                            <div className="d-flex align-items-center">                                                
+                                                <div className="pr-5">
+                                                    Δωμάτια
+                                                </div> 
+                                                <div className="pr-3">
+                                                    <button className="form-control"><i class="fas fa-minus"></i></button>
                                                 </div>
-                                            </DropdownItem>
-                                            <DropdownItem divider />
-                                            <DropdownItem>
-                                                <Row className="align-items-center">
-                                                    <Col className="d-flex justify-content-start">
-                                                        Ενήλικες
-                                                    </Col>
+                                                <div className="pr-3">
+                                                    26
+                                                </div>
+                                                <div className="">
+                                                    <button className="form-control"><i class="fas fa-plus"></i></button>
+                                                </div>
+                                            </div>
 
-                                                    <Col className="d-flex justify-content-end">                                                
-                                                        <button className="form-control"><i class="fas fa-minus"></i></button>
-                                                        <div className="pr-3 pl-3 align-self-center">
-                                                            2
-                                                        </div>
-                                                        <button className="form-control"><i class="fas fa-plus"></i></button>                        
-                                                    </Col>
-                                                </Row>
-                                            </DropdownItem>
                                             <DropdownItem divider />
-                                            <DropdownItem>
-                                                <Row className="align-items-center">
-                                                    <Col className="d-flex justify-content-start">
-                                                        Παιδιά
-                                                    </Col>
 
-                                                    <Col className="d-flex justify-content-end">                                                
-                                                        <button className="form-control"><i class="fas fa-minus"></i></button>
-                                                        <div className="pr-3 pl-3 align-self-center">
-                                                            2
-                                                        </div>
-                                                        <button className="form-control"><i class="fas fa-plus"></i></button>                        
-                                                    </Col>
-                                                </Row>
-                                            </DropdownItem>
+                                            <Row className="align-items-center">
+                                                <Col className="d-flex justify-content-start">
+                                                    Ενήλικες
+                                                </Col>
+
+                                                <Col className="d-flex justify-content-end">                                                
+                                                    <button className="form-control"><i class="fas fa-minus"></i></button>
+                                                    <div className="pr-3 pl-3 align-self-center">
+                                                        28
+                                                    </div>
+                                                    <button className="form-control"><i class="fas fa-plus"></i></button>                        
+                                                </Col>
+                                            </Row>
+
+                                            <DropdownItem divider />
+
+                                            <Row className="align-items-center">
+                                                <Col className="d-flex justify-content-start">
+                                                    Παιδιά
+                                                </Col>
+
+                                                <Col className="d-flex justify-content-end">                                                
+                                                    <button className="form-control"><i class="fas fa-minus"></i></button>
+                                                    <div className="pr-3 pl-3 align-self-center">
+                                                        24
+                                                    </div>
+                                                    <button className="form-control"><i class="fas fa-plus"></i></button>                        
+                                                </Col>
+                                            </Row>
+
                                         </DropdownMenu>
                                     </InputGroupButtonDropdown>
                                 </Col>
                             
                                 <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto">
-                                    <button id={classes.submit_btn} className="form-control border-0 rounded-0 font-weight-bold">Αναζήτηση</button>
+                                    <button id={classes.submit_btn} className="form-control  rounded-0 font-weight-bold">Αναζήτηση</button>
                                 </Col>
                             </FormGroup>
                         </Form>

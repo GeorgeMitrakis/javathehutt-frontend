@@ -15,6 +15,7 @@
 #submit_btn {
     background-color: rgb(48, 34, 238);
     color: white;
+    border: 1px solid rgb(236, 190, 90);
 }
 
 #submit_btn:hover {
