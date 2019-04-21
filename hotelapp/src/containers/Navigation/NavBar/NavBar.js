@@ -1,14 +1,12 @@
 import React from 'react';
 import classes from './NavBar.module.css';
+import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem';
 import {
     Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    Button } from 'reactstrap';
+    Nav } from 'reactstrap';
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -34,20 +32,8 @@ class NavBar extends React.Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink href="#">
-                                <Button className="font-weight-bold" color="light" size="sm" block>
-                                    Log In
-                                </Button>
-                            </NavLink>                        
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="#">
-                                <Button className="font-weight-bold" color="light" size="sm" block>
-                                    Sign Up
-                                </Button>
-                            </NavLink>
-                        </NavItem>
+                        <NavigationItem navDest="hello" navItemText="Log In"/>
+                        <NavigationItem navDest="whatsup" navItemText="Sign Up"/>
                     </Nav>
                 </Collapse>
             </Navbar>
