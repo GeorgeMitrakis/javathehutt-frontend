@@ -38,8 +38,12 @@ class NavBar extends React.Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <NavigationItem navDest="hello" navItemText="Log In"/>
-                        <NavigationItem navDest="whatsup" navItemText="Sign Up"/>
+                        { !this.props.isAuth
+                            ? <> <NavigationItem link="/login"> Log In </NavigationItem>
+                              <NavigationItem link="/signup"> Sign Up </NavigationItem> </>
+                            : <NavigationItem link="/logout"> Logout </NavigationItem>
+                        }
+                        
                     </Nav>
                 </Collapse>
             </Navbar>

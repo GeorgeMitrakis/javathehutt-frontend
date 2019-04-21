@@ -8,10 +8,10 @@ const navigationItem = ( props ) => (
             style={{textDecoration: "none"}}
             className="container fluid align-self-center p-0"
             exact
-            to={props.navDest}
+            to={props.link}
         >
             <Button className="font-weight-bold" color="light" size="sm" block>
-                {props.navItemText}
+                {props.children}
             </Button>
         </RouterNavLink>  
     </NavItem>
