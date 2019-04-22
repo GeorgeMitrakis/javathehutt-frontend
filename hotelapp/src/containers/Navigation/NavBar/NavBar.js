@@ -43,7 +43,6 @@ class NavBar extends React.Component {
                               <NavigationItem link="/signup"> Sign Up </NavigationItem> </>
                             : <NavigationItem link="/logout"> Logout </NavigationItem>
                         }
-                        
                     </Nav>
                 </Collapse>
             </Navbar>
