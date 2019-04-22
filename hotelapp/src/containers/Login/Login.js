@@ -3,6 +3,7 @@ import produce from 'immer';
 import { Redirect } from 'react-router-dom';
 import classes from './Login.module.css';
 import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
+import MyInput from '../../components/UI/MyInput/MyInput';
 
 class Login extends React.Component {
 
@@ -10,8 +11,19 @@ class Login extends React.Component {
         super(props);
         this.state = {
             modalIsOpen: true,
-            email: null,
-            password: null
+            formControls: {
+                email: {
+                    value: '',
+                    type: "email",
+                    placeholder: "example@example.com"
+                },
+
+                password: {
+                    value: '',
+                    type: "password",
+                    placeholder: ''
+                }
+            }
         };
     }
     
@@ -23,14 +35,43 @@ class Login extends React.Component {
         );
     }
 
+    inputChangedHandler = ( event, controlName ) => {
+        this.setState(
+            produce(draft => {
+                draft.formControls[controlName].value = event.target.value;
+            })
+        );
+    }
+
+
     submitHandler = ( event ) => {
         event.preventDefault();
         alert("Form Submitted")
     }
 
     render(){
+
+        const formElementsArray = [];
+        for ( let key in this.state.formControls ) {
+            formElementsArray.push( {
+                id: key,
+                config: this.state.formControls[key]
+            });
+        }
+
+        let formFields = formElementsArray.map( formElement => (
+            <MyInput
+                key={formElement.id}
+                name={formElement.id}
+                value={formElement.config.value}
+                type={formElement.config.type}
+                placeholder={formElement.config.placeholder}
+                changed={( event ) => this.inputChangedHandler( event, formElement.id )} 
+            />
+        ));
+
         return (
-            <Modal className="modal-sm" fade isOpen={this.state.modalIsOpen}>
+            <Modal  centered size="sm" fade isOpen={this.state.modalIsOpen}>
                 <ModalHeader toggle={this.closeModal}>
                     <h3 className={"font-weight-bold rm_hl " + classes.header_color}>Συνδεθείτε</h3>
                 </ModalHeader>
@@ -38,15 +79,8 @@ class Login extends React.Component {
                 <ModalBody>
                     <Form onSubmit={this.submitHandler}>
                         <p className="small">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας για πρόσβαση στις υπηρεσίες μας.</p>
-                        <FormGroup>
-                            <Label for="email" className="font-weight-bold small">Email</Label>
-                            <Input required type="email" className="" id="email" placeholder="exaple@exaple.com"/>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="password" className="font-weight-bold small">Password</Label>
-                            <Input required type="password" className="" id="password" />
-                        </FormGroup>
+                        
+                        {formFields}
 
                         <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button>
                     </Form>
