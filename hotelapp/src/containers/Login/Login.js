@@ -14,6 +14,7 @@ class Login extends React.Component {
             modalIsOpen: true,
             formControls: {
                 email: {
+                    required: true,
                     id: "login_email",
                     name: "Email",
                     value: '',
@@ -22,6 +23,7 @@ class Login extends React.Component {
                 },
 
                 password: {
+                    required: true,
                     id: "login_pwd",
                     name: "Password",
                     value: '',
@@ -115,6 +117,7 @@ class Login extends React.Component {
                 name={formElement.config.name}
                 value={formElement.config.value}
                 type={formElement.config.type}
+                required={formElement.config.required}
                 placeholder={formElement.config.placeholder}
                 changed={( event ) => this.inputChangedHandler( event, formElement.id )} 
             />
