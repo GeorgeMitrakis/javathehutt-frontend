@@ -1,5 +1,6 @@
 import React from 'react';
 import produce from 'immer';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import classes from './Login.module.css';
 import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
@@ -46,7 +47,32 @@ class Login extends React.Component {
 
     submitHandler = ( event ) => {
         event.preventDefault();
-        alert("Form Submitted")
+
+        // formData = {
+        //     'email': this.state.formControls.email.value,
+        //     'password': this.state.formControls.password.value
+        // }
+
+        const formData = {
+            'email': "exaple@exa/ple.com",
+            'password': "mypass"
+        }
+        
+        alert("Form Submitted");
+        axios.post(
+            "http://localhost:8765/app/api/login",
+            formData,
+            {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        )
+        .then((result) => {
+            console.log(result);
+
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     render(){
