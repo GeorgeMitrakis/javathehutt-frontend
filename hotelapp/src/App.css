@@ -22,7 +22,10 @@
     color: rgb(236, 190, 90);
 }
 
-#root .rm_hl {
+#root .rm_hl,
+#root .rm_hl:hover,
+#root .rm_hl:active,
+#root .rm_hl:visited {
     outline: none !important;
     box-shadow:none !important;
 }

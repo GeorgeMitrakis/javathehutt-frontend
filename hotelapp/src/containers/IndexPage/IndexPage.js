@@ -4,8 +4,11 @@ import classes from './IndexPage.module.css';
 import { Row } from 'reactstrap';
 
 import SearchForm from '../SearchForm/SearchForm';
+import Login from '../Login/Login';
 
 class IndexPage extends React.Component {
+
+    
 
     render() {
         return (
@@ -28,7 +31,15 @@ class IndexPage extends React.Component {
                 </div>
             </div>
 
-            
+            <Route
+                path="/login"
+                component={Login}
+            />
+
+            <Route
+                path="/signup"
+                component={Login}
+            />
 
             </>
   

@@ -37,9 +37,9 @@ class NavBar extends React.Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         { !this.props.isAuth
-                            ? <> <NavigationItem link="/login"> Log In </NavigationItem>
-                              <NavigationItem link="/signup"> Sign Up </NavigationItem> </>
-                            : <NavigationItem link="/logout"> Logout </NavigationItem>
+                            ? <> <NavigationItem link="/login"> Είσοδος </NavigationItem>
+                              <NavigationItem link="/signup"> Εγγραφή </NavigationItem> </>
+                            : <NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>
                         }
                     </Nav>
                 </Collapse>
