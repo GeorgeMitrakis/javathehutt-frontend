@@ -1,29 +1,5 @@
-
-
-
 #content{
     height: 100vh;
     padding-top: 15vh;
     padding-bottom: 2vh;
-}
-
-#rm_btn_hl{
-    outline: none !important;
-    box-shadow:none !important;;
-}
-
-#submit_btn {
-    background-color: rgb(48, 34, 238);
-    color: white;
-    border: 1px solid rgb(236, 190, 90);
-}
-
-#submit_btn:hover {
-    background-color: rgb(40, 30, 182);
-    color: whitesmoke;
-}
-
-.search_border{
-    border: 2px solid rgb(236, 190, 90);
-    background-color: white;
 }
