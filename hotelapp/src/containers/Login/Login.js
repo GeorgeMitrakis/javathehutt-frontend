@@ -14,12 +14,16 @@ class Login extends React.Component {
             modalIsOpen: true,
             formControls: {
                 email: {
+                    id: "login_email",
+                    name: "Email",
                     value: '',
                     type: "email",
                     placeholder: "example@example.com"
                 },
 
                 password: {
+                    id: "login_pwd",
+                    name: "Password",
                     value: '',
                     type: "password",
                     placeholder: ''
@@ -59,10 +63,16 @@ class Login extends React.Component {
     submitHandler = ( event ) => {
         event.preventDefault();
 
-        const formData = {
-            'email': this.state.formControls.email.value,
-            'password': this.state.formControls.password.value
+        let formData = {};
+        for ( let key in this.state.formControls ) 
+        {
+            formData[key] = this.state.formControls[key].value;
         }
+
+        // const formData = {
+        //     'email': this.state.formControls.email.value,
+        //     'password': this.state.formControls.password.value
+        // }
 
         // const formData = {
         //     'email': "exaple@exaple.com",
@@ -90,7 +100,8 @@ class Login extends React.Component {
     render(){
 
         const formElementsArray = [];
-        for ( let key in this.state.formControls ) {
+        for ( let key in this.state.formControls ) 
+        {
             formElementsArray.push( {
                 id: key,
                 config: this.state.formControls[key]
@@ -100,7 +111,8 @@ class Login extends React.Component {
         let formFields = formElementsArray.map( formElement => (
             <MyInput
                 key={formElement.id}
-                name={formElement.id}
+                id={formElement.config.id}
+                name={formElement.config.name}
                 value={formElement.config.value}
                 type={formElement.config.type}
                 placeholder={formElement.config.placeholder}

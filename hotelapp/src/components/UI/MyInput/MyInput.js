@@ -6,8 +6,8 @@ const myInput = ( props ) => {
     
     return (
         <FormGroup>
-            <Label for={props.name} className="font-weight-bold small">{props.name}</Label>
-            <Input onChange={props.changed} value={props.value}  type={props.type} className="" id={props.name} placeholder={props.placeholder}/>
+            <Label for={props.id} className="font-weight-bold small">{props.name}</Label>
+            <Input onChange={props.changed} value={props.value}  type={props.type} className="" id={props.id} placeholder={props.placeholder}/>
         </FormGroup>
     );
 
