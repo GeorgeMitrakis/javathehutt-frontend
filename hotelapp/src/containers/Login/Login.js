@@ -37,28 +37,40 @@ class Login extends React.Component {
     }
 
     inputChangedHandler = ( event, controlName ) => {
-        this.setState(
-            produce(draft => {
-                draft.formControls[controlName].value = event.target.value;
-            })
-        );
+        // tryhard way
+        // const updatedControls = {
+        //     ...this.state.formControls,
+        //     [controlName]: {
+        //         ...this.state.formControls[controlName],
+        //         value: event.target.value
+        //     }
+        // };
+        // this.setState( { formControls: updatedControls } );
+
+        //easy immer way
+        const formControls = produce(this.state.formControls, draft => {
+            draft[controlName].value = event.target.value
+        });
+
+        this.setState({ formControls });
     }
 
 
     submitHandler = ( event ) => {
         event.preventDefault();
 
-        // formData = {
-        //     'email': this.state.formControls.email.value,
-        //     'password': this.state.formControls.password.value
+        const formData = {
+            'email': this.state.formControls.email.value,
+            'password': this.state.formControls.password.value
+        }
+
+        // const formData = {
+        //     'email': "exaple@exaple.com",
+        //     'password': "mypass"
         // }
 
-        const formData = {
-            'email': "exaple@exa/ple.com",
-            'password': "mypass"
-        }
-        
-        alert("Form Submitted");
+        console.log(formData);
+
         axios.post(
             "http://localhost:8765/app/api/login",
             formData,
@@ -67,8 +79,8 @@ class Login extends React.Component {
             }
         )
         .then((result) => {
+            alert("Form Submitted");
             console.log(result);
-
         })
         .catch((err) => {
             console.log(err);
