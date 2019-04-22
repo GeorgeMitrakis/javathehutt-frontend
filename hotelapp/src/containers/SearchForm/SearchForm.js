@@ -34,7 +34,7 @@ class SearchForm extends React.Component {
                                     <i className="fas fa-bed"></i> 
                                 </InputGroupText> 
                             </InputGroupAddon> 
-                            <Input type="text" className="form-control border-0 p-0" id="destination" placeholder="Που θα θέλατε να πάτε;"/> 
+                            <Input type="text" className="form-control border-0 p-0 rm_hl" id="destination" placeholder="Που θα θέλατε να πάτε;"/> 
                         </InputGroup> 
                     </Col> 
 
@@ -47,7 +47,7 @@ class SearchForm extends React.Component {
                                     <span className="ml-3 font-weight-bold"> Από </span> 
                                 </InputGroupText> 
                             </InputGroupAddon> 
-                            <Input type="date" className="form-control border-0 p-0" id="date_from"/> 
+                            <Input type="date" className="form-control border-0 p-0 rm_hl" id="date_from"/> 
                         </InputGroup> 
                     </Col> 
 
@@ -60,14 +60,14 @@ class SearchForm extends React.Component {
                                     <span className="ml-3 font-weight-bold"> 'Εως </span> 
                                 </InputGroupText> 
                             </InputGroupAddon> 
-                            <Input type="date" className="form-control border-0 p-0" id="date_to"/> 
+                            <Input type="date" className="form-control border-0 p-0 rm_hl" id="date_to"/> 
                         </InputGroup> 
                     </Col> 
 
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto"> 
                         <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}> 
-                            <DropdownToggle caret className="rounded-0 bg-transparent border-0 text-secondary"> 
-                                <i class="fas fa-user mr-3"></i>                                          
+                            <DropdownToggle caret className="rounded-0 bg-transparent border-0 text-secondary rm_hl"> 
+                                <i className="fas fa-user mr-3"></i>                                          
                                 1 ενήλικας - 0 παιδιά {' '} 
                             </DropdownToggle> 
                             <DropdownMenu className="p-2"> 
@@ -76,13 +76,13 @@ class SearchForm extends React.Component {
                                         Δωμάτια 
                                     </div>  
                                     <div className="pr-3"> 
-                                        <button className="form-control"><i class="fas fa-minus"></i></button> 
+                                        <button className="form-control rm_hl"><i className="fas fa-minus"></i></button> 
                                     </div> 
                                     <div className="pr-3"> 
                                         26 
                                     </div> 
                                     <div className=""> 
-                                        <button className="form-control"><i class="fas fa-plus"></i></button> 
+                                        <button className="form-control rm_hl"><i className="fas fa-plus"></i></button> 
                                     </div> 
                                 </div> 
 
@@ -94,11 +94,11 @@ class SearchForm extends React.Component {
                                     </Col> 
 
                                     <Col className="d-flex justify-content-end">                                                 
-                                        <button className="form-control"><i class="fas fa-minus"></i></button> 
+                                        <button className="form-control rm_hl"><i className="fas fa-minus"></i></button> 
                                         <div className="pr-3 pl-3 align-self-center"> 
                                             28 
                                         </div> 
-                                        <button className="form-control"><i class="fas fa-plus"></i></button>                         
+                                        <button className="form-control rm_hl"><i className="fas fa-plus"></i></button>                         
                                     </Col> 
                                 </Row> 
 
@@ -110,11 +110,11 @@ class SearchForm extends React.Component {
                                     </Col> 
 
                                     <Col className="d-flex justify-content-end">                                                 
-                                        <button className="form-control"><i class="fas fa-minus"></i></button> 
+                                        <button className="form-control rm_hl"><i className="fas fa-minus"></i></button> 
                                         <div className="pr-3 pl-3 align-self-center"> 
                                             24 
                                         </div> 
-                                        <button className="form-control"><i class="fas fa-plus"></i></button>                         
+                                        <button className="form-control rm_hl"><i className="fas fa-plus"></i></button>                         
                                     </Col> 
                                 </Row> 
 
@@ -123,7 +123,7 @@ class SearchForm extends React.Component {
                     </Col> 
                 
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto"> 
-                        <button id={classes.submit_btn} className="form-control  rounded-0 font-weight-bold">Αναζήτηση</button> 
+                        <button className="form-control  rounded-0 font-weight-bold rm_hl submit_btn">Αναζήτηση</button> 
                     </Col> 
                 </FormGroup> 
             </Form> 

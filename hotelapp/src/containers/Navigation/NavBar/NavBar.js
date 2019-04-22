@@ -29,12 +29,10 @@ class NavBar extends React.Component {
     render() {
         return (
         <div>
-            <Navbar light expand="sm" className={classes.bg_color + " fixed-top"} >
-                <NavbarBrand>
-                    <RouterNavLink to="/" exact>
-                        <img src={logo} style={{height: "7vh"}} alt="Hotels App" className="img-fluid img-thumbnail"/>
-                    </RouterNavLink>
-                </NavbarBrand>
+            <Navbar light expand="sm" className="fixed-top primary_bg_color" >
+                <RouterNavLink to="/" exact>
+                    <img src={logo} style={{height: "7vh"}} alt="Hotels App" className="img-fluid img-thumbnail"/>
+                </RouterNavLink>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
