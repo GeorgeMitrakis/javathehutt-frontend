@@ -3,6 +3,7 @@ import classes from './SearchForm.module.css';
 import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
          InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
          DropdownMenu, DropdownItem } from 'reactstrap';
+import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 
 
 class SearchForm extends React.Component {
@@ -22,9 +23,13 @@ class SearchForm extends React.Component {
         });
     }
 
+    submitForm = (event) => {
+        event.preventDefault();
+    }
+
     render() {
         return (
-            <Form> 
+            <Form onSubmit={this.submitForm}> 
                 <FormGroup row> 
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" lg="auto"> 
                         <Label hidden for="destination">Destination</Label> 
@@ -123,7 +128,10 @@ class SearchForm extends React.Component {
                     </Col> 
                 
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto"> 
-                        <button className="form-control  rounded-0 font-weight-bold rm_hl submit_btn">Αναζήτηση</button> 
+                        {/* <button className="form-control  rounded-0 font-weight-bold rm_hl submit_btn">Αναζήτηση</button>  */}
+                        <SubmitBtn classes="form-control rounded-0">
+                            Αναζήτηση
+                        </SubmitBtn>
                     </Col> 
                 </FormGroup> 
             </Form> 
