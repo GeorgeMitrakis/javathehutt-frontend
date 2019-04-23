@@ -129,7 +129,7 @@ class SearchForm extends React.Component {
                 
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto"> 
                         {/* <button className="form-control  rounded-0 font-weight-bold rm_hl submit_btn">Αναζήτηση</button>  */}
-                        <SubmitBtn classes="form-control rounded-0">
+                        <SubmitBtn classes="form-control rounded-0" borderWidth="2px">
                             Αναζήτηση
                         </SubmitBtn>
                     </Col> 

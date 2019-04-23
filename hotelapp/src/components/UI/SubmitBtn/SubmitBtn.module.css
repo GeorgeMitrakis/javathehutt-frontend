@@ -3,7 +3,9 @@
     box-shadow:none !important;
     background-color: rgb(48, 34, 238);
     color: white;
-    border: 2px solid rgb(236, 190, 90);
+    border-style:  solid; 
+    border-color: rgb(236, 190, 90);
+    border-width: 3px;
 }
 
 #submit_btn:hover {
