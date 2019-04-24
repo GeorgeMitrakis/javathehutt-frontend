@@ -54,6 +54,17 @@
     box-shadow:none !important;
 } */
 
+ input {
+    outline: none !important;
+    box-shadow:none !important;
+ }
+
+ input:hover,
+ input:focus{
+    border-width: 2px;
+ }
+
+
 #root .inner_box_shadow:hover,
 #root .inner_box_shadow:focus
 {
