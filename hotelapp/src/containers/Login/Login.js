@@ -5,6 +5,9 @@ import { Redirect } from 'react-router-dom';
 import classes from './Login.module.css';
 import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
 import MyInput from '../../components/UI/MyInput/MyInput';
+import Header from '../../components/UI/Header/Header';
+import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
+
 
 class Login extends React.Component {
 
@@ -126,7 +129,9 @@ class Login extends React.Component {
         return (
             <Modal  centered size="sm" fade isOpen={this.state.modalIsOpen}>
                 <ModalHeader toggle={this.closeModal}>
-                    <h3 className={"font-weight-bold rm_hl " + classes.header_color}>Συνδεθείτε</h3>
+                    <Header>
+                        Σύνδεση
+                    </Header>
                 </ModalHeader>
 
                 <ModalBody>
@@ -135,7 +140,10 @@ class Login extends React.Component {
                         
                         {formFields}
 
-                        <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button>
+                        {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button> */}
+                        <SubmitBtn classes="float-right">
+                            Είσοδος
+                        </SubmitBtn>
                     </Form>
                 </ModalBody>
             </Modal>

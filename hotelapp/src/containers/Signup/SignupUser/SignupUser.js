@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import classes from './SignupUser.module.css';
 import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
 import MyInput from '../../../components/UI/MyInput/MyInput';
+import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 
 class SignupUser extends React.Component {
 
@@ -139,7 +140,10 @@ class SignupUser extends React.Component {
 
                 {formFields}
 
-                <Button className="float-right font-weight-bold" id={classes.submit_btn}>Εγγραφή</Button>
+                {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Εγγραφή</Button> */}
+                <SubmitBtn classes="float-right">
+                    Εγγραφή
+                </SubmitBtn>
             </Form>
         );
     }
