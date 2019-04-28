@@ -55,16 +55,16 @@ class Login extends React.Component {
     }
 
     setFormField = (controlName, feedback, validity, value) => {
-        const formControls = produce(this.state.formControls, draft => {
-            draft[controlName].feedback = feedback;
-            draft[controlName].validity = validity;
-            if (value)
-            {
-                draft[controlName].value = value;
-            }
-        });
-
-        this.setState({ formControls });
+        this.setState(
+            produce(draft => {
+                draft.formControls[controlName].feedback = feedback;
+                draft.formControls[controlName].validity = validity;
+                if (value)
+                {
+                    draft.formControls[controlName].value = value;
+                }
+            })
+        );
     }
 
     inputBlurredHandler = ( event, controlName ) => {
@@ -75,13 +75,6 @@ class Login extends React.Component {
             if (!res.report)
             {
                 console.log("LA80S");
-                const formControls = produce(this.state.formControls, draft => {
-                    draft[controlName].feedback = res.msg;
-                    draft[controlName].validity = "is-invalid";
-                });
-        
-                this.setState({ formControls });
-
                 this.setFormField(controlName, res.msg, "is-invalid", null);
             }
         // }
@@ -104,54 +97,65 @@ class Login extends React.Component {
             const res = checkValidity(this.state.formControls[controlName].value, this.state.formControls[controlName].rules);
             if (res.report)
             {
-                console.log("ola ok");
-                const formControls = produce(this.state.formControls, draft => {
-                    draft[controlName].feedback = null;
-                    draft[controlName].validity = '';
-                    draft[controlName].value = event.target.value;
-                });
-        
-                this.setState({ formControls });
+                console.log("ola eginan ok");
+                this.setFormField(controlName, null, '', event.target.value);
                 return;
             }
         }
-
-        //easy immer way
-        const formControls = produce(this.state.formControls, draft => {
-            draft[controlName].value = event.target.value
-        });
-
-        this.setState({ formControls });
+       
+        console.log("ola htan ok");
+        const value = event.target.value;
+        this.setState(
+            produce(draft => {
+                draft.formControls[controlName].value = value;
+            })
+        );
+        
     }
 
     setFormWithError = () => {
-        const formControls = produce(this.state.formControls, draft => {
-            
-            draft.password.feedback = "Εισάγατε λανθασμένα στοιχεία";
-            draft.password.validity = "is-invalid";
-            draft.password.value = '';
-            
-            draft.email.validity = "is-invalid";
-            draft.email.feedback = null;
-            draft.email.value = '';
-            
-        });
-
-        this.setState({ formControls });
+        this.setState(
+            produce(draft => {
+                draft.formControls.password.value = '';
+                draft.formControls.password.feedback = "Εισάγατε λανθασμένα στοιχεία";
+                draft.formControls.password.validity = "is-invalid";
+          
+                draft.formControls.email.value = '';
+                draft.formControls.email.feedback = null;
+                draft.formControls.email.validity = "is-invalid";
+            })
+        );
     }
 
     submitHandler = ( event ) => {
         event.preventDefault();
 
-        // if (!)
-        // this.resetForm();
-        // return;
-
         let formData = {};
+        let formIsValid = true;
+        let errFeedBack = {};
         for ( let key in this.state.formControls ) 
         {
             const res = checkValidity(this.state.formControls[key].value, this.state.formControls[key].rules);
+            if (!res.report)
+            {
+                formIsValid = false;
+                errFeedBack[key] = res.msg;
+            }
             formData[key] = this.state.formControls[key].value;
+        }
+
+        if (!formIsValid)
+        {
+            this.setState(
+                produce(draft => {
+                    for ( let key in errFeedBack ) 
+                    {
+                        draft.formControls[key].feedback = errFeedBack[key];
+                        draft.formControls[key].validity = "is-invalid";
+                    }
+                })
+            );
+            return;
         }
 
         // const formData = {

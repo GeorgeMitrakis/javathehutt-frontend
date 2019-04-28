@@ -28,4 +28,4 @@ const myInput = ( props ) => {
 
 };
 
-export default myInput;
+export default React.memo(myInput);
