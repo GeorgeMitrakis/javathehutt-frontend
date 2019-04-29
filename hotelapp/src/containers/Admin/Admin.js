@@ -5,7 +5,7 @@ import classes from './Admin.module.css';
 import { Row } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
-
+import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem'
 import UserView from './UserView'
 import Transactions from './Transactions'
 
@@ -54,25 +54,16 @@ class Admin extends React.Component {
                         {this.state.val}
                     </Row>
 
-
-
-                    <Route path="/userview" component={UserView}>
-                    </Route>
+                    <NavigationItem link="/admin/userview"> Χρηστες </NavigationItem>
+                    <NavigationItem link="/admin/transactions"> Συναλλαγες</NavigationItem>
                     
-                    {
-                        this.state.tabs.map( t => {
-                            return <button key={t.title} value={t.title} onClick={this.tabChanged.bind(this)}>{t.title}</button>
-                        })
-                    }
-
+                    <Switch>
+                        <Route path="/admin/userview" component={UserView} />
+                        <Route path="/admin/transactions" component={Transactions} />
+                        <Redirect to="/admin/userview" />
+                    </Switch>
                     
-                    {
-                        this.state.tabs.map( t => {
-                            return null;
-                            return this.state.activeTab == t.title ? <div key="t.title">{t.comp}</div> : null
-                        })
-                    }
-                                 
+                              
                 </div>
             </div>
 
