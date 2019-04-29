@@ -1,0 +1,13 @@
+#content{
+    height: 100vh;
+    padding-top: 15vh;
+    padding-bottom: 2vh;
+}
+
+#userview{
+    overflow-y: scroll;
+}
+
+.user{
+    border: 1px solid black !important;
+}

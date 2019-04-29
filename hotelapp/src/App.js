@@ -6,7 +6,7 @@ import { Container} from 'reactstrap';
 
 import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
-
+import Admin from './containers/Admin/Admin';
 
 class App extends Component {
 
@@ -36,6 +36,7 @@ class App extends Component {
 
         let routes = (
             <Switch>
+                <Route path="/admin" component={Admin} />
                 <Route path="/" component={IndexPage} />
                 <Redirect to="/" />
             </Switch>
