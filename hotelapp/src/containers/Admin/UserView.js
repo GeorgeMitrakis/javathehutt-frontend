@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-import classes from './Admin.module.css';
+
 import { Row, Input } from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 import myInput from '../../components/UI/MyInput/MyInput';
 import submitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
+import classes from './Admin.module.css';
 //import SearchForm from '../SearchForm/SearchForm';
 //import Login from '../Login/Login';
 //import Signup from '../Signup/Signup';
@@ -15,27 +16,22 @@ import submitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 
 class UserView extends React.Component {
 
+    handleKeyPress = (e) => {
+        
+        if (e.key === 'Enter') {
+            this.searchUsers();  
+        }
+    }
+
+    handleSearchPressed = (e) => {
+        
+        this.searchUsers();
+    }
     renderUser(u){
         
         return <>
 
-        <div>
-            <strong> {u.email} </strong>
-            {
-               u.banned ? 
-               (<>
-                <button value={u.id}  onClick={this.unban} > Unban </button>
-               </>) 
-               : 
-               (<>
-               <button value={u.id} onClick={this.ban}> Ban </button>
-               </>)
-            }
-
-            <button value={u.id} onClick={this.promote}>
-                Promote to admin
-            </button>
-        </div>
+        
             
             
         </>
@@ -120,20 +116,16 @@ class UserView extends React.Component {
         
     }
 
-    searchChanged(e){
+    searchChanged = (e) =>{
         this.setState({searchStr:e.target.value});
     }
-    searchUsers(e){
-
+    searchUsers = () =>{
+        if(this.state.searchStr === ''){
+            return;
+        }
        
         axios.get(
-            "http://localhost:8765/....",
-            {
-               'query':this.state.searchStr
-            },
-            {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
+            "http://localhost:8765/app/api/dummy?field=users"
         )
         .then((result) => {
             alert("Promote Submitted");
@@ -142,6 +134,7 @@ class UserView extends React.Component {
         .catch((err) => {
             console.log(err);    
         })
+        
         this.setState(produce(draft=>{
             draft.testData = [
                 {
@@ -183,17 +176,50 @@ class UserView extends React.Component {
         return (
             <>
                 
-                <div className="jumbotron" id="userview">
-                    
-                    <input type='text' onChange={this.searchChanged.bind(this)} value={this.state.searchStr}></input>
-                    <button color='primary' onClick={this.searchUsers.bind(this)}>Αναζητηση</button>
-                    {
-                        this.state.testData.map( (u,i) => {
-                            return <ul key={i}> {this.renderUser(u)} </ul>
-                        })
-                    }
+                
+                    <Row className = "mt-4 col-lg-10 offset-lg-3">
+                        <input 
+                            type='text'
+                            onChange={this.searchChanged.bind(this)} 
+                            value={this.state.searchStr} 
+                            onKeyPress={this.handleKeyPress.bind(this)}
+                            className="form-control form-control-sm  col-lg-4"
+                            placeholder="Seach users..."
+                        >
+                        </input>
+                        <button type="submit" className="btn btn-primary btn-sm col-lg-2" onClick={this.handleSearchPressed.bind(this)}>Αναζητηση</button>
+                    </Row>
+                    <div   id={classes.userframe}>
+                        {
+                            this.state.testData.map( (u,i) => {
+                                return <>
+                                <div className={classes.user + "  bg-white"} key={i}>
+                                    <p className="h4 "> {u.email} </p>
+                                    
+                                    <button className="btn btn-info btn-sm " value={u.id} onClick={this.promote}>
+                                        Promote to admin
+                                    </button>
+                                    
+                                    
+                                    {
+                                    u.banned ? 
+                                    (<>
+                                        <button value={u.id}  onClick={this.unban} className="btn btn-danger btn-sm  col-lg-2"> Unban </button>
+                                    </>) 
+                                    : 
+                                    (<>
+                                    <button value={u.id} onClick={this.ban} className="btn btn-danger btn-sm  col-lg-2" > Ban </button>
+                                    </>)
+                                    }
 
-                </div>
+                                    
+                                </div>
+
+                                </>
+                            })
+                        }
+                    </div>
+               
                 
             </>
   
