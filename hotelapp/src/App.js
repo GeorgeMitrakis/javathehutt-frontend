@@ -7,39 +7,72 @@ import { Container} from 'reactstrap';
 import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
 
+import Logout from './containers/Logout/Logout';
+
 
 class App extends Component {
 
     state = {
-        isAuth: false
+        isAuth: localStorage.getItem('token') !== null
     }
 
-    storeAuthToken = (authToken) => {
+    logIn = (authToken) => {
         localStorage.setItem('token', authToken);
+        
         this.setState(
             produce(draft => {
                 draft.isAuth = true;
             })
         );
+
+        this.props.history.replace("/");
     }
 
-    deleteAuthToken = () => {
+    logOut = () => {
         localStorage.removeItem('token');
+        
         this.setState(
             produce(draft => {
                 draft.isAuth = false;
             })
         );
+
+        this.props.history.replace("/");
     }
 
     render () {
 
         let routes = (
             <Switch>
-                <Route path="/" component={IndexPage} />
+                <Route 
+                    path={ ["/", "/login", '/signup'] } 
+                    exact
+                    render={() => ( <IndexPage logIn={this.logIn} />)}
+                />
                 <Redirect to="/" />
             </Switch>
         );
+
+        if (this.state.isAuth)
+        {
+            routes = (
+                <Switch>
+                    <Route 
+                        path="/logout" 
+                        exact
+                        render={() => ( <Logout logOut={this.logOut}/> )}
+                    />
+
+                    <Route 
+                        path={ ["/", "/login", '/signup'] } 
+                        exact
+                        render={() => ( <IndexPage logIn={this.logIn} />)}
+                    />
+
+                    <Redirect to="/" />
+                </Switch>
+            );
+        }
 
         return (
             <Container fluid className="App">
