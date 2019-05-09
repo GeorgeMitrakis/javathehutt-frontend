@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import classes from './IndexPage.module.css';
 import { Row } from 'reactstrap';
 
@@ -12,6 +12,10 @@ class IndexPage extends React.Component {
     
 
     render() {
+
+        console.log("Rendering Index Page");
+        console.log(this.props);
+
         return (
             <>
             <div className="d-flex align-items-start justify-content-center" id={classes.content}>
@@ -32,15 +36,21 @@ class IndexPage extends React.Component {
                 </div>
             </div>
 
-            <Route
-                path="/login"
-                component={Login}
-            />
+            <Switch>
+                <Route
+                    path="/login"
+                    exact
+                    // component={Login}
+                    render={() => ( <Login logIn={this.props.logIn}/> )}
+                />
 
-            <Route
-                path="/signup"
-                component={Signup}
-            />
+                <Route
+                    path="/signup"
+                    exact
+                    // component={Signup}
+                    render={() => ( <Signup logIn={this.props.logIn} />)}
+                />
+            </Switch>
 
             </>
   
@@ -49,4 +59,4 @@ class IndexPage extends React.Component {
 
 }
 
-export default IndexPage;
+export default withRouter(IndexPage);
