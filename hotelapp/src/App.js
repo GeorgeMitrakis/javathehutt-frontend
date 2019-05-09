@@ -64,7 +64,7 @@ class App extends Component {
                     />
 
                     <Route 
-                        path={ ["/", "/login", '/signup'] } 
+                        path="/" 
                         exact
                         render={() => ( <IndexPage logIn={this.logIn} />)}
                     />

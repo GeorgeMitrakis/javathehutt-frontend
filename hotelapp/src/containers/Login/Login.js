@@ -1,7 +1,7 @@
 import React from 'react';
 import produce from 'immer';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import classes from './Login.module.css';
 import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
 import MyInput from '../../components/UI/MyInput/MyInput';
@@ -47,11 +47,14 @@ class Login extends React.Component {
     }
     
     closeModal = () => {
-        this.setState(
-            produce(draft => {
-                draft.modalIsOpen = false;
-            })
-        );
+        // this.setState(
+        //     produce(draft => {
+        //         draft.modalIsOpen = false;
+        //     })
+        // );
+
+        this.props.history.push("/");
+        // this.props.history.goBack();
     }
 
     setFormField = (controlName, feedback, validity, value) => {
@@ -74,7 +77,7 @@ class Login extends React.Component {
             const res = checkValidity(this.state.formControls[controlName].value, this.state.formControls[controlName].rules);
             if (!res.report)
             {
-                console.log("LA80S");
+                // console.log("LA80S");
                 this.setFormField(controlName, res.msg, "is-invalid", null);
             }
         // }
@@ -97,13 +100,13 @@ class Login extends React.Component {
             const res = checkValidity(this.state.formControls[controlName].value, this.state.formControls[controlName].rules);
             if (res.report)
             {
-                console.log("ola eginan ok");
+                //console.log("ola eginan ok");
                 this.setFormField(controlName, null, '', event.target.value);
                 return;
             }
         }
        
-        console.log("ola htan ok");
+        //console.log("ola htan ok");
         const value = event.target.value;
         this.setState(
             produce(draft => {
@@ -180,6 +183,7 @@ class Login extends React.Component {
         .then((result) => {
             alert("Form Submitted");
             console.log(result);
+            this.props.logIn("demo_auth_token_1234");
         })
         .catch((err) => {
             console.log(err);
@@ -247,4 +251,4 @@ class Login extends React.Component {
 }
 
 
-export default Login;
+export default withRouter(Login);
