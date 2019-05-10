@@ -6,6 +6,7 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
          DropdownMenu, DropdownItem } from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import DropDownUnit from '../../components/UI/SearchForm/DropDownUnit';
+import DateCalendar from '../../components/UI/SearchForm/DateCalendar';
 
 
 class SearchForm extends React.Component {
@@ -15,6 +16,17 @@ class SearchForm extends React.Component {
 
         this.toggleDropDown = this.toggleDropDown.bind(this);
         this.state = {
+            searchText: "",
+            fromDate:{
+                month: 0,
+                day: 0,
+                year: 0
+            },
+            toDate:{
+                month: 0,
+                day: 0,
+                year: 0
+            },
             dropdownOpen: false,
             dropdownUnits: {
                 rooms: 1,
@@ -23,6 +35,19 @@ class SearchForm extends React.Component {
             },
         };
     }
+
+    handleSearchText(event) {
+        this.insertSearchText((event.target.value));//the things I do for an immutable state...
+    }
+
+    insertSearchText(text){
+        this.setState(
+            produce(draft => {
+                draft.searchText = text;//this happens because event.target is not visible from draft
+            })
+        );
+    }
+
 
     toggleDropDown() {
         this.setState(
@@ -50,6 +75,7 @@ class SearchForm extends React.Component {
 
     submitForm = (event) => {
         event.preventDefault();
+        console.log(this.state);
     }
 
     render() {
@@ -64,35 +90,29 @@ class SearchForm extends React.Component {
                                     <i className="fas fa-bed"></i> 
                                 </InputGroupText> 
                             </InputGroupAddon> 
-                            <Input type="text" className="form-control border-0 p-0 rm_hl" id="destination" placeholder="Που θα θέλατε να πάτε;"/> 
+                            <Input
+                                type="text"
+                                className="form-control border-0 p-0 rm_hl"
+                                id="destination"
+                                placeholder="Που θα θέλατε να πάτε;"
+                                onChange={this.handleSearchText.bind(this)}//save change in searched text to state
+                            />
                         </InputGroup> 
-                    </Col> 
+                    </Col>
 
-                    <Col className={classes.search_border + " m-0 p-0"} xs="6" md="3" lg="auto"> 
-                        <Label hidden for="date_from">Από</Label> 
-                        <InputGroup> 
-                            <InputGroupAddon addonType="prepend">                                         
-                                <InputGroupText className="bg-transparent border-0 text-secondary">                                          
-                                    <i className="far fa-calendar-alt"></i> 
-                                    <span className="ml-3 font-weight-bold"> Από </span> 
-                                </InputGroupText> 
-                            </InputGroupAddon> 
-                            <Input type="date" className="form-control border-0 p-0 rm_hl" id="date_from"/> 
-                        </InputGroup> 
-                    </Col> 
+                    <DateCalendar
+                        search_border={classes.search_border}
+                        id={"date_from"}
+                        text={"Από"}
+                    />
 
-                    <Col className={classes.search_border + " m-0 p-0"} xs="6" md="3" lg="auto"> 
-                        <Label hidden for="date_to">Έως</Label> 
-                        <InputGroup> 
-                            <InputGroupAddon addonType="prepend">                                         
-                                <InputGroupText className="bg-transparent border-0 text-secondary">                                          
-                                    <i className="far fa-calendar-alt"></i> 
-                                    <span className="ml-3 font-weight-bold"> 'Εως </span> 
-                                </InputGroupText> 
-                            </InputGroupAddon> 
-                            <Input type="date" className="form-control border-0 p-0 rm_hl" id="date_to"/> 
-                        </InputGroup> 
-                    </Col> 
+
+                    <DateCalendar
+                        search_border={classes.search_border}
+                        id={"date_to"}
+                        text={"Προς"}
+                    />
+
 
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto"> 
                         <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}> 
