@@ -1,9 +1,11 @@
 import React from 'react';
+import produce from 'immer';
 import classes from './SearchForm.module.css';
 import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
          InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
          DropdownMenu, DropdownItem } from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
+import DropDownUnit from '../../components/UI/SearchForm/DropDownUnit';
 
 
 class SearchForm extends React.Component {
@@ -14,13 +16,36 @@ class SearchForm extends React.Component {
         this.toggleDropDown = this.toggleDropDown.bind(this);
         this.state = {
             dropdownOpen: false,
+            dropdownUnits: {
+                rooms: 1,
+                adults: 1,
+                children: 0
+            },
         };
     }
 
     toggleDropDown() {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
+        this.setState(
+            produce(draft => {
+                draft.dropdownOpen = !this.state.dropdownOpen;
+            })
+        );
+    }
+
+    increaseUnit(unit) {
+        this.setState(
+            produce(draft => {
+                draft.dropdownUnits[unit] = this.state.dropdownUnits[unit]+1;
+            })
+        );
+    }
+
+    decreaseUnit(unit) {
+        this.setState(
+            produce(draft => {
+                draft.dropdownUnits[unit] = this.state.dropdownUnits[unit] >0 ? this.state.dropdownUnits[unit]-1 : 0;
+            })
+        );
     }
 
     submitForm = (event) => {
@@ -72,56 +97,36 @@ class SearchForm extends React.Component {
                     <Col className={classes.search_border + " m-0 p-0"} xs="12" sm="6" md="3" lg="auto"> 
                         <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}> 
                             <DropdownToggle caret className="rounded-0 bg-transparent border-0 text-secondary rm_hl"> 
-                                <i className="fas fa-user mr-3"></i>                                          
-                                1 ενήλικας - 0 παιδιά {' '} 
+                                <i className="fas fa-user mr-3"></i>
+                                {this.state.dropdownUnits.adults} ενήλικες - {this.state.dropdownUnits.children} παιδιά {' '}
                             </DropdownToggle> 
-                            <DropdownMenu className="p-2"> 
-                                <div className="d-flex align-items-center">                                                 
-                                    <div className="pr-5"> 
-                                        Δωμάτια 
-                                    </div>  
-                                    <div className="pr-3"> 
-                                        <button className="form-control rm_hl"><i className="fas fa-minus"></i></button> 
-                                    </div> 
-                                    <div className="pr-3"> 
-                                        26 
-                                    </div> 
-                                    <div className=""> 
-                                        <button className="form-control rm_hl"><i className="fas fa-plus"></i></button> 
-                                    </div> 
-                                </div> 
+                            <DropdownMenu className="p-2">
 
-                                <DropdownItem divider /> 
+                                <DropDownUnit
+                                    unitName={"Δωμάτια"}
+                                    unitAmount={this.state.dropdownUnits.rooms}
+                                    dec={this.decreaseUnit.bind(this, 'rooms')}
+                                    inc={this.increaseUnit.bind(this, 'rooms')}
+                                />
 
-                                <Row className="align-items-center"> 
-                                    <Col className="d-flex justify-content-start"> 
-                                        Ενήλικες 
-                                    </Col> 
+                                <DropdownItem divider />
 
-                                    <Col className="d-flex justify-content-end">                                                 
-                                        <button className="form-control rm_hl"><i className="fas fa-minus"></i></button> 
-                                        <div className="pr-3 pl-3 align-self-center"> 
-                                            28 
-                                        </div> 
-                                        <button className="form-control rm_hl"><i className="fas fa-plus"></i></button>                         
-                                    </Col> 
-                                </Row> 
+                                <DropDownUnit
+                                    unitName={"Ενήλικες"}
+                                    unitAmount={this.state.dropdownUnits.adults}
+                                    dec={this.decreaseUnit.bind(this, 'adults')}
+                                    inc={this.increaseUnit.bind(this, 'adults')}
+                                />
 
-                                <DropdownItem divider /> 
+                                <DropdownItem divider />
 
-                                <Row className="align-items-center"> 
-                                    <Col className="d-flex justify-content-start"> 
-                                        Παιδιά 
-                                    </Col> 
-
-                                    <Col className="d-flex justify-content-end">                                                 
-                                        <button className="form-control rm_hl"><i className="fas fa-minus"></i></button> 
-                                        <div className="pr-3 pl-3 align-self-center"> 
-                                            24 
-                                        </div> 
-                                        <button className="form-control rm_hl"><i className="fas fa-plus"></i></button>                         
-                                    </Col> 
-                                </Row> 
+                                <DropDownUnit
+                                    unitName={"Παιδιά"}
+                                    nameMargin={"mr-3"}
+                                    unitAmount={this.state.dropdownUnits.children}
+                                    dec={this.decreaseUnit.bind(this, 'children')}
+                                    inc={this.increaseUnit.bind(this, 'children')}
+                                />
 
                             </DropdownMenu> 
                         </InputGroupButtonDropdown> 
