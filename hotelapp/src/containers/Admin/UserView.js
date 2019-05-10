@@ -197,8 +197,8 @@ class UserView extends React.Component {
                             this.state.testData.map( (u,i) => {
                                 return <>
                                 <Row>
-                                    <Col className="bg-white col-lg-6 offset-lg-3 mt-3 " key={i}>
-                                        <Card outline color="secondary" className="p-2">
+                                    <Col className="bg-white col-lg-6 offset-lg-3 mt-3" key={i}>
+                                        <Card outline color="secondary" className="p-2  bg-white">
                                             
                                            
                                             <CardTitle>

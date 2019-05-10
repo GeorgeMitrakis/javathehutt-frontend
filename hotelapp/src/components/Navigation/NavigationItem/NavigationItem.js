@@ -3,14 +3,14 @@ import { NavLink as RouterNavLink }  from 'react-router-dom';
 import { NavItem, Button } from 'reactstrap';
 
 const navigationItem = ( props ) => (
-    <NavItem className="d-flex align-content-center p-1">
+    <NavItem className="d-flex align-content-center p-1 ">
         <RouterNavLink
             style={{textDecoration: "none"}}
-            className="container fluid align-self-center p-0"
+            className="container fluid align-self-center p-0" 
             exact
             to={props.link}
         >
-            <Button id={props.customid} className="font-weight-bold rm_hl" color="light" size="sm" block>
+            <Button id={props.customid} className="font-weight-bold rm_hl" color={props.isActive ? "dark":"light"} size="sm" block>
                 {props.children}
             </Button>
         </RouterNavLink>  

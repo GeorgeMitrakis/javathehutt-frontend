@@ -40,13 +40,8 @@ class Admin extends React.Component {
     }
 
     render() {
-        let activeTabClass = "border border-dark"
-        let activeTabs = {
-            'users': this.state.activeTab === 'usersTab' ? activeTabClass:"",
-            'transactions': this.state.activeTab === 'transactionsTab' ? activeTabClass:""
-        }
+       
         
-        console.log(activeTabs.users);
         return (
             <>
 
@@ -59,15 +54,15 @@ class Admin extends React.Component {
                 
                     <Row id={classes.tabs}>
 
-                            <Col   >
-                                <span  className={activeTabs.users} onClick={this.tabChanged.bind(this)}>
-                                <NavigationItem  customid="usersTab" link="/admin/userview"> Χρηστες </NavigationItem>
+                            <Col className="col-lg-3 offset-lg-3">
+                                <span  onClick={this.tabChanged.bind(this)}>
+                                <NavigationItem  isActive={(this.state.activeTab === 'usersTab')} customid="usersTab" link="/admin/userview"> Χρηστες </NavigationItem>
                                 </span>
                             </Col>
                             
-                            <Col >
-                            <span className={activeTabs.transactions} onClick={this.tabChanged.bind(this)} >
-                                <NavigationItem  customid="transactionsTab" link="/admin/transactions" > Συναλλαγες</NavigationItem>
+                            <Col className="col-lg-3">
+                            <span onClick={this.tabChanged.bind(this)} >
+                                <NavigationItem  isActive={this.state.activeTab === 'transactionsTab'} customid="transactionsTab" link="/admin/transactions" > Συναλλαγες</NavigationItem>
                             </span>
                             </Col>
                             
@@ -76,7 +71,7 @@ class Admin extends React.Component {
                     
                     
                     
-                    <Card outline color="secondary" className=" scrollbar h-75" id={classes.frame}>
+                    <Card outline color="secondary" className="bg-light scrollbar h-75" id={classes.frame}>
                         <Switch>
                             <Route path="/admin/userview" component={UserView} />
                             <Route path="/admin/transactions" component={Transactions} />
