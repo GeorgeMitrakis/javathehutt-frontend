@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 
-import { Row, Input } from 'reactstrap';
+import { Row, Col,Input ,Container,Card,CardTitle} from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 import myInput from '../../components/UI/MyInput/MyInput';
@@ -30,10 +30,6 @@ class UserView extends React.Component {
     renderUser(u){
         
         return <>
-
-        
-            
-            
         </>
     }
     
@@ -117,8 +113,10 @@ class UserView extends React.Component {
     }
 
     searchChanged = (e) =>{
+        console.log(window.location.pathname);
         this.setState({searchStr:e.target.value});
     }
+
     searchUsers = () =>{
         if(this.state.searchStr === ''){
             return;
@@ -175,50 +173,66 @@ class UserView extends React.Component {
 
         return (
             <>
-                
-                
-                    <Row className = "mt-4 col-lg-10 offset-lg-3">
-                        <input 
-                            type='text'
-                            onChange={this.searchChanged.bind(this)} 
-                            value={this.state.searchStr} 
-                            onKeyPress={this.handleKeyPress.bind(this)}
-                            className="form-control form-control-sm  col-lg-4"
-                            placeholder="Seach users..."
-                        >
-                        </input>
-                        <button type="submit" className="btn btn-primary btn-sm col-lg-2" onClick={this.handleSearchPressed.bind(this)}>Αναζητηση</button>
-                    </Row>
-                    <div   id={classes.userframe}>
+
+                    <Container className = "mt-4 p-2">
+                        <Row>
+                            <Col className="col-xs-8 col-sm-8 col-md-6 col-lg-5 offset-sm-1 offset-md-3 offset-lg-3">
+                                <input 
+                                    type='text'
+                                    onChange={this.searchChanged.bind(this)} 
+                                    value={this.state.searchStr} 
+                                    onKeyPress={this.handleKeyPress.bind(this)}
+                                    className="form-control form-control-sm"
+                                    placeholder="Seach users..."
+                                >
+                                </input>
+                            </Col>
+                            <Col className="col-xs-4 col-sm-2 col-md-2 col-lg-2 offset-xs-8">
+                                <button type="submit" className="btn btn-primary btn-sm" onClick={this.handleSearchPressed.bind(this)}>Αναζητηση</button>
+                            </Col>
+                        </Row>
+                    
+                            
                         {
                             this.state.testData.map( (u,i) => {
                                 return <>
-                                <div className={classes.user + "  bg-white"} key={i}>
-                                    <p className="h4 "> {u.email} </p>
-                                    
-                                    <button className="btn btn-info btn-sm " value={u.id} onClick={this.promote}>
-                                        Promote to admin
-                                    </button>
-                                    
-                                    
-                                    {
-                                    u.banned ? 
-                                    (<>
-                                        <button value={u.id}  onClick={this.unban} className="btn btn-danger btn-sm  col-lg-2"> Unban </button>
-                                    </>) 
-                                    : 
-                                    (<>
-                                    <button value={u.id} onClick={this.ban} className="btn btn-danger btn-sm  col-lg-2" > Ban </button>
-                                    </>)
-                                    }
-
-                                    
-                                </div>
-
+                                <Row>
+                                    <Col className="bg-white col-lg-6 offset-lg-3 mt-3 " key={i}>
+                                        <Card outline color="secondary" className="p-2">
+                                            
+                                           
+                                            <CardTitle>
+                                                <h3>
+                                                    {u.email}
+                                                </h3>
+                                            </CardTitle>
+                                                    
+                                            
+                                            
+                                            <Container>
+                                                <Row>
+                                                    
+                                                        <button className="btn btn-info btn-sm" value={u.id} onClick={this.promote}>
+                                                            Promote to admin
+                                                        </button>
+                                                    
+                                                    
+                                                        <button value={u.id} onClick={u.banned ? this.ban : this.unban} className="btn btn-danger btn-sm  " > 
+                                                        {u.banned ? "Ban":"Unban"} 
+                                                        </button>
+                                                    
+                                                    
+                                                    
+                                                </Row>
+                                            </Container>
+                                        </Card>
+                                    </Col>
+                                </Row>
                                 </>
                             })
                         }
-                    </div>
+                        
+                    </Container>
                
                 
             </>

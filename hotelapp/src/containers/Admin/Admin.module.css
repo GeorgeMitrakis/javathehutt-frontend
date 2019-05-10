@@ -3,18 +3,16 @@
     top: 10%;
 }
 
-.user{
-    border: 1px solid black !important;
-    margin: 1%;
-    padding: 1%;
+.activeTab{
+    background-color: red;
 }
 
 #frame{
-   
+    overflow-y: scroll !important;
     
 }
 
 #userframe{
-    overflow-y: scroll !important;
+    
     height: 80%;
 }

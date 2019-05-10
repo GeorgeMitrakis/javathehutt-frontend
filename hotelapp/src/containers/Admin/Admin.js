@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import classes from './Admin.module.css';
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Container, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 import produce from 'immer';
 import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem'
@@ -22,54 +22,68 @@ class Admin extends React.Component {
         super();
         
         this.state = {
-            tabs:[
-                {
-                    'title':'Users',
-                    'comp':<> <UserView></UserView> </>
-                },
-                {
-                    'title':'Transactions',
-                    'comp':<> <Transactions></Transactions> </>
-                }
-            
-            ],
-            activeTab: 'Users'
+            activeTab: 'usersTab'
         };
         
         
     }
     
     tabChanged(e){
-        this.state.activeTab = e.target.value;
+        const id = e.target.id;
+        
+        this.setState(
+            produce(draft => {
+                draft.activeTab = id;
+            })
+        );
         
     }
 
     render() {
-
+        let activeTabClass = "border border-dark"
+        let activeTabs = {
+            'users': this.state.activeTab === 'usersTab' ? activeTabClass:"",
+            'transactions': this.state.activeTab === 'transactionsTab' ? activeTabClass:""
+        }
+        
+        console.log(activeTabs.users);
         return (
             <>
-            
-                <div id={classes.content} className="h-75 col-lg-8 offset-lg-2">
+
+                
+                <div id={classes.content} className="h-100 col-lg-8 offset-lg-2">
 
                     <Row className="justify-content-center" > 
                         <h1 className="font-weight-bold">I AM THE SENATE!</h1>
                     </Row>
                 
                     <Row id={classes.tabs}>
-                        
-                            <NavigationItem  link="/admin/userview"> Χρηστες </NavigationItem>
-                            <NavigationItem link="/admin/transactions"> Συναλλαγες</NavigationItem>
+
+                            <Col   >
+                                <span  className={activeTabs.users} onClick={this.tabChanged.bind(this)}>
+                                <NavigationItem  customid="usersTab" link="/admin/userview"> Χρηστες </NavigationItem>
+                                </span>
+                            </Col>
+                            
+                            <Col >
+                            <span className={activeTabs.transactions} onClick={this.tabChanged.bind(this)} >
+                                <NavigationItem  customid="transactionsTab" link="/admin/transactions" > Συναλλαγες</NavigationItem>
+                            </span>
+                            </Col>
+                            
                            
                     </Row>
                     
                     
-                    <div className="container border border-dark h-75" id={classes.frame}>
-                            <Switch>
-                                <Route path="/admin/userview" component={UserView} />
-                                <Route path="/admin/transactions" component={Transactions} />
-                                <Redirect to="/admin/userview" />
-                            </Switch>
-                    </div>       
+                    
+                    <Card outline color="secondary" className=" scrollbar h-75" id={classes.frame}>
+                        <Switch>
+                            <Route path="/admin/userview" component={UserView} />
+                            <Route path="/admin/transactions" component={Transactions} />
+                            <Redirect to="/admin/userview" />
+                        </Switch>
+                    </Card>
+                             
                                 
 
                    

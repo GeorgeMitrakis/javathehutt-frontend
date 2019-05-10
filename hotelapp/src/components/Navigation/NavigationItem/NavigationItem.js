@@ -10,7 +10,7 @@ const navigationItem = ( props ) => (
             exact
             to={props.link}
         >
-            <Button className="font-weight-bold rm_hl" color="light" size="sm" block>
+            <Button id={props.customid} className="font-weight-bold rm_hl" color="light" size="sm" block>
                 {props.children}
             </Button>
         </RouterNavLink>  
