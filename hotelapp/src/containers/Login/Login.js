@@ -166,16 +166,19 @@ class Login extends React.Component {
         //     'password': this.state.formControls.password.value
         // }
 
-        // const formData = {
-        //     'email': "exaple@exaple.com",
-        //     'password': "mypass"
-        // }
+         const formData2 = {
+             'email': "exaple@exaple.com",
+             'password': "mypass"
+         }
 
         console.log(formData);
 
+        var qs = require('querystring');
+        
+
         axios.post(
             "http://localhost:8765/app/api/login",
-            formData,
+            qs.stringify(formData),
             {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
