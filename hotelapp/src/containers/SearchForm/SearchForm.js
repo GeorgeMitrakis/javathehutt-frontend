@@ -15,17 +15,20 @@ class SearchForm extends React.Component {
         super(props);
 
         this.toggleDropDown = this.toggleDropDown.bind(this);
+        const initialdate = new Date();
         this.state = {
             searchText: "",
             fromDate:{
-                month: 0,
-                day: 0,
-                year: 0
+                month: initialdate.getMonth()+1,
+                day: initialdate.getDate(),
+                year: initialdate.getFullYear(),
+                //full: initialdate.getFullYear()+ "-" + (initialdate.getMonth()+1) + "-" + initialdate.getDate()
             },
             toDate:{
-                month: 0,
-                day: 0,
-                year: 0
+                month: initialdate.getMonth()+1,
+                day: initialdate.getDate(),
+                year: initialdate.getFullYear()
+                //full: initialdate.getFullYear()+ "-" + (initialdate.getMonth()+1) + "-" + initialdate.getDate()
             },
             dropdownOpen: false,
             dropdownUnits: {
@@ -34,6 +37,8 @@ class SearchForm extends React.Component {
                 children: 0
             },
         };
+
+        //console.log(this.constructFromDate());
     }
 
     handleSearchText(event) {
@@ -47,6 +52,64 @@ class SearchForm extends React.Component {
             })
         );
     }
+
+
+    constructFromDate = () => {
+        var fulldate="";
+        fulldate = fulldate + this.state.fromDate.year+"-";
+        if(this.state.fromDate.month<10)
+            fulldate = fulldate + "0";
+        fulldate = fulldate +  this.state.fromDate.month+"-";
+        if(this.state.fromDate.day<10)
+            fulldate = fulldate + "0";
+        fulldate = fulldate +  this.state.fromDate.day;
+
+        return fulldate;
+    }
+
+
+    handleFromDate(event){
+        let d = new Date(event.target.value);
+        this.setState(
+            produce(draft => {
+                draft.fromDate.year = d.getFullYear();
+            })
+        );
+
+        this.setState(
+            produce(draft => {
+                draft.fromDate.month = d.getMonth()+1;
+            })
+        );
+
+        this.setState(
+            produce(draft => {
+                draft.fromDate.day = d.getDate();
+            })
+        );
+    }
+
+    handleToDate(event){
+        let d = new Date(event.target.value);
+        this.setState(
+            produce(draft => {
+                draft.toDate.year = d.getFullYear();
+            })
+        );
+
+        this.setState(
+            produce(draft => {
+                draft.toDate.month = d.getMonth()+1;
+            })
+        );
+
+        this.setState(
+            produce(draft => {
+                draft.toDate.day = d.getDate();
+            })
+        );
+    }
+
 
 
     toggleDropDown() {
@@ -104,13 +167,41 @@ class SearchForm extends React.Component {
                         search_border={classes.search_border}
                         id={"date_from"}
                         text={"Από"}
+
+                        //values passed for date entry
+                        year={this.state.fromDate.year}
+                        month={this.state.fromDate.month}
+                        day={this.state.fromDate.day}
+
+                        //values passed for earliest date entry
+                        inityear={()=> new Date().getFullYear()}
+                        initmonth={()=> {return ((new Date()).getMonth()+1)}}
+                        initday={()=> new Date().getDay()}
+
+                        //binds date inserted to state
+                        change={this.handleFromDate.bind(this)}
+
+
                     />
 
 
                     <DateCalendar
                         search_border={classes.search_border}
                         id={"date_to"}
-                        text={"Προς"}
+                        text={"Έως"}
+
+                        //values passed for earliest date entry
+                        year={this.state.toDate.year}
+                        month={this.state.toDate.month}
+                        day={this.state.toDate.day}
+
+                        //values passed for earliest date entry
+                        inityear={this.state.fromDate.year}
+                        initmonth={this.state.fromDate.month}
+                        initday={this.state.fromDate.day}
+
+                        //binds date inserted to state
+                        change={this.handleToDate.bind(this)}
                     />
 
 
