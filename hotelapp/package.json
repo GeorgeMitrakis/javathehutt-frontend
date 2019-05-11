@@ -2,7 +2,7 @@
   "name": "hotelapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://localhost:8765/app/static",
+  "homepage": "http://localhost/hotelapp",
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",

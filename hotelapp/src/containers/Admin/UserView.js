@@ -200,31 +200,30 @@ class UserView extends React.Component {
                                     <Col className="bg-white col-lg-6 offset-lg-3 mt-3" key={i}>
                                         <Card outline color="secondary" className="p-2  bg-white">
                                             
-                                           
-                                            <CardTitle>
-                                                <h3>
-                                                    {u.email}
-                                                </h3>
-                                            </CardTitle>
-                                                    
-                                            
-                                            
                                             <Container>
                                                 <Row>
+                                                    <Col>
+                                                        <h3>
+                                                            {u.email}
+                                                        </h3>
                                                     
-                                                        <button className="btn btn-info btn-sm" value={u.id} onClick={this.promote}>
+                                                    </Col>
+
+                                                </Row>
+                                                <Row>
+                                                    <Col className="col-lg-4">
+                                                        <button className="btn btn-info btn-sm btn-block" value={u.id} onClick={this.promote}>
                                                             Promote to admin
                                                         </button>
-                                                    
-                                                    
-                                                        <button value={u.id} onClick={u.banned ? this.ban : this.unban} className="btn btn-danger btn-sm  " > 
+                                                    </Col>
+                                                    <Col className="col-lg-4">
+                                                        <button value={u.id} onClick={u.banned ? this.ban : this.unban} className="btn btn-danger btn-sm btn-block " > 
                                                         {u.banned ? "Ban":"Unban"} 
                                                         </button>
-                                                    
-                                                    
-                                                    
-                                                </Row>
+                                                    </Col>
+                                                </Row>    
                                             </Container>
+                                            
                                         </Card>
                                     </Col>
                                 </Row>
