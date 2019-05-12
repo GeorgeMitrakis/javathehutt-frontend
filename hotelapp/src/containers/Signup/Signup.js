@@ -262,7 +262,14 @@ class Signup extends React.Component {
                         </TabPane>
 
                         <TabPane tabId="provider" className="">
-                            {this.state.activeTab === "provider" ? <SignupProvider/> : null} 
+                            {this.state.activeTab === "provider" 
+                            ? 
+                                <SignupProvider
+                                    inputBlurredHandler={this. inputBlurredHandler}
+                                    inputChangedHandler={this.inputChangedHandler}
+                                    submitHandler={this.submitHandler}
+                                /> 
+                            : null} 
                         </TabPane>
                     </TabContent>
 

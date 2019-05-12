@@ -1,12 +1,7 @@
 import React from 'react';
-import produce from 'immer';
-import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import classes from './SignupUser.module.css';
-import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
+import { Form } from 'reactstrap';
 import MyInput from '../../../components/UI/MyInput/MyInput';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
-import { checkValidity } from '../../../Utility/Utility';
 
 
 class SignupUser extends React.Component {
@@ -18,7 +13,7 @@ class SignupUser extends React.Component {
                     required: true,
                     isEmail: true
                 },
-                id: "signup_user",
+                id: "signup_user_email",
                 name: "Email",
                 value: '',
                 type: "text",
@@ -38,7 +33,7 @@ class SignupUser extends React.Component {
                 name: "Κωδικός",
                 value: '',
                 type: "password",
-                placeholder: '',
+                placeholder: 'Password',
                 feedback: null,
                 validity: ''
             },
@@ -52,7 +47,7 @@ class SignupUser extends React.Component {
                 name: "Επιβεβαίωση Κωδικού",
                 value: '',
                 type: "password",
-                placeholder: '',
+                placeholder: 'Confirm Password',
                 feedback: null,
                 validity: ''
             },
@@ -68,7 +63,7 @@ class SignupUser extends React.Component {
                 name: "'Oνομα",
                 value: '',
                 type: "text",
-                placeholder: "'Ονομα",
+                placeholder: "Name",
                 feedback: null,
                 validity: ''
             },
@@ -84,7 +79,7 @@ class SignupUser extends React.Component {
                 name: "Επίθετο",
                 value: '',
                 type: "text",
-                placeholder: "Επίθετο",
+                placeholder: "Surname",
                 feedback: null,
                 validity: ''
             }
@@ -122,7 +117,6 @@ class SignupUser extends React.Component {
 
                 {formFields}
 
-                {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Εγγραφή</Button> */}
                 <SubmitBtn classes="float-right">
                     Εγγραφή
                 </SubmitBtn>
