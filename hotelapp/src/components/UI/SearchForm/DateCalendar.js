@@ -3,25 +3,6 @@ import {Col, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Labe
 
 const dateCalendar = (props) =>{
 
-    let initdate="";
-    initdate  = initdate  + props.inityear +"-";
-    if(props.initmonth<10)
-        initdate  = initdate  + "0";
-    initdate  = initdate  +  props.initmonth +"-";
-    if(props.initday<10)
-        initdate  = initdate  + "0";
-    initdate  = initdate  +  props.initday;
-
-
-    let currdate ="";
-    currdate = currdate + props.year +"-";
-    if(props.month<10)
-        currdate = currdate + "0";
-    currdate = currdate +  props.month +"-";
-    if(props.day<10)
-        currdate = currdate + "0";
-    currdate = currdate +  props.day;
-
     return (
         <Col className={props.search_border + " m-0 p-0"} xs="6" md="3" lg="auto">
             <Label hidden for={props.id}>{props.text}</Label>
@@ -36,8 +17,8 @@ const dateCalendar = (props) =>{
                     type="date"
                     className="form-control border-0 p-0 rm_hl"
                     id={props.id}
-                    min={initdate}
-                    value={currdate}
+                    min={props.min}
+                    value={props.value}
                     onChange={props.change}
                 />
             </InputGroup>

@@ -15,21 +15,11 @@ class SearchForm extends React.Component {
         super(props);
 
         this.toggleDropDown = this.toggleDropDown.bind(this);
-        const initialdate = new Date();
+        const fulldate = this.todayIs();
         this.state = {
             searchText: "",
-            fromDate:{
-                month: initialdate.getMonth()+1,
-                day: initialdate.getDate(),
-                year: initialdate.getFullYear(),
-                //full: initialdate.getFullYear()+ "-" + (initialdate.getMonth()+1) + "-" + initialdate.getDate()
-            },
-            toDate:{
-                month: initialdate.getMonth()+1,
-                day: initialdate.getDate(),
-                year: initialdate.getFullYear()
-                //full: initialdate.getFullYear()+ "-" + (initialdate.getMonth()+1) + "-" + initialdate.getDate()
-            },
+            fromDate: this.todayIs(),
+            toDate: this.todayIs(),
             dropdownOpen: false,
             dropdownUnits: {
                 rooms: 1,
@@ -54,58 +44,27 @@ class SearchForm extends React.Component {
     }
 
 
-    constructFromDate = () => {
-        var fulldate="";
-        fulldate = fulldate + this.state.fromDate.year+"-";
-        if(this.state.fromDate.month<10)
-            fulldate = fulldate + "0";
-        fulldate = fulldate +  this.state.fromDate.month+"-";
-        if(this.state.fromDate.day<10)
-            fulldate = fulldate + "0";
-        fulldate = fulldate +  this.state.fromDate.day;
+    //the method below returns the current date in form "YYYY-MM-DD"
+    todayIs(){
+        let initialdate = new Date();
+        let fulldate = "";
+        fulldate  = fulldate  + initialdate.getFullYear() +"-";
+        if(initialdate.getMonth()+1<10)
+            fulldate  = fulldate  + "0";
+        fulldate  = fulldate  +  (initialdate.getMonth()+1) +"-";
+        if(initialdate.getDate()<10)
+            fulldate  = fulldate  + "0";
+        fulldate  = fulldate  +  initialdate.getDate();
 
         return fulldate;
     }
 
 
-    handleFromDate(event){
-        let d = new Date(event.target.value);
+    handleDate(date_index, event){
+        let d = event.target.value;
         this.setState(
             produce(draft => {
-                draft.fromDate.year = d.getFullYear();
-            })
-        );
-
-        this.setState(
-            produce(draft => {
-                draft.fromDate.month = d.getMonth()+1;
-            })
-        );
-
-        this.setState(
-            produce(draft => {
-                draft.fromDate.day = d.getDate();
-            })
-        );
-    }
-
-    handleToDate(event){
-        let d = new Date(event.target.value);
-        this.setState(
-            produce(draft => {
-                draft.toDate.year = d.getFullYear();
-            })
-        );
-
-        this.setState(
-            produce(draft => {
-                draft.toDate.month = d.getMonth()+1;
-            })
-        );
-
-        this.setState(
-            produce(draft => {
-                draft.toDate.day = d.getDate();
+                draft[date_index] = d;
             })
         );
     }
@@ -136,8 +95,20 @@ class SearchForm extends React.Component {
         );
     }
 
+    //this method applies default values to the form fields if they are empty before submission
+    // setDefaultsIfEmpty(){
+    //     if(this.state.fromDate == ""){
+    //         this.setState(
+    //             produce(draft => {
+    //                 draft.fromDate = this.todayIs();
+    //             })
+    //         );
+    //     }
+    // }
+
     submitForm = (event) => {
         event.preventDefault();
+        //this.setDefaultsIfEmpty();
         console.log(this.state);
     }
 
@@ -168,18 +139,14 @@ class SearchForm extends React.Component {
                         id={"date_from"}
                         text={"Από"}
 
-                        //values passed for date entry
-                        year={this.state.fromDate.year}
-                        month={this.state.fromDate.month}
-                        day={this.state.fromDate.day}
+                        //room booking can only start from today
+                        min={this.todayIs()}
 
-                        //values passed for earliest date entry
-                        inityear={()=> new Date().getFullYear()}
-                        initmonth={()=> {return ((new Date()).getMonth()+1)}}
-                        initday={()=> new Date().getDay()}
+                        //stay starting date
+                        value={this.state.fromDate}
 
                         //binds date inserted to state
-                        change={this.handleFromDate.bind(this)}
+                        change={this.handleDate.bind(this, 'fromDate')}
 
 
                     />
@@ -190,18 +157,14 @@ class SearchForm extends React.Component {
                         id={"date_to"}
                         text={"Έως"}
 
-                        //values passed for earliest date entry
-                        year={this.state.toDate.year}
-                        month={this.state.toDate.month}
-                        day={this.state.toDate.day}
+                        //room booking can only end after the starting date
+                        min={this.state.fromDate}
 
-                        //values passed for earliest date entry
-                        inityear={this.state.fromDate.year}
-                        initmonth={this.state.fromDate.month}
-                        initday={this.state.fromDate.day}
+                        //stay ending date
+                        value={this.state.toDate}
 
                         //binds date inserted to state
-                        change={this.handleToDate.bind(this)}
+                        change={this.handleDate.bind(this, 'toDate')}
                     />
 
 
