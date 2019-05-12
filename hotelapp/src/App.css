@@ -82,3 +82,7 @@
     box-shadow: 1px 1px 8px 2px #ccc;
 }
 
+
+.pointer:hover {
+    cursor: pointer;
+}

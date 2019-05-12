@@ -5,6 +5,7 @@ import { Row } from 'reactstrap';
 
 import SearchForm from '../SearchForm/SearchForm';
 import Login from '../Login/Login';
+
 import Signup from '../Signup/Signup';
 
 class IndexPage extends React.Component {
@@ -51,6 +52,9 @@ class IndexPage extends React.Component {
                     render={() => ( <Signup logIn={this.props.logIn} />)}
                 />
             </Switch>
+
+            
+        
 
             </>
   

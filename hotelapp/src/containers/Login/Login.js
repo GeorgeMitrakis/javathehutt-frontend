@@ -32,7 +32,7 @@ class Login extends React.Component {
 
                 password: {
                     rules: {
-                        required: true,
+                        required: true
                     },
                     id: "login_pwd",
                     name: "Password",
@@ -70,19 +70,6 @@ class Login extends React.Component {
         );
     }
 
-    inputBlurredHandler = ( event, controlName ) => {
-
-        // if (this.state.formControls[controlName].value.trim() !== '' )
-        // {
-            const res = checkValidity(this.state.formControls[controlName].value, this.state.formControls[controlName].rules);
-            if (!res.report)
-            {
-                // console.log("LA80S");
-                this.setFormField(controlName, res.msg, "is-invalid", null);
-            }
-        // }
-    }
-
     inputChangedHandler = ( event, controlName ) => {
         // tryhard way
         // const updatedControls = {
@@ -94,26 +81,23 @@ class Login extends React.Component {
         // };
         // this.setState( { formControls: updatedControls } );
 
-        // if (this.state.formControls[controlName].value.trim() !== '' && 
-        if (this.state.formControls[controlName].validity === "is-invalid")
-        {
-            const res = checkValidity(this.state.formControls[controlName].value, this.state.formControls[controlName].rules);
-            if (res.report)
-            {
-                //console.log("ola eginan ok");
-                this.setFormField(controlName, null, '', event.target.value);
-                return;
-            }
-        }
-       
-        //console.log("ola htan ok");
         const value = event.target.value;
-        this.setState(
-            produce(draft => {
-                draft.formControls[controlName].value = value;
-            })
-        );
-        
+        this.setState( 
+            produce(draft => { 
+                draft.formControls[controlName].value = value; 
+            }) 
+        ); 
+
+        const res = checkValidity(value, this.state.formControls[controlName].rules);
+        if (res.report)
+        {
+            //console.log("ola eginan ok");
+            this.setFormField(controlName, null, '', null);
+        }
+        else
+        {
+            this.setFormField(controlName, res.msg, "is-invalid", null);
+        }       
     }
 
     setFormWithError = () => {
@@ -166,16 +150,19 @@ class Login extends React.Component {
         //     'password': this.state.formControls.password.value
         // }
 
-        // const formData = {
-        //     'email': "exaple@exaple.com",
-        //     'password': "mypass"
-        // }
+         const formData2 = {
+             'email': "exaple@exaple.com",
+             'password': "mypass"
+         }
 
         console.log(formData);
 
+        var qs = require('querystring');
+        
+
         axios.post(
             "http://localhost:8765/app/api/login",
-            formData,
+            qs.stringify(formData),
             {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -188,6 +175,8 @@ class Login extends React.Component {
         .catch((err) => {
             console.log(err);
             this.setFormWithError();
+            // this.props.logIn("demo_auth_token_1234");
+
             // this.setState(
             //     produce(draft => {
             //         draft.formControls.password.feedback = "Εισάγατε λανθασμένα στοιχεία";
@@ -220,7 +209,6 @@ class Login extends React.Component {
                 feedback={formElement.config.feedback}
                 validity={formElement.config.validity}
                 changed={( event ) => this.inputChangedHandler( event, formElement.id )} 
-                blurred={( event ) => this.inputBlurredHandler ( event, formElement.id )}
             />
         ));
 
