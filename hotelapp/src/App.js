@@ -10,6 +10,8 @@ import IndexPage from './containers/IndexPage/IndexPage' ;
 import Logout from './containers/Logout/Logout';
 import SearchResults from'./containers/SearchResults/SearchResults'
 import Admin from './containers/Admin/Admin';
+import Checkout from './containers/Checkout/Checkout';
+
 import { getUserInfoField } from './Utility/Utility';
 import { getUserInfo } from './Utility/Utility';
 
@@ -65,6 +67,12 @@ class App extends Component {
                     path={ ["/results"] }
                     exact
                     render={() => ( <SearchResults logIn={this.logIn} />)}
+                />
+
+                <Route
+                    path={ ["/checkout"] }
+                    exact
+                    render={() => ( <Checkout logIn={this.logIn} />)}
                 />
 
                 <Redirect to="/" />
