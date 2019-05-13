@@ -50,10 +50,17 @@ class App extends Component {
         let routes = (
             <Switch>
                 <Route 
-                    path={ ["/", "/login", '/signup'] } 
+                    path={ ["/", "/login", "/signup"] } 
                     exact
                     render={() => ( <IndexPage logIn={this.logIn} />)}
                 />
+
+                {/* <Route 
+                    path={ ["/results"] } 
+                    exact
+                    render={() => ( <SearchResults logIn={this.logIn} />)}
+                /> */}
+
                 <Redirect to="/" />
             </Switch>
         );
@@ -68,15 +75,54 @@ class App extends Component {
                         render={() => ( <Logout logOut={this.logOut}/> )}
                     />
 
+                    {/* <Route 
+                    path={ ["/results"] } 
+                    exact
+                    render={() => ( <SearchResults/> )}
+                    /> */}
+
                     <Route 
                         path="/" 
                         exact
-                        render={() => ( <IndexPage logIn={this.logIn} />)}
+                        render={() => ( <IndexPage/> )}
                     />
 
                     <Redirect to="/" />
                 </Switch>
             );
+
+            if (this.state.role === "admin")
+            {
+                routes = (
+                    <Switch>
+                        <Route 
+                            path="/logout" 
+                            exact
+                            render={() => ( <Logout logOut={this.logOut}/> )}
+                        />
+    
+                        {/* <Route 
+                        path={ ["/results"] } 
+                        exact
+                        render={() => ( <SearchResults/> )}
+                        /> */}
+
+                        {/* <Route 
+                            path={ ["/admin", "/admin/users", "/admin/transactions"] } 
+                            exact
+                            render={() => ( <Admin/> )}
+                        /> */}
+    
+                        <Route 
+                            path="/" 
+                            exact
+                            render={() => ( <IndexPage/> )}
+                        />
+    
+                        <Redirect to="/" />
+                    </Switch>
+                );
+            }
         }
 
         return (
