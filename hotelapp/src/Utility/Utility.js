@@ -55,3 +55,19 @@ export const checkValidity = ( value, rules, name ) => {
 
     return {report: true, msg: ""};
 }
+
+export const getUserInfo = () => {
+    return JSON.parse(localStorage.getItem('userInfo'));
+}
+
+export const getUserInfoField = (field) => {
+    const userInfo = getUserInfo();
+    if (userInfo)
+    {
+        return userInfo[field];
+    }
+    else
+    {
+        return null;
+    }
+}
