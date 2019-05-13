@@ -7,6 +7,7 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import DropDownUnit from '../../components/UI/SearchForm/DropDownUnit';
 import DateCalendar from '../../components/UI/SearchForm/DateCalendar';
+// import SearchResults from '../SearchResults';
 
 
 class SearchForm extends React.Component {
@@ -109,6 +110,7 @@ class SearchForm extends React.Component {
     submitForm = (event) => {
         event.preventDefault();
         //this.setDefaultsIfEmpty();
+        this.props.history.push("/results");
         console.log(this.state);
     }
 
@@ -211,7 +213,10 @@ class SearchForm extends React.Component {
                         <SubmitBtn classes="form-control rounded-0" borderWidth="2px">
                             Αναζήτηση
                         </SubmitBtn>
-                    </Col> 
+                    </Col>
+                    {/*<Row className="justify-content-center mr-2 ml-2 mt-5">*/}
+                        {/*<SearchResults/>*/}
+                    {/*</Row>*/}
                 </FormGroup> 
             </Form> 
         ); 
