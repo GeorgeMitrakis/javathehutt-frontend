@@ -9,21 +9,28 @@ import IndexPage from './containers/IndexPage/IndexPage' ;
 
 import Logout from './containers/Logout/Logout';
 import SearchResults from'./containers/SearchResults/SearchResults'
+import Admin from './containers/Admin/Admin';
+import { getUserInfoField } from './Utility/Utility';
+import { getUserInfo } from './Utility/Utility';
 
 
 
 class App extends Component {
 
     state = {
-        isAuth: localStorage.getItem('token') !== null
+        isAuth: localStorage.getItem('token') !== null,
+        role: getUserInfoField("role")
+        //roles: null, visitor, provider, admin
     }
 
-    logIn = (authToken) => {
-        localStorage.setItem('token', authToken);
+    logIn = (data) => {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userInfo', JSON.stringify(data.user));
         
         this.setState(
             produce(draft => {
                 draft.isAuth = true;
+                draft.role = data.user.role;
             })
         );
 
@@ -32,10 +39,12 @@ class App extends Component {
 
     logOut = () => {
         localStorage.removeItem('token');
-        
+        localStorage.removeItem('userInfo');
+
         this.setState(
             produce(draft => {
                 draft.isAuth = false;
+                draft.role = "visitor";
             })
         );
 
@@ -47,7 +56,7 @@ class App extends Component {
         let routes = (
             <Switch>
                 <Route 
-                    path={ ["/", "/login", '/signup'] } 
+                    path={ ["/", "/login", "/signup"] }
                     exact
                     render={() => ( <IndexPage logIn={this.logIn} />)}
                 />
@@ -75,12 +84,45 @@ class App extends Component {
                     <Route 
                         path="/" 
                         exact
-                        render={() => ( <IndexPage logIn={this.logIn} />)}
+                        render={() => ( <IndexPage/> )}
                     />
 
                     <Redirect to="/" />
                 </Switch>
             );
+
+            if (this.state.role === "admin")
+            {
+                routes = (
+                    <Switch>
+                        <Route
+                            path="/logout"
+                            exact
+                            render={() => ( <Logout logOut={this.logOut}/> )}
+                        />
+
+                        {/* <Route
+                        path={ ["/results"] }
+                        exact
+                        render={() => ( <SearchResults/> )}
+                        /> */}
+
+                        <Route
+                            path={ ["/admin", "/admin/userview", "/admin/transactions"] }
+                            exact
+                            render={() => ( <Admin/> )}
+                        />
+
+                        <Route
+                            path="/"
+                            exact
+                            render={() => ( <IndexPage/> )}
+                        />
+
+                        <Redirect to="/" />
+                    </Switch>
+                );
+            }
         }
 
         return (
@@ -91,7 +133,17 @@ class App extends Component {
             </Container>
         );
 
-  }
+    }
+
+    componentDidMount() {
+        console.log("[App.js] did mount");
+        console.log("---state---");
+        console.log(this.state);
+        console.log("---userInfo---");
+        console.log(getUserInfo());
+        console.log("---authToken---");
+        console.log(localStorage.getItem('token'));
+    }
 
 }
 

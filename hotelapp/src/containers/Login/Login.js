@@ -8,6 +8,8 @@ import MyInput from '../../components/UI/MyInput/MyInput';
 import Header from '../../components/UI/Header/Header';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import { checkValidity } from '../../Utility/Utility';
+import qs from 'querystring';
+
 
 class Login extends React.Component {
 
@@ -35,7 +37,7 @@ class Login extends React.Component {
                         required: true
                     },
                     id: "login_pwd",
-                    name: "Password",
+                    name: "Κωδικός",
                     value: '',
                     type: "password",
                     placeholder: '',
@@ -145,21 +147,15 @@ class Login extends React.Component {
             return;
         }
 
-        // const formData = {
-        //     'email': this.state.formControls.email.value,
-        //     'password': this.state.formControls.password.value
-        // }
+        //  const formData2 = {
+        //      'email': "exaple@exaple.com",
+        //      'password': "mypass"
+        //  }
 
-         const formData2 = {
-             'email': "exaple@exaple.com",
-             'password': "mypass"
-         }
-
-        console.log(formData);
-
-        var qs = require('querystring');
-        
-
+        console.log("---Form Data---");
+        console.log(formData);    
+        console.log("---------------");
+    
         axios.post(
             "http://localhost:8765/app/api/login",
             qs.stringify(formData),
@@ -170,20 +166,20 @@ class Login extends React.Component {
         .then((result) => {
             alert("Form Submitted");
             console.log(result);
-            this.props.logIn("demo_auth_token_1234");
+            if (!result.data.success)
+            {
+                console.log("login NOT successful");
+                this.setFormWithError();
+            }
+            else
+            {
+                console.log("login Successful");
+                this.props.logIn(result.data.data);
+            }
         })
         .catch((err) => {
             console.log(err);
-            this.setFormWithError();
             // this.props.logIn("demo_auth_token_1234");
-
-            // this.setState(
-            //     produce(draft => {
-            //         draft.formControls.password.feedback = "Εισάγατε λανθασμένα στοιχεία";
-            //         draft.formControls.password.validity = "is-invalid";
-            //         draft.formControls.email.validity = "is-invalid";
-            //     })
-            // );
         })
     }
 
