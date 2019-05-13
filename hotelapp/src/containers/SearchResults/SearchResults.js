@@ -8,23 +8,36 @@ class SearchResults extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            data: null
+            data: []
         };
     }
 
     render() {
+
+        const sth =  this.state.data.map((room) =>
+            <Results 
+                details={room}
+            />
+        );
         
         return (
-            <div className="paragraph">
-                <h1>Edwwww</h1>
+            <div className="mt-10">
+                {sth}
             </div>
-        )
+        );
     }
 
     componentDidMount(){
-        fetch("http://localhost:8765/app/api/dummy?field=rooms")
+        console.log("componentDidMount()");
+        fetch('http://localhost:8765/app/api/dummy?field=rooms')
         .then(response => response.json())
         .then(jsonData => {
+            // let rooms = jsonData.map((roomData) => {
+            //     return(
+            //         <div>{roomData}</div>
+            //     )
+            // })
+
             this.setState(
                 produce(draft => {
                     draft.data = jsonData;
