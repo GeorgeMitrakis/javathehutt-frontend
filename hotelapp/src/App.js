@@ -8,14 +8,16 @@ import IndexPage from './containers/IndexPage/IndexPage' ;
 import Logout from './containers/Logout/Logout';
 import Admin from './containers/Admin/Admin';
 import { getUserInfoField } from './Utility/Utility';
+import { getUserInfo } from './Utility/Utility';
+
 
 
 class App extends Component {
 
     state = {
         isAuth: localStorage.getItem('token') !== null,
-        role: getUserInfoField("role") === null ? "visitor" : getUserInfoField("role")
-        //roles: visitor, user (aka logged in visitor), provider, admin
+        role: getUserInfoField("role")
+        //roles: null, visitor, provider, admin
     }
 
     logIn = (data) => {
@@ -134,7 +136,17 @@ class App extends Component {
             </Container>
         );
 
-  }
+    }
+
+    componentDidMount() {
+        console.log("[App.js] did mount");
+        console.log("---state---");
+        console.log(this.state);
+        console.log("---userInfo---");
+        console.log(getUserInfo());
+        console.log("---authToken---");
+        console.log(localStorage.getItem('token'));
+    }
 
 }
 

@@ -7,6 +7,7 @@ import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 class SignupUser extends React.Component {
 
     state = {
+        type: "visitor",
         formControls: {
             email: {
                 rules: {

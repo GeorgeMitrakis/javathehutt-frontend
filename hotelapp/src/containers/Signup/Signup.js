@@ -187,6 +187,8 @@ class Signup extends React.Component {
             return;
         }
 
+        formData["type"] = FormObj.state.type;
+
         console.log("---Form Data---");
         console.log(formData);    
         console.log("---------------");
