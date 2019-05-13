@@ -24,3 +24,5 @@ yarn-error.log*
 
 # VS workspace
 *.code-workspace 
+
+.idea
