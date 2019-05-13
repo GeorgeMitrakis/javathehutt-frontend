@@ -6,6 +6,7 @@ import { Container} from 'reactstrap';
 import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
 import Logout from './containers/Logout/Logout';
+import Admin from './containers/Admin/Admin';
 import { getUserInfoField } from './Utility/Utility';
 
 
@@ -107,11 +108,11 @@ class App extends Component {
                         render={() => ( <SearchResults/> )}
                         /> */}
 
-                        {/* <Route 
-                            path={ ["/admin", "/admin/users", "/admin/transactions"] } 
+                        <Route 
+                            path={ ["/admin", "/admin/userview", "/admin/transactions"] } 
                             exact
                             render={() => ( <Admin/> )}
-                        /> */}
+                        />
     
                         <Route 
                             path="/" 
