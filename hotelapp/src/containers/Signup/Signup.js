@@ -10,7 +10,7 @@ import SignupUser from './SignupUser/SignupUser';
 import SignupProvider from './SignupProvider/SignupProvider';
 import Header from '../../components/UI/Header/Header';
 import { checkValidity } from '../../Utility/Utility';
-
+import qs from 'querystring';
 
 
 class Signup extends React.Component {
@@ -71,13 +71,19 @@ class Signup extends React.Component {
                 }
             )
             .then((result) => {
-                alert("Email is ok");
+                // alert("Email is ok");
                 console.log(result);
+                if (!result.data.success)
+                {
+                    this.setFormField(FormObj, "email", null, 'is-valid', null);
+                }
+                else
+                {
+                    this.setFormField(FormObj, "email", "Το συγκεκριμένο email χρησιμοποιείται ήδη από άλλον λογαριασμό", 'is-invalid', null);
+                }
             })
             .catch((err) => {
                 console.log(err);
-                // this.setFormField(FormObj, "email", "Το συγκεκριμένο email χρησιμοποιείται ήδη από άλλον λογαριασμό", 'is-invalid', null);
-                this.setFormField(FormObj, "email", null, 'is-valid', null);
             })
     }
 
@@ -181,23 +187,45 @@ class Signup extends React.Component {
             return;
         }
 
-        alert("Form Submitted");
-        console.log(formData);
+        console.log("---Form Data---");
+        console.log(formData);    
+        console.log("---------------");
 
         axios.post(
-            "http://localhost:8765/app/api/signup",
-            formData,
+            "http://localhost:8765/app/api/users",
+            qs.stringify(formData),
             {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                params: {
+                    autologin: "true"
+                    // signup: "yes"
+                }
             }
         )
         .then((result) => {
             alert("Form Submitted");
             console.log(result);
+           
+            if (!result.data.success)
+            {
+                console.log("signup NOT successful");
+                if (result.data.message === "Sign up error: email is already taken")
+                {
+                    this.setFormField(FormObj, "email", "Το συγκεκριμένο email χρησιμοποιείται ήδη από άλλον λογαριασμό", 'is-invalid', null);
+                }
+                else if (result.data.message === "Sign up error: mismatching password")
+                {
+                    this.setFormField(FormObj, "password1", "Οι κωδικοί δεν ταιριάζουν", "is-invalid", null);
+                }
+            }
+            else
+            {
+                console.log("signup Successful");
+                this.props.logIn(result.data.data);
+            }
         })
         .catch((err) => {
             console.log(err);
-            // this.setEmailUnavailable();
         })
     }
 
