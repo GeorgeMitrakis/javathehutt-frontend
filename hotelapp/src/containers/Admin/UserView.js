@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
-
+import qs from 'querystring';
 import { Row, Col,Input ,Container,Card,CardTitle} from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
@@ -28,7 +28,7 @@ class UserView extends React.Component {
         this.searchUsers();
     }
     renderUser(u){
-        
+
         return <>
         </>
     }
@@ -36,19 +36,25 @@ class UserView extends React.Component {
     ban(e){
         const id = e.target.value;
         if(!window.confirm(`Ban user ${id}?`)) return;
+        let data = {
+            'option':"ban",
+            "id":id
+        };
         
-        axios.put(
-            "http://localhost:8765/....",
-            {
-                'action':"ban",
-                "userid":id
-            },
+        axios.post(
+            "http://localhost:8765/app/api/admin",
+            qs.stringify(data),
             {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         )
         .then((result) => {
             alert("Ban Submitted");
+            if(result.data.success){
+                alert("ban Submitted - ok");
+            }else{
+                alert("ban Submitted - fail");
+            }
             
         })
         .catch((err) => {
@@ -60,19 +66,24 @@ class UserView extends React.Component {
     unban(e){
         const id = e.target.value;
         if(!window.confirm(`Unban user ${id}?`)) return;
-        
-        axios.put(
-            "http://localhost:8765/....",
-            {
-                'action':"unban",
-                "userid":id
-            },
+        let data = {
+            'option':"unban",
+            "id":id
+        };
+        axios.post(
+            "http://localhost:8765/app/api/admin",
+            qs.stringify(data),
             {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         )
         .then((result) => {
-            alert("Unban Submitted");
+           
+            if(result.data.success){
+                alert("Unban Submitted - ok");
+            }else{
+                alert("Unban Submitted - fail");
+            }
             
         })
         .catch((err) => {
@@ -83,19 +94,24 @@ class UserView extends React.Component {
     promote(e){
         const id = e.target.value;
         if(!window.confirm(`Promote user ${id}?`)) return;
-        
-        axios.put(
-            "http://localhost:8765/....",
-            {
-                'action':"promote",
-                "userid":id
-            },
+        let data = {
+            'option':"unban",
+            "id":id
+        }
+        axios.post(
+            "http://localhost:8765/app/api/admin",
+            qs.stringify(data),
             {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         )
         .then((result) => {
-            alert("Promote Submitted");
+            console.log(result);
+            if(result.data.success){
+                alert("prom Submitted - ok");
+            }else{
+                alert("prom Submitted - fail");
+            }
             
         })
         .catch((err) => {
@@ -107,13 +123,13 @@ class UserView extends React.Component {
         super(props);
         this.state = {
             'searchStr':'',
-            'testData':[]
+            'users':[]
         }
         
     }
 
     searchChanged = (e) =>{
-        console.log(window.location.pathname);
+        //console.log(window.location.pathname);
         this.setState({searchStr:e.target.value});
     }
 
@@ -126,47 +142,18 @@ class UserView extends React.Component {
             "http://localhost:8765/app/api/dummy?field=users"
         )
         .then((result) => {
-            alert("Promote Submitted");
-            
+            console.log(result.data);
+            console.log(result);
+            this.setState(produce(draft => {
+                
+                draft.users = result.data;
+            }));
         })
         .catch((err) => {
             console.log(err);    
         })
         
-        this.setState(produce(draft=>{
-            draft.testData = [
-                {
-                    "id":1,
-                    "email": "test@email.com",
-                    "role": "visitor",
-                    "banned": false
-                },
-                {
-                    "id":2,
-                    "email": "testem@ail1.com",
-                    "role": "provider",
-                    "banned": true
-                },
-                {
-                    "id":3,
-                    "email": "testem@ail2.com",
-                    "role": "provider",
-                    "banned": true
-                },
-                {
-                    "id":4,
-                    "email": "testem@ail3.com",
-                    "role": "provider",
-                    "banned": false
-                },
-                {
-                    "id":5,
-                    "email": "testem@ail4.com",
-                    "role": "provider",
-                    "banned": true
-                }
-            ]
-        }))
+        
     }
 
     render() {
@@ -194,7 +181,7 @@ class UserView extends React.Component {
                     
                             
                         {
-                            this.state.testData.map( (u,i) => {
+                            this.state.users.map( (u,i) => {
                                 return <>
                                 <Row>
                                     <Col className="bg-white col-lg-6 offset-lg-3 mt-3" key={i}>
@@ -218,7 +205,7 @@ class UserView extends React.Component {
                                                     </Col>
                                                     <Col className="col-lg-4">
                                                         <button value={u.id} onClick={u.banned ? this.ban : this.unban} className="btn btn-danger btn-sm btn-block " > 
-                                                        {u.banned ? "Ban":"Unban"} 
+                                                        {!u.banned ? "Ban":"Unban"} 
                                                         </button>
                                                     </Col>
                                                 </Row>    
