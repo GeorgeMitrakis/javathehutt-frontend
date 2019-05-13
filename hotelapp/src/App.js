@@ -8,6 +8,7 @@ import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
 
 import Logout from './containers/Logout/Logout';
+import SearchResults from'./containers/SearchResults/SearchResults'
 
 
 
@@ -50,6 +51,13 @@ class App extends Component {
                     exact
                     render={() => ( <IndexPage logIn={this.logIn} />)}
                 />
+
+                <Route
+                    path={ ["/results"] }
+                    exact
+                    render={() => ( <SearchResults logIn={this.logIn} />)}
+                />
+
                 <Redirect to="/" />
             </Switch>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import produce from 'immer';
 import classes from './SearchForm.module.css';
 import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
@@ -226,4 +227,4 @@ class SearchForm extends React.Component {
 
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);
