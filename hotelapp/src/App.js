@@ -3,26 +3,28 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import produce from 'immer';
 import './App.css';
 import { Container} from 'reactstrap';
-
 import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
-
 import Logout from './containers/Logout/Logout';
-
+import { getUserInfoField } from './Utility/Utility';
 
 
 class App extends Component {
 
     state = {
-        isAuth: localStorage.getItem('token') !== null
+        isAuth: localStorage.getItem('token') !== null,
+        role: getUserInfoField("role") === null ? "visitor" : getUserInfoField("role")
+        //roles: visitor, user (aka logged in visitor), provider, admin
     }
 
-    logIn = (authToken) => {
-        localStorage.setItem('token', authToken);
+    logIn = (data) => {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userInfo', JSON.stringify(data.user));
         
         this.setState(
             produce(draft => {
                 draft.isAuth = true;
+                draft.role = data.user.role;
             })
         );
 
@@ -31,10 +33,12 @@ class App extends Component {
 
     logOut = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
         
         this.setState(
             produce(draft => {
                 draft.isAuth = false;
+                draft.role = "visitor";
             })
         );
 
