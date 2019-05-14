@@ -18,11 +18,12 @@ class SearchResults extends React.Component {
 
     }
 
-    bookRoomHandler = (event, roomInfo) => {
+    bookRoomHandler = (event, roomInfo, searchInfo) => {
         // alert(roomID);
         const params = {
             hotel_id: "123456",
-            ...roomInfo
+            ...roomInfo,
+            ...searchInfo
         }
 
         const queryParams = createQueryParams(params);
@@ -60,7 +61,7 @@ class SearchResults extends React.Component {
                                         <SearchResult 
                                             key={room.id}
                                             details={room}
-                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room )} 
+                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, queryParams )} 
                                         />
                                     );
                                     return rooms;
