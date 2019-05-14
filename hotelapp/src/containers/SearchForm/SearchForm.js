@@ -111,6 +111,8 @@ class SearchForm extends React.Component {
 
     submitForm = (event) => {
         event.preventDefault();
+        console.log(this.state);
+
         //this.setDefaultsIfEmpty();
         let params = {};
         params["destination"] = this.state.searchText;
@@ -121,12 +123,12 @@ class SearchForm extends React.Component {
         params["children"] = this.state.dropdownUnits.children;
 
         const queryParams = createQueryParams(params);
-        console.log(queryParams);
+        console.log("Inside SearchForm. About to redirect to: /searchresults?" + queryParams);
+        // console.log(queryParams);
         // console.log(getQueryParams(queryParams));
         // return;
 
-        this.props.history.push("/results?" + queryParams);
-        console.log(this.state);
+        this.props.history.push("/searchresults?" + queryParams);
     }
 
     render() {

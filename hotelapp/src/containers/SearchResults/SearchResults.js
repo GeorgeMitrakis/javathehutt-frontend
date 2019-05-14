@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import produce from 'immer';
-import Results from '../../components/UI/SearchResult/Results';
+import SearchResult from '../../components/UI/SearchResult/SearchResult';
 import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
     InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
     DropdownMenu, DropdownItem } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get } from 'react-axios';
+import { createQueryParams, getQueryParams } from '../../Utility/Utility';
+
 
 class SearchResults extends React.Component {
     
@@ -15,7 +17,19 @@ class SearchResults extends React.Component {
 
     }
 
+    bookRoomHandler = (event, roomID) => {
+        // alert(roomID);
+        const queryParams = createQueryParams();
+        console.log("Inside SearchResults. About to redirect to: ");
+        this.props.history.push("/results");
+    }
+
     render() {
+        const queryParams = getQueryParams(this.props.location.search);
+        console.log("[SearchResults.js] Rendering. Received queryParams:");
+        console.log(queryParams);
+        console.log("--------------");
+
         return (
             <Container className={styles['results']}>
                 <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
@@ -29,9 +43,10 @@ class SearchResults extends React.Component {
                         else if(response !== null) {
                             console.log(response);
                             const rooms = response.data.map( room =>
-                                <Results 
+                                <SearchResult 
                                     key={room.id}
                                     details={room}
+                                    bookRoomHandler={( event ) => this.bookRoomHandler( event, room.id )} 
                                 />
                             );
                             return rooms;

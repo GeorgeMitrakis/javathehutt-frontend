@@ -9,7 +9,9 @@ import styles from './Result.module.css';
 import Pills from './ResultPills';
 
 
-const Results = (props) => {
+const searchResult = (props) => {
+
+
     return (
         <Row>
             <Container className={styles['res-container']}>
@@ -27,13 +29,17 @@ const Results = (props) => {
                         <p>Διαθεσιμότητα: {props.details.capacity}</p>
                     </Col>
                     <Col sm={6}>
-                        <Button className={styles['reservation-btn']} color="primary">Κράτηση</Button>
+                        <Button onClick={props.bookRoomHandler} className={styles['reservation-btn']} color="primary">Κράτηση</Button>
                     </Col>
                 </Row>
                 <Pills/>
             </Container>
         </Row>
     );
+
+    
 }
 
-export default Results;
+
+
+export default searchResult;
