@@ -17,11 +17,16 @@ class SearchResults extends React.Component {
 
     }
 
-    bookRoomHandler = (event, roomID) => {
+    bookRoomHandler = (event, roomInfo) => {
         // alert(roomID);
-        const queryParams = createQueryParams();
-        console.log("Inside SearchResults. About to redirect to: ");
-        this.props.history.push("/results");
+        const params = {
+            hotel_id: "123456",
+            ...roomInfo
+        }
+
+        const queryParams = createQueryParams(params);
+        console.log("Inside SearchResults. About to redirect to: /book?" + queryParams);
+        this.props.history.push("/book?" + queryParams);
     }
 
     render() {
@@ -46,7 +51,7 @@ class SearchResults extends React.Component {
                                 <SearchResult 
                                     key={room.id}
                                     details={room}
-                                    bookRoomHandler={( event ) => this.bookRoomHandler( event, room.id )} 
+                                    bookRoomHandler={( event ) => this.bookRoomHandler( event, room )} 
                                 />
                             );
                             return rooms;
