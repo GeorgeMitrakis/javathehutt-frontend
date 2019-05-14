@@ -59,6 +59,7 @@ class App extends Component {
 
         //axios.defaults.baseURL = "http://localhost:8765/app/api/";
         axios.defaults.headers.common['token'] = localStorage.getItem('token');
+        axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:8765/";
 
         let routes = (
             <Switch>
