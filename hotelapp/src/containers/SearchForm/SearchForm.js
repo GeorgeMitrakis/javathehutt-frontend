@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import produce from 'immer';
 import classes from './SearchForm.module.css';
 import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
@@ -7,6 +8,8 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import DropDownUnit from '../../components/UI/SearchForm/DropDownUnit';
 import DateCalendar from '../../components/UI/SearchForm/DateCalendar';
+// import SearchResults from '../SearchResults';
+import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 
 
 class SearchForm extends React.Component {
@@ -15,18 +18,11 @@ class SearchForm extends React.Component {
         super(props);
 
         this.toggleDropDown = this.toggleDropDown.bind(this);
+        const fulldate = this.todayIs();
         this.state = {
             searchText: "",
-            fromDate:{
-                month: 0,
-                day: 0,
-                year: 0
-            },
-            toDate:{
-                month: 0,
-                day: 0,
-                year: 0
-            },
+            fromDate: this.todayIs(),
+            toDate: this.todayIs(),
             dropdownOpen: false,
             dropdownUnits: {
                 rooms: 1,
@@ -34,6 +30,8 @@ class SearchForm extends React.Component {
                 children: 0
             },
         };
+
+        //console.log(this.constructFromDate());
     }
 
     handleSearchText(event) {
@@ -49,6 +47,33 @@ class SearchForm extends React.Component {
     }
 
 
+    //the method below returns the current date in form "YYYY-MM-DD"
+    todayIs(){
+        let initialdate = new Date();
+        let fulldate = "";
+        fulldate  = fulldate  + initialdate.getFullYear() +"-";
+        if(initialdate.getMonth()+1<10)
+            fulldate  = fulldate  + "0";
+        fulldate  = fulldate  +  (initialdate.getMonth()+1) +"-";
+        if(initialdate.getDate()<10)
+            fulldate  = fulldate  + "0";
+        fulldate  = fulldate  +  initialdate.getDate();
+
+        return fulldate;
+    }
+
+
+    handleDate(date_index, event){
+        let d = event.target.value;
+        this.setState(
+            produce(draft => {
+                draft[date_index] = d;
+            })
+        );
+    }
+
+
+
     toggleDropDown() {
         this.setState(
             produce(draft => {
@@ -57,7 +82,9 @@ class SearchForm extends React.Component {
         );
     }
 
-    increaseUnit(unit) {
+    increaseUnit(event, unit) {
+        event.preventDefault();
+
         this.setState(
             produce(draft => {
                 draft.dropdownUnits[unit] = this.state.dropdownUnits[unit]+1;
@@ -65,7 +92,9 @@ class SearchForm extends React.Component {
         );
     }
 
-    decreaseUnit(unit) {
+    decreaseUnit(event, unit) {
+        event.preventDefault();
+
         this.setState(
             produce(draft => {
                 draft.dropdownUnits[unit] = this.state.dropdownUnits[unit] >0 ? this.state.dropdownUnits[unit]-1 : 0;
@@ -73,9 +102,37 @@ class SearchForm extends React.Component {
         );
     }
 
+    //this method applies default values to the form fields if they are empty before submission
+    // setDefaultsIfEmpty(){
+    //     if(this.state.fromDate == ""){
+    //         this.setState(
+    //             produce(draft => {
+    //                 draft.fromDate = this.todayIs();
+    //             })
+    //         );
+    //     }
+    // }
+
     submitForm = (event) => {
         event.preventDefault();
         console.log(this.state);
+
+        //this.setDefaultsIfEmpty();
+        let params = {};
+        params["destination"] = this.state.searchText;
+        params["fromDate"] = this.state.fromDate; 
+        params["toDate"] = this.state.toDate; 
+        params["rooms"] = this.state.dropdownUnits.rooms;
+        params["adults"] = this.state.dropdownUnits.adults;
+        params["children"] = this.state.dropdownUnits.children;
+
+        const queryParams = createQueryParams(params);
+        console.log("Inside SearchForm. About to redirect to: /searchresults?" + queryParams);
+        // console.log(queryParams);
+        // console.log(getQueryParams(queryParams));
+        // return;
+
+        this.props.history.push("/searchresults?" + queryParams);
     }
 
     render() {
@@ -104,13 +161,33 @@ class SearchForm extends React.Component {
                         search_border={classes.search_border}
                         id={"date_from"}
                         text={"Από"}
+
+                        //room booking can only start from today
+                        min={this.todayIs()}
+
+                        //stay starting date
+                        value={this.state.fromDate}
+
+                        //binds date inserted to state
+                        change={this.handleDate.bind(this, 'fromDate')}
+
+
                     />
 
 
                     <DateCalendar
                         search_border={classes.search_border}
                         id={"date_to"}
-                        text={"Προς"}
+                        text={"Έως"}
+
+                        //room booking can only end after the starting date
+                        min={this.state.fromDate}
+
+                        //stay ending date
+                        value={this.state.toDate}
+
+                        //binds date inserted to state
+                        change={this.handleDate.bind(this, 'toDate')}
                     />
 
 
@@ -125,8 +202,8 @@ class SearchForm extends React.Component {
                                 <DropDownUnit
                                     unitName={"Δωμάτια"}
                                     unitAmount={this.state.dropdownUnits.rooms}
-                                    dec={this.decreaseUnit.bind(this, 'rooms')}
-                                    inc={this.increaseUnit.bind(this, 'rooms')}
+                                    inc={( event ) => this.increaseUnit( event, 'rooms' )} 
+                                    dec={( event ) => this.decreaseUnit( event, 'rooms' )}
                                 />
 
                                 <DropdownItem divider />
@@ -134,8 +211,8 @@ class SearchForm extends React.Component {
                                 <DropDownUnit
                                     unitName={"Ενήλικες"}
                                     unitAmount={this.state.dropdownUnits.adults}
-                                    dec={this.decreaseUnit.bind(this, 'adults')}
-                                    inc={this.increaseUnit.bind(this, 'adults')}
+                                    inc={( event ) => this.increaseUnit( event, 'adults' )} 
+                                    dec={( event ) => this.decreaseUnit( event, 'adults' )}
                                 />
 
                                 <DropdownItem divider />
@@ -144,8 +221,8 @@ class SearchForm extends React.Component {
                                     unitName={"Παιδιά"}
                                     nameMargin={"mr-3"}
                                     unitAmount={this.state.dropdownUnits.children}
-                                    dec={this.decreaseUnit.bind(this, 'children')}
-                                    inc={this.increaseUnit.bind(this, 'children')}
+                                    inc={( event ) => this.increaseUnit( event, 'children' )} 
+                                    dec={( event ) => this.decreaseUnit( event, 'children' )}
                                 />
 
                             </DropdownMenu> 
@@ -157,7 +234,10 @@ class SearchForm extends React.Component {
                         <SubmitBtn classes="form-control rounded-0" borderWidth="2px">
                             Αναζήτηση
                         </SubmitBtn>
-                    </Col> 
+                    </Col>
+                    {/*<Row className="justify-content-center mr-2 ml-2 mt-5">*/}
+                        {/*<SearchResults/>*/}
+                    {/*</Row>*/}
                 </FormGroup> 
             </Form> 
         ); 
@@ -167,4 +247,4 @@ class SearchForm extends React.Component {
 
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);

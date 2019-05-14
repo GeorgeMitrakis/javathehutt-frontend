@@ -3,12 +3,19 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import produce from 'immer';
 import './App.css';
 import { Container} from 'reactstrap';
+
 import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
+
 import Logout from './containers/Logout/Logout';
+import SearchResults from'./containers/SearchResults/SearchResults'
 import Admin from './containers/Admin/Admin';
+import Checkout from './containers/Checkout/Checkout';
+
 import { getUserInfoField } from './Utility/Utility';
 import { getUserInfo } from './Utility/Utility';
+
+import axios from 'axios';
 
 
 
@@ -37,7 +44,7 @@ class App extends Component {
     logOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userInfo');
-        
+
         this.setState(
             produce(draft => {
                 draft.isAuth = false;
@@ -50,19 +57,29 @@ class App extends Component {
 
     render () {
 
+        //axios.defaults.baseURL = "http://localhost:8765/app/api/";
+        axios.defaults.headers.common['token'] = localStorage.getItem('token');
+        // axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:8765/";
+
         let routes = (
             <Switch>
                 <Route 
-                    path={ ["/", "/login", "/signup"] } 
+                    path={ ["/", "/login", "/signup"] }
                     exact
                     render={() => ( <IndexPage logIn={this.logIn} />)}
                 />
 
-                {/* <Route 
-                    path={ ["/results"] } 
+                <Route
+                    path={ ["/searchresults"] }
                     exact
                     render={() => ( <SearchResults logIn={this.logIn} />)}
-                /> */}
+                />
+
+                <Route
+                    path={ ["/hotel/:hotelname"] }
+                    exact
+                    render={() => ( null )}
+                />
 
                 <Redirect to="/" />
             </Switch>
@@ -78,11 +95,23 @@ class App extends Component {
                         render={() => ( <Logout logOut={this.logOut}/> )}
                     />
 
-                    {/* <Route 
-                    path={ ["/results"] } 
-                    exact
-                    render={() => ( <SearchResults/> )}
-                    /> */}
+                    <Route
+                        path={ ["/searchresults"] }
+                        exact
+                        render={() => ( <SearchResults/> )}
+                    />
+
+                    <Route
+                        path={ ["/hotel/:hotelname"] }
+                        exact
+                        render={() => ( null )}
+                    />
+
+                    <Route
+                        path={ ["/book"] }
+                        exact
+                        render={() => ( <Checkout/> )}
+                    />
 
                     <Route 
                         path="/" 
@@ -98,30 +127,42 @@ class App extends Component {
             {
                 routes = (
                     <Switch>
-                        <Route 
-                            path="/logout" 
+                        <Route
+                            path="/logout"
                             exact
                             render={() => ( <Logout logOut={this.logOut}/> )}
                         />
-    
-                        {/* <Route 
-                        path={ ["/results"] } 
-                        exact
-                        render={() => ( <SearchResults/> )}
-                        /> */}
 
-                        <Route 
-                            path={ ["/admin", "/admin/userview", "/admin/transactions"] } 
+                        <Route
+                            path={ ["/searchresults"] }
+                            exact
+                            render={() => ( <SearchResults/> )}
+                        />
+
+                        <Route
+                            path={ ["/hotel/:hotelname"] }
+                            exact
+                            render={() => ( null )}
+                        />
+
+                        <Route
+                            path={ ["/book"] }
+                            exact
+                            render={() => ( <Checkout /> )}
+                        />
+
+                        <Route
+                            path={ ["/admin", "/admin/userview", "/admin/transactions"] }
                             exact
                             render={() => ( <Admin/> )}
                         />
-    
-                        <Route 
-                            path="/" 
+
+                        <Route
+                            path="/"
                             exact
                             render={() => ( <IndexPage/> )}
                         />
-    
+
                         <Redirect to="/" />
                     </Switch>
                 );
