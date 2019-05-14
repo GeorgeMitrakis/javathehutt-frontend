@@ -87,3 +87,9 @@
 .pointer:hover {
     cursor: pointer;
 }
+
+.content{
+    height: 100vh;
+    padding-top: 15vh;
+    padding-bottom: 2vh;
+}

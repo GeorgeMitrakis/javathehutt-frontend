@@ -9,6 +9,7 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
 import styles from './SearchResults.module.css';
 import { Get } from 'react-axios';
 import { createQueryParams, getQueryParams } from '../../Utility/Utility';
+import SearchForm from '../SearchForm/SearchForm';
 
 
 class SearchResults extends React.Component {
@@ -36,30 +37,41 @@ class SearchResults extends React.Component {
         console.log("--------------");
 
         return (
-            <Container className={styles['results']}>
-                <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
-                    {(error, response, isLoading, makeRequest, axios) => {
-                        if(error) {
-                            return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
-                        }
-                        else if(isLoading) {
-                            return (<div>Loading...</div>)
-                        }
-                        else if(response !== null) {
-                            console.log(response);
-                            const rooms = response.data.map( room =>
-                                <SearchResult 
-                                    key={room.id}
-                                    details={room}
-                                    bookRoomHandler={( event ) => this.bookRoomHandler( event, room )} 
-                                />
-                            );
-                            return rooms;
-                        }
-                        return null;
-                    }}
-                </Get>
-            </Container>   
+
+            <Row className="content">
+                <Col sm="3" className="border">
+                    <SearchForm/>
+                </Col>
+
+                <Col sm="8" className="border">
+
+                    <Container>
+                        <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
+                            {(error, response, isLoading, makeRequest, axios) => {
+                                if(error) {
+                                    return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
+                                }
+                                else if(isLoading) {
+                                    return (<div>Loading...</div>)
+                                }
+                                else if(response !== null) {
+                                    console.log(response);
+                                    const rooms = response.data.map( room =>
+                                        <SearchResult 
+                                            key={room.id}
+                                            details={room}
+                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room )} 
+                                        />
+                                    );
+                                    return rooms;
+                                }
+                                return null;
+                            }}
+                        </Get>
+                    </Container> 
+                </Col>
+
+            </Row>
         );
     }
 
