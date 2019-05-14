@@ -59,7 +59,7 @@ class App extends Component {
 
         //axios.defaults.baseURL = "http://localhost:8765/app/api/";
         axios.defaults.headers.common['token'] = localStorage.getItem('token');
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:8765/";
+        // axios.defaults.headers.common['Access-Control-Allow-Origin'] = "http://localhost:8765/";
 
         let routes = (
             <Switch>
@@ -79,12 +79,6 @@ class App extends Component {
                     path={ ["/hotel/:hotelname"] }
                     exact
                     render={() => ( null )}
-                />
-
-                <Route
-                    path={ ["/book"] }
-                    exact
-                    render={() => ( <Checkout logIn={this.logIn} />)}
                 />
 
                 <Redirect to="/" />
