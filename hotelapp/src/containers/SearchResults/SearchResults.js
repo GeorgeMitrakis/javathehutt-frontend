@@ -7,58 +7,42 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
     DropdownMenu, DropdownItem } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
+import { Get } from 'react-axios';
 
 class SearchResults extends React.Component {
     
-    constructor(props){
-        super(props);
-        this.state={
-            data: []
-        };
+    state = {
+
     }
 
     render() {
-
-        const sth =  this.state.data.map((room) =>
-            <Results 
-                details={room}
-            />
-        );
-        
         return (
-            <Container className={styles['results']}>{sth}</Container>   
+            <Container className={styles['results']}>
+                <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
+                    {(error, response, isLoading, makeRequest, axios) => {
+                        if(error) {
+                            return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
+                        }
+                        else if(isLoading) {
+                            return (<div>Loading...</div>)
+                        }
+                        else if(response !== null) {
+                            console.log(response);
+                            const rooms = response.data.map( room =>
+                                <Results 
+                                    key={room.id}
+                                    details={room}
+                                />
+                            );
+                            return rooms;
+                        }
+                        return null;
+                    }}
+                </Get>
+            </Container>   
         );
     }
 
-    componentDidMount(){
-        console.log("componentDidMount()");
-        fetch('http://localhost:8765/app/api/dummy?field=rooms')
-        .then(response => response.json())
-        .then(jsonData => {
-            // let rooms = jsonData.map((roomData) => {
-            //     return(
-            //         <div>{roomData}</div>
-            //     )
-            // })
-
-            this.setState(
-                produce(draft => {
-                    draft.data = jsonData;
-                })
-            )
-            // <Results results={jsonData} />
-            console.log(jsonData);
-        });
-        // .catch(() => {
-        //     console.log("error");
-        // });
-
-        // this.setState(
-        //     produce(draft => {
-        //         draft.data = jsonData;
-        //     })
-        // )
-    }
 }
 
 
