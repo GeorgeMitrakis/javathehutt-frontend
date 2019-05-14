@@ -9,6 +9,7 @@ import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import DropDownUnit from '../../components/UI/SearchForm/DropDownUnit';
 import DateCalendar from '../../components/UI/SearchForm/DateCalendar';
 // import SearchResults from '../SearchResults';
+import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 
 
 class SearchForm extends React.Component {
@@ -111,7 +112,20 @@ class SearchForm extends React.Component {
     submitForm = (event) => {
         event.preventDefault();
         //this.setDefaultsIfEmpty();
-        this.props.history.push("/results");
+        let params = {};
+        params["destination"] = this.state.searchText;
+        params["fromDate"] = this.state.fromDate; 
+        params["toDate"] = this.state.toDate; 
+        params["rooms"] = this.state.dropdownUnits.rooms;
+        params["adults"] = this.state.dropdownUnits.adults;
+        params["children"] = this.state.dropdownUnits.children;
+
+        const queryParams = createQueryParams(params);
+        console.log(queryParams);
+        // console.log(getQueryParams(queryParams));
+        // return;
+
+        this.props.history.push("/results?" + queryParams);
         console.log(this.state);
     }
 
