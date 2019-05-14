@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import produce from 'immer';
 import Results from '../../components/UI/SearchResult/Results';
+import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
+    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
+    DropdownMenu, DropdownItem } from 'reactstrap';
+
+import styles from './SearchResults.module.css';
 
 class SearchResults extends React.Component {
     
@@ -21,9 +26,7 @@ class SearchResults extends React.Component {
         );
         
         return (
-            <div className="mt-10">
-                {sth}
-            </div>
+            <Container className={styles['results']}>{sth}</Container>   
         );
     }
 
