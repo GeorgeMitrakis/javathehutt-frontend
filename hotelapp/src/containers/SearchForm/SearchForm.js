@@ -82,7 +82,9 @@ class SearchForm extends React.Component {
         );
     }
 
-    increaseUnit(unit) {
+    increaseUnit(event, unit) {
+        event.preventDefault();
+
         this.setState(
             produce(draft => {
                 draft.dropdownUnits[unit] = this.state.dropdownUnits[unit]+1;
@@ -90,7 +92,9 @@ class SearchForm extends React.Component {
         );
     }
 
-    decreaseUnit(unit) {
+    decreaseUnit(event, unit) {
+        event.preventDefault();
+
         this.setState(
             produce(draft => {
                 draft.dropdownUnits[unit] = this.state.dropdownUnits[unit] >0 ? this.state.dropdownUnits[unit]-1 : 0;
@@ -198,8 +202,8 @@ class SearchForm extends React.Component {
                                 <DropDownUnit
                                     unitName={"Δωμάτια"}
                                     unitAmount={this.state.dropdownUnits.rooms}
-                                    dec={this.decreaseUnit.bind(this, 'rooms')}
-                                    inc={this.increaseUnit.bind(this, 'rooms')}
+                                    inc={( event ) => this.increaseUnit( event, 'rooms' )} 
+                                    dec={( event ) => this.decreaseUnit( event, 'rooms' )}
                                 />
 
                                 <DropdownItem divider />
@@ -207,8 +211,8 @@ class SearchForm extends React.Component {
                                 <DropDownUnit
                                     unitName={"Ενήλικες"}
                                     unitAmount={this.state.dropdownUnits.adults}
-                                    dec={this.decreaseUnit.bind(this, 'adults')}
-                                    inc={this.increaseUnit.bind(this, 'adults')}
+                                    inc={( event ) => this.increaseUnit( event, 'adults' )} 
+                                    dec={( event ) => this.decreaseUnit( event, 'adults' )}
                                 />
 
                                 <DropdownItem divider />
@@ -217,8 +221,8 @@ class SearchForm extends React.Component {
                                     unitName={"Παιδιά"}
                                     nameMargin={"mr-3"}
                                     unitAmount={this.state.dropdownUnits.children}
-                                    dec={this.decreaseUnit.bind(this, 'children')}
-                                    inc={this.increaseUnit.bind(this, 'children')}
+                                    inc={( event ) => this.increaseUnit( event, 'children' )} 
+                                    dec={( event ) => this.decreaseUnit( event, 'children' )}
                                 />
 
                             </DropdownMenu> 
