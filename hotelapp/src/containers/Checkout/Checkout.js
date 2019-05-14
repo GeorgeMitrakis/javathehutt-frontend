@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import produce from 'immer';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { Row, Col, Form, FormGroup,
     Input, InputGroup, InputGroupText, 
     InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import classes from './Checkout.module.css';
+import axios from 'axios';
+import { createQueryParams, getQueryParams, getUserInfoField } from '../../Utility/Utility';
+import qs from "querystring";
 
 
 class Checkout extends Component{
@@ -89,12 +93,53 @@ class Checkout extends Component{
 
     
 
-    submitForm = (event) => {
+    submitForm = (event, bookingInfo) => {
         event.preventDefault();
         console.log(this.state);
+        console.log(bookingInfo);
+
+        let formData = {};
+        formData["roomId"] = bookingInfo.id;
+        formData["startDate"] = bookingInfo.fromDate;
+        formData["endDate"] = bookingInfo.toDate;
+        formData["userId"] = getUserInfoField("id");
+
+        console.log("form data: ");;
+        console.log(formData);
+        console.log("---------------");
+        
+        axios.post(
+            "http://localhost:8765/app/api/book",
+            qs.stringify(formData),
+            {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        )
+        .then((result) => {
+            console.log(result);
+            if (!result.data.success)
+            {
+                alert("PAIXTHKE TROLLIA");
+            }
+            else
+            {        
+                alert("Επιτυχής Κράτηση!");
+                this.props.history.replace("/");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        
     }
 
     render(){
+
+        const bookingInfo = getQueryParams(this.props.location.search);
+        console.log("[Checkout.js] Rendering. Received query params: ");
+        console.log(bookingInfo);
+        console.log("---------");;
+
         return(
             <div id={classes.content}>
                 {/* <Row className="justify-content-center mt-5">
@@ -110,7 +155,7 @@ class Checkout extends Component{
                     </Col>
                 </Row>
 
-                <Form onSubmit={this.submitForm}>
+                <Form onSubmit={(event) => this.submitForm(event, bookingInfo)}>
                     <FormGroup >
                         <Row className="mt-3 mb-3">
                             <Col>
@@ -207,4 +252,4 @@ class Checkout extends Component{
 
 }
 
-export default Checkout;
+export default withRouter(Checkout);

@@ -205,7 +205,7 @@ class Signup extends React.Component {
             }
         )
         .then((result) => {
-            alert("Form Submitted");
+            // alert("Form Submitted");
             console.log(result);
            
             if (!result.data.success)
