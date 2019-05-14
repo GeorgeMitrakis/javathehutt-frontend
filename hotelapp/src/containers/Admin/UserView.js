@@ -182,9 +182,9 @@ class UserView extends React.Component {
                             
                         {
                             this.state.users.map( (u,i) => {
-                                return <>
-                                <Row>
-                                    <Col className="bg-white col-lg-6 offset-lg-3 mt-3" key={i}>
+                                return (
+                                <Row key={u.id}>
+                                    <Col className="bg-white col-lg-6 offset-lg-3 mt-3">
                                         <Card outline color="secondary" className="p-2  bg-white">
                                             
                                             <Container>
@@ -214,7 +214,7 @@ class UserView extends React.Component {
                                         </Card>
                                     </Col>
                                 </Row>
-                                </>
+                                )
                             })
                         }
                         
