@@ -284,7 +284,7 @@ class Signup extends React.Component {
                             {this.state.activeTab === "user" 
                             ? 
                                 <SignupUser 
-                                    inputBlurredHandler={this. inputBlurredHandler}
+                                    inputBlurredHandler={this.inputBlurredHandler}
                                     inputChangedHandler={this.inputChangedHandler}
                                     submitHandler={this.submitHandler}
                                 /> 
@@ -295,7 +295,7 @@ class Signup extends React.Component {
                             {this.state.activeTab === "provider" 
                             ? 
                                 <SignupProvider
-                                    inputBlurredHandler={this. inputBlurredHandler}
+                                    inputBlurredHandler={this.inputBlurredHandler}
                                     inputChangedHandler={this.inputChangedHandler}
                                     submitHandler={this.submitHandler}
                                 /> 

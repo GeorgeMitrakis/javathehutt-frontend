@@ -15,6 +15,8 @@ import Checkout from './containers/Checkout/Checkout';
 import { getUserInfoField } from './Utility/Utility';
 import { getUserInfo } from './Utility/Utility';
 
+import axios from 'axios';
+
 
 
 class App extends Component {
@@ -54,6 +56,9 @@ class App extends Component {
     }
 
     render () {
+
+        //axios.defaults.baseURL = "http://localhost:8765/app/api/";
+        axios.defaults.headers.common['token'] = localStorage.getItem('token');
 
         let routes = (
             <Switch>
