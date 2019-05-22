@@ -7,6 +7,7 @@ import { Container} from 'reactstrap';
 import Layout from './hoc/Layout/Layout';
 import IndexPage from './containers/IndexPage/IndexPage' ;
 
+import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import SearchResults from'./containers/SearchResults/SearchResults'
 import Admin from './containers/Admin/Admin';
@@ -64,15 +65,27 @@ class App extends Component {
         let routes = (
             <Switch>
                 <Route 
-                    path={ ["/", "/login", "/signup"] }
+                    path="/" 
+                    exact
+                    render={() => ( <IndexPage/>)}
+                />
+
+                <Route 
+                    path="/login" 
+                    exact
+                    render={() => ( <Login logIn={this.logIn} />)}
+                />
+                {/* <Route 
+                    path="/signup"
                     exact
                     render={() => ( <IndexPage logIn={this.logIn} />)}
-                />
+                /> */}
+
 
                 <Route
                     path={ ["/searchresults"] }
                     exact
-                    render={() => ( <SearchResults logIn={this.logIn} />)}
+                    render={() => ( <SearchResults isAuth={this.state.isAuth}/>)}
                 />
 
                 <Route

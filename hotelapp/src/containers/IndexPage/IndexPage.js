@@ -37,7 +37,7 @@ class IndexPage extends React.Component {
                 </div>
             </div>
 
-            <Switch>
+            {/* <Switch>
                 <Route
                     path="/login"
                     exact
@@ -51,7 +51,7 @@ class IndexPage extends React.Component {
                     // component={Signup}
                     render={() => ( <Signup logIn={this.props.logIn} />)}
                 />
-            </Switch>
+            </Switch> */}
 
             
         

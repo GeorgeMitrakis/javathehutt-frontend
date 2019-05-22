@@ -175,6 +175,7 @@ class Login extends React.Component {
             {
                 console.log("login Successful");
                 this.props.logIn(result.data.data);
+                this.props.history.goBack();
             }
         })
         .catch((err) => {
@@ -209,26 +210,24 @@ class Login extends React.Component {
         ));
 
         return (
-            <Modal  centered size="sm" fade isOpen={this.state.modalIsOpen}>
-                <ModalHeader toggle={this.closeModal}>
-                    <Header>
-                        Σύνδεση
-                    </Header>
-                </ModalHeader>
+            // <div  centered size="sm" fade isOpen={this.state.modalIsOpen}>
+            <div>
+                <Header>
+                    Σύνδεση
+                </Header>
 
-                <ModalBody>
-                    <Form onSubmit={this.submitHandler}>
-                        <p className="small">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας για πρόσβαση στις υπηρεσίες μας.</p>
-                        
-                        {formFields}
 
-                        {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button> */}
-                        <SubmitBtn classes="float-right">
-                            Είσοδος
-                        </SubmitBtn>
-                    </Form>
-                </ModalBody>
-            </Modal>
+                <Form onSubmit={this.submitHandler}>
+                    <p className="small">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας για πρόσβαση στις υπηρεσίες μας.</p>
+                    
+                    {formFields}
+
+                    {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button> */}
+                    <SubmitBtn classes="float-right">
+                        Είσοδος
+                    </SubmitBtn>
+                </Form>
+            </div>
         );
     }
 
