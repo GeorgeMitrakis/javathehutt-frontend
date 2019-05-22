@@ -27,8 +27,14 @@ class SearchResults extends React.Component {
         }
 
         const queryParams = createQueryParams(params);
-        console.log("Inside SearchResults. About to redirect to: /book?" + queryParams);
-        this.props.history.push("/book?" + queryParams);
+        if(this.props.isAuth){
+            console.log("Inside SearchResults. About to redirect to: /book?" + queryParams);
+            this.props.history.push("/book?" + queryParams);
+        }
+        else{
+            alert("Πρέπει να είστε συνδεδεμένοι για να κάνετε κράτηση δωματίων.")
+        }
+        
     }
 
     render() {

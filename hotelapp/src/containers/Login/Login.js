@@ -16,7 +16,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            modalIsOpen: true,
+            //modalIsOpen: true,
             formControls: {
                 email: {
                     rules: {
@@ -48,16 +48,16 @@ class Login extends React.Component {
         };
     }
     
-    closeModal = () => {
-        // this.setState(
-        //     produce(draft => {
-        //         draft.modalIsOpen = false;
-        //     })
-        // );
+    // closeModal = () => {
+    //     // this.setState(
+    //     //     produce(draft => {
+    //     //         draft.modalIsOpen = false;
+    //     //     })
+    //     // );
 
-        this.props.history.push("/");
-        // this.props.history.goBack();
-    }
+    //     this.props.history.push("/");
+    //     // this.props.history.goBack();
+    // }
 
     setFormField = (controlName, feedback, validity, value) => {
         this.setState(
@@ -211,7 +211,7 @@ class Login extends React.Component {
 
         return (
             // <div  centered size="sm" fade isOpen={this.state.modalIsOpen}>
-            <div>
+            <div id={classes.content}>
                 <Header>
                     Σύνδεση
                 </Header>

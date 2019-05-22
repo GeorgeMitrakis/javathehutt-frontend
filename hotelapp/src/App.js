@@ -9,6 +9,7 @@ import IndexPage from './containers/IndexPage/IndexPage' ;
 
 import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
+import Signup from './containers/Signup/Signup';
 import SearchResults from'./containers/SearchResults/SearchResults'
 import Admin from './containers/Admin/Admin';
 import Checkout from './containers/Checkout/Checkout';
@@ -53,7 +54,7 @@ class App extends Component {
             })
         );
 
-        this.props.history.replace("/");
+        this.props.history.goBack();
     }
 
     render () {
@@ -75,11 +76,11 @@ class App extends Component {
                     exact
                     render={() => ( <Login logIn={this.logIn} />)}
                 />
-                {/* <Route 
+                <Route 
                     path="/signup"
                     exact
-                    render={() => ( <IndexPage logIn={this.logIn} />)}
-                /> */}
+                    render={() => ( <Signup logIn={this.logIn} />)}
+                />
 
 
                 <Route
