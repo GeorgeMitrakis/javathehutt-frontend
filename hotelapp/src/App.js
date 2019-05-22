@@ -112,7 +112,7 @@ class App extends Component {
                     <Route
                         path={ ["/searchresults"] }
                         exact
-                        render={() => ( <SearchResults/> )}
+                        render={() => ( <SearchResults isAuth={this.state.isAuth}/>)}                        /> )}
                     />
 
                     <Route

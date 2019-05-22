@@ -19,15 +19,14 @@ class SearchResults extends React.Component {
     }
 
     bookRoomHandler = (event, roomInfo, searchInfo) => {
-        // alert(roomID);
-        const params = {
-            hotel_id: "123456",
-            ...roomInfo,
-            ...searchInfo
-        }
-
-        const queryParams = createQueryParams(params);
+        // alert(roomID);        
         if(this.props.isAuth){
+            const params = {
+                hotel_id: "123456",
+                ...roomInfo,
+                ...searchInfo
+            }
+            const queryParams = createQueryParams(params);
             console.log("Inside SearchResults. About to redirect to: /book?" + queryParams);
             this.props.history.push("/book?" + queryParams);
         }
