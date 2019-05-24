@@ -1,6 +1,13 @@
 .search_border{
+    /* margin-top: 10px;  */
     border: 2px solid rgb(236, 190, 90);
     background-color: white;
+    /* width: 70%; */
    
+}
+
+.results_container{
+    margin-top: 100px;
+    width: 100%;
 }
 

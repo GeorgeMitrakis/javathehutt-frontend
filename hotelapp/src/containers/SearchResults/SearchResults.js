@@ -10,6 +10,7 @@ import styles from './SearchResults.module.css';
 import { Get } from 'react-axios';
 import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
+import FiltersTab from '../Filters/FiltersTab'
 
 
 class SearchResults extends React.Component {
@@ -38,15 +39,17 @@ class SearchResults extends React.Component {
         console.log("--------------");
 
         return (
-
-            <Row className="content">
-                <Col sm="3" className="border">
-                    <SearchForm/>
-                </Col>
-
-                <Col sm="8" className="border">
-
-                    <Container>
+            <Container className={styles['results_container']}>
+                
+                <Row>
+                    <Col sm={{ size: 12, order: 9, offset: 3 }}><SearchForm className={styles['search_border']}/></Col>
+                </Row>
+                <Row>
+                    <Col sm={3}>
+                        <FiltersTab />
+                    </Col>
+                    <Col sm={9}>
+                        
                         <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
@@ -66,13 +69,13 @@ class SearchResults extends React.Component {
                                     );
                                     return rooms;
                                 }
-                                return null;
-                            }}
+                            return null;
+                        }}
                         </Get>
-                    </Container> 
-                </Col>
+                    </Col>
+                </Row>
+            </Container> 
 
-            </Row>
         );
     }
 

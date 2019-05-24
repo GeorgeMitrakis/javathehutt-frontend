@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
     InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+    DropdownMenu, DropdownItem, Nav, NavItem, NavLink, Collapse, CardBody, Card } from 'reactstrap';
 
+import FaIconPack from 'react-icons/lib/fa'
 import styles from './RoomInfo.module.css'
 import Pills from './../../components/UI/SearchResult/ResultPills';
 
@@ -11,16 +12,13 @@ class RoomInfo extends React.Component{
     
     
     constructor(props) {
-        super(props)
-        this.state = {
-            infoIsClose: true
-        }
+        super(props);
+        this.toggleHidden = this.toggleHidden.bind(this);
+        this.state = { infoIsClose: false };
     }
 
     toggleHidden () {
-        this.setState({
-            infoIsClose: !this.state.infoIsClose
-        })
+        this.setState(state => ({ infoIsClose: !state.infoIsClose }));
     }
 
     render(){
@@ -46,9 +44,16 @@ class RoomInfo extends React.Component{
         return (
             <Row>
                 <Col sm={12}>
-                    <Button onClick={this.toggleHidden.bind(this)} className={styles['info-btn']} color="success">Περισσότερα</Button>
+                    <Button onClick={this.toggleHidden} className={styles['info-btn']} color="success" >Περισσότερα</Button>
                 </Col>
-                {!this.state.infoIsClose && <Info items={items} />}
+                <Collapse isOpen={this.state.infoIsClose}>
+                    <Card>
+                        <CardBody>
+                            <Info items={items}/>
+                        </CardBody>
+                    </Card>
+                </Collapse>
+
             </Row>
         );
     }
