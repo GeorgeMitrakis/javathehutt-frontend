@@ -41,8 +41,8 @@ class SearchResults extends React.Component {
         return (
             <Container className={styles['results_container']}>
                 
-                <Row>
-                    <Col sm={{ size: 12, order: 9, offset: 3 }}><SearchForm className={styles['search_border']}/></Col>
+                <Row className="justify-content-center" >
+                    <SearchForm className={styles['search_border']}/>
                 </Row>
                 <Row>
                     <Col sm={3}>
