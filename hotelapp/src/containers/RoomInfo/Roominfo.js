@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
     InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+    DropdownMenu, DropdownItem, Nav, NavItem, NavLink, Collapse, CardBody, Card } from 'reactstrap';
 
+import FaIconPack from 'react-icons/lib/fa'
+import styles from './RoomInfo.module.css'
+import Pills from './../../components/UI/SearchResult/ResultPills';
 
-import styles from './Result.module.css';
-import RoomInfo from './../../../containers/RoomInfo/Roominfo';
-
-
-
-const searchResult = (props) => {
+class RoomInfo extends React.Component{
     
-    const items = [
+    
+    constructor(props) {
+        super(props);
+        this.toggleHidden = this.toggleHidden.bind(this);
+        this.state = { infoIsClose: false };
+    }
+
+    toggleHidden () {
+        this.setState(state => ({ infoIsClose: !state.infoIsClose }));
+    }
+
+    render(){
+        
+        let items = [
             {
               src: 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa1d%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa1d%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.3%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E',
               altText: 'Slide 1',
@@ -29,34 +40,30 @@ const searchResult = (props) => {
               caption: ""
             }
           ];
+    
+        return (
+            <Row>
+                <Col sm={12}>
+                    <Button onClick={this.toggleHidden} className={styles['info-btn']} color="success" >Περισσότερα</Button>
+                </Col>
+                <Collapse isOpen={this.state.infoIsClose}>
+                    <Card>
+                        <CardBody>
+                            <Info items={items}/>
+                        </CardBody>
+                    </Card>
+                </Collapse>
 
-        
-    return (
-        <Row>
-            <Container className={styles['res-container']}>
-                <h2>{props.details.name}</h2>
-                <Row className={styles['row-style']}>
-                    <Col sm={6}>
-                        <p>Περιοχή: {props.details.location}</p>
-                    </Col>
-                    <Col sm={6}>
-                        <p className={styles['price-par']}>Τιμή: {props.details.price}</p>
-                    </Col>
-                </Row>
-                <Row className={styles['row-style']}>
-                    <Col sm={6}>
-                        <p>Διαθεσιμότητα: {props.details.capacity}</p>
-                    </Col>
-                    <Col sm={6}>
-                        <Button onClick={props.bookRoomHandler} className={styles['reservation-btn']} color="primary">Κράτηση</Button>
-                    </Col>
-                </Row>
-               <RoomInfo/>
-            </Container>
-        </Row>
-    );
+            </Row>
+        );
+    }
 }
 
+const Info = (props) => (
+    <Container>
+        <Pills/>
+        <UncontrolledCarousel  items={props.items} />
+    </Container>
+)
 
-
-export default searchResult;
+export default RoomInfo;

@@ -7,9 +7,10 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
     DropdownMenu, DropdownItem } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
-import { Get } from 'react-axios';
+import { Get, Post } from 'react-axios';
 import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
+import FiltersTab from '../Filters/FiltersTab'
 
 
 class SearchResults extends React.Component {
@@ -43,16 +44,18 @@ class SearchResults extends React.Component {
         console.log("--------------");
 
         return (
-
-            <Row className="content">
-                <Col sm="3" className="border">
-                    <SearchForm/>
-                </Col>
-
-                <Col sm="8" className="border">
-
-                    <Container>
-                        <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
+            <Container className={styles['results_container']}>
+                
+                <Row className="justify-content-center" >
+                    <SearchForm className={styles['search_border']}/>
+                </Row>
+                <Row>
+                    <Col sm={3}>
+                        <FiltersTab />
+                    </Col>
+                    <Col sm={9}>
+                        
+                        <Post url="http://localhost:8765/app/api/search" params={{field: "rooms"}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
@@ -71,13 +74,13 @@ class SearchResults extends React.Component {
                                     );
                                     return rooms;
                                 }
-                                return null;
-                            }}
-                        </Get>
-                    </Container> 
-                </Col>
+                            return null;
+                        }}
+                        </Post>
+                    </Col>
+                </Row>
+            </Container> 
 
-            </Row>
         );
     }
 

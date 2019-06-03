@@ -1,0 +1,15 @@
+.filters_tab{
+    margin-top: 110px;
+    padding-bottom: 5px;
+    border: 1px rgb(32, 31, 28);
+    /* border-width: 2px; */
+    box-shadow: 1px 1px 8px 2px #ccc;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif ;
+    font-weight: normal;
+}
+
+.price_range{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
