@@ -10,9 +10,15 @@ class AreaRange extends React.Component{
     constructor(props) {
         super(props);
     }
+
+    handleAreaRangeChange = () => {
+        console.log("Allakse to AREA");
+        // this.setState({ sliderValues });
+    };
+
 	render(){
         return (
-			<Slider allowCross={false} defaultValue={[0, 20]} marks={{0: 0, 50: 50, 100: 100 }}  />
+			<Slider allowCross={false} defaultValue={20} marks={{0: 0, 50: 50, 100: 100 }} />
         );
     }
 }
