@@ -20,12 +20,12 @@ import AreaRange from './../../components/UI/AreaRange/AreaRange'
 class FiltersTab extends React.Component{
 
     constructor(props) {
-        super(props);
-
+		super(props);
+		
+		this.priceRange = [0, 20];
+		this.areaRange = 20;
         this.state = {
             searchText: "",
-            priceRange: [0, 100],
-            areaRange: [0, 100],
             facilities: {
                 breakfast: false,
                 wifi: false,
@@ -55,21 +55,43 @@ class FiltersTab extends React.Component{
         //axios request to send the search input
     }
 
-    handlecheckBoxChange = (props) => {
+    handlecheckBoxChange = (label) => {
         console.log("[FiltersTab.js]");
-        console.log("Allakse kati se checkbox sto " + props);
-        this.state.facilities[props] = !this.state.facilities[props];
-        console.log("Meta thn allagh sto checkbox " + props + " " + this.state.facilities[props]);
+        console.log("Allakse kati se checkbox sto " + label);
+    
+        let facilitiesChanged = this.state.facilities;
+        facilitiesChanged[label] = !this.state.facilities[label];
+        this.setState({
+            facilities: facilitiesChanged
+        });
+        console.log("Meta thn allagh sto checkbox " + label + " " + this.state.facilities[label]);
+        //axios request to send the search input
     }
 
-    handlePriceRangeChange = () => {
-        console.log("Allakse to PRICE");
-        // this.setState({ sliderValues });
+    handlePriceRangeChange = (value) => {
+		console.log("Allakse to PRICE!!!");
+		console.log(value);
+        // this.setState(
+        //     produce(draft => {
+		// 		draft.priceRange = value;
+		// 	})
+		// );
+		this.priceRange = value;
+        console.log(this.priceRange);
+        //axios request to send the search input
     };
     
-    handleAreaRangeChange = () => {
-        console.log("Allakse to AREA");
-        // this.setState({ sliderValues });
+    handleAreaRangeChange = (value) => {
+        console.log("Allakse to AREA!!!");
+		console.log(value);
+        // this.setState(
+        //     produce(draft => {
+		// 		draft.areaRange = value;
+		// 	})
+		// );
+		this.areaRange = value;
+        console.log(this.areaRange);
+        //axios request to send the search input
     };
 
     render(){
@@ -84,11 +106,16 @@ class FiltersTab extends React.Component{
                 </InputGroup>
                 <div className={styles['price_range']}>
                     <p>Εύρος Τιμής</p>
-                    <PriceRange onAfterChange = {this.handlePriceRangeChange}/>
+					<PriceRange 
+						defaultValue={this.priceRange}
+						handlePriceRangeChange = {this.handlePriceRangeChange}
+					/>
                 </div>
                 <div className={styles['price_range']}>
                     <p>Εύρος Περοχής Αναζήτησης (km)</p>
-                    <AreaRange onAfterChange = {this.handleAreaRangeChange}/>
+					<AreaRange 
+						defaultValue={this.areaRange}
+						handleAreaRangeChange = {this.handleAreaRangeChange}/>
                 </div>
                 <h3>Παροχές</h3>
                 <Checkbox className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {this.handlecheckBoxChange.bind(this, 'breakfast')}>

@@ -11,14 +11,20 @@ class PriceRange extends React.Component{
         console.log(props);
     }
 
-    handlePriceRangeChange = () => {
-        console.log("Allakse to PRICE");
-        // this.setState({ sliderValues });
-    };
+    // handlePriceRangeChange = (event) => {
+	// 	console.log("Allakse to PRICE");
+	// 	this.props.onAfterChange(event.target.value);
+    //     // this.setState({ sliderValues });
+    // };
 
 	render(){
         return (
-			<Range allowCross={false} defaultValue={[0, 20]} marks={{0: 0, 50: 50, 100: 100 }}  />
+			<Range 
+				allowCross={false} 
+				defaultValue={this.props.defaultValue}
+				marks={{0: 0, 50: 50, 100: 100 }}
+				onAfterChange={(value) => {this.props.handlePriceRangeChange(value)}}  
+				/>
         );
     }
 }

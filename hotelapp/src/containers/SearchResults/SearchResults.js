@@ -55,7 +55,32 @@ class SearchResults extends React.Component {
                     </Col>
                     <Col sm={9}>
                         
-                        <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
+                         
+                    <Get url="http://localhost:8765/app/api/search" params={{field: "rooms"}}>
+                            {(error, response, isLoading, makeRequest, axios) => {
+                                if(error) {
+                                    return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
+                                }
+                                else if(isLoading) {
+                                    return (<div>Loading...</div>)
+                                }
+                                else if(response !== null) {
+                                    console.log(response);
+                                    const rooms = response.data.data.results.map( room =>
+                                        <SearchResult 
+                                            key={room.id}
+                                            details={room}
+                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, queryParams )} 
+                                        />
+                                    );
+                                    return rooms;
+                                }
+                            return null;
+                        }}
+                        </Get>
+
+                        {/* EINAI TO REQUEST GIA TO DUMMY */}
+                        {/* <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
@@ -76,7 +101,7 @@ class SearchResults extends React.Component {
                                 }
                             return null;
                         }}
-                        </Get>
+                        </Get> */}
                     </Col>
                 </Row>
             </Container> 
