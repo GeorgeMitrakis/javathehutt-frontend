@@ -24,8 +24,9 @@ class FiltersTab extends React.Component{
             <Container className={styles['filters_tab']}>
                 <h3 className={styles['header']} >Φίλτρα</h3>
                 <InputGroup className={styles['searchArea']}>
-                    <Input placeholder="username" />
-                    <FontAwesomeIcon className={styles['searchIcon']} icon={faSearch} />
+                    <Input placeholder="Αναζήτηση κριτικών.." />
+                    <InputGroupAddon addonType="append"><Button color="link"><FontAwesomeIcon  icon={faSearch} /></Button></InputGroupAddon>
+                    
                 </InputGroup>
                 <div className={styles['price_range']}>
                     <p>Εύρος Τιμής</p>
