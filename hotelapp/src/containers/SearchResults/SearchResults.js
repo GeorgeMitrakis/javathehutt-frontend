@@ -55,7 +55,7 @@ class SearchResults extends React.Component {
                     </Col>
                     <Col sm={9}>
                         
-                        <Post url="http://localhost:8765/app/api/search" params={{field: "rooms"}}>
+                        <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
@@ -76,7 +76,7 @@ class SearchResults extends React.Component {
                                 }
                             return null;
                         }}
-                        </Post>
+                        </Get>
                     </Col>
                 </Row>
             </Container> 

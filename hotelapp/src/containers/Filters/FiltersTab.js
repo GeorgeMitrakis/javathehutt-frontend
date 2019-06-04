@@ -4,6 +4,13 @@ import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Lab
     InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
     DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
 
+import { Checkbox } from 'pretty-checkbox-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+
+
+import './../../styles.scss';
 
 
 import styles from './FiltersTab.module.css';
@@ -15,7 +22,11 @@ class FiltersTab extends React.Component{
     render(){
         return (
             <Container className={styles['filters_tab']}>
-                <h3>Φίλτρα</h3>
+                <h3 className={styles['header']} >Φίλτρα</h3>
+                <InputGroup className={styles['searchArea']}>
+                    <Input placeholder="username" />
+                    <FontAwesomeIcon className={styles['searchIcon']} icon={faSearch} />
+                </InputGroup>
                 <div className={styles['price_range']}>
                     <p>Εύρος Τιμής</p>
                     <PriceRange />
@@ -24,7 +35,19 @@ class FiltersTab extends React.Component{
                     <p>Εύρος Περοχής Αναζήτησης (km)</p>
                     <AreaRange />
                 </div>
-                
+                <h3>Παροχές</h3>
+                <Checkbox className={styles['checkbox']} shape="curve" color="primary" animation="smooth">
+                  Πρωινό
+                </Checkbox>
+                <Checkbox className={styles['checkbox']} shape="curve" color="primary" animation="smooth">
+                   Wi-Fi
+                </Checkbox>
+                <Checkbox className={styles['checkbox']} shape="curve" color="primary" animation="smooth">
+                    Σάουνα
+                </Checkbox>
+                <Checkbox className={styles['checkbox']} shape="curve" color="primary" animation="smooth">
+                   Πίσίνα
+                </Checkbox>
             </Container>
         );
     }
