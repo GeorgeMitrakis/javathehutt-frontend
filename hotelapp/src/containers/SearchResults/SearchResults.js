@@ -10,7 +10,7 @@ import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
 import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
-import FiltersTab from '../Filters/FiltersTab'
+import FiltersTab from '../../components/Filters/FiltersTab'
 import GoogleMapReact from 'google-map-react';
 
 class SearchResults extends React.Component {
