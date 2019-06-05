@@ -34,7 +34,7 @@ const searchResult = (props) => {
     return (
         <Row>
             <Container className={styles['res-container']}>
-                <h2>{props.details.name}</h2>
+                <h2>{props.details.roomName}</h2>
                 <Row className={styles['row-style']}>
                     <Col sm={6}>
                         <p>Περιοχή: {props.details.location}</p>

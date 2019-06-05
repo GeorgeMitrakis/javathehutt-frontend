@@ -56,7 +56,15 @@ class SearchResults extends React.Component {
                     <Col sm={9}>
                         
                          
-                    <Get url="http://localhost:8765/app/api/search" params={{field: "rooms"}}>
+                    <Get url="http://localhost:8765/app/api/search" params={{minPrice: -1,
+                                                                            maxPrice: -1,
+                                                                            maxDist: 100,
+                                                                            hasPool: false,
+                                                                            hasWifi: false,
+                                                                            hasShauna: false,
+                                                                            Name: this.props.location.search,
+                                                                            pointX: 37.983810,
+                                                                            pointY: 23.727539}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
