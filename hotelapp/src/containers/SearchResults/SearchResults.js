@@ -67,7 +67,7 @@ class SearchResults extends React.Component {
                     </Col>
                 </Row>
 
-                <Row>
+                <Row className="mt-4">
                     <Col sm={3}>
                         <Row>
                             <FiltersTab />
@@ -108,8 +108,9 @@ class SearchResults extends React.Component {
                                     );
                                     return rooms;
                                 }
-                            return null;
-                        }}
+
+                                return null;
+                            }}
                         </Get>
 
                         {/* EINAI TO REQUEST GIA TO DUMMY */}
