@@ -2,6 +2,9 @@
     height: 100vh;
     padding-top: 15vh;
     padding-bottom: 2vh;
-    margin-left: 35%;
-    margin-right: 35%;
+}
+
+#login_form {
+    max-width: 300px;
+    border-color :rgb(40, 30, 182);
 }

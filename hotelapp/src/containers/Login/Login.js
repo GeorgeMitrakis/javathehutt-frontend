@@ -3,7 +3,7 @@ import produce from 'immer';
 import axios from 'axios';
 import { Redirect, withRouter } from 'react-router-dom';
 import classes from './Login.module.css';
-import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
+import { Card, CardTitle, CardHeader, CardBody, CardText, Container, Row, Col, Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
 import MyInput from '../../components/UI/MyInput/MyInput';
 import Header from '../../components/UI/Header/Header';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
@@ -209,25 +209,36 @@ class Login extends React.Component {
             />
         ));
 
-        return (
-            // <div  centered size="sm" fade isOpen={this.state.modalIsOpen}>
-            <div id={classes.content}>
-                <Header>
-                    Σύνδεση
-                </Header>
+        return (               
+            <Container fluid id={classes.content}>
+                <Row className="justify-content-center">
+                    <Col xs="4"></Col>
+                    <Col className="align-self-center p-0" xs="auto">
+                        <Card id={classes.login_form}>
+                            <CardHeader>
+                                <Header>
+                                    Σύνδεση
+                                </Header>
+                            </CardHeader>
 
+                            <CardBody>
+                                <CardText>
+                                    <p className="small text-muted">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας προκειμένου να έχετε πρόσβαση στις υπηρεσίες μας.</p>
+                                </CardText>
 
-                <Form onSubmit={this.submitHandler}>
-                    <p className="small">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας για πρόσβαση στις υπηρεσίες μας.</p>
-                    
-                    {formFields}
-
-                    {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button> */}
-                    <SubmitBtn classes="float-right">
-                        Είσοδος
-                    </SubmitBtn>
-                </Form>
-            </div>
+                                <Form onSubmit={this.submitHandler}>
+                                    {formFields}
+                                    {/* <Button className="float-right font-weight-bold" id={classes.submit_btn}>Είσοδος</Button> */}
+                                    <SubmitBtn classes="float-right">
+                                        Είσοδος
+                                    </SubmitBtn>
+                                </Form>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col xs="4"></Col>
+                </Row>
+            </Container>
         );
     }
 
