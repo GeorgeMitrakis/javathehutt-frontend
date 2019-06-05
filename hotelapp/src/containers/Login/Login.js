@@ -222,9 +222,8 @@ class Login extends React.Component {
                             </CardHeader>
 
                             <CardBody>
-                                <CardText>
-                                    <p className="small text-muted">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας προκειμένου να έχετε πρόσβαση στις υπηρεσίες μας.</p>
-                                </CardText>
+                                
+                                <p className="small text-muted">Μπορείτε να συνδεθείτε χρησιμοποιώντας τον λογαριασμό σας προκειμένου να έχετε πρόσβαση στις υπηρεσίες μας.</p>
 
                                 <Form onSubmit={this.submitHandler}>
                                     {formFields}

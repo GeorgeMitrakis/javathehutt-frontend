@@ -2,6 +2,9 @@
     height: 100vh;
     padding-top: 15vh;
     padding-bottom: 2vh;
-    margin-left: 35%;
-    margin-right: 35%;
+}
+
+#signup_form {
+    max-width: 500px;
+    border-color :rgb(40, 30, 182);
 }

@@ -3,7 +3,7 @@ import produce from 'immer';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import classes from './Signup.module.css';
-import { Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input,TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Card, CardTitle, CardHeader, CardBody, CardText, Container, Row, Col, Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input,TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import classnames from 'classnames';
 import MyInput from '../../components/UI/MyInput/MyInput';
 import SignupUser from './SignupUser/SignupUser';
@@ -249,60 +249,72 @@ class Signup extends React.Component {
         };
 
         return (
-            // <Modal  centered size="md" fade isOpen={this.state.modalIsOpen}>
-                // <ModalHeader toggle={this.closeModal}>
-            <div id={classes.content}>
-                <Header>
-                    Εγγραφή
-                </Header>
+            <Container fluid id={classes.content}>
+                <Row className="justify-content-center">
+                    <Col xs="3"></Col>
+                    <Col className="align-self-center p-0" xs="auto">
+                        <Card id={classes.signup_form}>
+                            <CardHeader>
+                                <Header>
+                                    Εγγραφή
+                                </Header>
+                            </CardHeader>
             
-                <Nav tabs className="justify-content-center" style={{borderColor: "rgb(40, 30, 182)"}}>
-                    <NavItem>
-                        <NavLink
-                            className={"border-bottom-0 pointer " + classnames({ active: this.state.activeTab === 'user' })}
-                            onClick={ () => this.toggleTabs('user') }
-                            style={ this.state.activeTab === 'user' ? activeTabStyle : inactiveTabStyle }
-                        >
-                            Επισκέπτης
-                        </NavLink>
-                    </NavItem>
+                            <Nav tabs className="justify-content-center mt-3" style={{borderColor: "rgb(40, 30, 182)"}}>
+                                <NavItem>
+                                    <NavLink
+                                        className={"border-bottom-0 pointer " + classnames({ active: this.state.activeTab === 'user' })}
+                                        onClick={ () => this.toggleTabs('user') }
+                                        style={ this.state.activeTab === 'user' ? activeTabStyle : inactiveTabStyle }
+                                    >
+                                        Επισκέπτης
+                                    </NavLink>
+                                </NavItem>
 
-                    <NavItem>
-                        <NavLink
-                            className={"border-bottom-0 pointer " + classnames({ active: this.state.activeTab === 'provider' })}
-                            onClick={() => this.toggleTabs('provider')}
-                            style={ this.state.activeTab === 'provider' ? activeTabStyle : inactiveTabStyle }
-                        >
-                            Πάροχος
-                        </NavLink>
-                    </NavItem>
-                </Nav>
+                                <NavItem>
+                                    <NavLink
+                                        className={"border-bottom-0 pointer " + classnames({ active: this.state.activeTab === 'provider' })}
+                                        onClick={() => this.toggleTabs('provider')}
+                                        style={ this.state.activeTab === 'provider' ? activeTabStyle : inactiveTabStyle }
+                                    >
+                                        Πάροχος
+                                    </NavLink>
+                                </NavItem>
+                            </Nav>
 
-                <TabContent activeTab={this.state.activeTab}>
-                    <p className="small mt-1">Εγγραφείτε προκειμένου να έχετε πλήρη πρόσβαση σε όλες τις υπηρεσίες μας.</p>
-                    <TabPane tabId="user" className="">
-                        {this.state.activeTab === "user" 
-                        ? 
-                            <SignupUser 
-                                inputBlurredHandler={this.inputBlurredHandler}
-                                inputChangedHandler={this.inputChangedHandler}
-                                submitHandler={this.submitHandler}
-                            /> 
-                        : null} 
-                    </TabPane>
+                            <CardBody>
+                                <TabContent activeTab={this.state.activeTab}>
+                                    
+                                    <p className="small text-muted">Εγγραφείτε προκειμένου να έχετε πλήρη πρόσβαση σε όλες τις υπηρεσίες μας.</p>
 
-                    <TabPane tabId="provider" className="">
-                        {this.state.activeTab === "provider" 
-                        ? 
-                            <SignupProvider
-                                inputBlurredHandler={this.inputBlurredHandler}
-                                inputChangedHandler={this.inputChangedHandler}
-                                submitHandler={this.submitHandler}
-                            /> 
-                        : null} 
-                    </TabPane>
-                </TabContent>
-            </div>
+                                    <TabPane tabId="user" className="">
+                                        {this.state.activeTab === "user" 
+                                        ? 
+                                            <SignupUser 
+                                                inputBlurredHandler={this.inputBlurredHandler}
+                                                inputChangedHandler={this.inputChangedHandler}
+                                                submitHandler={this.submitHandler}
+                                            /> 
+                                        : null} 
+                                    </TabPane>
+
+                                    <TabPane tabId="provider" className="">
+                                        {this.state.activeTab === "provider" 
+                                        ? 
+                                            <SignupProvider
+                                                inputBlurredHandler={this.inputBlurredHandler}
+                                                inputChangedHandler={this.inputChangedHandler}
+                                                submitHandler={this.submitHandler}
+                                            /> 
+                                        : null} 
+                                    </TabPane>
+                                </TabContent>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                    <Col xs="3"></Col>
+                </Row>
+            </Container>
 
         );
     }
