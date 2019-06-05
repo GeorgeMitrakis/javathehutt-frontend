@@ -20,15 +20,22 @@ class SearchForm extends React.Component {
         this.toggleDropDown = this.toggleDropDown.bind(this);
         const fulldate = this.todayIs();
         this.state = {
-            searchText: "",
-            fromDate: this.todayIs(),
-            toDate: this.todayIs(),
+            searchText: !this.props.searchInfo ? "" : this.props.searchInfo.destination,
+            fromDate: !this.props.searchInfo ? this.todayIs() : this.props.searchInfo.fromDate,
+            toDate: !this.props.searchInfo ? this.todayIs() : this.props.searchInfo.toDate,
             dropdownOpen: false,
-            dropdownUnits: {
-                rooms: 1,
-                adults: 1,
-                children: 0
-            },
+            dropdownUnits: !this.props.searchInfo ? 
+                {
+                    rooms: 1,
+                    adults: 1,
+                    children: 0
+                } 
+                : 
+                {
+                    rooms: Number(this.props.searchInfo.rooms),
+                    adults: Number(this.props.searchInfo.adults),
+                    children: Number(this.props.searchInfo.children)
+                }
         };
 
         //console.log(this.constructFromDate());
@@ -152,6 +159,7 @@ class SearchForm extends React.Component {
                                 className="form-control border-0 p-0 rm_hl"
                                 id="destination"
                                 placeholder="Που θα θέλατε να πάτε;"
+                                value={this.state.searchText}
                                 onChange={this.handleSearchText.bind(this)}//save change in searched text to state
                             />
                         </InputGroup> 

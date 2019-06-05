@@ -48,7 +48,7 @@ class SearchResults extends React.Component {
                 <Row>
                     <Col sm="10">
                         <Row className="justify-content-center" >
-                            <SearchForm className={styles['search_border']}/>
+                            <SearchForm searchInfo={queryParams} className={styles['search_border']}/>
                         </Row>
                     </Col>
 
