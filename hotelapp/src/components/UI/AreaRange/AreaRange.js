@@ -20,7 +20,7 @@ class AreaRange extends React.Component{
         return (
 			<Slider 
 				allowCross={false} 
-				defaultValue={20} 
+				defaultValue={this.props.defaultValue} 
 				marks={{0: 0, 50: 50, 100: 100 }} 
 				onAfterChange={(value) => {this.props.handleAreaRangeChange(value)}} 
 				/>
