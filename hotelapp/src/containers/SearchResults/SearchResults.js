@@ -11,7 +11,7 @@ import { Get, Post } from 'react-axios';
 import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../Filters/FiltersTab'
-
+import GoogleMapReact from 'google-map-react';
 
 class SearchResults extends React.Component {
     
@@ -44,15 +44,50 @@ class SearchResults extends React.Component {
         console.log("--------------");
 
         return (
-            <Container className={styles['results_container']}>
-                
-                <Row className="justify-content-center" >
-                    <SearchForm className={styles['search_border']}/>
-                </Row>
+            <Container fluid className={styles['results_container']}>
                 <Row>
-                    <Col sm={3}>
-                        <FiltersTab />
+                    <Col sm="10">
+                        <Row className="justify-content-center" >
+                            <SearchForm className={styles['search_border']}/>
+                        </Row>
                     </Col>
+
+                    <Col sm="2">                    
+                        <GoogleMapReact
+                            bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
+                            defaultCenter={{
+                                lat: 59.95,
+                                lng: 30.33
+                            }}
+                            defaultZoom={11}
+                        >
+                        <p> "My Marker" </p>
+                            
+                        </GoogleMapReact>
+                    </Col>
+                </Row>
+
+                <Row className="mt-4">
+                    <Col sm={3}>
+                        <Row>
+                            <FiltersTab />
+                        </Row>
+
+                        <Row className="mt-3 mb-3" style={{height: "250px"}}>
+                            <GoogleMapReact
+                                bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
+                                defaultCenter={{
+                                    lat: 59.95,
+                                    lng: 30.33
+                                }}
+                                defaultZoom={11}
+                            >
+                            <p> "My Marker" </p>
+                                
+                            </GoogleMapReact>
+                        </Row>
+                    </Col>
+
                     <Col sm={9}>
                         
                          
@@ -83,8 +118,9 @@ class SearchResults extends React.Component {
                                     );
                                     return rooms;
                                 }
-                            return null;
-                        }}
+
+                                return null;
+                            }}
                         </Get>
 
                         {/* EINAI TO REQUEST GIA TO DUMMY */}

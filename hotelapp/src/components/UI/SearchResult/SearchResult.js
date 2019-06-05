@@ -32,7 +32,7 @@ const searchResult = (props) => {
 
         
     return (
-        <Row>
+        <Row className="pl-3">
             <Container className={styles['res-container']}>
                 <h2>{props.details.roomName}</h2>
                 <Row className={styles['row-style']}>
