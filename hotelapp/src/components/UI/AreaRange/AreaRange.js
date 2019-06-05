@@ -2,30 +2,17 @@ import 'rc-slider/assets/index.css';
 import React from 'react';
 import Slider from 'rc-slider';
 
-const Range = Slider.Range;
-
-const style = { width: 400, margin: 50 };
-
-class AreaRange extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
-    handleAreaRangeChange = () => {
-        console.log("Allakse to AREA");
-        // this.setState({ sliderValues });
-    };
-
-	render(){
-        return (
-			<Slider 
-				allowCross={false} 
-				defaultValue={this.props.defaultValue} 
-				marks={{0: 0, 50: 50, 100: 100 }} 
-				onAfterChange={(value) => {this.props.handleAreaRangeChange(value)}} 
-				/>
-        );
-    }
+const areaRange = (props) => {
+    
+    return (
+        <Slider 
+            allowCross={false} 
+            defaultValue={props.defaultValue} 
+            marks={{0: 0, 50: 50, 100: 100 }} 
+            onAfterChange={(value) => {props.handleAreaRangeChange(value)}} 
+        />
+    );
+    
 }
 
-export default AreaRange;
+export default areaRange;

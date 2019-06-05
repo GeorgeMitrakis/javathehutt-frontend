@@ -7,4 +7,5 @@
 #signup_form {
     max-width: 500px;
     border-color :rgb(40, 30, 182);
+    box-shadow: 1px 1px 8px 2px #ccc;
 }

@@ -40,7 +40,8 @@ class SearchResults extends React.Component {
             this.props.history.push("/book?" + queryParams);
         }
         else{
-            alert("Πρέπει να είστε συνδεδεμένοι για να κάνετε κράτηση δωματίων.")
+            // alert("Πρέπει να είστε συνδεδεμένοι για να κάνετε κράτηση δωματίων.")
+            this.props.history.push("/login");
         }
         
     }
