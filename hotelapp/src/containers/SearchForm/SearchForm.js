@@ -102,9 +102,24 @@ class SearchForm extends React.Component {
     decreaseUnit(event, unit) {
         event.preventDefault();
 
+        if ((unit === "rooms") && (this.state.dropdownUnits.rooms === 1))
+        {
+            return;
+        }
+
+        if ((unit === "adults") && (this.state.dropdownUnits.adults === 1))
+        {
+            return;
+        }
+
+        if ((unit === "children") && (this.state.dropdownUnits.children === 0))
+        {
+            return;
+        }
+
         this.setState(
             produce(draft => {
-                draft.dropdownUnits[unit] = this.state.dropdownUnits[unit] >0 ? this.state.dropdownUnits[unit]-1 : 0;
+                draft.dropdownUnits[unit] -= 1;
             })
         );
     }
@@ -155,6 +170,7 @@ class SearchForm extends React.Component {
                                 </InputGroupText> 
                             </InputGroupAddon> 
                             <Input
+                                required
                                 type="text"
                                 className="form-control border-0 p-0 rm_hl"
                                 id="destination"

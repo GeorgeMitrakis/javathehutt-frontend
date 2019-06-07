@@ -13,18 +13,69 @@ import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
 
+
+const searchFiltersDefaults = {
+    minPrice: 0,
+    maxPrice: 100,
+    maxDist: 100,
+    searchText: "", 
+    facilities: {
+        breakfast: false,
+        wifi: false,
+        pool: false,
+        sauna: false
+    }
+}
+
+
 class SearchResults extends React.Component {
     
-    state = {
-        priceRange: [0, 100],
-        areaRange: 100,
-        searchText: "",
-        facilities: {
-            breakfast: false,
-            wifi: false,
-            pool: false,
-            sauna: false
-        }
+    // state = {
+    //     priceRange: [0, 100],
+    //     areaRange: 100,
+    //     searchText: "",
+    //     facilities: {
+    //         breakfast: false,
+    //         wifi: false,
+    //         pool: false,
+    //         sauna: false
+    //     }
+    // }
+
+    getSearchFilters = (queryParams) => {
+        let searchFilters = {};
+        Object.keys(searchFiltersDefaults).forEach(filterId => { 
+
+            if (filterId === "facilities")
+            {
+                let facilities = {}
+                Object.keys(searchFiltersDefaults.facilities).forEach(facId => {
+                    if (queryParams[facId])
+                    {
+                        facilities[facId] = queryParams[facId] === "true";
+                    }
+                    else
+                    {
+                        facilities[facId] = searchFiltersDefaults.facilities[facId];
+                    }
+                });
+                searchFilters["facilities"] = facilities;
+            }
+            else
+            {
+                if (queryParams[filterId])
+                {
+                    searchFilters[filterId] = Number(queryParams[filterId]);
+                }
+                else
+                {
+                    searchFilters[filterId] = searchFiltersDefaults[filterId];
+                }
+            }
+
+        });
+
+        return searchFilters;
     }
 
     bookRoomHandler = (event, roomInfo, searchInfo) => {
@@ -46,23 +97,37 @@ class SearchResults extends React.Component {
         
     }
 
-    handleSearchText = (event) => {
+    updateURL = (searchFilters) => {
+        const flatSearchFilters = { 
+            
+            ...searchFilters.facilities 
+        };
+
+        const queryParams = createQueryParams(flatSearchFilters);
+        this.props.history.push("/searchresults?" + queryParams);
+    }
+
+    handleSearchText = (event, searchFilters) => {
         const text = event.target.value;
 
-        this.setState(
-            produce(draft => {
-                draft.searchText = text;//this happens because event.target is not visible from draft
-            })
-        );
+        // this.setState(
+        //     produce(draft => {
+        //         draft.searchText = text;//this happens because event.target is not visible from draft
+        //     })
+        // );
+
+        searchFilters.searchText = text;
+        console.log("changed searchText", searchFilters);
+        this.updateURL(searchFilters);
     }
 
     searchCritics = () => {
-        console.log("Αναζητηση Critics");
-        console.log(this.state);
+        // console.log("Αναζητηση Critics");
+        // console.log(this.state);
         //axios request to send the search input
     }
 
-    handlecheckBoxChange = (label) => {
+    handlecheckBoxChange = (label, searchFilters) => {
         console.log("[FiltersTab.js]");
         console.log("Allakse kati se checkbox sto " + label);
     
@@ -74,37 +139,50 @@ class SearchResults extends React.Component {
 
         // const checkboxValue = event.target.value;
 
-        this.setState(
-            produce(draft => {
-				draft.facilities[label] = !draft.facilities[label];
-			})
-		);
-        console.log("Meta thn allagh sto checkbox " + " " + this.state.facilities[label]);
+        // this.setState(
+        //     produce(draft => {
+		// 		draft.facilities[label] = !draft.facilities[label];
+		// 	})
+		// );
+        // console.log("Meta thn allagh sto checkbox " + " " + this.state.facilities[label]);
         //axios request to send the search input
+
+        searchFilters.facilities[label] = !searchFilters.facilities[label];
+        console.log(searchFilters);
+        this.updateURL(searchFilters);
     }
 
-    handlePriceRangeChange = (value) => {
+    handlePriceRangeChange = (value, searchFilters) => {
 		console.log("Allakse to PRICE!!!");
-		console.log(value);
-        this.setState(
-            produce(draft => {
-				draft.priceRange = value;
-			})
-		);
-        console.log(this.state.priceRange);
+		// console.log(value);
+        // this.setState(
+        //     produce(draft => {
+		// 		draft.priceRange = value;
+		// 	})
+		// );
+        // console.log(this.state.priceRange);
         //axios request to send the search input
+
+        searchFilters.minPrice = value[0];
+        searchFilters.maxPrice = value[1];
+        console.log(searchFilters);
+        this.updateURL(searchFilters);
     };
     
-    handleAreaRangeChange = (value) => {
+    handleAreaRangeChange = (value, searchFilters) => {
         console.log("Allakse to AREA!!!");
-		console.log(value);
-        this.setState(
-            produce(draft => {
-				draft.areaRange = value;
-			})
-		);
-        console.log(this.areaRange);
+		// console.log(value);
+        // this.setState(
+        //     produce(draft => {
+		// 		draft.areaRange = value;
+		// 	})
+		// );
+        // console.log(this.areaRange);
         //axios request to send the search input
+
+        searchFilters.maxDist = value;
+        console.log(searchFilters);
+        this.updateURL(searchFilters);
     };
 
     render() {
@@ -113,7 +191,9 @@ class SearchResults extends React.Component {
         console.log(queryParams);
         console.log("--------------");
 
-        console.log("state: ", this.state);
+        const searchFilters = this.getSearchFilters(queryParams);
+        console.log("searchFilters", searchFilters);
+        // console.log("state: ", this.state);
 
         return (
             <Container fluid className={styles['results_container']}>
@@ -147,10 +227,12 @@ class SearchResults extends React.Component {
                                 handleAreaRangeChange = {this.handleAreaRangeChange}
                                 handleSearchText = {this.handleSearchText}
                                 handlecheckBoxChange = {this.handlecheckBoxChange}
-                                facilitiesFlags = {this.state.facilities}
-                                priceRange = {this.state.priceRange}
-                                areaRange = {this.state.areaRange}
-                                searchText = {this.state.searchText}
+
+                                searchFilters = {searchFilters}
+                                // facilitiesFlags = {searchFilters.facilities}
+                                // priceRange = {[searchFilters.minPrice, searchFilters.maxPrice]}
+                                // areaRange = {searchFilters.maxDist}
+                                // searchText = {searchFilters.searchText}
                             />
                         </Row>
 
@@ -172,12 +254,12 @@ class SearchResults extends React.Component {
                     <Col sm={9}>
                         
                          
-                    <Get url="http://localhost:8765/app/api/search" params={{minPrice: this.state.priceRange[0],
-                                                                            maxPrice: this.state.priceRange[1],
-                                                                            maxDist: this.state.areaRange,
-                                                                            hasPool: this.state.facilities.pool,
-                                                                            hasWifi: this.state.facilities.wifi,
-                                                                            hasShauna: this.state.facilities.sauna,
+                    <Get url="http://localhost:8765/app/api/search" params={{minPrice: searchFilters.minPrice,
+                                                                            maxPrice: searchFilters.maxPrice,
+                                                                            maxDist: searchFilters.maxDist,
+                                                                            hasPool: searchFilters.facilities.pool,
+                                                                            hasWifi: searchFilters.facilities.wifi,
+                                                                            hasShauna: searchFilters.facilities.sauna,
                                                                             Name: queryParams.destination,
                                                                             pointX: 37.983810,
                                                                             pointY: 23.727539}}>

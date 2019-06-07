@@ -7,9 +7,9 @@ const areaRange = (props) => {
     return (
         <Slider 
             allowCross={false} 
-            defaultValue={props.defaultValue} 
+            defaultValue={props.searchFilters.maxDist} 
             marks={{0: 0, 50: 50, 100: 100 }} 
-            onAfterChange={(value) => {props.handleAreaRangeChange(value)}} 
+            onAfterChange={(value) => {props.handleAreaRangeChange(value, props.searchFilters)}} 
         />
     );
     
