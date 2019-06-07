@@ -6,8 +6,8 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
          InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
          DropdownMenu, DropdownItem } from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
-import DropDownUnit from '../../components/UI/SearchForm/DropDownUnit';
-import DateCalendar from '../../components/UI/SearchForm/DateCalendar';
+import DropDownUnit from '../../components/SearchForm/DropDownUnit';
+import DateCalendar from '../../components/SearchForm/DateCalendar';
 // import SearchResults from '../SearchResults';
 import { createQueryParams, getQueryParams } from '../../Utility/Utility';
 

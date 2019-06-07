@@ -14,8 +14,8 @@ import './../../styles.scss';
 
 
 import styles from './FiltersTab.module.css';
-import PriceRange from '../UI/PriceRange/PriceRange'
-import AreaRange from '../UI/AreaRange/AreaRange'
+import PriceRange from './PriceRange/PriceRange';
+import AreaRange from './AreaRange/AreaRange';
 
 const filtersTab = (props) => {
 

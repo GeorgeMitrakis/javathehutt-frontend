@@ -4,9 +4,9 @@ import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Lab
     InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
     DropdownMenu, DropdownItem, Nav, NavItem, NavLink, Collapse, CardBody, Card } from 'reactstrap';
 
-import FaIconPack from 'react-icons/lib/fa'
-import styles from './RoomInfo.module.css'
-import Pills from './../../components/UI/SearchResult/ResultPills';
+import FaIconPack from 'react-icons/lib/fa';
+import styles from './RoomInfo.module.css';
+import Pills from '../../components/SearchResult/ResultPills';
 
 class RoomInfo extends React.Component{
     

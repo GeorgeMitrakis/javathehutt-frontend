@@ -6,7 +6,7 @@ import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Lab
 
 
 import styles from './Result.module.css';
-import RoomInfo from './../../../containers/RoomInfo/Roominfo';
+import RoomInfo from '../../containers/RoomInfo/Roominfo';
 
 
 
