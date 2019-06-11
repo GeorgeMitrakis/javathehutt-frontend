@@ -8,6 +8,9 @@ import produce from 'immer';
 import myInput from '../../components/UI/MyInput/MyInput';
 import submitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import classes from './Administration.module.css';
+
+import UserViewElem from '../../components/User/Admin/UserViewElem'
+import UserViewResults from '../../components/User/Admin/UserViewResults'
 //import SearchForm from '../SearchForm/SearchForm';
 //import Login from '../Login/Login';
 //import Signup from '../Signup/Signup';
@@ -120,34 +123,81 @@ class UserView extends React.Component {
     }
 
     constructor(props) {
-        super(props);
+		super(props);
         this.state = {
-            'searchStr':'',
-            'users':[]
-        }
+            searchStr:'',
+            users:[]
+		}
+		this.getAllUsers();
         
     }
 
     searchChanged = (e) =>{
         //console.log(window.location.pathname);
         this.setState({searchStr:e.target.value});
-    }
+	}
+	
+	getAllUsers = () => {
+		axios.get(
+			"http://localhost:8765/app/api/users",			
+			{
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+        )
+        .then((result) => {            
+			if(result.data.success){
+				console.log(result.data.data);
+           		console.log(result.data);
+				console.log(result);
+				this.setState(
+					produce(draft => {					
+					draft.users = result.data.data.users;
+				}));
+			}
+			else{
+				console.log(result.data.message);
+			}
+            
+        })
+        .catch((err) => {
+            console.log(err);    
+		})
+	}
 
-    searchUsers = () =>{
+    searchUsers(){
         if(this.state.searchStr === ''){
             return;
         }
-       
+	   
         axios.get(
-            "http://localhost:8765/app/api/dummy?field=users"
+			"http://localhost:8765/app/api/users",
+			{
+				params:{
+					'email':this.state.searchStr
+				}
+			},			
+			{
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
         )
         .then((result) => {
-            console.log(result.data);
-            console.log(result);
-            this.setState(produce(draft => {
-                
-                draft.users = result.data;
-            }));
+			if(result.data.success){
+				console.log(result.data.data);
+				console.log(result.data);
+				console.log(result);
+				this.setState(
+					produce(draft => {					
+					draft.users = result.data.data.users;
+				}));
+			}
+			else{
+				this.setState(
+					produce(draft => {					
+					draft.users = [];
+				}));
+				console.log(result.data.message);
+			}
+            
         })
         .catch((err) => {
             console.log(err);    
@@ -160,66 +210,33 @@ class UserView extends React.Component {
 
         return (
             <>
-
-                    <Container className = "mt-4 p-2">
-                        <Row>
-                            <Col className="col-xs-8 col-sm-8 col-md-6 col-lg-5 offset-sm-1 offset-md-3 offset-lg-3">
-                                <input 
-                                    type='text'
-                                    onChange={this.searchChanged.bind(this)} 
-                                    value={this.state.searchStr} 
-                                    onKeyPress={this.handleKeyPress.bind(this)}
-                                    className="form-control form-control-sm"
-                                    placeholder="Seach users..."
-                                >
-                                </input>
-                            </Col>
-                            <Col className="col-xs-4 col-sm-2 col-md-2 col-lg-2 offset-xs-8">
-                                <button type="submit" className="btn btn-primary btn-sm" onClick={this.handleSearchPressed.bind(this)}>Αναζητηση</button>
-                            </Col>
-                        </Row>
-                    
-                            
-                        {
-                            this.state.users.map( (u,i) => {
-                                return (
-                                <Row key={u.id}>
-                                    <Col className="bg-white col-lg-6 offset-lg-3 mt-3">
-                                        <Card outline color="secondary" className="p-2  bg-white">
-                                            
-                                            <Container>
-                                                <Row>
-                                                    <Col>
-                                                        <h3>
-                                                            {u.email}
-                                                        </h3>
-                                                    
-                                                    </Col>
-
-                                                </Row>
-                                                <Row>
-                                                    <Col className="col-lg-4">
-                                                        <button className="btn btn-info btn-sm btn-block" value={u.id} onClick={this.promote}>
-                                                            Promote to admin
-                                                        </button>
-                                                    </Col>
-                                                    <Col className="col-lg-4">
-                                                        <button value={u.id} onClick={u.banned ? this.ban : this.unban} className="btn btn-danger btn-sm btn-block " > 
-                                                        {!u.banned ? "Ban":"Unban"} 
-                                                        </button>
-                                                    </Col>
-                                                </Row>    
-                                            </Container>
-                                            
-                                        </Card>
-                                    </Col>
-                                </Row>
-                                )
-                            })
-                        }
-                        
-                    </Container>
-               
+				<Container className = "mt-4 p-2">
+					<Row>
+						<Col className="col-xs-8 col-sm-8 col-md-6 col-lg-5 offset-sm-1 offset-md-3 offset-lg-3">
+							<input 
+								type='text'
+								onChange={this.searchChanged.bind(this)} 
+								value={this.state.searchStr} 
+								onKeyPress={this.handleKeyPress.bind(this)}
+								className="form-control form-control-sm"
+								placeholder="Search users..."
+							>
+							</input>
+						</Col>
+						<Col className="col-xs-4 col-sm-2 col-md-2 col-lg-2 offset-xs-8">
+							<button type="submit" className="btn btn-primary btn-sm" onClick={this.handleSearchPressed.bind(this)}>Αναζητηση</button>
+						</Col>
+					</Row>
+				
+						
+					<UserViewResults
+						users={this.state.users}
+						promote={this.promote}
+						ban={this.ban}
+						unban={this.unban}
+					/>
+					
+				</Container>               
                 
             </>
   

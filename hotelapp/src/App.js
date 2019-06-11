@@ -11,7 +11,7 @@ import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import Signup from './containers/Signup/Signup';
 import SearchResults from'./containers/SearchResults/SearchResults'
-import Admin from './components/User/Admin';
+import Admin from './components/User/Admin/Admin';
 import Checkout from './containers/Checkout/Checkout';
 
 import { getUserInfoField } from './Utility/Utility';
