@@ -11,7 +11,7 @@ import Login from './containers/Login/Login';
 import Logout from './containers/Logout/Logout';
 import Signup from './containers/Signup/Signup';
 import SearchResults from'./containers/SearchResults/SearchResults'
-import Admin from './containers/Admin/Admin';
+import Admin from './components/User/Admin';
 import Checkout from './containers/Checkout/Checkout';
 
 import { getUserInfoField } from './Utility/Utility';
@@ -166,7 +166,7 @@ class App extends Component {
                         />
 
                         <Route
-                            path={ ["/admin", "/admin/userview", "/admin/transactions"] }
+                            path={ ["/admin", "/admin/profile", "/admin/administration", "/admin/administration/userview", "/admin/administration/transactions"] }
                             exact
                             render={() => ( <Admin/> )}
                         />

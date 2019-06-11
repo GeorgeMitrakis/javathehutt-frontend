@@ -7,7 +7,7 @@ import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 import myInput from '../../components/UI/MyInput/MyInput';
 import submitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
-import classes from './Admin.module.css';
+import classes from './Administration.module.css';
 //import SearchForm from '../SearchForm/SearchForm';
 //import Login from '../Login/Login';
 //import Signup from '../Signup/Signup';
