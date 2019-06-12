@@ -86,3 +86,49 @@ export const getQueryParams = (URLsearch) => {
 
     return queryParams;
 }
+
+//the method below returns the current date in form "YYYY-MM-DD"
+// export const todayIs = () => {
+//     let initialdate = new Date();
+//     let fulldate = "";
+//     fulldate  = fulldate  + initialdate.getFullYear() +"-";
+//     if(initialdate.getMonth()+1<10)
+//         fulldate  = fulldate  + "0";
+//     fulldate  = fulldate  +  (initialdate.getMonth()+1) +"-";
+//     if(initialdate.getDate()<10)
+//         fulldate  = fulldate  + "0";
+//     fulldate  = fulldate  +  initialdate.getDate();
+
+//     return fulldate;
+// }
+
+
+//the methods below return the date in form "YYYY-MM-DD"
+
+export const todayIs = () => {
+    return formatDate(new Date());
+}
+
+export const tomorrowIs = () => {
+    let date = new Date();
+    date.setDate(date.getDate() + 1);
+    return formatDate(date);
+}
+
+export const nextDayIs = (currDate) => {
+    let date = new Date(currDate);
+    date.setDate(date.getDate() + 1);
+    return formatDate(date);
+}
+
+const formatDate = (date) => {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
