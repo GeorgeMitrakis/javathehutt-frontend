@@ -9,7 +9,7 @@ import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import DropDownUnit from '../../components/SearchForm/DropDownUnit';
 import DateCalendar from '../../components/SearchForm/DateCalendar';
 // import SearchResults from '../SearchResults';
-import { createQueryParams, getQueryParams } from '../../Utility/Utility';
+import { createQueryParams, getQueryParams, todayIs, tomorrowIs, nextDayIs } from '../../Utility/Utility';
 
 
 class SearchForm extends React.Component {
@@ -18,11 +18,11 @@ class SearchForm extends React.Component {
         super(props);
 
         this.toggleDropDown = this.toggleDropDown.bind(this);
-        const fulldate = this.todayIs();
+        const fulldate = todayIs();
         this.state = {
             searchText: !this.props.searchInfo ? "" : this.props.searchInfo.destination,
-            fromDate: !this.props.searchInfo ? this.todayIs() : this.props.searchInfo.fromDate,
-            toDate: !this.props.searchInfo ? this.todayIs() : this.props.searchInfo.toDate,
+            fromDate: !this.props.searchInfo ? todayIs() : this.props.searchInfo.fromDate,
+            toDate: !this.props.searchInfo ? tomorrowIs() : this.props.searchInfo.toDate,
             dropdownOpen: false,
             dropdownUnits: !this.props.searchInfo ? 
                 {
@@ -52,23 +52,6 @@ class SearchForm extends React.Component {
             })
         );
     }
-
-
-    //the method below returns the current date in form "YYYY-MM-DD"
-    todayIs(){
-        let initialdate = new Date();
-        let fulldate = "";
-        fulldate  = fulldate  + initialdate.getFullYear() +"-";
-        if(initialdate.getMonth()+1<10)
-            fulldate  = fulldate  + "0";
-        fulldate  = fulldate  +  (initialdate.getMonth()+1) +"-";
-        if(initialdate.getDate()<10)
-            fulldate  = fulldate  + "0";
-        fulldate  = fulldate  +  initialdate.getDate();
-
-        return fulldate;
-    }
-
 
     handleDate(date_index, event){
         let d = event.target.value;
@@ -187,7 +170,7 @@ class SearchForm extends React.Component {
                         text={"Από"}
 
                         //room booking can only start from today
-                        min={this.todayIs()}
+                        min={todayIs()}
 
                         //stay starting date
                         value={this.state.fromDate}
@@ -205,7 +188,7 @@ class SearchForm extends React.Component {
                         text={"Έως"}
 
                         //room booking can only end after the starting date
-                        min={this.state.fromDate}
+                        min={nextDayIs(this.state.fromDate)}
 
                         //stay ending date
                         value={this.state.toDate}
