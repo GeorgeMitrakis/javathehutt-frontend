@@ -11,7 +11,7 @@ const priceRange = (props) => {
             allowCross={false} 
             defaultValue = {[props.searchFilters.minPrice, props.searchFilters.maxPrice]}
             marks={{0: 0, 50: 50, 100: 100 }}
-            onAfterChange={(value) => {props.handlePriceRangeChange(value, props.searchFilters)}}  
+            onAfterChange={(value) => {props.handlePriceRangeChange(value, props.searchFilters, props.searchInfo)}}  
         />
     );
 }

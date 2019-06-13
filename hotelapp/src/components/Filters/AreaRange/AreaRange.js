@@ -9,7 +9,7 @@ const areaRange = (props) => {
             allowCross={false} 
             defaultValue={props.searchFilters.maxDist} 
             marks={{0: 0, 50: 50, 100: 100 }} 
-            onAfterChange={(value) => {props.handleAreaRangeChange(value, props.searchFilters)}} 
+            onAfterChange={(value) => {props.handleAreaRangeChange(value, props.searchFilters, props.searchInfo)}} 
         />
     );
     

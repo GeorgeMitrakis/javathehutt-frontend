@@ -8,7 +8,7 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
-import { createQueryParams, getQueryParams } from '../../Utility/Utility';
+import { createQueryParams, getQueryParams, todayIs, tomorrowIs } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
@@ -27,6 +27,17 @@ const searchFiltersDefaults = {
     }
 }
 
+const searchInfoDefaults = {
+    destination: "",
+    fromDate: todayIs(),
+    toDate: tomorrowIs(),
+    rooms: 1,
+    adults: 1,
+    children: 0
+}
+
+ const numSearchInfo = ["rooms", "adults", "children"];
+
 
 class SearchResults extends React.Component {
     
@@ -42,6 +53,34 @@ class SearchResults extends React.Component {
     //     }
     // }
 
+    getSearchInfo = (queryParams) => {
+        let searchInfo = {};
+        Object.keys(searchInfoDefaults).forEach(filterId => { 
+            if (filterId === "destination") 
+            {
+                if ((!queryParams["destination"]) || (queryParams["destination"] === ""))
+                {
+                    this.props.history.goBack();
+                    return;
+                }
+            }
+
+            if (queryParams[filterId])
+            {
+                searchInfo[filterId] = queryParams[filterId];
+            }
+            else
+            {
+                searchInfo[filterId] = searchInfoDefaults[filterId];
+            }
+
+        });
+
+        
+
+        return searchInfo;
+    }
+ 
     getSearchFilters = (queryParams) => {
         let searchFilters = {};
         Object.keys(searchFiltersDefaults).forEach(filterId => { 
@@ -63,7 +102,7 @@ class SearchResults extends React.Component {
             }
             else
             {
-                if (queryParams[filterId])
+                if ((queryParams[filterId]) && (!isNaN(queryParams[filterId])) && (queryParams[filterId] >=0 ))
                 {
                     searchFilters[filterId] = Number(queryParams[filterId]);
                 }
@@ -75,10 +114,16 @@ class SearchResults extends React.Component {
 
         });
 
+        if (searchFilters.minPrice > searchFilters.maxPrice) 
+        {
+            searchFilters.minPrice = searchFiltersDefaults.minPrice;
+            searchFilters.maxPrice = searchFiltersDefaults.maxPrice;
+        }
+
         return searchFilters;
     }
 
-    bookRoomHandler = (event, roomInfo, searchInfo) => {
+    bookRoomHandler = (event, roomInfo, searchFilters, searchInfo) => {
         // alert(roomID);        
         if(this.props.isAuth){
             const params = {
@@ -97,17 +142,20 @@ class SearchResults extends React.Component {
         
     }
 
-    updateURL = (searchFilters) => {
-        const flatSearchFilters = { 
-            
+    updateURL = (searchFilters, searchInfo) => {
+        let params = { 
+            ...searchInfo,
+            ...searchFilters,
             ...searchFilters.facilities 
         };
 
-        const queryParams = createQueryParams(flatSearchFilters);
+        delete params.facilities;
+
+        const queryParams = createQueryParams(params);
         this.props.history.push("/searchresults?" + queryParams);
     }
 
-    handleSearchText = (event, searchFilters) => {
+    handleSearchText = (event, searchFilters, searchInfo) => {
         const text = event.target.value;
 
         // this.setState(
@@ -118,7 +166,7 @@ class SearchResults extends React.Component {
 
         searchFilters.searchText = text;
         console.log("changed searchText", searchFilters);
-        this.updateURL(searchFilters);
+        this.updateURL(searchFilters, searchInfo);
     }
 
     searchCritics = () => {
@@ -127,7 +175,7 @@ class SearchResults extends React.Component {
         //axios request to send the search input
     }
 
-    handlecheckBoxChange = (label, searchFilters) => {
+    handlecheckBoxChange = (label, searchFilters, searchInfo) => {
         console.log("[FiltersTab.js]");
         console.log("Allakse kati se checkbox sto " + label);
     
@@ -149,10 +197,10 @@ class SearchResults extends React.Component {
 
         searchFilters.facilities[label] = !searchFilters.facilities[label];
         console.log(searchFilters);
-        this.updateURL(searchFilters);
+        this.updateURL(searchFilters, searchInfo);
     }
 
-    handlePriceRangeChange = (value, searchFilters) => {
+    handlePriceRangeChange = (value, searchFilters, searchInfo) => {
 		console.log("Allakse to PRICE!!!");
 		// console.log(value);
         // this.setState(
@@ -166,10 +214,10 @@ class SearchResults extends React.Component {
         searchFilters.minPrice = value[0];
         searchFilters.maxPrice = value[1];
         console.log(searchFilters);
-        this.updateURL(searchFilters);
+        this.updateURL(searchFilters, searchInfo);
     };
     
-    handleAreaRangeChange = (value, searchFilters) => {
+    handleAreaRangeChange = (value, searchFilters, searchInfo) => {
         console.log("Allakse to AREA!!!");
 		// console.log(value);
         // this.setState(
@@ -182,7 +230,7 @@ class SearchResults extends React.Component {
 
         searchFilters.maxDist = value;
         console.log(searchFilters);
-        this.updateURL(searchFilters);
+        this.updateURL(searchFilters, searchInfo);
     };
 
     render() {
@@ -193,6 +241,12 @@ class SearchResults extends React.Component {
 
         const searchFilters = this.getSearchFilters(queryParams);
         console.log("searchFilters", searchFilters);
+
+        const searchInfo = this.getSearchInfo(queryParams);
+        console.log("searchInfo", searchInfo);
+
+        // console.log("tomorrow is: ", tomorrowIs());
+
         // console.log("state: ", this.state);
 
         return (
@@ -200,7 +254,7 @@ class SearchResults extends React.Component {
                 <Row>
                     <Col sm="10">
                         <Row className="justify-content-center" >
-                            <SearchForm searchInfo={queryParams} className={styles['search_border']}/>
+                            <SearchForm searchInfo={searchInfo} searchFilters={searchFilters} className={styles['search_border']}/>
                         </Row>
                     </Col>
 
@@ -208,8 +262,8 @@ class SearchResults extends React.Component {
                         <GoogleMapReact
                             bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
                             defaultCenter={{
-                                lat: 59.95,
-                                lng: 30.33
+                                lat: 53.430957,
+                                lng: -2.960476
                             }}
                             defaultZoom={11}
                         >
@@ -229,6 +283,7 @@ class SearchResults extends React.Component {
                                 handlecheckBoxChange = {this.handlecheckBoxChange}
 
                                 searchFilters = {searchFilters}
+                                searchInfo = {searchInfo}
                                 // facilitiesFlags = {searchFilters.facilities}
                                 // priceRange = {[searchFilters.minPrice, searchFilters.maxPrice]}
                                 // areaRange = {searchFilters.maxDist}
@@ -240,8 +295,8 @@ class SearchResults extends React.Component {
                             <GoogleMapReact
                                 bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
                                 defaultCenter={{
-                                    lat: 59.95,
-                                    lng: 30.33
+                                    lat: 53.430957,
+                                    lng: -2.960476
                                 }}
                                 defaultZoom={11}
                             >
@@ -260,9 +315,10 @@ class SearchResults extends React.Component {
                                                                             hasPool: searchFilters.facilities.pool,
                                                                             hasWifi: searchFilters.facilities.wifi,
                                                                             hasShauna: searchFilters.facilities.sauna,
-                                                                            Name: queryParams.destination,
-                                                                            pointX: 37.983810,
-                                                                            pointY: 23.727539}}>
+                                                                            cityName: searchInfo.destination,
+                                                                            people: searchInfo.adults,
+                                                                            pointX: 53.430957,
+                                                                            pointY: -2.960476}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
@@ -276,7 +332,7 @@ class SearchResults extends React.Component {
                                         <SearchResult 
                                             key={room.id}
                                             details={room}
-                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, queryParams )} 
+                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
                                         />
                                     );
                                     return rooms;

@@ -131,6 +131,17 @@ class SearchForm extends React.Component {
         params["adults"] = this.state.dropdownUnits.adults;
         params["children"] = this.state.dropdownUnits.children;
 
+        if (this.props.searchFilters)
+        {
+            params = {
+                ...params,
+                ...this.props.searchFilters,
+                ...this.props.searchFilters.facilities 
+            };
+
+            delete params.facilities;
+        }
+
         const queryParams = createQueryParams(params);
         console.log("Inside SearchForm. About to redirect to: /searchresults?" + queryParams);
         // console.log(queryParams);
