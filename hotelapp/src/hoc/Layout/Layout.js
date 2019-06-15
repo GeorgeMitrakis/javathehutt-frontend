@@ -5,7 +5,7 @@ import NavBar from '../../containers/Navigation/NavBar/NavBar';
 
 const layout = (props) => (
     <>
-        <NavBar isAuth={props.isAuth}/>
+        <NavBar isAuth={props.isAuth} role={props.role}/>
         {props.children}
     </>
 );

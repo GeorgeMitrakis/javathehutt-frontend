@@ -3,6 +3,7 @@ import { NavLink as RouterNavLink }  from 'react-router-dom';
 import classes from './NavBar.module.css';
 import logo from '../../../assets/images/dummy_logo.png';
 import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem';
+import { getUserInfoField } from '../../../Utility/Utility';
 import {
     Collapse,
     Navbar,
@@ -16,7 +17,7 @@ class NavBar extends React.Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+			isOpen: false
         };
     }
 
@@ -24,7 +25,74 @@ class NavBar extends React.Component {
         this.setState({
             isOpen: !this.state.isOpen
         });
-    }
+	}
+
+	
+	adminNav = () => {
+		return(
+			<>
+				<NavigationItem link="/admin"> Διαχείριση Πλατφόρμας </NavigationItem>
+				<NavigationItem link="/admin/profile"> Επεξεργασία Προφίλ </NavigationItem>
+				<NavigationItem link="#"> Αλλαγή Κωδικού </NavigationItem>		
+				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
+			</>
+		);
+	}
+	
+	visitorNav = () => {
+		return(
+			<>
+				<NavigationItem link="#"> Αγαπημένα </NavigationItem>
+				<NavigationItem link="#"> Επεξεργασία Προφίλ </NavigationItem>
+				<NavigationItem link="#"> Αλλαγή Κωδικού </NavigationItem>		
+				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
+			</>
+		);
+	}
+	
+	providerNav = () => {
+		return(
+			<>
+				<NavigationItem link="#"> Επεξεργασία Προφίλ </NavigationItem>
+				<NavigationItem link="#"> Αλλαγή Κωδικού </NavigationItem>		
+				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
+			</>
+		);
+	}
+	
+	guestNav = () => {
+		return(
+			<>
+				<NavigationItem link="/login"> Είσοδος </NavigationItem>
+				<NavigationItem link="/signup"> Εγγραφή </NavigationItem> 
+			</>
+		);
+	}
+
+	navItems = () => {
+		console.log("----------------");
+		console.log(this.props.isAuth);
+		console.log("----------------");
+		console.log(this.props.role);
+		console.log("----------------");
+		
+		if(!this.props.isAuth){
+			return this.guestNav();
+		}
+		else if(this.props.role === "admin"){
+			return this.adminNav();
+		}
+		else if(this.props.role === "visitor"){
+			return this.visitorNav();
+		}
+		else if(this.props.role === "provider"){
+			return this.providerNav();
+		}
+		else{
+			return this.guestNav();
+		}
+	}
+
 
     render() {
         return (
@@ -36,13 +104,7 @@ class NavBar extends React.Component {
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        { !this.props.isAuth
-                            ?   <> 
-                                    <NavigationItem link="/login"> Είσοδος </NavigationItem>
-                                    <NavigationItem link="/signup"> Εγγραφή </NavigationItem> 
-                                </>
-                            : <NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>
-                        }
+                        {this.navItems()}
                     </Nav>
                 </Collapse>
             </Navbar>

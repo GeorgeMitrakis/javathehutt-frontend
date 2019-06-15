@@ -185,7 +185,7 @@ class App extends Component {
 
         return (
             <Container fluid className="App">
-                <Layout isAuth={this.state.isAuth}>
+                <Layout isAuth={this.state.isAuth} role={this.state.role}>
                     {routes}
                 </Layout>
             </Container>
