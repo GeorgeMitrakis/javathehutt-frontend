@@ -6,12 +6,12 @@ import { Row, Col,Input ,InputGroup, Container,Card,CardTitle,
 	Form, FormGroup} from 'reactstrap';
 import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
-import myInput from '../../components/UI/MyInput/MyInput';
-import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
+import myInput from '../../../components/UI/MyInput/MyInput';
+import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import classes from './Administration.module.css';
 
-import UserViewElem from '../../components/User/Admin/UserViewElem'
-import UserViewResults from '../../components/User/Admin/UserViewResults'
+//import UserViewElem from '../../../components/User/Admin/UserViewElem'
+import UserViewResults from '../../../components/User/Admin/UserViewResults'
 //import SearchForm from '../SearchForm/SearchForm';
 //import Login from '../Login/Login';
 //import Signup from '../Signup/Signup';
@@ -33,7 +33,7 @@ class UserView extends React.Component {
 
     handleSearch = (event) => {  
 		event.preventDefault(); 
-		//console.log(this.searchStr.current);
+		console.log(this.searchStr.current.value);
 		axios.get(
 			"http://localhost:8765/app/api/users",
 			{
@@ -60,12 +60,14 @@ class UserView extends React.Component {
 					produce(draft => {					
 					draft.users = [];
 				}));
-				console.log(result.data.message);
+				console.log(result.data.message+".then()");
+				console.log(result);
+			
 			}
             
         })
         .catch((err) => {
-			console.log(err); 
+			console.log(err+".err()"); 
 			this.setState(
 				produce(draft => {					
 				draft.users = [];

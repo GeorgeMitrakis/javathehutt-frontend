@@ -6,7 +6,7 @@ import classes from './Administration.module.css';
 import { Container, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 import produce from 'immer';
-import NavigationItem from '../../components/Navigation/NavigationItem/NavigationItem'
+import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem'
 import UserView from './UserView'
 import Transactions from './Transactions'
 

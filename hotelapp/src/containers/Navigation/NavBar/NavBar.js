@@ -33,7 +33,7 @@ class NavBar extends React.Component {
 			<>
 				<NavigationItem link="/admin"> Διαχείριση Πλατφόρμας </NavigationItem>
 				<NavigationItem link="/admin/profile"> Επεξεργασία Προφίλ </NavigationItem>
-				<NavigationItem link="#"> Αλλαγή Κωδικού </NavigationItem>		
+				<NavigationItem link="/admin/changepass"> Αλλαγή Κωδικού </NavigationItem>		
 				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
 			</>
 		);
@@ -42,9 +42,10 @@ class NavBar extends React.Component {
 	visitorNav = () => {
 		return(
 			<>
-				<NavigationItem link="#"> Αγαπημένα </NavigationItem>
-				<NavigationItem link="#"> Επεξεργασία Προφίλ </NavigationItem>
-				<NavigationItem link="#"> Αλλαγή Κωδικού </NavigationItem>		
+				<NavigationItem link="/visitor/favorites"> Αγαπημένα </NavigationItem>
+				<NavigationItem link="/visitor/history"> Ιστορικό Κρατήσεων </NavigationItem>
+				<NavigationItem link="/visitor/profile"> Επεξεργασία Προφίλ </NavigationItem>
+				<NavigationItem link="/visitor/changepass"> Αλλαγή Κωδικού </NavigationItem>		
 				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
 			</>
 		);
@@ -53,8 +54,10 @@ class NavBar extends React.Component {
 	providerNav = () => {
 		return(
 			<>
-				<NavigationItem link="#"> Επεξεργασία Προφίλ </NavigationItem>
-				<NavigationItem link="#"> Αλλαγή Κωδικού </NavigationItem>		
+				<NavigationItem link="/provider/myrooms"> Τα Δωμάτιά μου </NavigationItem>
+				<NavigationItem link="/provider/history"> Ιστορικό Κρατήσεων </NavigationItem>
+				<NavigationItem link="/provider/profile"> Επεξεργασία Προφίλ </NavigationItem>
+				<NavigationItem link="/provider/changepass"> Αλλαγή Κωδικού </NavigationItem>		
 				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
 			</>
 		);
