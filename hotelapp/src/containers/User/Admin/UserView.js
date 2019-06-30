@@ -27,12 +27,20 @@ class UserView extends React.Component {
 		}
 		//this.ban = this.ban.bind(this);
 		//this.unban = this.unban.bind(this);
-		this.handleSearch = this.handleSearch.bind(this);
+		//this.searchUsers = this.searchUsers.bind(this);
         
-    }
+	}
 
-    handleSearch = (event) => {  
+	componentDidMount(){
+		this.searchUsers();
+	}
+
+	handleChange = (event) => {
 		event.preventDefault(); 
+		this.searchUsers();
+	}
+
+    searchUsers = () => {
 		console.log(this.searchStr.current.value);
 		axios.get(
 			"http://localhost:8765/app/api/users",
@@ -75,32 +83,7 @@ class UserView extends React.Component {
         })
 	}
 	
-	componentDidMount(){
-		axios.get(
-			"http://localhost:8765/app/api/users",			
-			{
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}
-        )
-        .then((result) => {            
-			if(result.data.success){
-				console.log(result.data.data);
-           		console.log(result.data);
-				console.log(result);			
-				this.setState(
-					produce(draft => {					
-					draft.users = result.data.data.users;
-				}));
-			}
-			else{
-				console.log(result.data.message);
-			}
-            
-        })
-        .catch((err) => {
-			console.log(err);
-		})
-	}
+	
 
     ban(u){
         //const id = e.target.value;
@@ -129,7 +112,10 @@ class UserView extends React.Component {
         .catch((err) => {
             console.log(err);
             
-        })
+		})		
+
+		
+		let a = () => this.searchUsers;
     }
 
     unban(u){
@@ -156,7 +142,9 @@ class UserView extends React.Component {
         })
         .catch((err) => {
             console.log(err);    
-        })
+		})
+		
+		let a = () => this.searchUsers;
     }
 
     promote(u){
@@ -184,7 +172,10 @@ class UserView extends React.Component {
         })
         .catch((err) => {
             console.log(err);    
-        })
+		})
+		
+		
+		let a = () => this.searchUsers;
     }
 	
 
@@ -202,7 +193,7 @@ class UserView extends React.Component {
 									className="form-control form-control-sm"
 									placeholder="Εισάγετε email χρήστη..."
 									defaultValue=""
-									onChange={(event)=> this.handleSearch(event)}
+									onChange={(event)=> this.handleChange(event)}
 								/>
 							</Col>
 							{/* <Col className="col-xs-4 col-sm-2 col-md-2 col-lg-2 offset-xs-8">

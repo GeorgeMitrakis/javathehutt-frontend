@@ -11,7 +11,8 @@ const userViewElem = (props) => {
 					<Container>
 						<Row>
 							<Col>
-								<h3>#{props.u.id} {props.u.email}</h3>
+								<p>#{props.u.id} </p>
+								<p>{props.u.email}</p>
 								<p>{props.u.role}</p>
 							
 							</Col>
