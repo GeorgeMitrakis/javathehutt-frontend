@@ -2,7 +2,7 @@ import React from 'react';
 import UserViewElem from './UserViewElem'
 
 const userViewResults = (props)=>{
-		return props.users.map( (u, props) => {
+		return props.users.map( (u) => {
 			return (
 				<UserViewElem 
 					key={u.id}

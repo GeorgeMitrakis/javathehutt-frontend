@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Changepass extends Component {
+class ProviderProfile extends Component {
 	constructor(props){
 		super(props);
 	}
@@ -8,10 +8,10 @@ class Changepass extends Component {
 	render(){
 		return(
 			<h3 className="d-flex justify-content-center" style={{marginTop:'15%'}}>
-				Hello dear Admin, this is a page for you to change your password.
+				Hello dear Provider, this is a page for you to edit your profile info.
 			</h3>
 		);
 	}
 }
 
-export default Changepass;
+export default ProviderProfile;

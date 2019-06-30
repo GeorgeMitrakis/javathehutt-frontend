@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Changepass extends Component {
+class ProviderChangepass extends Component {
 	constructor(props){
 		super(props);
 	}
@@ -14,4 +14,4 @@ class Changepass extends Component {
 	}
 }
 
-export default Changepass;
+export default ProviderChangepass;

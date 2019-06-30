@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class History extends Component {
+class VisitorPassword extends Component {
 	constructor(props){
 		super(props);
 	}
@@ -8,10 +8,10 @@ class History extends Component {
 	render(){
 		return(
 			<h3 className="d-flex justify-content-center" style={{marginTop:'15%'}}>
-				Hello dear Visitor, this is a page for you view your booking history.
+				Hello dear Visitor, this is a page for you to change your password.
 			</h3>
 		);
 	}
 }
 
-export default History;
+export default VisitorPassword;
