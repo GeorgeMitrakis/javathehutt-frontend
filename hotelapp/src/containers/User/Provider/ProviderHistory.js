@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Profile extends Component {
+class ProviderHistory extends Component {
 	constructor(props){
 		super(props);
 	}
@@ -8,10 +8,10 @@ class Profile extends Component {
 	render(){
 		return(
 			<h3 className="d-flex justify-content-center" style={{marginTop:'15%'}}>
-				Hello dear Provider, this is a page for you to edit your profile info.
+				Hello dear Provider, this is a page for you view the booking history of your rooms.
 			</h3>
 		);
 	}
 }
 
-export default Profile;
+export default ProviderHistory;

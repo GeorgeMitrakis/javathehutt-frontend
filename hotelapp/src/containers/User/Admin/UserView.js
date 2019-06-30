@@ -1,14 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+//import { Route } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'querystring';
-import { Row, Col,Input ,InputGroup, Container,Card,CardTitle, 
-	Form, FormGroup} from 'reactstrap';
-import Button from 'reactstrap/lib/Button';
+import { Row, Col, Container} from 'reactstrap';
+//import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
-import myInput from '../../../components/UI/MyInput/MyInput';
-import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
-import classes from './Administration.module.css';
+//import myInput from '../../../components/UI/MyInput/MyInput';
+//import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
+//import classes from './Administration.module.css';
 
 //import UserViewElem from '../../../components/User/Admin/UserViewElem'
 import UserViewResults from '../../../components/User/Admin/UserViewResults'
@@ -24,21 +23,30 @@ class UserView extends React.Component {
 		super(props);
 		this.searchStr = React.createRef();
         this.state = {
-            users : []
+			users : []
 		}
-		this.getAllUsers();
-		this.handleSearch = this.handleSearch.bind(this);
+		this.ban = this.ban.bind(this);
+		this.unban = this.unban.bind(this);
+		this.searchUsers = this.searchUsers.bind(this);
         
-    }
+	}
 
-    handleSearch = (event) => {  
+	componentDidMount(){
+		this.searchUsers();
+	}
+
+	handleChange = (event) => {
 		event.preventDefault(); 
+		this.searchUsers();
+	}
+
+    searchUsers = () => {
 		console.log(this.searchStr.current.value);
 		axios.get(
 			"http://localhost:8765/app/api/users",
 			{
 				params:{
-					'email':this.searchStr.current.value
+					'emailPrefix':this.searchStr.current.value
 				}
 			},			
 			{
@@ -47,7 +55,7 @@ class UserView extends React.Component {
         )
         .then((result) => {
 			if(result.data.success){
-				// console.log(result.data.data);
+				console.log(result.data.data);
 				// console.log(result.data);
 				// console.log(result);
 				this.setState(
@@ -75,39 +83,14 @@ class UserView extends React.Component {
         })
 	}
 	
-	getAllUsers = () => {
-		axios.get(
-			"http://localhost:8765/app/api/users",			
-			{
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}
-        )
-        .then((result) => {            
-			if(result.data.success){
-				console.log(result.data.data);
-           		console.log(result.data);
-				console.log(result);			
-				this.setState(
-					produce(draft => {					
-					draft.users = result.data.data.users;
-				}));
-			}
-			else{
-				console.log(result.data.message);
-			}
-            
-        })
-        .catch((err) => {
-			console.log(err);
-		})
-	}
+	
 
-    ban(e){
-        const id = e.target.value;
-        if(!window.confirm(`Ban user ${id}?`)) return;
+    ban(u){
+        //const id = e.target.value;
+        if(!window.confirm(`Ban user ${u.email}?`)) return;
         let data = {
             'option':"ban",
-            "id":id
+            "id":u.id
         };
         
         axios.post(
@@ -118,26 +101,26 @@ class UserView extends React.Component {
             }
         )
         .then((result) => {
-            alert("Ban Submitted");
             if(result.data.success){
                 alert("ban Submitted - ok");
             }else{
                 alert("ban Submitted - fail");
-            }
-            
+			}
+
         })
         .catch((err) => {
             console.log(err);
             
-        })
+		})		
+
+		
     }
 
-    unban(e){
-        const id = e.target.value;
-        if(!window.confirm(`Unban user ${id}?`)) return;
+    unban(u){
+        if(!window.confirm(`Unban user ${u.email}?`)) return;
         let data = {
             'option':"unban",
-            "id":id
+            "id":u.id
         };
         axios.post(
             "http://localhost:8765/app/api/admin",
@@ -152,20 +135,21 @@ class UserView extends React.Component {
                 alert("Unban Submitted - ok");
             }else{
                 alert("Unban Submitted - fail");
-            }
+			}
             
         })
         .catch((err) => {
             console.log(err);    
-        })
+		})
+		
     }
 
-    promote(e){
-        const id = e.target.value;
-        if(!window.confirm(`Promote user ${id}?`)) return;
+    promote(u){
+        //const id = e.target.value;
+        if(!window.confirm(`Promote user ${u.email}?`)) return;
         let data = {
-            'option':"unban",
-            "id":id
+            'option':"promote",
+            "id":u.id
         }
         axios.post(
             "http://localhost:8765/app/api/admin",
@@ -185,7 +169,9 @@ class UserView extends React.Component {
         })
         .catch((err) => {
             console.log(err);    
-        })
+		})
+		
+		
     }
 	
 
@@ -195,23 +181,23 @@ class UserView extends React.Component {
         return (
             <>
 				<Container className = "mt-4 p-2">
-					<Form onSubmit={(event)=> this.handleSearch(event)}>
 						<Row>
 							<Col className="col-xs-8 col-sm-8 col-md-6 col-lg-5 offset-sm-1 offset-md-3 offset-lg-3">
 								<input
 									type='text'
 									ref={this.searchStr} 
 									className="form-control form-control-sm"
-									placeholder="Search users..."
+									placeholder="Εισάγετε email χρήστη..."
+									defaultValue=""
+									onChange={(event)=> this.handleChange(event)}
 								/>
 							</Col>
-							<Col className="col-xs-4 col-sm-2 col-md-2 col-lg-2 offset-xs-8">
+							{/* <Col className="col-xs-4 col-sm-2 col-md-2 col-lg-2 offset-xs-8">
 								<button type="submit" className="btn btn-primary btn-sm">
 									Αναζητηση
 								</button>
-							</Col>
+							</Col> */}
 						</Row>
-					</Form>
 				
 						
 					{this.state && this.state.users && 
@@ -222,12 +208,9 @@ class UserView extends React.Component {
 							ban={this.ban}
 							unban={this.unban}
 						/>
-						}
-					
-				</Container>               
-                
-            </>
-  
+						}					
+				</Container>                               
+            </>  
         );
     }
 

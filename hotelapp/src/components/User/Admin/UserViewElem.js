@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col,Input ,Container,Card,CardTitle} from 'reactstrap';
+import { Row, Col,Container,Card} from 'reactstrap';
 
 
 const userViewElem = (props) => {
@@ -11,21 +11,38 @@ const userViewElem = (props) => {
 					<Container>
 						<Row>
 							<Col>
-								<h3>{props.u.email}</h3>
+								<p>#{props.u.id} </p>
+								<p>{props.u.email}</p>
+								<p>{props.u.role}</p>
 							
 							</Col>
 						</Row>
-						<Row>
+						<Row>							
 							<Col className="col-lg-4">
-								<button className="btn btn-info btn-sm btn-block" value={props.u.id} onClick={props.promote}>
-									Promote to admin
+								<button 
+									value={props.u.id} 
+									onClick={() => !props.u.isBanned ? props.ban(props.u) : props.unban(props.u)} 
+									className="btn btn-danger btn-sm btn-block " 
+									> 
+									{!props.u.isBanned ? "Ban":"Unban"} 
 								</button>
 							</Col>
-							<Col className="col-lg-4">
-								<button value={props.u.id} onClick={props.u.banned ? props.ban : props.unban} className="btn btn-danger btn-sm btn-block " > 
-								{!props.u.banned ? "Ban":"Unban"} 
-								</button>
-							</Col>
+							{
+								props.u.role === "visitor"
+								? 
+								<Col className="col-lg-4">
+									<button 
+										className="btn btn-info btn-sm btn-block" 
+										value={props.u.id} 
+										onClick={() => props.promote(props.u)}
+										>
+										Promote to admin
+									</button>
+								</Col>
+								:
+								<Col/>
+								
+							}
 						</Row>    
 					</Container>
 					
