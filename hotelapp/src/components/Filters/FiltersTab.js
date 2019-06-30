@@ -20,8 +20,8 @@ import AreaRange from './AreaRange/AreaRange';
 const filtersTab = (props) => {
 
     return (
-        <Container className={styles['filters_tab']}>
-            <h3 className={styles['header']} >Φίλτρα</h3>
+        <Container fluid className={styles['filters_tab']}>
+            <Container>
             <InputGroup className={styles['searchArea']}>
                 <Input placeholder="Αναζήτηση.." 
                     value = {props.searchText}
@@ -29,22 +29,23 @@ const filtersTab = (props) => {
                 />
                 <InputGroupAddon addonType="append"><Button color="link"><FontAwesomeIcon  icon={faSearch}  /></Button></InputGroupAddon>
             </InputGroup>
-            <div className={styles['price_range']}>
+            </Container>
+            <Container className={styles['price_range']}>
                 <p>Εύρος Τιμής</p>
                 <PriceRange 
                     searchFilters = {props.searchFilters}
                     searchInfo = {props.searchInfo}
                     handlePriceRangeChange = {props.handlePriceRangeChange}
                 />
-            </div>
-            <div className={styles['price_range']}>
+            </Container>
+            <Container className={styles['price_range']}>
                 <p>Εύρος Περοχής Αναζήτησης (km)</p>
                 <AreaRange 
                     searchFilters = {props.searchFilters}
                     searchInfo = {props.searchInfo}
                     handleAreaRangeChange = {props.handleAreaRangeChange}/>
-            </div>
-            <h3>Παροχές</h3>
+            </Container>
+            <Container>
             <Checkbox checked={props.searchFilters.facilities["breakfast"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handlecheckBoxChange("breakfast", props.searchFilters, props.searchInfo)}>
                 Πρωινό
             </Checkbox>
@@ -57,6 +58,7 @@ const filtersTab = (props) => {
             <Checkbox checked={props.searchFilters.facilities["pool"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handlecheckBoxChange('pool', props.searchFilters, props.searchInfo)}>
                 Πίσίνα
             </Checkbox>
+            </Container>
         </Container>
     );
 }

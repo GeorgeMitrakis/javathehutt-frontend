@@ -32,8 +32,8 @@ const searchResult = (props) => {
 
         
     return (
-        <Row className="pl-3">
-            <Container className={styles['res-container']}>
+        <Row>
+            <Container fluid className={styles['res-container']}>
                 <h2>{props.details.roomName}</h2>
                 <Row className={styles['row-style']}>
                     <Col sm={6}>

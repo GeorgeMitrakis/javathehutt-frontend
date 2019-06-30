@@ -25,6 +25,7 @@
     "react-axios": "^2.0.3",
     "react-dom": "^16.8.6",
     "react-icons": "^2.2.7",
+    "react-responsive": "^7.0.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",

@@ -12,6 +12,8 @@ import { createQueryParams, getQueryParams, todayIs, tomorrowIs, isLegitDate, cm
 import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
+import { Spinner } from 'reactstrap';
+import MediaQuery from 'react-responsive';
 
 
 const searchFiltersDefaults = {
@@ -207,7 +209,7 @@ class SearchResults extends React.Component {
         //axios request to send the search input
     }
 
-    handlecheckBoxChange = (label, searchFilters, searchInfo) => {
+    handleCheckBoxChange = (label, searchFilters, searchInfo) => {
         console.log("[FiltersTab.js]");
         console.log("Allakse kati se checkbox sto " + label);
     
@@ -265,6 +267,14 @@ class SearchResults extends React.Component {
         this.updateURL(searchFilters, searchInfo);
     };
 
+    showFiltersHandler = () => {
+        alert("filters");
+    }
+
+    mapClickedHandler = () => {
+        alert("Map");
+    }
+
     render() {
         const queryParams = getQueryParams(this.props.location.search);
         console.log("[SearchResults.js] Rendering. Received queryParams:");
@@ -281,50 +291,17 @@ class SearchResults extends React.Component {
 
         // console.log("state: ", this.state);
 
-        return (
-            <Container fluid className={styles['results_container']}>
-                <Row>
-                    <Col sm="10">
-                        <Row className="justify-content-center" >
-                            <SearchForm searchInfo={searchInfo} searchFilters={searchFilters} className={styles['search_border']}/>
-                        </Row>
-                    </Col>
-
-                    <Col sm="2">                    
-                        <GoogleMapReact
-                            bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
-                            defaultCenter={{
-                                lat: 53.430957,
-                                lng: -2.960476
-                            }}
-                            defaultZoom={11}
-                        >
-                        <p> "My Marker" </p>
-                            
-                        </GoogleMapReact>
-                    </Col>
-                </Row>
-
-                <Row className="mt-4">
-                    <Col sm={3}>
-                        <Row>
-                            <FiltersTab 
+        const filtersTab = (<FiltersTab  
                                 handlePriceRangeChange = {this.handlePriceRangeChange}
                                 handleAreaRangeChange = {this.handleAreaRangeChange}
                                 handleSearchText = {this.handleSearchText}
-                                handlecheckBoxChange = {this.handlecheckBoxChange}
+                                handlecheckBoxChange = {this.handleCheckBoxChange}
 
                                 searchFilters = {searchFilters}
                                 searchInfo = {searchInfo}
-                                // facilitiesFlags = {searchFilters.facilities}
-                                // priceRange = {[searchFilters.minPrice, searchFilters.maxPrice]}
-                                // areaRange = {searchFilters.maxDist}
-                                // searchText = {searchFilters.searchText}
-                            />
-                        </Row>
+                            />);
 
-                        <Row className="mt-3 mb-3" style={{height: "250px"}}>
-                            <GoogleMapReact
+        const googleMap =  (<GoogleMapReact
                                 bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
                                 defaultCenter={{
                                     lat: 53.430957,
@@ -333,15 +310,49 @@ class SearchResults extends React.Component {
                                 defaultZoom={11}
                             >
                             <p> "My Marker" </p>
-                                
                             </GoogleMapReact>
+                            );
+
+        return (
+            <Container fluid className={styles.main_content}>
+                <Row>
+                    <Col md="1"></Col> 
+                    <Col xs="12" md="10">
+                        <Row className="justify-content-center pr-3 pl-3" >
+                            <SearchForm searchInfo={searchInfo} searchFilters={searchFilters} className={styles.search_border}/>
                         </Row>
                     </Col>
 
-                    <Col sm={9}>
+                    <Col xs="6" sm="4" className="d-md-none p-0 m-0" onClick={this.mapClickedHandler}>                    
+                        <MediaQuery maxWidth={767}>
+                            {googleMap}
+                        </MediaQuery>
+                    </Col>
+
+                    <Col xs="6" sm="8" className="d-md-none p-0 m-0">                    
+                        <i style={{fontSize: "35px", color: "rgb(40, 30, 182)"}} className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}> </i>
+                    </Col>
+                </Row>
+
+                <Row className="mt-4">
+                    <MediaQuery minWidth={768}>
+                        <div className={styles.side_filters}>
+                            <div className={styles.rm_scrollbar}>
+                                <Row>
+                                    {filtersTab}
+                                </Row>
+
+                                <Row className="mt-3 mb-3" style={{height: "200px"}}>
+                                    {googleMap}
+                                </Row>
+                            </div>
+                        </div>
+                    </MediaQuery>
+
+                    <Col md="4" lg="4"> </Col>
+                    <Col xs="12" md="8" lg="7">
                         
-                         
-                    <Get url="http://localhost:8765/app/api/search" params={{minPrice: searchFilters.minPrice,
+                        <Get url="http://localhost:8765/app/api/search" params={{minPrice: searchFilters.minPrice,
                                                                             maxPrice: searchFilters.maxPrice,
                                                                             maxDist: searchFilters.maxDist,
                                                                             hasPool: searchFilters.facilities.pool,
@@ -352,13 +363,13 @@ class SearchResults extends React.Component {
                                                                             pointX: 53.430957,
                                                                             pointY: -2.960476}}>
                             {(error, response, isLoading, makeRequest, axios) => {
-                                if(error) {
+                                if (error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
                                 }
-                                else if(isLoading) {
-                                    return (<div>Loading...</div>)
+                                else if (isLoading) {
+                                    return (<Spinner className="ml-5" color="primary" style={{ width: '3rem', height: '3rem' }} />);
                                 }
-                                else if(response !== null) {
+                                else if (response !== null) {
                                     console.log(response);
                                     const rooms = response.data.data.results.map( room =>
                                         <SearchResult 
@@ -374,29 +385,6 @@ class SearchResults extends React.Component {
                             }}
                         </Get>
 
-                        {/* EINAI TO REQUEST GIA TO DUMMY */}
-                        {/* <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
-                            {(error, response, isLoading, makeRequest, axios) => {
-                                if(error) {
-                                    return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
-                                }
-                                else if(isLoading) {
-                                    return (<div>Loading...</div>)
-                                }
-                                else if(response !== null) {
-                                    console.log(response);
-                                    const rooms = response.data.map( room =>
-                                        <SearchResult 
-                                            key={room.id}
-                                            details={room}
-                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, queryParams )} 
-                                        />
-                                    );
-                                    return rooms;
-                                }
-                            return null;
-                        }}
-                        </Get> */}
                     </Col>
                 </Row>
             </Container> 
