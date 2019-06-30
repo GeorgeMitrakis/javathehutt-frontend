@@ -17,25 +17,32 @@ const userViewElem = (props) => {
 							
 							</Col>
 						</Row>
-						<Row>
-							<Col className="col-lg-4">
-								<button 
-									className="btn btn-info btn-sm btn-block" 
-									value={props.u.id} 
-									onClick={() => props.promote(props.u)}
-									>
-									Promote to admin
-								</button>
-							</Col>
+						<Row>							
 							<Col className="col-lg-4">
 								<button 
 									value={props.u.id} 
-									onClick={() => props.u.banned ? props.ban(props.u) : props.unban(props.u)} 
+									onClick={() => !props.u.isBanned ? props.ban(props.u) : props.unban(props.u)} 
 									className="btn btn-danger btn-sm btn-block " 
 									> 
-									{!props.u.banned ? "Ban":"Unban"} 
+									{!props.u.isBanned ? "Ban":"Unban"} 
 								</button>
 							</Col>
+							{
+								props.u.role === "visitor"
+								? 
+								<Col className="col-lg-4">
+									<button 
+										className="btn btn-info btn-sm btn-block" 
+										value={props.u.id} 
+										onClick={() => props.promote(props.u)}
+										>
+										Promote to admin
+									</button>
+								</Col>
+								:
+								<Col/>
+								
+							}
 						</Row>    
 					</Container>
 					

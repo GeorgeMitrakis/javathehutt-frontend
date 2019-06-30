@@ -23,11 +23,11 @@ class UserView extends React.Component {
 		super(props);
 		this.searchStr = React.createRef();
         this.state = {
-            users : []
+			users : []
 		}
-		//this.ban = this.ban.bind(this);
-		//this.unban = this.unban.bind(this);
-		//this.searchUsers = this.searchUsers.bind(this);
+		this.ban = this.ban.bind(this);
+		this.unban = this.unban.bind(this);
+		this.searchUsers = this.searchUsers.bind(this);
         
 	}
 
@@ -55,7 +55,7 @@ class UserView extends React.Component {
         )
         .then((result) => {
 			if(result.data.success){
-				// console.log(result.data.data);
+				console.log(result.data.data);
 				// console.log(result.data);
 				// console.log(result);
 				this.setState(
@@ -101,13 +101,12 @@ class UserView extends React.Component {
             }
         )
         .then((result) => {
-            alert("Ban Submitted");
             if(result.data.success){
                 alert("ban Submitted - ok");
             }else{
                 alert("ban Submitted - fail");
-            }
-            
+			}
+
         })
         .catch((err) => {
             console.log(err);
@@ -115,7 +114,6 @@ class UserView extends React.Component {
 		})		
 
 		
-		let a = () => this.searchUsers;
     }
 
     unban(u){
@@ -137,14 +135,13 @@ class UserView extends React.Component {
                 alert("Unban Submitted - ok");
             }else{
                 alert("Unban Submitted - fail");
-            }
+			}
             
         })
         .catch((err) => {
             console.log(err);    
 		})
 		
-		let a = () => this.searchUsers;
     }
 
     promote(u){
@@ -175,7 +172,6 @@ class UserView extends React.Component {
 		})
 		
 		
-		let a = () => this.searchUsers;
     }
 	
 
