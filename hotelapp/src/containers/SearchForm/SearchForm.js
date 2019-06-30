@@ -32,9 +32,9 @@ class SearchForm extends React.Component {
                 } 
                 : 
                 {
-                    rooms: Number(this.props.searchInfo.rooms),
-                    adults: Number(this.props.searchInfo.adults),
-                    children: Number(this.props.searchInfo.children)
+                    rooms: this.props.searchInfo.rooms,
+                    adults: this.props.searchInfo.adults,
+                    children: this.props.searchInfo.children
                 }
         };
 

@@ -8,7 +8,7 @@ import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup,
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
-import { createQueryParams, getQueryParams, todayIs, tomorrowIs } from '../../Utility/Utility';
+import { createQueryParams, getQueryParams, todayIs, tomorrowIs, isLegitDate, cmpDates } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
@@ -36,7 +36,8 @@ const searchInfoDefaults = {
     children: 0
 }
 
- const numSearchInfo = ["rooms", "adults", "children"];
+const numSearchInfo = ["rooms", "adults", "children"];
+const datesSearchInfo = ["fromDate", "toDate"];
 
 
 class SearchResults extends React.Component {
@@ -56,27 +57,58 @@ class SearchResults extends React.Component {
     getSearchInfo = (queryParams) => {
         let searchInfo = {};
         Object.keys(searchInfoDefaults).forEach(filterId => { 
-            if (filterId === "destination") 
-            {
-                if ((!queryParams["destination"]) || (queryParams["destination"] === ""))
-                {
-                    this.props.history.goBack();
-                    return;
-                }
-            }
+            // if (filterId === "destination") 
+            // {
+            //     if ((!queryParams["destination"]) || (queryParams["destination"] === ""))
+            //     {
+            //         this.props.history.goBack();
+            //         return;
+            //     }
+            // }
 
+            let setDefaultVal = true;
             if (queryParams[filterId])
             {
-                searchInfo[filterId] = queryParams[filterId];
+                if (numSearchInfo.includes(filterId) && !isNaN(queryParams[filterId]))
+                {
+                    if (queryParams[filterId] >= searchInfoDefaults[filterId])
+                    {
+                        searchInfo[filterId] = Number(queryParams[filterId]);
+                        setDefaultVal = false;
+                    }
+                }
+                else if (datesSearchInfo.includes(filterId) && isLegitDate(queryParams[filterId]))
+                {
+                    if (cmpDates(queryParams[filterId], searchInfoDefaults[filterId]) >= 0)
+                    {
+                        searchInfo[filterId] = queryParams[filterId];
+                        setDefaultVal = false;
+                    }
+                }
+                else if (filterId === "destination")
+                {
+                    searchInfo[filterId] = queryParams[filterId];
+                    setDefaultVal = false;
+                }
+                // else
+                // {
+                //     alert("TROLIA");
+                //     alert(filterId);
+                // }
             }
-            else
+
+            if (setDefaultVal)
             {
                 searchInfo[filterId] = searchInfoDefaults[filterId];
             }
 
         });
 
-        
+        if (cmpDates(searchInfo.fromDate, searchInfo.toDate) >= 0)
+        {
+            searchInfo.fromDate = searchInfoDefaults.fromDate;
+            searchInfo.toDate = searchInfoDefaults.toDate;
+        }
 
         return searchInfo;
     }
