@@ -337,7 +337,7 @@ class SearchResults extends React.Component {
                                 }}
                                 defaultZoom={11}
                             >
-                            <p> "My Marker" </p>
+                            {/* <p> "My Marker" </p> */}
                             </GoogleMapReact>
                             );
 
@@ -391,16 +391,22 @@ class SearchResults extends React.Component {
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if (error) {
                                     const feedback = (
-                                        <div className="text-muted pointer" onClick={() => makeRequest({ params: { reload: true } })}> 
-                                            Υπήρξε πρόβλημα με τη σύνδεση σας. Δοκιμάστε ξανά
-                                            <i className="fas fa-redo-alt pointer ml-2"></i>
-                                        </div>
+                                        <Row className="justify-content-center">
+                                            <div className="text-muted align-self-center pointer" onClick={() => makeRequest({ params: { reload: true } })}> 
+                                                Υπήρξε πρόβλημα με τη σύνδεση σας. Δοκιμάστε ξανά
+                                                <i className="fas fa-redo-alt pointer ml-2"></i>
+                                            </div>
+                                        </Row>
                                     );
                                     return feedback;
                                     // return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
                                 }
                                 else if (isLoading) {
-                                    return (<Spinner className="ml-5" color="primary" style={{ width: '3rem', height: '3rem' }} />);
+                                    return (
+                                        <Row className="justify-content-center">
+                                            <Spinner color="primary" style={{ width: '3rem', height: '3rem' }} />
+                                        </Row>
+                                    );
                                 }
                                 else if (response !== null) {
                                     console.log(response);
