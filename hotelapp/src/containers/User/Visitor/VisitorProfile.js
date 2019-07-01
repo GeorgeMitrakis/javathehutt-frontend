@@ -3,7 +3,7 @@ import { getUserInfo, checkValidity } from '../../../Utility/Utility';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import MyInput from '../../../components/UI/MyInput/MyInput'
-import { Card, CardHeader, CardBody, Container, Form, FormGroup, Input } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Form, FormGroup, Input, Row, Col } from 'reactstrap';
 import classes from './Visitor.module.css';
 import qs from 'querystring';
 import produce from 'immer';
@@ -102,11 +102,21 @@ class VisitorProfile extends Component {
 			return;
 		}
 
-		let params = {
-			'userId' : getUserInfo().id,
-			'email' : this.email.current.value,
-			'name' : this.fname.current.value ,
-			'surname' : this.lname.current.value 
+		let params = null;
+		if(this.email.current.value === getUserInfo().email){
+			params = {
+				'userId' : getUserInfo().id,
+				'name' : this.fname.current.value ,
+				'surname' : this.lname.current.value 
+			}
+		}
+		else{
+			params = {
+				'userId' : getUserInfo().id,
+				'email' : this.email.current.value,
+				'name' : this.fname.current.value ,
+				'surname' : this.lname.current.value 
+			}
 		}
 		//console.log(this.state);
 		axios.put(
@@ -156,52 +166,56 @@ class VisitorProfile extends Component {
 	}
 	render(){
 		return(
-				<Container fluid id={classes.content} >
-					<Card>
-						<CardHeader className="justify-content-center">
-							<Header>
-								Επεξεργασία Προφίλ
-							</Header>
-						</CardHeader>
-						<CardBody>
-							<Form onSubmit={this.submitHandler}>	
-								<MyInput 
-									name='Νέο email:'
-									type='text'
-									innerRef={this.email}
-									defaultValue={this.state.email.value}
-									feedback={this.state.email.feedback}
-									validity={this.state.email.validity}
-									changed={() => this.inputChangedHandler( 'email', this.email.current.value )} 
-								/>
-								<br/>							
-								<MyInput 
-									name='Όνομα:'
-									type='text'
-									innerRef={this.fname}
-									defaultValue={this.state.name.value}
-									feedback={this.state.name.feedback}
-									validity={this.state.name.validity}
-									changed={() => this.inputChangedHandler( 'name', this.fname.current.value )} 
-								/>
-								<br/>						
-								<MyInput 
-									name='Επώνυμο:'
-									type='text'
-									innerRef={this.lname}
-									defaultValue={this.state.surname.value}
-									feedback={this.state.surname.feedback}
-									validity={this.state.surname.validity}
-									changed={() => this.inputChangedHandler( 'surname', this.lname.current.value )} 
-								/>
-								<br/>
-								<SubmitBtn classes="float-right">
-									Ενημέρωση
-								</SubmitBtn>
-							</Form>
-						</CardBody>
-					</Card>
-				</Container>
+			<Container fluid id={classes.content} >
+				<Row className="justify-content-center">
+					<Col className="align-self-center p-0" xs="auto" lg="4" xl="3">
+						<Card>
+							<CardHeader>
+								<Header>
+									Επεξεργασία Προφίλ
+								</Header>
+							</CardHeader>
+							<CardBody>
+								<Form onSubmit={this.submitHandler}>	
+									<MyInput 
+										name='Νέο email:'
+										type='text'
+										innerRef={this.email}
+										defaultValue={this.state.email.value}
+										feedback={this.state.email.feedback}
+										validity={this.state.email.validity}
+										changed={() => this.inputChangedHandler( 'email', this.email.current.value )} 
+									/>
+									<br/>							
+									<MyInput 
+										name='Όνομα:'
+										type='text'
+										innerRef={this.fname}
+										defaultValue={this.state.name.value}
+										feedback={this.state.name.feedback}
+										validity={this.state.name.validity}
+										changed={() => this.inputChangedHandler( 'name', this.fname.current.value )} 
+									/>
+									<br/>						
+									<MyInput 
+										name='Επώνυμο:'
+										type='text'
+										innerRef={this.lname}
+										defaultValue={this.state.surname.value}
+										feedback={this.state.surname.feedback}
+										validity={this.state.surname.validity}
+										changed={() => this.inputChangedHandler( 'surname', this.lname.current.value )} 
+									/>
+									<br/>
+									<SubmitBtn classes="float-right">
+										Ενημέρωση
+									</SubmitBtn>
+								</Form>
+							</CardBody>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
 				
 		);
 	}

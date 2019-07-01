@@ -3,7 +3,7 @@ import { getUserInfo, checkValidity } from '../../../Utility/Utility';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import MyInput from '../../../components/UI/MyInput/MyInput'
-import { Card, CardHeader, CardBody, Container, Form, FormGroup, Input } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Form, FormGroup, Input, Row, Col } from 'reactstrap';
 import classes from './Visitor.module.css';
 import qs from 'querystring';
 import produce from 'immer';
@@ -179,47 +179,51 @@ class VisitorPassword extends Component {
 	render(){
 		return(
 			<Container fluid id={classes.content} >
-					<Card>
-						<CardHeader className="justify-content-center">
-							<Header>
-								Αλλαγή Κωδικού
-							</Header>
-						</CardHeader>
-						<CardBody>
-							<Form onSubmit={this.submitHandler}>	
-								<MyInput 
-									name="Τρέχων κωδικός:"
-									type= "password"
-									innerRef={this.oldpassword}
-									feedback={this.state.oldpassword.feedback}
-									validity={this.state.oldpassword.validity}
-								/>
-								<br/>							
-								<MyInput 
-									name="Νέος κωδικός:"
-									type= "password"
-									innerRef={this.newpassword}
-									feedback={this.state.password.feedback}
-									validity={this.state.password.validity}
-									changed={() => this.inputChangedHandler( 'password', this.newpassword.current.value )}
-								/>
-								<br/>						
-								<MyInput  
-									name="Επανάληψη νέου κωδικού:"
-									type= "password"
-									innerRef={this.newpassword1}
-									feedback={this.state.password1.feedback}
-									validity={this.state.password1.validity}
-									changed={() => this.inputChangedHandler( 'password1', this.newpassword1.current.value )}
-								/>
-								<br/>
-								<SubmitBtn classes="float-right">
-									Ενημέρωση
-								</SubmitBtn>
-							</Form>
-						</CardBody>
-					</Card>
-				</Container>
+				<Row className="justify-content-center">
+					<Col className="align-self-center p-0" xs="auto" lg="4" xl="3">
+						<Card>
+							<CardHeader>
+								<Header>
+									Αλλαγή Κωδικού
+								</Header>
+							</CardHeader>
+							<CardBody>
+								<Form onSubmit={this.submitHandler}>	
+									<MyInput 
+										name="Τρέχων κωδικός:"
+										type= "password"
+										innerRef={this.oldpassword}
+										feedback={this.state.oldpassword.feedback}
+										validity={this.state.oldpassword.validity}
+									/>
+									<br/>							
+									<MyInput 
+										name="Νέος κωδικός:"
+										type= "password"
+										innerRef={this.newpassword}
+										feedback={this.state.password.feedback}
+										validity={this.state.password.validity}
+										changed={() => this.inputChangedHandler( 'password', this.newpassword.current.value )}
+									/>
+									<br/>						
+									<MyInput  
+										name="Επανάληψη νέου κωδικού:"
+										type= "password"
+										innerRef={this.newpassword1}
+										feedback={this.state.password1.feedback}
+										validity={this.state.password1.validity}
+										changed={() => this.inputChangedHandler( 'password1', this.newpassword1.current.value )}
+									/>
+									<br/>
+									<SubmitBtn classes="float-right">
+										Ενημέρωση
+									</SubmitBtn>
+								</Form>
+							</CardBody>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
 		);
 	}
 }
