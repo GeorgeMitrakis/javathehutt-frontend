@@ -390,26 +390,45 @@ class SearchResults extends React.Component {
                                                                             pointY: -2.960476}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if (error) {
-                                    return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
+                                    const feedback = (
+                                        <div className="text-muted pointer" onClick={() => makeRequest({ params: { reload: true } })}> 
+                                            Υπήρξε πρόβλημα με τη σύνδεση σας. Δοκιμάστε ξανά
+                                            <i className="fas fa-redo-alt pointer ml-2"></i>
+                                        </div>
+                                    );
+                                    return feedback;
+                                    // return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
                                 }
                                 else if (isLoading) {
                                     return (<Spinner className="ml-5" color="primary" style={{ width: '3rem', height: '3rem' }} />);
                                 }
                                 else if (response !== null) {
                                     console.log(response);
-                                    const rooms = response.data.data.results.map( room =>
-                                        <SearchResult 
-                                            key={room.id}
-                                            details={room}
-                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
-                                        />
-                                    );
-                                    return rooms;
+                                    // response.data.data = null;
+                                    if ((response.data.data) && (response.data.data.results))
+                                    {
+                                        const rooms = response.data.data.results.map( room =>
+                                            <SearchResult 
+                                                key={room.id}
+                                                details={room}
+                                                bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
+                                            />
+                                        );
+                                        return rooms;
+                                    }
+                                    else
+                                    {
+                                        return (
+                                            <Row className={"justify-content-center p-4 " + styles.box_border}>
+                                                <div className="text-muted align-self-center"> Δεν βρέθηκαν αποτελέσματα. Δοκιμάστε ξανά εισάγοντας διαφορετικά στοιχεία αναζήτησης. </div>
+                                            </Row>
+                                        );
+                                    }
                                 }
 
                                 return null;
                             }}
-                        </Get> */}
+                        </Get> 
 
                     </Col>
                 </Row>
@@ -422,7 +441,7 @@ class SearchResults extends React.Component {
             </MediaQuery>
 
             <Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
-                <div className={styles.map} style={{height: "75vh"}}>
+                <div className={styles.box_border} style={{height: "75vh"}}>
                     {googleMap}
                 </div>
             </Modal>

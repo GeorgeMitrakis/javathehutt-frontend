@@ -30,7 +30,7 @@ const searchResult = (props) => {
 
         
     return (
-        <Row>
+        <Row className="mb-4">
             <Container fluid className={styles['res-container']}>
                 <h2>{props.details.roomName}</h2>
                 <Row className={styles['row-style']}>
