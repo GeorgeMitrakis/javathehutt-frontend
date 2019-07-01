@@ -38,10 +38,18 @@ export const checkValidity = ( value, rules, name ) => {
     }
 
     if ( rules.onlyLetters ) {
-        const pattern = /^[a-zA-Zα-ωΑ-Ω]+$/;
+        const pattern = /^[a-zA-Zα-ωΑ-ΩίϊΐόάέύϋΰήώΆΈΉΊΎΌΏΪΫ]+$/;
         if (!pattern.test( value ) )
         {
             return {report: false, msg: "Πρέπει να αποτελείται μόνο από γράμματα"}
+        }
+	}
+	
+	if ( rules.onlyLettersDotsAndSpace ) {
+        const pattern = /^[a-zA-Zα-ωΑ-ΩίϊΐόάέύϋΰήώΆΈΉΊΎΌΏΪΫ\. ]+$/;
+        if (!pattern.test( value ) )
+        {
+            return {report: false, msg: "Πρέπει να αποτελείται μόνο από γράμματα, τελείες ή και κενά"}
         }
     }
 
