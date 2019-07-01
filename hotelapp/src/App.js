@@ -88,8 +88,14 @@ class App extends Component {
 					render={() => ( <Checkout /> )}
 				/>
 
-				<Route
+				{/* <Route
 					path={ ["/admin", "/admin/profile", "/admin/changepass", "/admin/administration", "/admin/administration/userview", "/admin/administration/transactions"] }
+					exact
+					render={() => ( <Admin/> )}
+				/> */}
+
+				<Route
+					path={ ["/admin", "/admin/administration", "/admin/administration/userview", "/admin/administration/transactions"] }
 					exact
 					render={() => ( <Admin/> )}
 				/>

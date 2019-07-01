@@ -8,8 +8,8 @@ const admin = (props) => {
 	return(
 		<Switch>
 			<Route path="/admin/administration" component={Administration} />
-			<Route path="/admin/profile" component={AdminProfile}/>
-			<Route path="/admin/changepass" component={AdminChangepass}/>
+			{/* <Route path="/admin/profile" component={AdminProfile}/>
+			<Route path="/admin/changepass" component={AdminChangepass}/> */}
 			<Route path="/admin" component={Administration} />
 		</Switch>
 	);
