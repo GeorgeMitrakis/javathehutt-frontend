@@ -168,7 +168,7 @@ class SearchForm extends React.Component {
                                 type="text"
                                 className="form-control border-0 p-0 rm_hl"
                                 id="destination"
-                                placeholder="Που θα θέλατε να πάτε;"
+                                placeholder="Που θέλετε να πάτε;"
                                 value={this.state.searchText}
                                 onChange={this.handleSearchText.bind(this)}//save change in searched text to state
                             />

@@ -5,8 +5,8 @@
   "homepage": "http://localhost/hotelapp",
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.18",
-    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.15.3",
     "bootstrap": "^4.3.1",
