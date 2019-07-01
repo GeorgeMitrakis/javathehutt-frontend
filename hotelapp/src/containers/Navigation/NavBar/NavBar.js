@@ -72,11 +72,11 @@ class NavBar extends React.Component {
 	}
 
 	navItems = () => {
-		console.log("----------------");
-		console.log(this.props.isAuth);
-		console.log("----------------");
-		console.log(this.props.role);
-		console.log("----------------");
+		// console.log("----------------");
+		// console.log(this.props.isAuth);
+		// console.log("----------------");
+		// console.log(this.props.role);
+		// console.log("----------------");
 		
 		if(!this.props.isAuth){
 			return this.guestNav();
