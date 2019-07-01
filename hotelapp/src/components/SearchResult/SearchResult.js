@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+import { Container, Col, Row, Button } from 'reactstrap';
 
 
 import styles from './Result.module.css';
@@ -32,7 +30,7 @@ const searchResult = (props) => {
 
         
     return (
-        <Row>
+        <Row className="mb-4">
             <Container fluid className={styles['res-container']}>
                 <h2>{props.details.roomName}</h2>
                 <Row className={styles['row-style']}>

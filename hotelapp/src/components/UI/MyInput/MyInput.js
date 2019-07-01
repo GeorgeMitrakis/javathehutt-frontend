@@ -21,7 +21,17 @@ const myInput = ( props ) => {
     return (
         <FormGroup>
             <Label for={props.id} className="font-weight-bold small">{props.name}</Label>
-            <Input onBlur={props.blurred} className={props.validity} onChange={props.changed} value={props.value}  type={props.type} id={props.id} placeholder={props.placeholder}/>
+			<Input 
+				onBlur={props.blurred} 
+				className={props.validity} 
+				onChange={props.changed} 
+				value={props.value}  
+				type={props.type} 
+				id={props.id} 
+				placeholder={props.placeholder} 
+				defaultValue={props.defaultValue} 
+				innerRef={props.innerRef}
+			/>
             {formFeedback}
         </FormGroup>
     );

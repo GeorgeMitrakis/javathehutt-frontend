@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import produce from 'immer';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Row, Col, Form, FormGroup,
     Input, InputGroup, InputGroupText, 
     InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import classes from './Checkout.module.css';
 import axios from 'axios';
-import { createQueryParams, getQueryParams, getUserInfoField } from '../../Utility/Utility';
+import { getQueryParams, getUserInfoField } from '../../Utility/Utility';
 import qs from "querystring";
 
 

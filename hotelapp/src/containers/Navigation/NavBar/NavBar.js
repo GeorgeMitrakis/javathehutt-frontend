@@ -1,14 +1,13 @@
 import React from 'react';
 import { NavLink as RouterNavLink }  from 'react-router-dom';
-import classes from './NavBar.module.css';
+//import classes from './NavBar.module.css';
 import logo from '../../../assets/images/dummy_logo.png';
 import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem';
-import { getUserInfoField } from '../../../Utility/Utility';
+//import { getUserInfoField } from '../../../Utility/Utility';
 import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav } from 'reactstrap';
 
 class NavBar extends React.Component {
@@ -73,11 +72,11 @@ class NavBar extends React.Component {
 	}
 
 	navItems = () => {
-		console.log("----------------");
-		console.log(this.props.isAuth);
-		console.log("----------------");
-		console.log(this.props.role);
-		console.log("----------------");
+		// console.log("----------------");
+		// console.log(this.props.isAuth);
+		// console.log("----------------");
+		// console.log(this.props.role);
+		// console.log("----------------");
 		
 		if(!this.props.isAuth){
 			return this.guestNav();

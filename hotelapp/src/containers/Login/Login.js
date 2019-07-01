@@ -1,9 +1,9 @@
 import React from 'react';
 import produce from 'immer';
 import axios from 'axios';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import classes from './Login.module.css';
-import { Card, CardTitle, CardHeader, CardBody, CardText, Container, Row, Col, Form, FormGroup, Label, FormFeedback, FormText, Button, Modal, ModalHeader, ModalBody, Input } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Row, Col, Form} from 'reactstrap';
 import MyInput from '../../components/UI/MyInput/MyInput';
 import Header from '../../components/UI/Header/Header';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';

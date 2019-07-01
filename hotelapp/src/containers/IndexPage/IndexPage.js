@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import classes from './IndexPage.module.css';
 import { Row } from 'reactstrap';
 
 import SearchForm from '../SearchForm/SearchForm';
-import Login from '../Login/Login';
+// import Login from '../Login/Login';
 
-import Signup from '../Signup/Signup';
+// import Signup from '../Signup/Signup';
 
 class IndexPage extends React.Component {
 

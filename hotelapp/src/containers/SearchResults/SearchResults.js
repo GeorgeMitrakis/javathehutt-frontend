@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import produce from 'immer';
+import {  withRouter } from 'react-router-dom';
+//import produce from 'immer';
 import SearchResult from '../../components/SearchResult/SearchResult';
-import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem } from 'reactstrap';
+import { Container, Col, Row, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
@@ -55,6 +53,32 @@ class SearchResults extends React.Component {
     //         sauna: false
     //     }
     // }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            filtersModal: false,
+            mapModal: false
+        };
+    
+        this.filtersToggle = this.filtersToggle.bind(this);
+        this.mapToggle = this.mapToggle.bind(this);
+
+    }
+    
+    filtersToggle = () => {
+        this.setState(prevState => ({
+            filtersModal: !prevState.filtersModal
+        }));
+    }
+
+    mapToggle = () => {
+        this.setState(prevState => ({
+            mapModal: !prevState.mapModal
+        }));
+    }
+    
 
     getSearchInfo = (queryParams) => {
         let searchInfo = {};
@@ -268,11 +292,14 @@ class SearchResults extends React.Component {
     };
 
     showFiltersHandler = () => {
-        alert("filters");
+        // alert("filters");
+        this.filtersToggle();
     }
 
     mapClickedHandler = () => {
-        alert("Map");
+        // alert("Map");
+        this.mapToggle();
+
     }
 
     render() {
@@ -302,6 +329,7 @@ class SearchResults extends React.Component {
                             />);
 
         const googleMap =  (<GoogleMapReact
+                                onClick={this.mapClickedHandler}
                                 bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
                                 defaultCenter={{
                                     lat: 53.430957,
@@ -309,11 +337,12 @@ class SearchResults extends React.Component {
                                 }}
                                 defaultZoom={11}
                             >
-                            <p> "My Marker" </p>
+                            {/* <p> "My Marker" </p> */}
                             </GoogleMapReact>
                             );
 
         return (
+            <>
             <Container fluid className={styles.main_content}>
                 <Row>
                     <Col md="1"></Col> 
@@ -323,14 +352,11 @@ class SearchResults extends React.Component {
                         </Row>
                     </Col>
 
-                    <Col xs="6" sm="4" className="d-md-none p-0 m-0" onClick={this.mapClickedHandler}>                    
+                    <Col xs="12" style={{fontSize: "35px", color: "rgb(40, 30, 182)"}} className="d-md-none p-0 m-0">      
                         <MediaQuery maxWidth={767}>
-                            {googleMap}
+                            <i className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}></i>
+                            <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapClickedHandler}></i>              
                         </MediaQuery>
-                    </Col>
-
-                    <Col xs="6" sm="8" className="d-md-none p-0 m-0">                    
-                        <i style={{fontSize: "35px", color: "rgb(40, 30, 182)"}} className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}> </i>
                     </Col>
                 </Row>
 
@@ -364,30 +390,69 @@ class SearchResults extends React.Component {
                                                                             pointY: -2.960476}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if (error) {
-                                    return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
+                                    const feedback = (
+                                        <Row className="justify-content-center">
+                                            <div className="text-muted align-self-center pointer" onClick={() => makeRequest({ params: { reload: true } })}> 
+                                                Υπήρξε πρόβλημα με τη σύνδεση σας. Δοκιμάστε ξανά
+                                                <i className="fas fa-redo-alt pointer ml-2"></i>
+                                            </div>
+                                        </Row>
+                                    );
+                                    return feedback;
+                                    // return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
                                 }
                                 else if (isLoading) {
-                                    return (<Spinner className="ml-5" color="primary" style={{ width: '3rem', height: '3rem' }} />);
+                                    return (
+                                        <Row className="justify-content-center">
+                                            <Spinner color="primary" style={{ width: '3rem', height: '3rem' }} />
+                                        </Row>
+                                    );
                                 }
                                 else if (response !== null) {
                                     console.log(response);
-                                    const rooms = response.data.data.results.map( room =>
-                                        <SearchResult 
-                                            key={room.id}
-                                            details={room}
-                                            bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
-                                        />
-                                    );
-                                    return rooms;
+                                    // response.data.data = null;
+                                    if ((response.data.data) && (response.data.data.results))
+                                    {
+                                        const rooms = response.data.data.results.map( room =>
+                                            <SearchResult 
+                                                key={room.id}
+                                                details={room}
+                                                bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
+                                            />
+                                        );
+                                        return rooms;
+                                    }
+                                    else
+                                    {
+                                        return (
+                                            <Row className={"justify-content-center p-4 " + styles.box_border}>
+                                                <div className="text-muted align-self-center"> Δεν βρέθηκαν αποτελέσματα. Δοκιμάστε ξανά εισάγοντας διαφορετικά στοιχεία αναζήτησης. </div>
+                                            </Row>
+                                        );
+                                    }
                                 }
 
                                 return null;
                             }}
-                        </Get>
+                        </Get> 
 
                     </Col>
                 </Row>
             </Container> 
+
+            <MediaQuery maxWidth={767}>
+                <Modal className="modal-sm" centered fade isOpen={this.state.filtersModal} toggle={this.filtersToggle} >
+                    {filtersTab}
+                </Modal>
+            </MediaQuery>
+
+            <Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
+                <div className={styles.box_border} style={{height: "75vh"}}>
+                    {googleMap}
+                </div>
+            </Modal>
+
+            </>
 
         );
     }
