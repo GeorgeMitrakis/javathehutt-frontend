@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Myrooms from '../../../containers/User/Provider/Myrooms';
 import ProviderHistory from '../../../containers/User/Provider/ProviderHistory';
 import ProviderProfile from '../../../containers/User/Provider/ProviderProfile';

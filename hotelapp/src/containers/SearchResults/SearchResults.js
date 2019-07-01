@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import produce from 'immer';
+import {  withRouter } from 'react-router-dom';
+//import produce from 'immer';
 import SearchResult from '../../components/SearchResult/SearchResult';
-import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Modal } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
@@ -411,7 +409,7 @@ class SearchResults extends React.Component {
 
                                 return null;
                             }}
-                        </Get>
+                        </Get> */}
 
                     </Col>
                 </Row>
