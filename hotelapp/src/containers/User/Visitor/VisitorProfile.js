@@ -11,6 +11,11 @@ import axios from 'axios';
 class VisitorProfile extends Component {
 	constructor(props){
 		super(props);
+
+		this.email = React.createRef();
+		this.fname = React.createRef();
+		this.lname = React.createRef();
+
 		this.state = {
 			email:{
 				value: getUserInfo().email,
@@ -43,10 +48,6 @@ class VisitorProfile extends Component {
 
 			}
 		};
-
-		this.email = React.createRef();
-		this.fname = React.createRef();
-		this.lname = React.createRef();
 	}
 
 	inputChangedHandler = (field, value) => {
