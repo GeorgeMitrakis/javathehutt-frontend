@@ -16,7 +16,27 @@ const myInput = ( props ) => {
         formFeedback = (
             <FormFeedback invalid="true"> {props.feedback} </FormFeedback>
         )
-    }
+	}
+	
+	if(props.readOnly){
+		return (
+			<FormGroup>
+				<Label for={props.id} className="font-weight-bold small">{props.name}</Label>
+				<Input readOnly
+					onBlur={props.blurred} 
+					className={props.validity} 
+					onChange={props.changed} 
+					value={props.value}  
+					type={props.type} 
+					id={props.id} 
+					placeholder={props.placeholder} 
+					defaultValue={props.defaultValue} 
+					innerRef={props.innerRef}
+				/>
+				{formFeedback}
+			</FormGroup>
+		);
+	}
     
     return (
         <FormGroup>
@@ -28,6 +48,7 @@ const myInput = ( props ) => {
 				value={props.value}  
 				type={props.type} 
 				id={props.id} 
+				min={props.min}
 				placeholder={props.placeholder} 
 				defaultValue={props.defaultValue} 
 				innerRef={props.innerRef}

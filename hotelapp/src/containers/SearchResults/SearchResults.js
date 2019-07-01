@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import produce from 'immer';
 import {  withRouter } from 'react-router-dom';
 //import produce from 'immer';
 import SearchResult from '../../components/SearchResult/SearchResult';
@@ -59,12 +60,50 @@ class SearchResults extends React.Component {
 
         this.state = {
             filtersModal: false,
-            mapModal: false
+            mapModal: false,
+            searchText: "",
+            filtersMoved: false
         };
     
         this.filtersToggle = this.filtersToggle.bind(this);
         this.mapToggle = this.mapToggle.bind(this);
 
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll, { passive: true });
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = (event) => {
+        const windH = document.documentElement.clientHeight;
+        const vh = window.pageYOffset / windH;
+        
+        if (!this.state.filtersMoved && (vh >= 0.2))
+        {//move it
+            // alert("move it");
+            this.setState(
+                produce(draft => {
+                    draft.filtersMoved = true;
+                })
+            );
+        }
+        else if (this.state.filtersMoved && (vh < 0.2))
+        {//phgaine to sthn arxikh 8esh
+            // alert("phgaine to sthn arxikh 8esh");
+            this.setState(
+                produce(draft => {
+                    draft.filtersMoved = false;
+                })
+            );
+        }
+        // console.log(window.pageYOffset);
+    //   alert( window.scrollY);
+    // do something like call `this.setState`
+    // access window.scrollY etc
     }
     
     filtersToggle = () => {
@@ -341,6 +380,18 @@ class SearchResults extends React.Component {
                             </GoogleMapReact>
                             );
 
+        let sideFiltersStyles;
+        if (this.state.filtersMoved)
+        {
+            sideFiltersStyles = {
+                top: "15vh"
+            }
+        }
+        else
+        {
+            sideFiltersStyles = {};
+        }
+
         return (
             <>
             <Container fluid className={styles.main_content}>
@@ -352,7 +403,7 @@ class SearchResults extends React.Component {
                         </Row>
                     </Col>
 
-                    <Col xs="12" style={{fontSize: "35px", color: "rgb(40, 30, 182)"}} className="d-md-none p-0 m-0">      
+                    <Col xs="12" style={{fontSize: "25px", color: "gray"}} className="d-md-none p-0 m-0">      
                         <MediaQuery maxWidth={767}>
                             <i className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}></i>
                             <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapClickedHandler}></i>              
@@ -362,7 +413,7 @@ class SearchResults extends React.Component {
 
                 <Row className="mt-4">
                     <MediaQuery minWidth={768}>
-                        <div className={styles.side_filters}>
+                        <div style={sideFiltersStyles} className={styles.side_filters}>
                             <div className={styles.rm_scrollbar}>
                                 <Row>
                                     {filtersTab}
@@ -416,7 +467,7 @@ class SearchResults extends React.Component {
                                         const rooms = response.data.data.results.map( room =>
                                             <SearchResult 
                                                 key={room.id}
-                                                details={room}
+                                                room={room}
                                                 bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
                                             />
                                         );
