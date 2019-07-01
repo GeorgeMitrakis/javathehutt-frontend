@@ -138,7 +138,15 @@ class VisitorProfile extends Component {
 				}));  
 			}
 			else{
-                console.log(result+".then()");
+				console.log(result+".then()");
+				if(result.data.message === "Update error: email given is already taken"){
+					this.setState(
+						produce(draft => {		
+							draft.email.feedback = "Η διεύθυνση email χρησιμοποιείται ήδη.";
+							draft.email.validity = "is-invalid";
+							
+					})); 
+				}
             }
 		})
 		.catch((err)=>{
