@@ -409,7 +409,7 @@ class SearchResults extends React.Component {
 
                                 return null;
                             }}
-                        </Get> */}
+                        </Get> 
 
                     </Col>
                 </Row>
