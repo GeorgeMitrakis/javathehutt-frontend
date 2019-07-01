@@ -4,7 +4,7 @@ import produce from 'immer';
 import SearchResult from '../../components/SearchResult/SearchResult';
 import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
     InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem } from 'reactstrap';
+    DropdownMenu, DropdownItem, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
@@ -55,6 +55,32 @@ class SearchResults extends React.Component {
     //         sauna: false
     //     }
     // }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            filtersModal: false,
+            mapModal: false
+        };
+    
+        this.filtersToggle = this.filtersToggle.bind(this);
+        this.mapToggle = this.mapToggle.bind(this);
+
+    }
+    
+    filtersToggle = () => {
+        this.setState(prevState => ({
+            filtersModal: !prevState.filtersModal
+        }));
+    }
+
+    mapToggle = () => {
+        this.setState(prevState => ({
+            mapModal: !prevState.mapModal
+        }));
+    }
+    
 
     getSearchInfo = (queryParams) => {
         let searchInfo = {};
@@ -268,11 +294,14 @@ class SearchResults extends React.Component {
     };
 
     showFiltersHandler = () => {
-        alert("filters");
+        // alert("filters");
+        this.filtersToggle();
     }
 
     mapClickedHandler = () => {
-        alert("Map");
+        // alert("Map");
+        this.mapToggle();
+
     }
 
     render() {
@@ -302,6 +331,7 @@ class SearchResults extends React.Component {
                             />);
 
         const googleMap =  (<GoogleMapReact
+                                onClick={this.mapClickedHandler}
                                 bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
                                 defaultCenter={{
                                     lat: 53.430957,
@@ -314,6 +344,7 @@ class SearchResults extends React.Component {
                             );
 
         return (
+            <>
             <Container fluid className={styles.main_content}>
                 <Row>
                     <Col md="1"></Col> 
@@ -323,14 +354,11 @@ class SearchResults extends React.Component {
                         </Row>
                     </Col>
 
-                    <Col xs="6" sm="4" className="d-md-none p-0 m-0" onClick={this.mapClickedHandler}>                    
+                    <Col xs="12" style={{fontSize: "35px", color: "rgb(40, 30, 182)"}} className="d-md-none p-0 m-0">      
                         <MediaQuery maxWidth={767}>
-                            {googleMap}
+                            <i className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}></i>
+                            <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapClickedHandler}></i>              
                         </MediaQuery>
-                    </Col>
-
-                    <Col xs="6" sm="8" className="d-md-none p-0 m-0">                    
-                        <i style={{fontSize: "35px", color: "rgb(40, 30, 182)"}} className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}> </i>
                     </Col>
                 </Row>
 
@@ -388,6 +416,20 @@ class SearchResults extends React.Component {
                     </Col>
                 </Row>
             </Container> 
+
+            <MediaQuery maxWidth={767}>
+                <Modal className="modal-sm" centered fade isOpen={this.state.filtersModal} toggle={this.filtersToggle} >
+                    {filtersTab}
+                </Modal>
+            </MediaQuery>
+
+            <Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
+                <div className={styles.map} style={{height: "75vh"}}>
+                    {googleMap}
+                </div>
+            </Modal>
+
+            </>
 
         );
     }
