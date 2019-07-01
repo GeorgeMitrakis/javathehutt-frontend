@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {  withRouter } from 'react-router-dom';
 //import produce from 'immer';
 import SearchResult from '../../components/SearchResult/SearchResult';
-import { Container, Col, Row } from 'reactstrap';
+import { Container, Col, Row, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
