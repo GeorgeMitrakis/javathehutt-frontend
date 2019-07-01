@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Administration from '../../../containers/User/Admin/Administration';
-import AdminProfile from '../../../containers/User/Admin/AdminProfile';
-import AdminChangepass from '../../../containers/User/Admin/AdminChangepass';
 
 const admin = (props) => {
 	return(
