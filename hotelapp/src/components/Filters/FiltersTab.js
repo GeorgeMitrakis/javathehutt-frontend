@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
-import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+import { Container, Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
 import { Checkbox } from 'pretty-checkbox-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import produce from 'immer';
+//import produce from 'immer';
 
 
 import './../../styles.scss';

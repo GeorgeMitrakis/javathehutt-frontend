@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink, Collapse, CardBody, Card } from 'reactstrap';
+import { UncontrolledCarousel, Container, Col, Row, Button,  Collapse, CardBody, Card } from 'reactstrap';
 
-import FaIconPack from 'react-icons/lib/fa';
+//import FaIconPack from 'react-icons/lib/fa';
 import styles from './RoomInfo.module.css';
 import Pills from '../../components/SearchResult/ResultPills';
 

@@ -199,16 +199,13 @@ class UserView extends React.Component {
 							</Col> */}
 						</Row>
 				
-						
-					{this.state && this.state.users && 
-						this.state.users.length >0 &&
 						<UserViewResults
 							users={this.state.users}
 							promote={this.promote}
 							ban={this.ban}
 							unban={this.unban}
 						/>
-						}					
+											
 				</Container>                               
             </>  
         );

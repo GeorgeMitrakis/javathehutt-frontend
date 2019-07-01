@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Favorites from '../../../containers/User/Visitor/Favorites';
 import VisitorHistory from '../../../containers/User/Visitor/VisitorHistory';
 import VisitorProfile from '../../../containers/User/Visitor/VisitorProfile';

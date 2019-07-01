@@ -1,15 +1,15 @@
 import React from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import produce from 'immer';
 import classes from './SearchForm.module.css';
-import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-         InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
+import { Col, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
+         InputGroupText, InputGroupButtonDropdown, DropdownToggle,
          DropdownMenu, DropdownItem } from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import DropDownUnit from '../../components/SearchForm/DropDownUnit';
 import DateCalendar from '../../components/SearchForm/DateCalendar';
 // import SearchResults from '../SearchResults';
-import { createQueryParams, getQueryParams, todayIs, tomorrowIs, nextDayIs } from '../../Utility/Utility';
+import { createQueryParams, todayIs, tomorrowIs, nextDayIs } from '../../Utility/Utility';
 
 
 class SearchForm extends React.Component {

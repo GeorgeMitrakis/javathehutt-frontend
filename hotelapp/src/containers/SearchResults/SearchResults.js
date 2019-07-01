@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import produce from 'immer';
+import {  withRouter } from 'react-router-dom';
+//import produce from 'immer';
 import SearchResult from '../../components/SearchResult/SearchResult';
-import { Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
@@ -341,7 +339,7 @@ class SearchResults extends React.Component {
                     <Col sm={9}>
                         
                          
-                    <Get url="http://localhost:8765/app/api/search" params={{minPrice: searchFilters.minPrice,
+                    {/* <Get url="http://localhost:8765/app/api/search" params={{minPrice: searchFilters.minPrice,
                                                                             maxPrice: searchFilters.maxPrice,
                                                                             maxDist: searchFilters.maxDist,
                                                                             hasPool: searchFilters.facilities.pool,
@@ -372,10 +370,10 @@ class SearchResults extends React.Component {
 
                                 return null;
                             }}
-                        </Get>
+                        </Get> */}
 
                         {/* EINAI TO REQUEST GIA TO DUMMY */}
-                        {/* <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
+                        <Get url="http://localhost:8765/app/api/dummy" params={{field: "rooms"}}>
                             {(error, response, isLoading, makeRequest, axios) => {
                                 if(error) {
                                     return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
@@ -396,7 +394,7 @@ class SearchResults extends React.Component {
                                 }
                             return null;
                         }}
-                        </Get> */}
+                        </Get>
                     </Col>
                 </Row>
             </Container> 

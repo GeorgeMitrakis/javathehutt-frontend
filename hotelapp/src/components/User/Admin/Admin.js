@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Administration from '../../../containers/User/Admin/Administration';
 import AdminProfile from '../../../containers/User/Admin/AdminProfile';
 import AdminChangepass from '../../../containers/User/Admin/AdminChangepass';

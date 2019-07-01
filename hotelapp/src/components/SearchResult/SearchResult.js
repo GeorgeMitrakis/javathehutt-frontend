@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+import { Container, Col, Row, Button } from 'reactstrap';
 
 
 import styles from './Result.module.css';

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import classes from './Administration.module.css';
 
-import { Container, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Card, Row, Col } from 'reactstrap';
 
 import produce from 'immer';
 import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem'
