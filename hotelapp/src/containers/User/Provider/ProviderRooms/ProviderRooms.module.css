@@ -3,7 +3,7 @@
 }
 
 .price-par{
-    float: right;
+    float: left;
 }
 
 .res-container{
@@ -28,9 +28,17 @@
 .room-remove-btn{
     float: right;
     margin-top: 10px;
+    /* margin-right: 3px; */
+    margin-left: 3px;
 }
 
 .room-edit-btn{
     float: right;
     margin-top: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.btn-col{
+    /* margin-left: 1px; */
 }
