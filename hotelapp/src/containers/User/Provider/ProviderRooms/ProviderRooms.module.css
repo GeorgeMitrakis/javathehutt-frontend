@@ -1,0 +1,36 @@
+.reservation-btn{
+    float: right;
+}
+
+.price-par{
+    float: right;
+}
+
+.res-container{
+    margin-bottom: 10px;
+    border: 1px rgb(32, 31, 28);
+    /* border-width: 2px; */
+    box-shadow: 1px 1px 8px 2px #ccc;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif ;
+    font-weight: normal;
+}
+
+.pills-style{
+    margin: 7px;
+    font-weight: normal;
+    /* text-align: left; */
+}
+.row-style{
+    /* text-align: left; */
+}
+
+.room-remove-btn{
+    float: right;
+    margin-top: 10px;
+}
+
+.room-edit-btn{
+    float: right;
+    margin-top: 10px;
+}
