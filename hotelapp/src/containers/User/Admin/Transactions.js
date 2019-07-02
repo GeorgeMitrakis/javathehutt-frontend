@@ -45,33 +45,10 @@ class Transactions extends React.Component {
 
     render() {
         return (
-            // <Col>
-			// 	<br/>
-			// 	<Row xs="auto" md="auto">
-			// 		<Col className="d-flex justify-content-center" >Πελάτης</Col>
-			// 		<Col className="d-flex justify-content-center" >Δωμάτιο</Col>
-			// 		<Col className="d-flex justify-content-center" >Από:</Col>
-			// 		<Col className="d-flex justify-content-center" >Έως:</Col>
-			// 		<Col className="d-flex justify-content-center" >Κόστος:</Col>
-			// 		<Col className="d-flex justify-content-center" >Άτομα:</Col>
-			// 	</Row>
-            //    {this.state.transactions.map((t) => {
-			// 	   return (
-			// 		   <Row  key={t.id} xs="auto" md="auto" >
-			// 			   <Col className="d-flex justify-content-center" >{"#"+t.visitorId}</Col>
-			// 			   <Col className="d-flex justify-content-center" >{"#"+t.roomId}</Col>
-			// 			   <Col className="d-flex justify-content-center" >{t.startDate}</Col>
-			// 			   <Col className="d-flex justify-content-center" >{t.endDate}</Col>
-			// 			   <Col className="d-flex justify-content-center" >{t.cost+"€"}</Col>
-			// 			   <Col className="d-flex justify-content-center" >{t.occupants}</Col>
-			// 		   </Row>
-			// 	   )
-			//    }) }
-			// </Col>
 			<Container>
 			<Row className="d-flex justify-content-around" >
 				<Col xs="auto" md="auto"  >
-					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >ID</Row>
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >ID</Row>
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (
@@ -82,7 +59,7 @@ class Transactions extends React.Component {
 				   })}
 				</Col>
 				<Col xs="auto" md="auto"  >
-					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Πελάτης</Row>
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >Πελάτης</Row>
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (
@@ -94,7 +71,7 @@ class Transactions extends React.Component {
 				</Col>
 
 				<Col xs="auto" md="auto"  >
-					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Δωμάτιο</Row>
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >Δωμάτιο</Row>
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (
@@ -110,7 +87,7 @@ class Transactions extends React.Component {
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (
-						<Row key={t.id} className="d-flex justify-content-center"   xs="1" md="auto"  >
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
 							{t.startDate}
 						</Row>
 				   )
@@ -122,7 +99,7 @@ class Transactions extends React.Component {
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (
-						<Row key={t.id} className="d-flex justify-content-center"   xs="1" md="auto"  >
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
 							{t.endDate}
 						</Row>
 				   )
@@ -130,7 +107,7 @@ class Transactions extends React.Component {
 				</Col>
 
 				<Col xs="auto" md="auto"  >
-					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Κόστος:</Row>
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >Κόστος:</Row>
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (
@@ -142,7 +119,7 @@ class Transactions extends React.Component {
 				</Col>
 
 				<Col  xs="auto" md="auto"  >
-					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Άτομα:</Row>
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >Άτομα:</Row>
 					<hr/>
 					{this.state.transactions.map((t) => {
 				   return (

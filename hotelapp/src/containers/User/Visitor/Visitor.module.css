@@ -10,6 +10,8 @@
     box-shadow: 1px 1px 8px 2px #ccc;
 }
 
-#email_field{
-
+#history_card{
+    height: 100vh;
+    padding-top: 15vh;
+	margin-bottom: 15vh;
 }
