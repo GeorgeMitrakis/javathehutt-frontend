@@ -3,7 +3,7 @@ import Axios from 'axios';
 // import { Route } from 'react-router-dom';
 
 // import classes from './Administration.module.css';
-import { Row, Col, Container } from 'reactstrap';
+import { Row, Col, Container, CardHeader } from 'reactstrap';
 // import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 
@@ -13,11 +13,12 @@ class Transactions extends React.Component {
         super(props);
         
         this.state = {
-			transactions:[]
+			transactions:[],
+			profit:0
 		}
     }
 
-	componentDidMount(){
+	getTransactions(){
 		Axios.get(
 			"http://localhost:8765/app/api/book",			
 			{
@@ -41,6 +42,38 @@ class Transactions extends React.Component {
 		.catch((err) => {
 			console.log(err);
 		})
+	}
+
+	getProfit(){
+		Axios.get(
+			"http://localhost:8765/app/api/admin",			
+			{
+				'Content-Type': 'application/x-www-form-urlencoded'
+			}
+		)
+		.then((result) => {
+			if(result.data.success){
+				console.log(result.data);
+				console.log(result.data.data);
+				this.setState(
+					produce( draft => {
+						draft.profit = result.data.data.profit;
+					})
+				);
+			}
+			else{
+				console.log(result.data.message+".then()");
+				console.log(result);
+			}
+		})
+		.catch((err) => {
+			console.log(err);
+		})
+	}
+
+	componentDidMount(){
+		this.getTransactions();
+		this.getProfit();
 	}
 
     render() {
@@ -130,6 +163,14 @@ class Transactions extends React.Component {
 				   })}
 				</Col>
 			</Row>
+			<Row className="mt-5"/>
+			<Row className="d-flex justify-content-center">
+				<CardHeader>
+					Συνολικό κέρδος:{' '+this.state.profit+"€"}
+				</CardHeader>
+				
+			</Row>
+			<Row className="mb-5"/>
 			</Container>
   
         );
