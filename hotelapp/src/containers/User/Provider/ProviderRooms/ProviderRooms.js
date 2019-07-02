@@ -6,10 +6,11 @@ import { UncontrolledCarousel, Container, Col, Row, Button, Form, FormGroup, Lab
 
 import styles from './ProviderRooms.module.css';
 import RoomInfo from '../../../RoomInfo/Roominfo';
+import Header from '../../../../components/UI/Header/Header'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faEdit, faMapMarkerAlt, faEuroSign } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faTrash)
 
@@ -19,24 +20,33 @@ const providerRoom = (props) => {
         <Row>
             <Container fluid className={styles['res-container'] }>
                 <Row className="justify-content-center">
-					<Col xs="8" sm="8" md="10" lg="10">
-                        <h2>{props.details.roomName}</h2>
+					<Col xs="6" sm="6" md="10" lg="10">
+                        <Header classes="d-flex flex-shrink-1 border">
+                            {props.details.roomName}
+                        </Header>
 					</Col>
-					<Col xs="2" sm="" md="1" lg="1">
+					<Col xs="6" sm="6" md="2" lg="2" className={styles['btn-col']}>
 						<Button className={styles['room-remove-btn']} color="danger" size="sm">
-                        <FontAwesomeIcon  icon={faTrash}  />
+                            <FontAwesomeIcon  icon={faTrash}  />
+                        </Button>
+                        <Button className={styles['room-edit-btn']} color="info" size="sm">
+                            <FontAwesomeIcon  icon={faEdit}  />
                         </Button>
 					</Col>
-                    <Col xs="2" sm="2" md="1" lg="1">
-						<Button className={styles['room-edit-btn']} color="info" size="sm">
-                        <FontAwesomeIcon  icon={faEdit}  />
-                        </Button>
-					</Col>
+                    {/* <Col xs="3" sm="3" md="1" lg="1" className={styles['btn-col']}> */}
+						
+					{/* </Col> */}
 				</Row>
 
                 <Row className={styles['row-style']}>
+                    {/* <div className="text-muted small"> 
+                        <i className="fas fa-map-marker-alt mr-2"></i>
+                        {props.details.location.cityname}
+                    </div> */}
                     <Col xs={6}>
-                        <p>Περιοχή: {props.details.location.cityname}</p>
+                        <FontAwesomeIcon  icon={faMapMarkerAlt}  />
+                        {props.details.location.cityname}
+                        {/* <p>Περιοχή: {props.details.location.cityname}</p> */}
                     </Col>
                     
                 </Row>
@@ -44,11 +54,18 @@ const providerRoom = (props) => {
                     <Col xs={6}>
                         <p>Διαθεσιμότητα: {props.details.maxOccupants}</p>
                     </Col>
-                    <Col xs={6}>
+                    {/* <Col xs={6}>
                         <p className={styles['price-par']}>Τιμή: {props.details.price}</p>
-                    </Col>
+                    </Col> */}
                 </Row>
-                <RoomInfo/>
+                <Row>
+                <Col xs={6}>
+                    <p className={styles['price-par']}>Τιμή: {props.details.price}</p>
+                    <FontAwesomeIcon  icon={faEuroSign}  />
+                </Col>
+                <Col xs={6}><RoomInfo/></Col>
+                </Row>
+ 
             </Container>
         </Row>
     );
