@@ -461,25 +461,37 @@ class SearchResults extends React.Component {
                                 }
                                 else if (response !== null) {
                                     console.log(response);
+                                    // alert(response.data.data.results[0].id);
                                     // response.data.data = null;
+                                    const noResults = (
+                                        <Row className={"justify-content-center p-4 " + styles.box_border}>
+                                            <div className="text-muted align-self-center"> Δεν βρέθηκαν αποτελέσματα. Δοκιμάστε ξανά εισάγοντας διαφορετικά στοιχεία αναζήτησης. </div>
+                                        </Row>
+                                    );
+
                                     if ((response.data.data) && (response.data.data.results))
                                     {
                                         const rooms = response.data.data.results.map( room =>
                                             <SearchResult 
                                                 key={room.id}
                                                 room={room}
+                                                // bookRoomHandler={this.searchCritics}
                                                 bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
                                             />
                                         );
-                                        return rooms;
+
+                                        if (rooms.length)
+                                        {
+                                            return rooms;
+                                        }
+                                        else
+                                        {
+                                            return noResults;
+                                        }
                                     }
                                     else
                                     {
-                                        return (
-                                            <Row className={"justify-content-center p-4 " + styles.box_border}>
-                                                <div className="text-muted align-self-center"> Δεν βρέθηκαν αποτελέσματα. Δοκιμάστε ξανά εισάγοντας διαφορετικά στοιχεία αναζήτησης. </div>
-                                            </Row>
-                                        );
+                                        return noResults;
                                     }
                                 }
 
