@@ -103,6 +103,7 @@ class UserView extends React.Component {
         .then((result) => {
             if(result.data.success){
                 alert("ban Submitted - ok");
+				this.searchUsers();
             }else{
                 alert("ban Submitted - fail");
 			}
@@ -133,6 +134,7 @@ class UserView extends React.Component {
            
             if(result.data.success){
                 alert("Unban Submitted - ok");
+				this.searchUsers();
             }else{
                 alert("Unban Submitted - fail");
 			}
@@ -162,6 +164,7 @@ class UserView extends React.Component {
             console.log(result);
             if(result.data.success){
                 alert("prom Submitted - ok");
+				this.searchUsers();
             }else{
                 alert("prom Submitted - fail.\nReason:"+result.data.message);
             }
