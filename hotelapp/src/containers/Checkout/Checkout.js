@@ -123,7 +123,7 @@ class Checkout extends Component{
             console.log(result);
             if (!result.data.success)
             {
-                alert("PAIXTHKE TROLLIA");
+                alert(result.data.message);
             }
             else
             {        

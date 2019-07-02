@@ -32,18 +32,18 @@ const searchResult = (props) => {
     return (
         <Row className="mb-4">
             <Container fluid className={styles['res-container']}>
-                <h2>{props.details.roomName}</h2>
+                <h2>{props.room.roomName}</h2>
                 <Row className={styles['row-style']}>
                     <Col sm={6}>
-                        <p>Περιοχή: {props.details.location.cityname}</p>
+                        <p>Περιοχή: {props.room.location.cityname}</p>
                     </Col>
                     <Col sm={6}>
-                        <p className={styles['price-par']}>Τιμή: {props.details.price}</p>
+                        <p className={styles['price-par']}>Τιμή: {props.room.price}</p>
                     </Col>
                 </Row>
                 <Row className={styles['row-style']}>
                     <Col sm={6}>
-                        <p>Διαθεσιμότητα: {props.details.capacity}</p>
+                        <p>Διαθεσιμότητα: {props.room.capacity}</p>
                     </Col>
                     <Col sm={6}>
                         <Button onClick={props.bookRoomHandler} className={styles['reservation-btn']} color="primary">Κράτηση</Button>
