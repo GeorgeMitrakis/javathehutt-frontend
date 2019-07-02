@@ -31,8 +31,8 @@ class NavBar extends React.Component {
 		return(
 			<>
 				<NavigationItem link="/admin"> Διαχείριση Πλατφόρμας </NavigationItem>
-				<NavigationItem link="/admin/profile"> Επεξεργασία Προφίλ </NavigationItem>
-				<NavigationItem link="/admin/changepass"> Αλλαγή Κωδικού </NavigationItem>		
+				{/* <NavigationItem link="/admin/profile"> Επεξεργασία Προφίλ </NavigationItem>
+				<NavigationItem link="/admin/changepass"> Αλλαγή Κωδικού </NavigationItem>		 */}
 				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
 			</>
 		);

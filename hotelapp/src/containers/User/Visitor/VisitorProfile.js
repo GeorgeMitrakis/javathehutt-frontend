@@ -3,7 +3,7 @@ import { getUserInfo, checkValidity } from '../../../Utility/Utility';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import MyInput from '../../../components/UI/MyInput/MyInput'
-import { Card, CardHeader, CardBody, Container, Form, FormGroup, Input, Row, Col } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Form, Row, Col } from 'reactstrap';
 import classes from './Visitor.module.css';
 import qs from 'querystring';
 import produce from 'immer';
