@@ -3,7 +3,7 @@ import Axios from 'axios';
 // import { Route } from 'react-router-dom';
 
 // import classes from './Administration.module.css';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 // import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 
@@ -45,32 +45,115 @@ class Transactions extends React.Component {
 
     render() {
         return (
-            <Col>
-				<br/>
-				<Row xs="auto" md="auto" lg="auto" xl="auto">
-					<Col className="d-flex justify-content-center p-0" >Πελάτης</Col>
-					<Col className="d-flex justify-content-centerp-0" >Δωμάτιο</Col>
-					<Col className="d-flex justify-content-center" >Από:</Col>
-					<Col className="d-flex justify-content-center" >Έως:</Col>
-					<Col className="d-flex justify-content-center p-0" >Κόστος:</Col>
-					<Col className="d-flex justify-content-center p-0" >Άτομα:</Col>
-				</Row>
-               {this.state.transactions.map((t) => {
+            // <Col>
+			// 	<br/>
+			// 	<Row xs="auto" md="auto">
+			// 		<Col className="d-flex justify-content-center" >Πελάτης</Col>
+			// 		<Col className="d-flex justify-content-center" >Δωμάτιο</Col>
+			// 		<Col className="d-flex justify-content-center" >Από:</Col>
+			// 		<Col className="d-flex justify-content-center" >Έως:</Col>
+			// 		<Col className="d-flex justify-content-center" >Κόστος:</Col>
+			// 		<Col className="d-flex justify-content-center" >Άτομα:</Col>
+			// 	</Row>
+            //    {this.state.transactions.map((t) => {
+			// 	   return (
+			// 		   <Row  key={t.id} xs="auto" md="auto" >
+			// 			   <Col className="d-flex justify-content-center" >{"#"+t.visitorId}</Col>
+			// 			   <Col className="d-flex justify-content-center" >{"#"+t.roomId}</Col>
+			// 			   <Col className="d-flex justify-content-center" >{t.startDate}</Col>
+			// 			   <Col className="d-flex justify-content-center" >{t.endDate}</Col>
+			// 			   <Col className="d-flex justify-content-center" >{t.cost+"€"}</Col>
+			// 			   <Col className="d-flex justify-content-center" >{t.occupants}</Col>
+			// 		   </Row>
+			// 	   )
+			//    }) }
+			// </Col>
+			<Container>
+			<Row className="d-flex justify-content-around" >
+				<Col xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >ID</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
 				   return (
-					   <div key={t.id}>
-					   <hr/>
-					   <Row xs="auto" md="auto" lg="auto" xl="auto">
-						   <Col className="d-flex justify-content-center" >{"#"+t.visitorId}</Col>
-						   <Col className="d-flex justify-content-center" >{"#"+t.roomId}</Col>
-						   <Col className="d-flex justify-content-center" >{t.startDate}</Col>
-						   <Col className="d-flex justify-content-center" >{t.endDate}</Col>
-						   <Col className="d-flex justify-content-center" >{t.cost+"€"}</Col>
-						   <Col className="d-flex justify-content-center" >{t.occupants}</Col>
-					   </Row>
-					   </div>
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
+							{"#"+t.id}
+						</Row>
 				   )
-			   }) }
-            </Col>
+				   })}
+				</Col>
+				<Col xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Πελάτης</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
+				   return (
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
+							{"#"+t.visitorId}
+						</Row>
+				   )
+				   })}
+				</Col>
+
+				<Col xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Δωμάτιο</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
+				   return (
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
+							{"#"+t.roomId}
+						</Row>
+				   )
+				   })}
+				</Col>
+
+				<Col xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >Από:</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
+				   return (
+						<Row key={t.id} className="d-flex justify-content-center"   xs="1" md="auto"  >
+							{t.startDate}
+						</Row>
+				   )
+				   })}
+				</Col>
+
+				<Col xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="auto" md="auto"  >Έως:</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
+				   return (
+						<Row key={t.id} className="d-flex justify-content-center"   xs="1" md="auto"  >
+							{t.endDate}
+						</Row>
+				   )
+				   })}
+				</Col>
+
+				<Col xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Κόστος:</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
+				   return (
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
+							{t.cost+"€"}
+						</Row>
+				   )
+				   })}
+				</Col>
+
+				<Col  xs="auto" md="auto"  >
+					<Row className="d-flex justify-content-center"   xs="1" md="auto"  >Άτομα:</Row>
+					<hr/>
+					{this.state.transactions.map((t) => {
+				   return (
+						<Row key={t.id} className="d-flex justify-content-center"   xs="auto" md="auto"  >
+							{t.occupants}
+						</Row>
+				   )
+				   })}
+				</Col>
+			</Row>
+			</Container>
   
         );
     }
