@@ -26,7 +26,7 @@ const providerRoom = (props) => {
                         </Header>
 					</Col>
 					<Col xs="6" sm="6" md="2" lg="2" className={styles['btn-col']}>
-						<Button className={styles['room-remove-btn']} color="danger" size="sm">
+						<Button className={styles['room-remove-btn']} color="danger" size="sm" onClick = {props.deleteHandler}>
                             <FontAwesomeIcon  icon={faTrash}  />
                         </Button>
                         <Button className={styles['room-edit-btn']} color="info" size="sm">

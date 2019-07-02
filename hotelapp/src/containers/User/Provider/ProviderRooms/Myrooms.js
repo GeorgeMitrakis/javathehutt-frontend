@@ -95,11 +95,13 @@ class Myrooms extends Component {
 				}
 			},
 			addRoomModal: false,
-			mapModal: false
-			// removeRoomModal: false
+			mapModal: false,
+			removeRoomModal: false,
+			deletedRoom: ""
 		};
 
 		this.addRoomToggle = this.addRoomToggle.bind(this);
+		this.deleteRoomToggle = this.deleteRoomToggle.bind(this);
 		this.mapToggle = this.mapToggle.bind(this);
 	}
 
@@ -107,6 +109,22 @@ class Myrooms extends Component {
 		this.setState(prevState => ({
             addRoomModal: !prevState.addRoomModal
         }));
+	}
+
+	deleteRoomToggle = (event, room) => {
+		if(room){
+			this.setState(prevState => ({
+				removeRoomModal: !prevState.removeRoomModal,
+				deletedRoom: room
+			}));
+		}
+		else{
+			this.setState(prevState => ({
+				removeRoomModal: !prevState.removeRoomModal,
+				deletedRoom: ""
+			}));
+		}
+		
 	}
 
 	mapToggle = () => {
@@ -174,23 +192,6 @@ class Myrooms extends Component {
         .catch((err) => {
             console.log(err);
         })
-        
-		
-	// 	let params = {
-	// 		providerId: JSON.parse(localStorage.getItem('userInfo'))["id"],
-	// 		...formData,
-	// 		...facilities,
-	// 		...coords
-
-	// 	}
-	// 	const queryParams = createQueryParams(params);
-    //     this.props.history.push("/rooms?" + queryParams);
-	// 	console.log(queryParams);
-	// 	axios.post("http://localhost:8765/app/api/rooms?"+queryParams);
-
-		// let formData = {};
-		// formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
-		// formData['price'] = 
 	}
 	
 	inputChangedHandler= (event, controlName) => {
@@ -204,6 +205,34 @@ class Myrooms extends Component {
 
 	editRoomHandler(){
 		alert("Kanw edit");
+	}
+
+	deleteRoomHandler = () => {
+		console.log("------------------");
+		console.log("Delete Handler --> id = "+ this.state.deletedRoom.id);
+		console.log("------------------");
+		
+		let params = {};
+		params['roomId'] = this.state.deletedRoom.id;
+		const queryParams = createQueryParams(params);
+		// this.props.history.push("/searchresults?" +  JSON.parse(localStorage.getItem('userInfo'))["id"]);
+		console.log(queryParams);
+		axios.delete("http://localhost:8765/app/api/rooms?"+queryParams)
+        .then((result) => {
+            console.log(result);
+            if (!result.data.success)
+            {
+                alert(result.data.message);
+            }
+            else
+            {        
+                alert("Επιτυχής Διαγραφή!");
+                this.props.history.replace("/");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 	}
 
 	render(){
@@ -269,7 +298,7 @@ class Myrooms extends Component {
 							console.log("Sto Myrooms to response2\n-------------------");
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
-								<ProviderRooms details={room} editHandler={(event) => this.editRoomHandler(event, room)}/>
+								<ProviderRooms details={room} editHandler={(event) => this.editRoomHandler(event, room)} deleteHandler = {(event) => this.deleteRoomToggle(event, room)}/>
 							);
 							return myrooms;
 						}
@@ -319,6 +348,16 @@ class Myrooms extends Component {
 					<ModalFooter>
 						<Button color="primary" onClick={this.submitForm}>Προσθήκη</Button>
 						<Button color="secondary" onClick={this.addRoomToggle}>Ακύρωση</Button>
+					</ModalFooter>
+				</Modal>
+				<Modal isOpen={this.state.removeRoomModal} toggle={this.deleteRoomToggle} className="modal-lg">
+					<ModalHeader> Διαγραφή Δωματίου</ModalHeader>
+					<ModalBody>
+						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου: {this.state.deletedRoom.roomName}? 
+					</ModalBody>
+					<ModalFooter>
+						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
+						<Button color="secondary" onClick={this.deleteRoomToggle}>Ακύρωση</Button>
 					</ModalFooter>
 				</Modal>
 			</>
