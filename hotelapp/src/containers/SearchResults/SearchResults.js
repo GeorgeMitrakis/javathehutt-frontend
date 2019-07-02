@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import produce from 'immer';
 import {  withRouter } from 'react-router-dom';
 //import produce from 'immer';
-import SearchResult from '../../components/SearchResult/SearchResult';
 import { Container, Col, Row, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
@@ -13,6 +12,7 @@ import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
 import { Spinner } from 'reactstrap';
 import MediaQuery from 'react-responsive';
+import FetchSearchResults from './FetchSearchResults/FetchSearchResults';
 
 
 const searchFiltersDefaults = {
@@ -79,6 +79,11 @@ class SearchResults extends React.Component {
     }
 
     handleScroll = (event) => {
+        if (document.documentElement.clientWidth < 768)
+        {
+            return;
+        }
+
         const windH = document.documentElement.clientHeight;
         const vh = window.pageYOffset / windH;
         
@@ -261,7 +266,10 @@ class SearchResults extends React.Component {
         //     })
         // );
 
-        searchFilters.searchText = text;
+        // searchFilters.searchText = text;
+        searchFilters = produce(searchFilters, draft => {
+            draft.searchText = text;
+        });
         console.log("changed searchText", searchFilters);
         this.updateURL(searchFilters, searchInfo);
     }
@@ -292,7 +300,10 @@ class SearchResults extends React.Component {
         // console.log("Meta thn allagh sto checkbox " + " " + this.state.facilities[label]);
         //axios request to send the search input
 
-        searchFilters.facilities[label] = !searchFilters.facilities[label];
+        // searchFilters.facilities[label] = !searchFilters.facilities[label];
+        searchFilters = produce(searchFilters, draft => {
+            draft.facilities[label] = !draft.facilities[label];
+        });
         console.log(searchFilters);
         this.updateURL(searchFilters, searchInfo);
     }
@@ -308,8 +319,12 @@ class SearchResults extends React.Component {
         // console.log(this.state.priceRange);
         //axios request to send the search input
 
-        searchFilters.minPrice = value[0];
-        searchFilters.maxPrice = value[1];
+        // searchFilters.minPrice = value[0];
+        // searchFilters.maxPrice = value[1];
+        searchFilters = produce(searchFilters, draft => {
+            draft.minPrice = value[0];
+            draft.maxPrice = value[1];
+        });
         console.log(searchFilters);
         this.updateURL(searchFilters, searchInfo);
     };
@@ -325,7 +340,10 @@ class SearchResults extends React.Component {
         // console.log(this.areaRange);
         //axios request to send the search input
 
-        searchFilters.maxDist = value;
+        // searchFilters.maxDist = value;
+        searchFilters = produce(searchFilters, draft => {
+            draft.maxDist = value;
+        });
         console.log(searchFilters);
         this.updateURL(searchFilters, searchInfo);
     };
@@ -428,77 +446,13 @@ class SearchResults extends React.Component {
 
                     <Col md="4" lg="4"> </Col>
                     <Col xs="12" md="8" lg="7">
+
+                        <FetchSearchResults
+                            bookRoomHandler={this.bookRoomHandler}
+                            searchFilters={searchFilters}
+                            searchInfo={searchInfo}
+                        />
                         
-                        <Get url="http://localhost:8765/app/api/search" params={{minPrice: searchFilters.minPrice,
-                                                                            maxPrice: searchFilters.maxPrice,
-                                                                            maxDist: searchFilters.maxDist,
-                                                                            hasPool: searchFilters.facilities.pool,
-                                                                            hasWifi: searchFilters.facilities.wifi,
-                                                                            hasShauna: searchFilters.facilities.sauna,
-                                                                            cityName: searchInfo.destination,
-                                                                            people: searchInfo.adults,
-                                                                            pointX: 53.430957,
-                                                                            pointY: -2.960476}}>
-                            {(error, response, isLoading, makeRequest, axios) => {
-                                if (error) {
-                                    const feedback = (
-                                        <Row className="justify-content-center">
-                                            <div className="text-muted align-self-center pointer" onClick={() => makeRequest({ params: { reload: true } })}> 
-                                                Υπήρξε πρόβλημα με τη σύνδεση σας. Δοκιμάστε ξανά
-                                                <i className="fas fa-redo-alt pointer ml-2"></i>
-                                            </div>
-                                        </Row>
-                                    );
-                                    return feedback;
-                                    // return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
-                                }
-                                else if (isLoading) {
-                                    return (
-                                        <Row className="justify-content-center">
-                                            <Spinner color="primary" style={{ width: '3rem', height: '3rem' }} />
-                                        </Row>
-                                    );
-                                }
-                                else if (response !== null) {
-                                    console.log(response);
-                                    // alert(response.data.data.results[0].id);
-                                    // response.data.data = null;
-                                    const noResults = (
-                                        <Row className={"justify-content-center p-4 " + styles.box_border}>
-                                            <div className="text-muted align-self-center"> Δεν βρέθηκαν αποτελέσματα. Δοκιμάστε ξανά εισάγοντας διαφορετικά στοιχεία αναζήτησης. </div>
-                                        </Row>
-                                    );
-
-                                    if ((response.data.data) && (response.data.data.results))
-                                    {
-                                        const rooms = response.data.data.results.map( room =>
-                                            <SearchResult 
-                                                key={room.id}
-                                                room={room}
-                                                // bookRoomHandler={this.searchCritics}
-                                                bookRoomHandler={( event ) => this.bookRoomHandler( event, room, searchFilters, searchInfo )} 
-                                            />
-                                        );
-
-                                        if (rooms.length)
-                                        {
-                                            return rooms;
-                                        }
-                                        else
-                                        {
-                                            return noResults;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        return noResults;
-                                    }
-                                }
-
-                                return null;
-                            }}
-                        </Get> 
-
                     </Col>
                 </Row>
             </Container> 
