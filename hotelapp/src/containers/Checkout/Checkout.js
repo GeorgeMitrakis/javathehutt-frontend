@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import produce from 'immer';
 import { withRouter } from 'react-router-dom';
-import { Row, Col, Form, FormGroup,
+import Header from '../../components/UI/Header/Header';
+import MyInput from '../../components/UI/MyInput/MyInput';
+import { Row, Col, Form, FormGroup, Container, Label,
     Input, InputGroup, InputGroupText, 
-    InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+	InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+	Card, CardHeader, CardBody} from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import classes from './Checkout.module.css';
 import axios from 'axios';
@@ -99,10 +102,11 @@ class Checkout extends Component{
         console.log(bookingInfo);
 
         let formData = {};
+        formData["userId"] = getUserInfoField("id");
         formData["roomId"] = bookingInfo.id;
         formData["startDate"] = bookingInfo.fromDate;
         formData["endDate"] = bookingInfo.toDate;
-        formData["userId"] = getUserInfoField("id");
+        formData["occupants"] = bookingInfo.adults + bookingInfo.children;
 
         console.log("form data: ");;
         console.log(formData);
@@ -141,110 +145,192 @@ class Checkout extends Component{
         console.log("---------");;
 
         return(
-            <div id={classes.content}>
-                {/* <Row className="justify-content-center mt-5">
-                    <h1 className="font-weight-bold" >GIVE ME YO MONEY !!!!</h1>
-                </Row> */}
+            <Container fluid id={classes.content}>
+				<Row className="justify-content-center">
+					<Col xs="auto" lg="6" xl="4">
+						<Card >
+							<CardHeader >
+								<Row className="d-flex justify-content-center">
+									<Header>
+										Ενοικίαση Δωματίου
+									</Header>
+								</Row>
+							</CardHeader>
 
-                <Row className="d-flex justify-content-center">
-                    <Col >
-                        Room Title: Undefined
-                    </Col>
-                    <Col >
-                        Room Price: Too Much
-                    </Col>
-                </Row>
+							<CardBody>
+								<Form onSubmit={(event) => this.submitForm(event, bookingInfo)}>
+									<br/>
+									<Row className="d-flex justify-content-center">
+										<Header>
+											Πληροφορίες κράτησης:
+										</Header>
+									</Row>
+									<br/>
+									<Row>										
+										<Col>
+											<MyInput readOnly
+												name='Δωμάτιο:'
+												type='text'
+												value={bookingInfo.roomName}
+											/>
+										</Col>
+										<Col>
+											<MyInput readOnly
+												name='Τοποθεσία:'
+												type='text'
+												value={bookingInfo.destination}
+											/>
+										</Col>
+									</Row>
+									<Row>										
+										<Col>
+											<MyInput readOnly
+												name='Από:'
+												type='date'
+												value={bookingInfo.fromDate}
+											/>
+										</Col>
+										<Col>
+											<MyInput readOnly
+												name='Εώς:'
+												type='date'
+												value={bookingInfo.toDate}
+											/>
+										</Col>
+									</Row>
+									<Row>										
+										<Col>
+											<MyInput readOnly
+												name='Ενήλικες:'
+												type='text'
+												value={bookingInfo.adults}
+											/>
+										</Col>
+										<Col>
+											<MyInput readOnly
+												name='Παιδιά:'
+												type='text'
+												value={bookingInfo.children}
+											/>
+										</Col>
+									</Row>
+									<Row>										
+										<Col>
+											<MyInput readOnly
+												name='Αριθμός δωματίων:'
+												type='text'
+												value={bookingInfo.rooms}
+											/>
+										</Col>
+										<Col>
+											<MyInput readOnly
+												name='Τιμή:'
+												type='text'
+												value={
+													bookingInfo.price+"€ X "+bookingInfo.rooms+" = "
+													+bookingInfo.price*bookingInfo.rooms+"€"
+												}
+											/>
+										</Col>
+									</Row>
+									<hr/>
+									<br/>	
+									<Row className="d-flex justify-content-center">							
+										<Header>
+											Πιστωτική κάρτα:
+										</Header>
+									</Row>
+									<br/>
+									<Row>
+										<Col>
+											<MyInput
+												name='ID:'
+												type='text'
+												placeholder="1111222233334444"
+												changed={this.handleCardId.bind(this)}
+											
+											/>	
+										</Col>
+										<Col>
+											<MyInput
+													name="Αρ.Ασφαλείας:"
+													type="text"
+													placeholder="123"
+													onChange={this.handleCSC.bind(this)}
+											/>
+										</Col>
+									</Row>
+									<br/>
+									<Row>
+										<Col>
+											
 
-                <Form onSubmit={(event) => this.submitForm(event, bookingInfo)}>
-                    <FormGroup >
-                        <Row className="mt-3 mb-3">
-                            <Col>
-                                <InputGroup>
-                                    <InputGroupText>Card id:</InputGroupText>
-                                    <Input
-                                        type="text"
-                                        placeholder="1111222233334444"
-                                        onChange={this.handleCardId.bind(this)}
-                                    />
-                                </InputGroup>
-                            </Col>
+											<FormGroup>
+												<Label className="font-weight-bold small">Τύπος Κάρτας:</Label>
+												<InputGroupButtonDropdown 
+													addonType="append"  
+													isOpen={this.state.dropdownOpen} 
+													toggle={this.toggleDropDown}
+												>
+												<DropdownToggle caret >
+														{this.state.card.type}
+												</DropdownToggle>
+												<DropdownMenu>
+													<DropdownItem 
+														className="d-flex align-items-center"
+														onClick={this.handleCardType.bind(this,'Visa')}>
 
-                            <Col>
-                                <InputGroup>
-                                    <InputGroupText>Card Security Code:</InputGroupText>
-                                        <Input
-                                            type="text"
-                                            placeholder="123"
-                                            onChange={this.handleCSC.bind(this)}
-                                        />
-                                </InputGroup>
-                            </Col>
-                        </Row>
-                        
+														Visa
+													</DropdownItem>
 
-                        <Row  className="mt-3 mb-3">
-                            <Col>
-                                <InputGroup>
-                                    <InputGroupText>Expiration date:</InputGroupText>
-                                        <Input
-                                            type="date"
-                                            min={this.todayIs()}
-                                            onChange={this.handleCardExpdate.bind(this)}
-                                        />
-                                </InputGroup>
-                            </Col>
+													<DropdownItem divider />
 
-                            <Col>
-                                <InputGroupButtonDropdown 
-                                    addonType="append"  
-                                    isOpen={this.state.dropdownOpen} 
-                                    toggle={this.toggleDropDown}>
+													<DropdownItem 
+														className="d-flex align-items-center"
+														onClick={this.handleCardType.bind(this,'Mastercard')}>
 
-                                    <DropdownToggle caret >
-                                        Card Type:
-                                    </DropdownToggle>
-                                    <DropdownMenu className="p-2">
-                                        <DropdownItem 
-                                            className="d-flex align-items-center"
-                                            onClick={this.handleCardType.bind(this,'Visa')}>
+														Mastercard
+													</DropdownItem>
+													
+													<DropdownItem divider />
+													<DropdownItem 
+														className="d-flex align-items-center" 
+														onClick={this.handleCardType.bind(this,'Diners')}>
 
-                                            Visa
-                                        </DropdownItem>
+														Diners
+													</DropdownItem>
+												</DropdownMenu>
+												</InputGroupButtonDropdown>
+											</FormGroup>
 
-                                        <DropdownItem divider />
-
-                                        <DropdownItem 
-                                            className="d-flex align-items-center"
-                                            onClick={this.handleCardType.bind(this,'Mastercard')}>
-
-                                            Mastercard
-                                        </DropdownItem>
-                                        
-                                        <DropdownItem divider />
-                                        <DropdownItem 
-                                            className="d-flex align-items-center" 
-                                            onClick={this.handleCardType.bind(this,'Diners')}>
-
-                                            Diners
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                    <Input readOnly
-                                        type="text"
-                                        value={this.state.card.type}
-                                    />
-                                </InputGroupButtonDropdown>                                
-                            </Col>
-                        </Row>
-                        <Row className="d-flex justify-content-end">
-                                <SubmitBtn classes="form-control rounded-0" borderWidth="2px">
-                                    Κράτηση
-                                </SubmitBtn>
-                        </Row>
-
-
-                    </FormGroup>
-                </Form>
-            </div>
+										</Col>
+										<br/>
+										<Col>
+											<MyInput
+												name="Ημερομηνία λήξης:"
+												type="date"
+												min={this.todayIs()}
+												onChange={this.handleCardExpdate.bind(this)}
+											/>
+										</Col>
+									</Row>							
+									<br/>
+									<br/>
+									<Row>
+										<Col/>
+										<Col>
+											<SubmitBtn>
+												Κράτηση
+											</SubmitBtn>
+										</Col>
+										<Col/>
+									</Row>
+								</Form>
+							</CardBody>
+						</Card>
+					</Col>
+				</Row>
+            </Container>
             
         );
     }
