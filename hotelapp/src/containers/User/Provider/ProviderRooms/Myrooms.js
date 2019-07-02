@@ -97,6 +97,7 @@ class Myrooms extends Component {
 			addRoomModal: false,
 			mapModal: false,
 			removeRoomModal: false,
+			editRoomModal: false,
 			deletedRoom: ""
 		};
 
@@ -124,6 +125,31 @@ class Myrooms extends Component {
 				deletedRoom: ""
 			}));
 		}
+	}
+
+	editRoomToggle = (event, room) =>{
+		if(room){
+
+			this.setState(prevState => ({
+				editRoomModal: !prevState.editRoomModal,
+				deletedRoom: room
+			}));
+
+			for(let key in facilities){
+				facilities[key] = room[key];
+			}
+
+			for(let key in coords){
+				coords[key] = room.location[key];
+			}
+		}
+		else{
+			this.setState(prevState => ({
+				editRoomModal: !prevState.editRoomModal,
+				deletedRoom: ""
+			}));
+		}
+
 		
 	}
 
@@ -238,11 +264,24 @@ class Myrooms extends Component {
 	render(){
 		const formElementsArray = [];
         for ( let key in this.state.formControls ) {
+			let obj = this.state.formControls[key]
+			if(this.state.deletedRoom){
+				if(key === 'cityName'){
+					obj['value'] = this.state.deletedRoom.location['cityname']
+				}
+				else{
+					obj['value'] = this.state.deletedRoom[key]
+				}
+			}
             formElementsArray.push( {
                 id: key,
-                config: this.state.formControls[key]
+                config: obj
             });
 		}
+
+		console.log(formElementsArray)
+		console.log("-------------")
+		console.log((this.state.deletedRoom))
 
 		let formFields = formElementsArray.map( formElement => (
 			<FormGroup row>
@@ -252,10 +291,11 @@ class Myrooms extends Component {
 				// key={formElement.id}
                 id={formElement.config.id}
                 name={formElement.config.name}
-                value={formElement.config.value}
+				onChange={( event ) => this.inputChangedHandler( event, formElement.id )}
                 type={formElement.config.type}
+				value={formElement.config.value}
                 placeholder={formElement.config.placeholder}
-                onChange={( event ) => this.inputChangedHandler( event, formElement.id )} />
+                />
 			</Col>
 			</FormGroup>
         ));
@@ -298,7 +338,7 @@ class Myrooms extends Component {
 							console.log("Sto Myrooms to response2\n-------------------");
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
-								<ProviderRooms details={room} editHandler={(event) => this.editRoomHandler(event, room)} deleteHandler = {(event) => this.deleteRoomToggle(event, room)}/>
+								<ProviderRooms details={room} editHandler={(event) => this.editRoomToggle(event, room)} deleteHandler = {(event) => this.deleteRoomToggle(event, room)}/>
 							);
 							return myrooms;
 						}
@@ -339,7 +379,7 @@ class Myrooms extends Component {
 									</div>
 								</Modal>
 								<FormText color="muted">
-								Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
+									Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
 								</FormText>
 							</Col>
 							</FormGroup>
@@ -358,6 +398,49 @@ class Myrooms extends Component {
 					<ModalFooter>
 						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
 						<Button color="secondary" onClick={this.deleteRoomToggle}>Ακύρωση</Button>
+					</ModalFooter>
+				</Modal>
+				<Modal isOpen={this.state.editRoomModal} toggle={this.editRoomToggle} className="modal-lg">
+				<ModalHeader toggle={this.editRoomToggle}>Επεξεργασία Δωματίου {this.state.deletedRoom.roomName}</ModalHeader>
+				<ModalBody>
+						<Form onSubmit={this.submitForm}>
+							{formFields}
+							<FormGroup row>
+							<Label for="extras" sm={2}>Παροχές</Label>
+							<Container>
+								<Checkbox checked={facilities['breakfast']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('breakfast')}>
+									Πρωινό
+								</Checkbox>
+								<Checkbox checked={facilities['wifi']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('wifi')}>
+									Wi-Fi
+								</Checkbox>
+								<Checkbox checked={facilities['shauna']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('shauna')}>
+									Σάουνα
+								</Checkbox>
+								<Checkbox checked={facilities['pool']}  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('pool')}>
+									Πισίνα
+								</Checkbox>
+							</Container>
+							</FormGroup>
+							<FormGroup row>
+							<Label for="map" sm={2}>Τοποθεσία στο Χάρτη</Label>
+							<Col sm={10}>
+								{googleMap}
+								<Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
+									<div className={styles.box_border} style={{height: "75vh"}}>
+										{googleMap}
+									</div>
+								</Modal>
+								<FormText color="muted">
+									Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
+								</FormText>
+							</Col>
+							</FormGroup>
+						</Form>
+					</ModalBody>
+					<ModalFooter>
+						<Button color="primary" onClick={this.editRoomHandler}>Τέλος Επεξεργασίας</Button>
+						<Button color="secondary" onClick={this.editRoomToggle}>Ακύρωση</Button>
 					</ModalFooter>
 				</Modal>
 			</>

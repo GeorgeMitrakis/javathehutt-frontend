@@ -29,7 +29,7 @@ const providerRoom = (props) => {
 						<Button className={styles['room-remove-btn']} color="danger" size="sm" onClick = {props.deleteHandler}>
                             <FontAwesomeIcon  icon={faTrash}  />
                         </Button>
-                        <Button className={styles['room-edit-btn']} color="info" size="sm">
+                        <Button className={styles['room-edit-btn']} color="info" size="sm" onClick = {props.editHandler}>
                             <FontAwesomeIcon  icon={faEdit}  />
                         </Button>
 					</Col>
@@ -52,7 +52,7 @@ const providerRoom = (props) => {
                 </Row>
                 <Row className={styles['row-style']}>
                     <Col xs={6}>
-                        <p>Διαθεσιμότητα: {props.details.maxOccupants}</p>
+                        <p>Διαθεσιμότητα: {props.details.capacity}</p>
                     </Col>
                     {/* <Col xs={6}>
                         <p className={styles['price-par']}>Τιμή: {props.details.price}</p>
