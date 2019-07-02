@@ -25,7 +25,7 @@ const filtersTab = (props) => {
                     value = {props.searchText}
                     onChange={(event) => props.handleSearchText(event, props.searchFilters, props.searchInfo)}
                 />
-                <InputGroupAddon addonType="append"><Button color="link"><FontAwesomeIcon  icon={faSearch}  /></Button></InputGroupAddon>
+                <InputGroupAddon addonType="append"><Button className="border" color="link"><FontAwesomeIcon  icon={faSearch}  /></Button></InputGroupAddon>
             </InputGroup>
             </Container>
             <Container className={styles['price_range']}>
