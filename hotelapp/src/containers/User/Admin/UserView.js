@@ -163,7 +163,7 @@ class UserView extends React.Component {
             if(result.data.success){
                 alert("prom Submitted - ok");
             }else{
-                alert("prom Submitted - fail");
+                alert("prom Submitted - fail.\nReason:"+result.data.message);
             }
             
         })
