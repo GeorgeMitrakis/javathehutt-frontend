@@ -13,6 +13,20 @@ import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 
 class SearchResult extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = { 
+            collapse: false 
+        };
+    }
+    
+    toggle() {
+        this.setState(state => (
+            { collapse: !state.collapse }
+        ));
+    }
+
     render() {
     
         const items = [
@@ -36,8 +50,10 @@ class SearchResult extends React.Component {
         const photo = "https://s-ec.bstatic.com/images/hotel/max1024x768/731/73118462.jpg";
     
         let stars = [] ;
-        for (let i=0; i < 5; i++)
-            stars.push(<i className="fas fa-star ml-1"></i>);
+        for (let i=1; i <= 5; i++)
+        {
+            stars.push(<i key={this.props.room.id + "_" + i} className="fas fa-star ml-1"></i>);
+        }
 
         return (
             <Row className={"mb-4 p-2 " + styles.room}>
@@ -48,7 +64,7 @@ class SearchResult extends React.Component {
                 <Col md="8" className="p-0 m-0 pl-2 d-flex-column border">
                     <div className="d-flex align-items-center">
                         <Header classes="d-flex flex-shrink-1 border">
-                            Ονομα ξενοδοχειουwdwd
+                            {this.props.room.provider.providername}
                         </Header>
 
                         <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
@@ -57,27 +73,30 @@ class SearchResult extends React.Component {
                     </div>
 
                     <div className={styles.sub_header}> 
-                        Ονομα δωματιου
+                        {this.props.room.roomName}
                     </div>
 
                     <div className="text-muted small"> 
                         <i className="fas fa-map-marker-alt mr-2"></i>
-                        τοποθεσια
+                        {this.props.room.location.cityname}
                     </div>
 
                     <div className="mt-2 mb-2">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting 
-                        industry. Lorem Ipsum has been the industry's standard dummy text eve
+                        {this.props.room.description}
+                        {/* Lorem Ipsum is simply dummy text of the printing and typesetting  */}
+                        {/* industry. Lorem Ipsum has been the industry's standard dummy text eve */}
                     </div>
 
                     <div className="d-flex justify-content-between border">
-                        <div className="d-flex align-items-center text-muted border">
-                            Περισσότερα <i className="fas fa-sort-down ml-1"></i>
+                        <div className="d-flex align-items-center border">
+                            <Button color="link" onClick={this.toggle} >
+                                Περισσότερα
+                            </Button>
                         </div>
 
                         <div className="d-flex">
                             <Header classes="d-flex align-items-center mr-3">
-                                300 €
+                                {this.props.room.price} {" "} €
                             </Header>
 
                             <div onClick={this.props.bookRoomHandler}>
