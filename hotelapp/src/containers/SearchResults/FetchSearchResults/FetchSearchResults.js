@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import {  withRouter } from 'react-router-dom';
-import SearchResult from '../../../components/SearchResult/SearchResult';
+import SearchResult from '../SearchResult/SearchResult';
 import { Get } from 'react-axios';
 import { Row } from 'reactstrap';
 import { Spinner } from 'reactstrap';

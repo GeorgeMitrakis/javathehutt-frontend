@@ -4,7 +4,7 @@ import { UncontrolledCarousel, Container, Col, Row, Button,  Collapse, CardBody,
 
 //import FaIconPack from 'react-icons/lib/fa';
 import styles from './RoomInfo.module.css';
-import Pills from '../../components/SearchResult/ResultPills';
+import Pills from '../SearchResults/SearchResult/ResultPills';
 
 class RoomInfo extends React.Component{
     

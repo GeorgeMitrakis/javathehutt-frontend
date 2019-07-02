@@ -4,9 +4,9 @@ import { Container, Col, Row, Button } from 'reactstrap';
 
 
 import styles from './Result.module.css';
-import RoomInfo from '../../containers/RoomInfo/Roominfo';
-import Header from '../UI/Header/Header';
-import SubmitBtn from '../UI/SubmitBtn/SubmitBtn';
+// import RoomInfo from '../../containers/RoomInfo/Roominfo';
+import Header from '../../../components/UI/Header/Header';
+import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 
 
 
@@ -67,7 +67,7 @@ const searchResult = (props) => {
                     industry. Lorem Ipsum has been the industry's standard dummy text eve
                 </div>
 
-                <div class="d-flex justify-content-between border">
+                <div className="d-flex justify-content-between border">
                     <div className="d-flex align-items-center text-muted border">
                         Περισσότερα <i className="fas fa-sort-down ml-1"></i>
                     </div>
