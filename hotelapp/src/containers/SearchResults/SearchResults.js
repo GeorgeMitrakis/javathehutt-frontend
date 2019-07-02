@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import produce from 'immer';
 import {  withRouter } from 'react-router-dom';
 //import produce from 'immer';
-import SearchResult from '../../components/SearchResult/SearchResult';
 import { Container, Col, Row, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
