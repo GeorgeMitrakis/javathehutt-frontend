@@ -186,6 +186,7 @@ class Myrooms extends Component {
 			formData[key] = facilities[key];
 		}
 
+		
 		for(let key in coords){
 			formData[key] = coords[key];
 		}
@@ -229,8 +230,53 @@ class Myrooms extends Component {
         ); 
 	}
 
-	editRoomHandler(){
-		alert("Kanw edit");
+	editRoomHandler = () => {
+
+		let formData = {};
+		// formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
+		formData['roomId'] = this.state.deletedRoom['id'];
+		for ( let key in this.state.formControls ) {
+            formData[key] = this.state.formControls[key].value;
+		}
+		
+		for(let key in facilities){
+			formData[key] = facilities[key];
+		}
+
+		for(let key in coords){
+			formData[key] = coords[key];
+		}
+
+		console.log("---Form Data---");
+		console.log(formData);
+		console.log(facilities); 
+		console.log(coords);    
+		console.log("---------------");
+		formData['breakfast'] = true
+		axios.put(
+            "http://localhost:8765/app/api/rooms",
+            qs.stringify(formData),
+            {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        )
+        .then((result) => {
+            console.log(result);
+            if (!result.data.success)
+            {
+                alert(result.data.message);
+            }
+            else
+            {        
+                alert("Επιτυχής Κράτηση!");
+                this.props.history.replace("/");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+		
+		// alert("Kanw edit");
 	}
 
 	deleteRoomHandler = () => {
@@ -288,7 +334,7 @@ class Myrooms extends Component {
 			<Label for={formElement.config.id} sm={2}>{formElement.config.name}</Label>
 			<Col sm={10}>
 				<Input 
-				// key={formElement.id}
+				key={formElement.id}
                 id={formElement.config.id}
                 name={formElement.config.name}
 				onChange={( event ) => this.inputChangedHandler( event, formElement.id )}
