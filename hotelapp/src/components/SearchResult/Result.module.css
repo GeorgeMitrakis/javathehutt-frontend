@@ -6,7 +6,7 @@
     float: right;
 }
 
-.res-container{
+.room{
     /* margin-bottom: 100px; */
     border: 1px rgb(32, 31, 28);
     /* border-width: 2px; */
@@ -23,4 +23,9 @@
 }
 .row-style{
     /* text-align: left; */
+}
+
+.sub_header {
+    font-size: calc(7px + 2vmin);
+    color: rgb(40, 30, 182);
 }

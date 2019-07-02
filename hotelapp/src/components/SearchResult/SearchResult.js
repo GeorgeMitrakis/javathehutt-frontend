@@ -5,6 +5,8 @@ import { Container, Col, Row, Button } from 'reactstrap';
 
 import styles from './Result.module.css';
 import RoomInfo from '../../containers/RoomInfo/Roominfo';
+import Header from '../UI/Header/Header';
+import SubmitBtn from '../UI/SubmitBtn/SubmitBtn';
 
 
 
@@ -28,12 +30,73 @@ const searchResult = (props) => {
             }
           ];
 
-        
+        const photo = "https://s-ec.bstatic.com/images/hotel/max1024x768/731/73118462.jpg";
+    
+        let stars = [] ;
+        for (let i=0; i < 5; i++)
+            stars.push(<i className="fas fa-star ml-1"></i>);
+
     return (
-        <Row className="mb-4">
-            <Container fluid className={styles['res-container']}>
-                <h2>{props.room.roomName}</h2>
-                <Row className={styles['row-style']}>
+        <Row className={"mb-4 p-2 " + styles.room}>
+            <Col md="4" className="p-0 m-0 border">
+                <img src={photo} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
+            </Col>
+
+            <Col md="8" className="p-0 m-0 pl-2 d-flex-column border">
+                <div className="d-flex align-items-center">
+                    <Header classes="d-flex flex-shrink-1 border">
+                        Ονομα ξενοδοχειουwdwd
+                    </Header>
+
+                    <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
+                        {stars}
+                    </div>
+                </div>
+
+                <div className={styles.sub_header}> 
+                    Ονομα δωματιου
+                </div>
+
+                <div className="text-muted small"> 
+                    <i className="fas fa-map-marker-alt mr-2"></i>
+                    τοποθεσια
+                </div>
+
+                <div className="mt-2 mb-2">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting 
+                    industry. Lorem Ipsum has been the industry's standard dummy text eve
+                </div>
+
+                <div class="d-flex justify-content-between border">
+                    <div className="d-flex align-items-center text-muted border">
+                        Περισσότερα <i className="fas fa-sort-down ml-1"></i>
+                    </div>
+
+                    <div className="d-flex">
+                        <Header classes="d-flex align-items-center mr-3">
+                            300 €
+                        </Header>
+
+                        <div onClick={props.bookRoomHandler}>
+                            <SubmitBtn >
+                                Κράτηση
+                            </SubmitBtn>
+                        </div>
+                    </div>
+                </div>
+               
+            </Col>
+
+            {/* <Col md="1" className="p-0 m-0 d-flex flex-column border">
+                <div className="">
+                    <p className="float-right">8.6 @</p>
+                </div>
+
+                <div className="">
+                    <p className="float-right">300 $</p>
+                </div>
+            </Col> */}
+                {/* <Row className={styles['row-style']}>
                     <Col sm={6}>
                         <p>Περιοχή: {props.room.location.cityname}</p>
                     </Col>
@@ -48,9 +111,8 @@ const searchResult = (props) => {
                     <Col sm={6}>
                         <Button onClick={props.bookRoomHandler} className={styles['reservation-btn']} color="primary">Κράτηση</Button>
                     </Col>
-                </Row>
-               <RoomInfo/>
-            </Container>
+                </Row> */}
+               {/* <RoomInfo/> */}
         </Row>
     );
 }
