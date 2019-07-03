@@ -34,136 +34,18 @@ class Myrooms extends Component {
 		super(props);
 		
 		this.state = {
-			formControls: {
-				roomName: {
-					rules: {
-						required: true
-					},
-					id: "roomName",
-					name: "Όνομα",
-					value: "",
-					type: "text",
-					placeholder: "Όνομα Δωματιου",
-				},
-				price: {
-					rules: {
-						required: true
-					},
-					id: "price",
-					name: "Τιμή",
-					value: "",
-					type: "number",
-					placeholder: "150€",
-				},
-				capacity: {
-					rules: {
-						required: true
-					},
-					id: "capacity",
-					name: "Δωμάτια",
-					value: "",
-					type: "number",
-					placeholder: "1",
-				},
-				maxOccupants: {
-					rules: {
-						required: true
-					},
-					id: "maxOccupants",
-					name: "Κλίνες",
-					value: "",
-					type: "number",
-					placeholder: "2",
-				},
-				cityName: {
-					rules: {
-						required: true
-					},
-					id: "roomName",
-					name: "Πόλη",
-					value: "",
-					type: "text",
-					placeholder: "Athens",
-				},
-				description: {
-
-					id: "descr",
-					name: "Περιγραφή Δωματίου",
-					value: "",
-					type: "textarea",
-					placeholder: "Προσθέστε κάτι σχετικό με το δωμάτιο",
-				}
-			},
-			addRoomModal: false,
-			mapModal: false,
-			removeRoomModal: false,
-			editRoomModal: false,
-			deletedRoom: ""
+			roomAdded:false
 		};
 
-		this.addRoomToggle = this.addRoomToggle.bind(this);
-		this.deleteRoomToggle = this.deleteRoomToggle.bind(this);
-		this.mapToggle = this.mapToggle.bind(this);
+		// this.addRoomToggle = this.addRoomToggle.bind(this);
+		// this.deleteRoomToggle = this.deleteRoomToggle.bind(this);
+		// this.mapToggle = this.mapToggle.bind(this);
 	}
 
 	addRoomToggle = () => {
 		this.setState(prevState => ({
             addRoomModal: !prevState.addRoomModal
         }));
-	}
-
-	deleteRoomToggle = (event, room) => {
-		if(room){
-			this.setState(prevState => ({
-				removeRoomModal: !prevState.removeRoomModal,
-				deletedRoom: room
-			}));
-		}
-		else{
-			this.setState(prevState => ({
-				removeRoomModal: !prevState.removeRoomModal,
-				deletedRoom: ""
-			}));
-		}
-	}
-
-	editRoomToggle = (event, room) =>{
-		if(room){
-
-			this.setState(prevState => ({
-				editRoomModal: !prevState.editRoomModal,
-				deletedRoom: room
-			}));
-
-			for(let key in facilities){
-				facilities[key] = room[key];
-			}
-
-			for(let key in coords){
-				coords[key] = room.location[key];
-			}
-		}
-		else{
-			this.setState(prevState => ({
-				editRoomModal: !prevState.editRoomModal,
-				deletedRoom: ""
-			}));
-		}
-
-		
-	}
-
-	mapToggle = () => {
-        this.setState(prevState => ({
-            mapModal: !prevState.mapModal
-        }));
-	}
-	
-	mapClickedHandler = (mapProps, map, e) => {
-		this.mapToggle();
-		console.log(mapProps);
-		coords['cordX'] = mapProps.lat;
-		coords['cordY'] = mapProps.lng;
 	}
 
 	handleCheckBoxChange = (label) => {
@@ -213,92 +95,6 @@ class Myrooms extends Component {
             else
             {        
                 alert("Επιτυχής Κράτηση!");
-                this.props.history.replace("/");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-	}
-	
-	inputChangedHandler= (event, controlName) => {
-		const value = event.target.value;
-		this.setState( 
-            produce(draft => { 
-                draft.formControls[controlName].value = value; 
-            }) 
-        ); 
-	}
-
-	editRoomHandler = () => {
-
-		let formData = {};
-		// formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
-		formData['roomId'] = this.state.deletedRoom['id'];
-		for ( let key in this.state.formControls ) {
-            formData[key] = this.state.formControls[key].value;
-		}
-		
-		for(let key in facilities){
-			formData[key] = facilities[key];
-		}
-
-		for(let key in coords){
-			formData[key] = coords[key];
-		}
-
-		console.log("---Form Data---");
-		console.log(formData);
-		console.log(facilities); 
-		console.log(coords);    
-		console.log("---------------");
-		formData['breakfast'] = true
-		axios.put(
-            "http://localhost:8765/app/api/rooms",
-            qs.stringify(formData),
-            {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        )
-        .then((result) => {
-            console.log(result);
-            if (!result.data.success)
-            {
-                alert(result.data.message);
-            }
-            else
-            {        
-                alert("Επιτυχής Κράτηση!");
-                this.props.history.replace("/");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-		
-		// alert("Kanw edit");
-	}
-
-	deleteRoomHandler = () => {
-		console.log("------------------");
-		console.log("Delete Handler --> id = "+ this.state.deletedRoom.id);
-		console.log("------------------");
-		
-		let params = {};
-		params['roomId'] = this.state.deletedRoom.id;
-		const queryParams = createQueryParams(params);
-		// this.props.history.push("/searchresults?" +  JSON.parse(localStorage.getItem('userInfo'))["id"]);
-		console.log(queryParams);
-		axios.delete("http://localhost:8765/app/api/rooms?"+queryParams)
-        .then((result) => {
-            console.log(result);
-            if (!result.data.success)
-            {
-                alert(result.data.message);
-            }
-            else
-            {        
-                alert("Επιτυχής Διαγραφή!");
                 this.props.history.replace("/");
             }
         })
@@ -414,81 +210,14 @@ class Myrooms extends Component {
 									Πισίνα
 								</Checkbox>
 							</Container>
-							</FormGroup>
-							<FormGroup row>
-							<Label for="map" sm={2}>Τοποθεσία στο Χάρτη</Label>
-							<Col sm={10}>
-								{googleMap}
-								<Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
-									<div className={styles.box_border} style={{height: "75vh"}}>
-										{googleMap}
-									</div>
-								</Modal>
-								<FormText color="muted">
-									Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
-								</FormText>
-							</Col>
-							</FormGroup>
+							</FormGroup>							
 						</Form>
 					</ModalBody>
 					<ModalFooter>
 						<Button color="primary" onClick={this.submitForm}>Προσθήκη</Button>
 						<Button color="secondary" onClick={this.addRoomToggle}>Ακύρωση</Button>
 					</ModalFooter>
-				</Modal>
-				<Modal isOpen={this.state.removeRoomModal} toggle={this.deleteRoomToggle} className="modal-lg">
-					<ModalHeader> Διαγραφή Δωματίου</ModalHeader>
-					<ModalBody>
-						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου: {this.state.deletedRoom.roomName}? 
-					</ModalBody>
-					<ModalFooter>
-						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
-						<Button color="secondary" onClick={this.deleteRoomToggle}>Ακύρωση</Button>
-					</ModalFooter>
-				</Modal>
-				<Modal isOpen={this.state.editRoomModal} toggle={this.editRoomToggle} className="modal-lg">
-				<ModalHeader toggle={this.editRoomToggle}>Επεξεργασία Δωματίου {this.state.deletedRoom.roomName}</ModalHeader>
-				<ModalBody>
-						<Form onSubmit={this.submitForm}>
-							{formFields}
-							<FormGroup row>
-							<Label for="extras" sm={2}>Παροχές</Label>
-							<Container>
-								<Checkbox checked={facilities['breakfast']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('breakfast')}>
-									Πρωινό
-								</Checkbox>
-								<Checkbox checked={facilities['wifi']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('wifi')}>
-									Wi-Fi
-								</Checkbox>
-								<Checkbox checked={facilities['shauna']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('shauna')}>
-									Σάουνα
-								</Checkbox>
-								<Checkbox checked={facilities['pool']}  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('pool')}>
-									Πισίνα
-								</Checkbox>
-							</Container>
-							</FormGroup>
-							<FormGroup row>
-							<Label for="map" sm={2}>Τοποθεσία στο Χάρτη</Label>
-							<Col sm={10}>
-								{googleMap}
-								<Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
-									<div className={styles.box_border} style={{height: "75vh"}}>
-										{googleMap}
-									</div>
-								</Modal>
-								<FormText color="muted">
-									Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
-								</FormText>
-							</Col>
-							</FormGroup>
-						</Form>
-					</ModalBody>
-					<ModalFooter>
-						<Button color="primary" onClick={this.editRoomHandler}>Τέλος Επεξεργασίας</Button>
-						<Button color="secondary" onClick={this.editRoomToggle}>Ακύρωση</Button>
-					</ModalFooter>
-				</Modal>
+				</Modal>				
 			</>
 			
 		);
