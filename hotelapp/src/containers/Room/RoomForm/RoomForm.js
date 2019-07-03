@@ -33,7 +33,7 @@ class RoomForm extends Component{
                     },
                     id: "roomName",
                     name: "Όνομα",
-                    value: "",
+                    value: this.props.room ? this.props.room['roomName'] : "",
                     type: "text",
                     placeholder: "Όνομα Δωματιου",
                 },
@@ -43,7 +43,7 @@ class RoomForm extends Component{
                     },
                     id: "price",
                     name: "Τιμή",
-                    value: "",
+                    value: this.props.room ? this.props.room['price'] : "",
                     type: "number",
                     placeholder: "150€",
                 },
@@ -53,7 +53,7 @@ class RoomForm extends Component{
                     },
                     id: "capacity",
                     name: "Δωμάτια",
-                    value: "",
+                    value: 1,
                     type: "number",
                     placeholder: "1",
                 },
@@ -63,7 +63,7 @@ class RoomForm extends Component{
                     },
                     id: "maxOccupants",
                     name: "Κλίνες",
-                    value: "",
+                    value: this.props.room ? this.props.room['maxOccupants'] : "",
                     type: "number",
                     placeholder: "2",
                 },
@@ -73,7 +73,7 @@ class RoomForm extends Component{
                     },
                     id: "roomName",
                     name: "Πόλη",
-                    value: "",
+                    value: this.props.room ? this.props.room.location['cityName'] : "",
                     type: "text",
                     placeholder: "Athens",
                 },
@@ -81,7 +81,7 @@ class RoomForm extends Component{
         
                     id: "descr",
                     name: "Περιγραφή Δωματίου",
-                    value: "",
+                    value: this.props.room ? this.props.room['description'] : "",
                     type: "textarea",
                     placeholder: "Προσθέστε κάτι σχετικό με το δωμάτιο",
                 }
@@ -161,8 +161,7 @@ class RoomForm extends Component{
             else
             {        
 				alert("Επιτυχία!");
-				this.props.roomsChangedHandler();//of Myrooms.js
-                this.props.history.replace("/");
+				this.props.toggleRoomFormModal();//of Myrooms.js
             }
         })
         .catch((err) => {
@@ -209,7 +208,7 @@ class RoomForm extends Component{
             else
             {        
                 alert("Επιτυχής Κράτηση!");
-                this.props.history.replace("/");
+                this.props.toggleRoomFormModal();
             }
         })
         .catch((err) => {
@@ -314,7 +313,7 @@ class RoomForm extends Component{
                 <Row >
                 <Col xs="12" sm="12" md="12" lg="12" className={styles['btn-col']}>
                     <Button className={styles['form-buttons']} color="primary" onClick={this.submitForm}>Προσθήκη</Button>
-                    <Button className={styles['form-buttons']} color="secondary" onClick={this.props.addRoomToggle}>Ακύρωση</Button>
+                    <Button className={styles['form-buttons']} color="secondary" onClick={this.props.toggleRoomFormModal}>Ακύρωση</Button>
                 </Col>
                 
                 </Row>
