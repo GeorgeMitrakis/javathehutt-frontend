@@ -102,6 +102,8 @@ class FetchSearchResults extends React.Component {
                                                                     hasPool: this.props.searchFilters.facilities.pool,
                                                                     hasWifi: this.props.searchFilters.facilities.wifi,
                                                                     hasShauna: this.props.searchFilters.facilities.sauna,
+                                                                    startDate: this.props.searchInfo.fromDate,
+                                                                    endDate: this.props.searchInfo.toDate,
                                                                     cityName: this.props.searchInfo.destination,
                                                                     occupants: this.props.searchInfo.adults + this.props.searchInfo.children,
                                                                     pointX: 53.430957,
