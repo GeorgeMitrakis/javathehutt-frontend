@@ -16,6 +16,8 @@ import FetchSearchResults from './FetchSearchResults/FetchSearchResults';
 
 
 const searchFiltersDefaults = {
+    pointX: null,
+    pointY: null,
     minPrice: 0,
     maxPrice: 100,
     maxDist: 100,
@@ -388,9 +390,12 @@ class SearchResults extends React.Component {
         this.filtersToggle();
     }
 
-    mapClickedHandler = () => {
-        // alert("Map");
+    mapClickedHandler = (mapProps, map, e) => {
+        console.log("-----------------");
+        console.log("Stoixeia xarth:");
+        console.log(mapProps);
         this.mapToggle();
+        
 
     }
 

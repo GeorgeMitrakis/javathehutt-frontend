@@ -151,6 +151,8 @@ class ProviderRooms extends Component {
 
 	render(){
 
+		console.log("===> inside ProviderRooms Render - state:",  this.state)
+
 		return(
 				<>
 				<Container className={styles['results-container']}>
@@ -171,9 +173,9 @@ class ProviderRooms extends Component {
 
 
 				<Modal isOpen={this.state.roomFormModal} toggle={this.toggleRoomFormModal} className="modal-lg">
-					<ModalHeader toggle={this.toggleRoomFormModal}>Προσθήκη Δωματίου</ModalHeader>
+					<ModalHeader toggle={this.toggleRoomFormModal}> {this.state.room ? "Επεξεργασία Δωματίου "+this.state.room.roomName : "Προσθήκη Δωματίου"} </ModalHeader>
 					<ModalBody>
-						<RoomForm room={this.state.room} addRoomToggle = {this.addRoomToggle}/>
+						<RoomForm room={this.state.room} toggleRoomFormModal = {this.toggleRoomFormModal}/>
 					</ModalBody>
 				</Modal>
 
@@ -185,8 +187,8 @@ class ProviderRooms extends Component {
 						{this.state.room ? this.state.room.roomName : null} 
 					</ModalBody>
 					<ModalFooter>
-						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
 						<Button color="secondary" onClick={this.toggleDeleteRoomModal}>Ακύρωση</Button>
+						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
 					</ModalFooter>
 				</Modal>			
 			</>
