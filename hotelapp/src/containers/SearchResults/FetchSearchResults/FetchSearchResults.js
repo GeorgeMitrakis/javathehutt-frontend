@@ -87,27 +87,38 @@ class FetchSearchResults extends React.Component {
         {
             // alert("edw 3");
             return false;
-        }
-        
-    }
+		}
+	}
 
-    render() {
-        //alert("PALIII");
-        console.log("-> Fetch Search Results rendering");
-        console.log(this.props);
-        return (
-            <Get url="http://localhost:8765/app/api/search" params={{minPrice: this.props.searchFilters.minPrice,
-                                                                    maxPrice: this.props.searchFilters.maxPrice,
-                                                                    maxDist: this.props.searchFilters.maxDist,
-                                                                    hasPool: this.props.searchFilters.facilities.pool,
-                                                                    hasWifi: this.props.searchFilters.facilities.wifi,
-                                                                    hasShauna: this.props.searchFilters.facilities.sauna,
-                                                                    startDate: this.props.searchInfo.fromDate,
-                                                                    endDate: this.props.searchInfo.toDate,
-                                                                    cityName: this.props.searchInfo.destination,
-                                                                    occupants: this.props.searchInfo.adults + this.props.searchInfo.children,
-                                                                    pointX: 53.430957,
-                                                                    pointY: -2.960476}}>
+	render() {
+		//alert("PALIII");
+		console.log("-> Fetch Search Results rendering");
+		console.log(this.props);
+
+
+		let params ={};
+
+		params['minPrice'] = this.props.searchFilters.minPrice;
+		params['maxPrice'] = this.props.searchFilters.maxPrice;
+		params['maxDist'] = this.props.searchFilters.maxDist;
+
+		params['hasPool'] = this.props.searchFilters.facilities.hasPool;
+		params['hasWifi'] = this.props.searchFilters.facilities.hasWifi;
+		params['hasShauna'] = this.props.searchFilters.facilities.hasShauna;
+
+		params['people'] = Number(this.props.searchInfo.adults) + Number(this.props.searchInfo.children);
+
+		if(this.props.searchInfo.destination.trim() !== ""){
+			params['cityName'] = this.props.searchInfo.destination ;
+		}
+		else{
+			if(pointX != null && pointY != null){
+				params['pointX'] = 53.430957 ;
+				params['pointY'] = -2.960476 ;
+			}
+		}
+		return (
+				<Get url="http://localhost:8765/app/api/search" params={params}>
                 {(error, response, isLoading, makeRequest, axios) => {
                     if (error) {
                         const feedback = (

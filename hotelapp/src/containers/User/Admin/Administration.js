@@ -3,8 +3,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import classes from './Administration.module.css';
 
-import { Card, Row, Col } from 'reactstrap';
-
+import { Card, Row, Col, CardHeader } from 'reactstrap';
+import Header from '../../../components/UI/Header/Header';
 import produce from 'immer';
 import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem'
 import UserView from './UserView'
@@ -43,8 +43,8 @@ class Administration extends React.Component {
         return (
 			<div id={classes.content} className="h-100 col-lg-8 offset-lg-2">
 
-				<Row className="justify-content-center" > 
-					<h1 className="font-weight-bold">I AM THE SENATE!</h1>
+				<Row className="justify-content-center mt-5 mb-5" > 				
+					<Header>Διαχείριση Πλατφόρμας</Header>
 				</Row>
 			
 				<Row id={classes.tabs}>
