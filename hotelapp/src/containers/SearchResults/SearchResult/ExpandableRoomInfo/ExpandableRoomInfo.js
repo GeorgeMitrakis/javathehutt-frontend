@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
 import produce from 'immer';
+import FetchRoomPhotos from '../FetchRoomPhotos/FetchRoomPhotos';
 
 
 class ExpandableRoomInfo extends React.Component {
@@ -121,18 +122,11 @@ class ExpandableRoomInfo extends React.Component {
 
                         </Container>
                     </TabPane>
-                        <Col sm="12">
-                            <h4>Tab 1 paroxes</h4>
-                        </Col>
-                        </Row>
-                    </TabPane>
 
                     <TabPane tabId="photos">
-                         <Row>
-                        <Col sm="12">
-                            <h4>Tab 2 photos</h4>
-                        </Col>
-                        </Row>
+                        <FetchRoomPhotos
+                        
+                        />
                     </TabPane>
 
                     <TabPane tabId="critics">
