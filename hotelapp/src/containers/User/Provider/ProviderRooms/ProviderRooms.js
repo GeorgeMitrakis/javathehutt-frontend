@@ -70,7 +70,8 @@ class ProviderRooms extends Component {
 							console.log("Sto Myrooms to response2\n-------------------");
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
-								<Room 
+                                <Room 
+                                    renderProvFuncs={true}
 									room={room} 
 									editHandler={(event) => this.editRoomToggle(event, room)} 
 									deleteHandler = {(event) => this.deleteRoomToggle(event, room)}

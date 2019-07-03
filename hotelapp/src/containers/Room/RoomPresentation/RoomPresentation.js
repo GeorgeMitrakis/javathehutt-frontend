@@ -96,7 +96,7 @@ class RoomPresentation extends React.Component {
                                         {this.props.room.price} {" "} €
                                     </Header>
 
-                                    { !this.props.renderProvFunc ?
+                                    {  this.props.renderProvFuncs ?
                                         (   <div className="d-flex justify-content-end border">
                                                 <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2">
                                                     <i className="fas fa-pencil-alt"></i>           
