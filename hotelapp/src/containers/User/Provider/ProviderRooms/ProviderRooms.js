@@ -5,6 +5,10 @@ import { Spinner } from 'reactstrap';
 import produce from 'immer';
 import RoomForm from '../../../Room/RoomForm/RoomForm';
 import Room from '../../../Room/Room';
+import FetchProviderRooms from './FetchProviderRooms/FetchProviderRooms'
+import { createQueryParams} from '../../../../Utility/Utility';
+import axios from 'axios';
+
 
 import styles from './ProviderRooms.module.css'
 
@@ -14,123 +18,177 @@ class ProviderRooms extends Component {
 		super(props);
 		
 		this.state = {
-			roomAdded:false
+			roomFormModal: false,
+			deleteRoomModal: false,
+			
+			reRender: false,
+			room: null
 		};
 
-		// this.addRoomToggle = this.addRoomToggle.bind(this);
-		// this.deleteRoomToggle = this.deleteRoomToggle.bind(this);
-		// this.mapToggle = this.mapToggle.bind(this);
+		this.toggleDeleteRoomModal = this.toggleDeleteRoomModal.bind(this);
+		this.toggleRoomFormModal = this.toggleRoomFormModal.bind(this);
+
 	}
 
-	addRoomToggle = () => {
-		this.setState(prevState => ({
-            addRoomModal: !prevState.addRoomModal
-        }));
-	}
+	//--- edit-add room 
 
-	// handleCheckBoxChange = (label) => {
-    //     console.log("[FiltersTab.js]");
-    //     console.log("Allakse kati se checkbox sto " + label);
-    //     facilities[label] = !facilities[label];
-    //     console.log(facilities);
-    // }
-	
-	roomsChangedHandler = () => {		
+	toggleRoomFormModal() {
 		this.setState(
-			produce( draft => {
-				draft.roomAdded = !this.state.roomAdded;
-			})
-		)
+            produce(draft => {
+				draft.roomFormModal = !draft.roomFormModal;
+				draft.room = null;
+            })
+		);
+	}
+
+	editRoomModalHandler = (room) => {
+		alert(room.id)
+		this.setState(
+            produce(draft => {
+				draft.room = room;
+            })
+		);
+		this.toggleRoomFormModal();
+	}
+
+	//----delete
+
+	toggleDeleteRoomModal() {
+		this.setState(
+            produce(draft => {
+				draft.deleteRoomModal = !draft.deleteRoomModal;
+				draft.room = null;
+            })
+		);
+	}
+
+	deleteRoomModalHandler = (room) => {
+		alert(room.id)
+		this.setState(
+            produce(draft => {
+				draft.room = room;
+            })
+		);
+		this.toggleDeleteRoomModal();
+	}
+	
+
+	// resetState = () => {
+	// 	this.setState(
+    //         produce(draft => {
+    //             draft.performSearchText = !draft.performSearchText;
+    //         })
+    //     );
+	// }
+
+	// toggleReRender = (room, action) => {
+	// 	this.setState(
+    //         produce(draft => {
+	// 			draft.reRender = !draft.reRender;
+	// 			draft.room = room;
+    //         })
+    //     );
+	// }
+		
+	
+	
+
+	// addRoomToggle = () => {
+	// 	this.setState(prevState => ({
+    //         addRoomModal: !prevState.addRoomModal
+    //     }));
+	// }
+
+	
+	// roomsChangedHandler = () => {	
+			
+	// 	this.setState(
+	// 		produce( draft => {
+	// 			draft.roomAdded = !this.state.roomAdded;
+	// 		})
+	// 	)
+	// }
+
+	// toggleDeleteRoom() {
+    //     this.setState(
+    //         produce(draft => {
+    //             draft.deleteRoomModal = !draft.deleteRoomModal;
+    //         })
+    //     );
+    // }
+
+    deleteRoomHandler = () => {
+		if (!this.state.room)
+		{
+			alert("PAIXTHKE TROLIA OLO MALAKIES");
+		}
+
+		console.log("------------------");
+		console.log("Delete Handler --> id = "+ this.state.room.id);
+		console.log("------------------");
+		
+		let params = {};
+		params['roomId'] = this.state.room.id;
+		const queryParams = createQueryParams(params);
+		// this.props.history.push("/searchresults?" +  JSON.parse(localStorage.getItem('userInfo'))["id"]);
+		console.log(queryParams);
+		axios.delete("http://localhost:8765/app/api/rooms?"+queryParams)
+        .then((result) => {
+            console.log(result);
+            if (!result.data.success)
+            {
+				alert(result.data.message);
+            }
+            else
+            {        
+				alert("Επιτυχής Διαγραφή!");
+				this.toggleDeleteRoomModal();
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 	}
 
 	render(){
 
 		return(
-			<>
+				<>
 				<Container className={styles['results-container']}>
 					<Row className={styles['top-row']}>
 						<Col xs="8" sm="8" md="10" lg="10">
 							<h3 className={styles['title']}>My rooms</h3>
 						</Col>
 						<Col xs="4" sm="4" md="2" lg="2">
-							<Button className={styles['room-add-btn']} color="success" size="sm" onClick={this.addRoomToggle}>Προσθήκη Δωματίου</Button>
+							<Button className={styles['room-add-btn']} color="success" size="sm" onClick={this.toggleRoomFormModal}>Προσθήκη Δωματίου</Button>
 						</Col>
 					</Row>
 					
-					<Get url="http://localhost:8765/app/api/rooms" params={{
-						providerId: JSON.parse(localStorage.getItem('userInfo'))["id"]}}>
-					{(error, response, isLoading, makeRequest, axios) => {
-						if (error) {
-							return (<div>Something bad happened: {error.message} <button onClick={() => makeRequest({ params: { reload: true } })}>Retry</button></div>)
-						}
-						else if (isLoading) {
-							return (<Spinner className="ml-5" color="primary" style={{ width: '3rem', height: '3rem' }} />);
-						}
-						else if (response !== null) {
-							console.log("Sto Myrooms to response2\n-------------------");
-							console.log(response);
-							const myrooms = response.data.data.rooms.map(room =>
-                                <Room 
-                                    key={room.id}
-                                    renderProvFuncs={true}
-									room={room} 
-								/>
-								// <SearchResult 
-								// 	details={room} 
-								// 	editHandler={(event) => this.editRoomToggle(event, room)} 
-								// 	deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
-								// />
-							);
-							return myrooms;
-						}
-						return null;
-					}}
-					</Get>
-					
+					<FetchProviderRooms 
+						editRoomModalHandler={this.editRoomModalHandler}
+						deleteRoomModalHandler={this.deleteRoomModalHandler}
+					/>
 				</Container>
-				<Modal isOpen={this.state.addRoomModal} toggle={this.addRoomToggle} className="modal-lg">
-					<ModalHeader toggle={this.addRoomToggle}>Προσθήκη Δωματίου</ModalHeader>
+
+
+				<Modal isOpen={this.state.roomFormModal} toggle={this.toggleRoomFormModal} className="modal-lg">
+					<ModalHeader toggle={this.toggleRoomFormModal}>Προσθήκη Δωματίου</ModalHeader>
 					<ModalBody>
-						<RoomForm addRoomToggle = {() => this.addRoomToggle()}/>
-						{/* <Form onSubmit={this.submitForm}>
-							{formFields}
-							<FormGroup row>
-							<Label for="extras" sm={2}>Παροχές</Label>
-							<Container>
-								<Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('breakfast')}>
-									Πρωινό
-								</Checkbox>
-								<Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('wifi')}>
-									Wi-Fi
-								</Checkbox>
-								<Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('shauna')}>
-									Σάουνα
-								</Checkbox>
-								<Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('pool')}>
-									Πισίνα
-								</Checkbox>
-							</Container>
-							</FormGroup>
-							<FormGroup row>
-							<Label for="map" sm={2}>Τοποθεσία στο Χάρτη</Label>
-							<Col sm={10}>
-								{googleMap}
-								<Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
-									<div className={styles.box_border} style={{height: "75vh"}}>
-										{googleMap}
-									</div>
-								</Modal>
-								<FormText color="muted">
-									Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
-								</FormText>
-							</Col>
-							</FormGroup>
-						</Form> */}
+						<RoomForm room={this.state.room} addRoomToggle = {this.addRoomToggle}/>
 					</ModalBody>
-					{/* <ModalFooter>
-						<Button color="primary" onClick={this.submitForm}>Προσθήκη</Button>
-						<Button color="secondary" onClick={this.addRoomToggle}>Ακύρωση</Button>
-					</ModalFooter> */}
+				</Modal>
+
+
+				<Modal isOpen={this.state.deleteRoomModal} toggle={this.toggleDeleteRoomModal} className="modal-lg">
+					<ModalHeader toggle={this.toggleDeleteRoomModal}> Διαγραφή Δωματίου</ModalHeader>
+					<ModalBody>
+						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου: 
+						{this.state.room ? this.state.room.roomName : null} 
+					</ModalBody>
+					<ModalFooter>
+						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
+						<Button color="secondary" onClick={this.toggleDeleteRoomModal}>Ακύρωση</Button>
+					</ModalFooter>
 				</Modal>			
 			</>
 			

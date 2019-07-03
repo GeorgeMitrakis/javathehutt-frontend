@@ -98,11 +98,11 @@ class RoomPresentation extends React.Component {
 
                                     {  this.props.renderProvFuncs ?
                                         (   <div className="d-flex justify-content-end border">
-                                                <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2" onClick={() => this.props.editFunc()}>
+                                                <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2" onClick={this.props.editRoomModalHandler}>
                                                     <i className="fas fa-pencil-alt"></i>           
                                                 </Button>
 
-                                                <Button style={{color: "black"}} color="danger" className="font-weight-bold" onClick={() => this.props.deleteFunc()}>
+                                                <Button style={{color: "black"}} color="danger" className="font-weight-bold" onClick={this.props.deleteRoomModalHandler}>
                                                     <i className="fas fa-trash-alt" ></i>
                                                 </Button>
                                             </div>
