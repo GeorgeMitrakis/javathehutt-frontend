@@ -5,14 +5,14 @@ import { Spinner } from 'reactstrap';
 import produce from 'immer';
 import RoomForm from '../../../../Room/RoomForm/RoomForm';
 import RoomPresentation from '../../../../Room/RoomPresentation/RoomPresentation';
-
+import { getUserInfoField } from '../../../../../Utility/Utility';
 
 
 
 class FetchProviderRooms extends React.Component{
 
     shouldComponentUpdate (nextProps, nextState) {
-        if (nextProps.reRender !== this.props.reRender)
+        if (nextProps.reFetchRooms !== this.props.reFetchRooms)
         {
             return true;
         }
@@ -24,10 +24,14 @@ class FetchProviderRooms extends React.Component{
     }
 
     render(){
-        alert("RENDER fetch provider rooms");
+        // alert("RENDER fetch provider rooms");
+        const params={};
+        // params["providerId"] = JSON.parse(localStorage.getItem('userInfo'))["id"];
+        params["providerId"] = getUserInfoField("id");
+        params["toggleReFetch"] = this.props.reFetchRooms;
+
         return (
-            <Get url="http://localhost:8765/app/api/rooms" params={{
-                providerId: JSON.parse(localStorage.getItem('userInfo'))["id"]}}>
+            <Get url="http://localhost:8765/app/api/rooms" params={params}>
                 {(error, response, isLoading, makeRequest, axios) => {
                     if (error) {
                         const feedback = (
