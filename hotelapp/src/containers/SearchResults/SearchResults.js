@@ -46,18 +46,6 @@ const datesSearchInfo = ["fromDate", "toDate"];
 
 class SearchResults extends React.Component {
     
-    // state = {
-    //     priceRange: [0, 100],
-    //     areaRange: 100,
-    //     searchText: "",
-    //     facilities: {
-    //         breakfast: false,
-    //         wifi: false,
-    //         pool: false,
-    //         sauna: false
-    //     }
-    // }
-
     constructor(props) {
         super(props);
 
@@ -390,11 +378,17 @@ class SearchResults extends React.Component {
         this.filtersToggle();
     }
 
-    mapClickedHandler = (mapProps, map, e) => {
+    mapClickedHandler = (mapProps, map, e, searchFilters, searchInfo) => {
+        this.mapToggle();
         console.log("-----------------");
         console.log("Stoixeia xarth:");
         console.log(mapProps);
-        this.mapToggle();
+        // searchFilters = produce(searchFilters, draft => {
+        //     draft.pointX = mapProps.lat;
+        //     draft.pointY = mapProps.lng;
+        // });
+        // console.log("changed searchText", searchFilters);
+        // this.updateURL(searchFilters, searchInfo);
         
 
     }

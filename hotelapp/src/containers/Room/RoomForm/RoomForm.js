@@ -73,7 +73,7 @@ class RoomForm extends Component{
                     },
                     id: "roomName",
                     name: "Πόλη",
-                    value: this.props.room ? this.props.room.location['cityName'] : "",
+                    value: this.props.room ? this.props.room.location['cityname'] : "",
                     type: "text",
                     placeholder: "Athens",
                 },
@@ -173,7 +173,7 @@ class RoomForm extends Component{
 
 		let formData = {};
 		// formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
-		formData['roomId'] = this.state.deletedRoom['id'];
+		formData['roomId'] = this.props.room['id'];
 		for ( let key in this.state.formControls ) {
             formData[key] = this.state.formControls[key].value;
 		}
@@ -312,7 +312,11 @@ class RoomForm extends Component{
                 </Row>
                 <Row >
                 <Col xs="12" sm="12" md="12" lg="12" className={styles['btn-col']}>
-                    <Button className={styles['form-buttons']} color="primary" onClick={this.submitForm}>Προσθήκη</Button>
+                    {this.props.room ? 
+                        <Button className={styles['form-buttons']} color="primary" onClick={this.editRoomHandler}>Ολοκλήρωση Επεξεργασίας</Button> : 
+                        <Button className={styles['form-buttons']} color="primary" onClick={this.submitForm}>Προσθήκη</Button>
+                    }
+                    {/* <Button className={styles['form-buttons']} color="primary" onClick={this.submitForm}>Προσθήκη</Button> */}
                     <Button className={styles['form-buttons']} color="secondary" onClick={this.props.toggleRoomFormModal}>Ακύρωση</Button>
                 </Col>
                 
