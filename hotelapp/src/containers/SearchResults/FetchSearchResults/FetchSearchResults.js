@@ -103,7 +103,7 @@ class FetchSearchResults extends React.Component {
                                                                     hasWifi: this.props.searchFilters.facilities.wifi,
                                                                     hasShauna: this.props.searchFilters.facilities.sauna,
                                                                     cityName: this.props.searchInfo.destination,
-                                                                    people: this.props.searchInfo.adults,
+                                                                    occupants: this.props.searchInfo.adults + this.props.searchInfo.children,
                                                                     pointX: 53.430957,
                                                                     pointY: -2.960476}}>
                 {(error, response, isLoading, makeRequest, axios) => {
