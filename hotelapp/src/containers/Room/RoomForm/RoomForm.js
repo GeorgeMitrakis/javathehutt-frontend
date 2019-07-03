@@ -9,22 +9,22 @@ import qs from "querystring";
 import styles from './RoomForm.module.css'
 import { getUserInfo} from '../../../Utility/Utility';
 
-const facilities = {
-	breakfast:  false,
-	wifi: false,
-	pool: false,
-	shauna: false
-}
+// const facilities = {
+// 	breakfast:  false,
+// 	wifi: false,
+// 	pool: false,
+// 	shauna: false
+// }
 
-const coords = {
-	cordX: "",
-	cordY: ""
-}
+// const coords = {
+// 	cordX: "",
+// 	cordY: ""
+// }
 
 class RoomForm extends Component{
     constructor(props){
         super(props)
-
+        console.log("state" + this.props.room)
         this.state = {
             formControls: {
                 roomName: {
@@ -85,7 +85,17 @@ class RoomForm extends Component{
                     type: "textarea",
                     placeholder: "Προσθέστε κάτι σχετικό με το δωμάτιο",
                 }
-			},
+            },
+            coords: {
+                cordX: this.props.room ? this.props.room.location['cordX'] : "",
+                cordY: this.props.room ? this.props.room.location['cordY'] : ""
+            },
+            facilities: {
+                breakfast:  this.props.room ? this.props.room['brekafast'] : false,
+                wifi: this.props.room ? this.props.room['wifi'] : false,
+                pool: this.props.room ? this.props.room['pool'] : false,
+                shauna: this.props.room ? this.props.room['shauna'] : false
+            },
 			mapModal: false
         }
         
@@ -99,17 +109,37 @@ class RoomForm extends Component{
 	}
 	
 	mapClickedHandler = (mapProps, map, e) => {
+        console.log(this.state.coords);
+        this.setState(
+            produce(draft => {
+                draft.coords['cordX'] = mapProps.lat;
+                draft.coords['cordY'] = mapProps.lng;
+            })
+        );
 		this.mapToggle();
-		console.log(mapProps);
-		coords['cordX'] = mapProps.lat;
-		coords['cordY'] = mapProps.lng;
+        console.log(mapProps);
+        console.log("egine toggle");
+        console.log(this.state.coords);
+        // this.setState(
+        //     produce(draft => {
+        //         draft.coords['cordX'] = mapProps.lat;
+        //         draft.coords['cordY'] = mapProps.lng;
+        //     })
+        // );
+		// coords['cordX'] = mapProps.lat;
+		// coords['cordY'] = mapProps.lng;
 	}
 
 	handleCheckBoxChange = (label) => {
         console.log("[FiltersTab.js]");
         console.log("Allakse kati se checkbox sto " + label);
-        facilities[label] = !facilities[label];
-        console.log(facilities);
+        this.setState(
+            produce(draft => {
+                draft.facilities[label] = !draft.facilities[label];
+            })
+        );
+        // facilities[label] = !facilities[label];
+        console.log(this.state.facilities);
     }
 
     inputChangedHandler= (event, controlName) => {
@@ -130,19 +160,19 @@ class RoomForm extends Component{
             formData[key] = this.state.formControls[key].value;
 		}
 		
-		for(let key in facilities){
-			formData[key] = facilities[key];
+		for(let key in this.state.facilities){
+			formData[key] = this.state.facilities[key];
 		}
 
 		
-		for(let key in coords){
-			formData[key] = coords[key];
+		for(let key in this.state.coords){
+			formData[key] = this.state.coords[key];
 		}
 
 		console.log("---Form Data---");
 		console.log(formData);
-		console.log(facilities); 
-		console.log(coords);    
+		console.log(this.state.facilities); 
+		console.log(this.state.coords);    
         console.log("---------------");
 		
 		axios.post(
@@ -178,18 +208,18 @@ class RoomForm extends Component{
             formData[key] = this.state.formControls[key].value;
 		}
 		
-		for(let key in facilities){
-			formData[key] = facilities[key];
+		for(let key in this.state.facilities){
+			formData[key] = this.state.facilities[key];
 		}
 
-		for(let key in coords){
-			formData[key] = coords[key];
+		for(let key in this.state.coords){
+			formData[key] = this.state.coords[key];
 		}
 
 		console.log("---Form Data---");
 		console.log(formData);
-		console.log(facilities); 
-		console.log(coords);    
+		console.log(this.state.facilities); 
+		console.log(this.state.coords);    
 		console.log("---------------");
 		formData['breakfast'] = true
 		axios.put(
@@ -276,16 +306,16 @@ class RoomForm extends Component{
                 <FormGroup row>
                 <Label for="extras" sm={2}>Παροχές</Label>
                 <Container>
-                    <Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('breakfast')}>
+                    <Checkbox checked={this.state.facilities['breakfast']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('breakfast')}>
                         Πρωινό
                     </Checkbox>
-                    <Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('wifi')}>
+                    <Checkbox checked={this.state.facilities['wifi']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('wifi')}>
                         Wi-Fi
                     </Checkbox>
-                    <Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('shauna')}>
+                    <Checkbox checked={this.state.facilities['shauna']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('shauna')}>
                         Σάουνα
                     </Checkbox>
-                    <Checkbox  className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('pool')}>
+                    <Checkbox checked={this.state.facilities['pool']} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => this.handleCheckBoxChange('pool')}>
                         Πισίνα
                     </Checkbox>
                 </Container>
