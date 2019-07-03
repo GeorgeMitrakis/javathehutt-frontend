@@ -161,7 +161,8 @@ class RoomForm extends Component{
             else
             {        
 				alert("Επιτυχία!");
-				this.props.toggleRoomFormModal();//of Myrooms.js
+                this.props.toggleRoomFormModal();//of Myrooms.js
+                this.props.toggleReFetchRooms();
             }
         })
         .catch((err) => {
@@ -209,6 +210,7 @@ class RoomForm extends Component{
             {        
                 alert("Επιτυχής Κράτηση!");
                 this.props.toggleRoomFormModal();
+                this.props.toggleReFetchRooms();
             }
         })
         .catch((err) => {

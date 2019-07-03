@@ -20,7 +20,7 @@ class ProviderRooms extends Component {
 			roomFormModal: false,
 			deleteRoomModal: false,
 			
-			reRender: false,
+			reFetchRooms: false,
 			room: null
 		};
 
@@ -71,50 +71,13 @@ class ProviderRooms extends Component {
 		);
 	}
 	
-
-	// resetState = () => {
-	// 	this.setState(
-    //         produce(draft => {
-    //             draft.performSearchText = !draft.performSearchText;
-    //         })
-    //     );
-	// }
-
-	// toggleReRender = (room, action) => {
-	// 	this.setState(
-    //         produce(draft => {
-	// 			draft.reRender = !draft.reRender;
-	// 			draft.room = room;
-    //         })
-    //     );
-	// }
-		
-	
-	
-
-	// addRoomToggle = () => {
-	// 	this.setState(prevState => ({
-    //         addRoomModal: !prevState.addRoomModal
-    //     }));
-	// }
-
-	
-	// roomsChangedHandler = () => {	
-			
-	// 	this.setState(
-	// 		produce( draft => {
-	// 			draft.roomAdded = !this.state.roomAdded;
-	// 		})
-	// 	)
-	// }
-
-	// toggleDeleteRoom() {
-    //     this.setState(
-    //         produce(draft => {
-    //             draft.deleteRoomModal = !draft.deleteRoomModal;
-    //         })
-    //     );
-    // }
+	toggleReFetchRooms = () => {
+		this.setState(
+            produce(draft => {
+				draft.reFetchRooms = ! draft.reFetchRooms;
+            })
+        );
+	}
 
     deleteRoomHandler = () => {
 		if (!this.state.room)
@@ -141,7 +104,8 @@ class ProviderRooms extends Component {
             else
             {        
 				alert("Επιτυχής Διαγραφή!");
-				this.toggleDeleteRoomModal();
+                this.toggleDeleteRoomModal();
+                this.toggleReFetchRooms();
             }
         })
         .catch((err) => {
@@ -151,6 +115,7 @@ class ProviderRooms extends Component {
 
 	render(){
 
+        alert("RENDER PROVIDER ROOMS");
 		console.log("===> inside ProviderRooms Render - state:",  this.state)
 
 		return(
@@ -165,7 +130,8 @@ class ProviderRooms extends Component {
 						</Col>
 					</Row>
 					
-					<FetchProviderRooms 
+                    <FetchProviderRooms 
+                        reFetchRooms={this.state.reFetchRooms}
 						editRoomModalHandler={this.editRoomModalHandler}
 						deleteRoomModalHandler={this.deleteRoomModalHandler}
 					/>
@@ -175,7 +141,11 @@ class ProviderRooms extends Component {
 				<Modal isOpen={this.state.roomFormModal} toggle={this.toggleRoomFormModal} className="modal-lg">
 					<ModalHeader toggle={this.toggleRoomFormModal}> {this.state.room ? "Επεξεργασία Δωματίου "+this.state.room.roomName : "Προσθήκη Δωματίου"} </ModalHeader>
 					<ModalBody>
-						<RoomForm room={this.state.room} toggleRoomFormModal = {this.toggleRoomFormModal}/>
+                        <RoomForm 
+                            room={this.state.room} 
+                            toggleRoomFormModal = {this.toggleRoomFormModal}
+                            toggleReFetchRooms = {this.toggleReFetchRooms}
+                        />
 					</ModalBody>
 				</Modal>
 

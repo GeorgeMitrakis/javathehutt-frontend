@@ -24,6 +24,7 @@ class FetchProviderRooms extends React.Component{
     }
 
     render(){
+        alert("RENDER fetch provider rooms");
         return (
             <Get url="http://localhost:8765/app/api/rooms" params={{
                 providerId: JSON.parse(localStorage.getItem('userInfo'))["id"]}}>
