@@ -2,7 +2,7 @@ import React from 'react';
 import {  withRouter } from 'react-router-dom';
 
 import { Container, Col, Row, Button, Collapse } from 'reactstrap';
-
+import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
 
 import styles from './Result.module.css';
 // import RoomInfo from '../../containers/RoomInfo/Roominfo';
@@ -37,7 +37,7 @@ class SearchResult extends React.Component {
                 draft.collapse = !draft.collapse;
                 if (!draft.expanded)
                 {
-                    alert("EXPANEDED ");
+                    // alert("EXPANEDED ");
                     draft.expanded = true;
                 }
             })
@@ -143,17 +143,10 @@ class SearchResult extends React.Component {
 
                     <Row className="border">
                         <Collapse isOpen={this.state.collapse}>
-                            {   this.state.expanded ?
-                                (
-                                    <p>
-                                    Anim pariatur cliche reprehenderit,
-                                    enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                                    anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                    nesciunt sapiente ea proident.
-                                    </p>
-                                )
-                                : null
-                            }
+                            <ExpandableRoomInfo 
+                                room={this.props.room}
+                                renderFlag={this.state.expanded}
+                            />
                         </Collapse>
                     </Row>
                 </Container>
