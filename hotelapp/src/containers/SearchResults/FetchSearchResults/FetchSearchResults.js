@@ -88,16 +88,16 @@ class FetchSearchResults extends React.Component {
             // alert("edw 3");
             return false;
         }
-        
-    }
-
-    render() {
-        //alert("PALIII");
-        console.log("-> Fetch Search Results rendering");
-        console.log(this.props);
-        return (
-            <Get url="http://localhost:8765/app/api/search" params={{minPrice: this.props.searchFilters.minPrice,
+        pps.searchFilters.maxPriceharams{minPrice: this.props.search{minPrice: this.props.searchFilters.minPrice,
                                                                     maxPrice: this.props.searchFilters.maxPrice,
+                                                                    maxDist: this.props.searchFilters.maxDist,
+                                                                    hasPool: this.props.searchFilters.facilities.pool,
+                                                                    hasWifi: this.props.searchFilters.facilities.wifi,
+                                                                    hasShauna: this.props.searchFilters.facilities.sauna,
+                                                                    cityName: this.props.searchInfo.destination,
+                                                                    people: this.props.searchInfo.adults,
+                                                                    pointX: 53.430957,
+                                                                    pointY: -2.960476}
                                                                     maxDist: this.props.searchFilters.maxDist,
                                                                     hasPool: this.props.searchFilters.facilities.pool,
                                                                     hasWifi: this.props.searchFilters.facilities.wifi,
