@@ -1,10 +1,3 @@
-.reservation-btn{
-    float: right;
-}
-
-.price-par{
-    float: right;
-}
 
 .room{
     /* margin-bottom: 100px; */
@@ -16,14 +9,6 @@
     font-weight: normal;
 }
 
-.pills-style{
-    margin: 7px;
-    font-weight: normal;
-    /* text-align: left; */
-}
-.row-style{
-    /* text-align: left; */
-}
 
 .sub_header {
     font-size: calc(7px + 2vmin);

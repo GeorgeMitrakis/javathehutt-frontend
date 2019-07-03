@@ -1,11 +1,12 @@
 
 import React from 'react';
 import {  withRouter } from 'react-router-dom';
+import styles from './RoomPresentation.module.css';
 
 
 class RoomPresentation extends React.Component {
 
-    
+
 
     render() {
         
