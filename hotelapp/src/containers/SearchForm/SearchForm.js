@@ -120,7 +120,7 @@ class SearchForm extends React.Component {
     }
 
 	
-    submitForm (event)  {
+    submitForm = (event) => {
 		event.preventDefault();		
 		this.handleRedirect();
 		
