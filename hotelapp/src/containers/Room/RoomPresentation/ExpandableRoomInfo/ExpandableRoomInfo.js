@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
 import produce from 'immer';
-import FetchRoomPhotos from '../FetchRoomPhotos/FetchRoomPhotos';
+import FetchRoomPhotos from './FetchRoomPhotos/FetchRoomPhotos';
 
 
 class ExpandableRoomInfo extends React.Component {

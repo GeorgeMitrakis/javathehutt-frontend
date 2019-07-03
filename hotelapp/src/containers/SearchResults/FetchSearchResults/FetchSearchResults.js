@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import {  withRouter } from 'react-router-dom';
-import SearchResult from '../SearchResult/SearchResult';
+import RoomPresentation from '../../Room/RoomPresentation/RoomPresentation';
 import { Get } from 'react-axios';
 import { Row } from 'reactstrap';
 import { Spinner } from 'reactstrap';
@@ -131,7 +131,7 @@ class FetchSearchResults extends React.Component {
                         if ((response.data.data) && (response.data.data.results))
                         {
                             const rooms = response.data.data.results.map( room =>
-                                <SearchResult 
+                                <RoomPresentation 
                                     key={room.id}
                                     room={room}
                                     // bookRoomHandler={this.props.bookRoomHandler}

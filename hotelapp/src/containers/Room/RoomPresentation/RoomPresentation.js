@@ -2,6 +2,11 @@
 import React from 'react';
 import {  withRouter } from 'react-router-dom';
 import styles from './RoomPresentation.module.css';
+import { Container, Col, Row, Button, Collapse } from 'reactstrap';
+import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
+
+import Header from '../../../components/UI/Header/Header';
+import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 
 
 class RoomPresentation extends React.Component {
