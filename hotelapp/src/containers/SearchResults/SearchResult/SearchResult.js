@@ -1,13 +1,14 @@
 import React from 'react';
 import {  withRouter } from 'react-router-dom';
 
-import { Container, Col, Row, Button } from 'reactstrap';
+import { Container, Col, Row, Button, Collapse } from 'reactstrap';
 
 
 import styles from './Result.module.css';
 // import RoomInfo from '../../containers/RoomInfo/Roominfo';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
+import produce from 'immer';
 
 
 
@@ -15,16 +16,44 @@ class SearchResult extends React.Component {
 
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
+
+        this.toggleCollapse = this.toggleCollapse.bind(this);
+        this.toggleRoomForm = this.toggleRoomForm.bind(this);
+
         this.state = { 
+            expanded: false,
+            roomFormModal: false,
             collapse: false 
         };
     }
     
-    toggle() {
-        this.setState(state => (
-            { collapse: !state.collapse }
-        ));
+    toggleCollapse() {
+        // this.setState(state => (
+        //     { collapse: !state.collapse }
+        // ));
+
+        this.setState(
+            produce(draft => {
+                draft.collapse = !draft.collapse;
+                if (!draft.expanded)
+                {
+                    alert("EXPANEDED ");
+                    draft.expanded = true;
+                }
+            })
+        );
+    }
+
+    toggleRoomForm() {
+        // this.setState(state => (
+        //     { roomFormModal: !state.roomFormModal }
+        // ));
+
+        this.setState(
+            produce(draft => {
+                draft.roomFormModal = !draft.roomFormModal;
+            })
+        );
     }
 
     render() {
@@ -57,84 +86,77 @@ class SearchResult extends React.Component {
 
         return (
             <Row className={"mb-4 p-2 " + styles.room}>
-                <Col md="4" className="p-0 m-0 border">
-                    <img src={photo} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
-                </Col>
-
-                <Col md="8" className="p-0 m-0 pl-2 d-flex-column border">
-                    <div className="d-flex align-items-center">
-                        <Header classes="d-flex flex-shrink-1 border">
-                            {this.props.room.provider.providername}
-                        </Header>
-
-                        <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
-                            {stars}
-                        </div>
-                    </div>
-
-                    <div className={styles.sub_header}> 
-                        {this.props.room.roomName}
-                    </div>
-
-                    <div className="text-muted small"> 
-                        <i className="fas fa-map-marker-alt mr-2"></i>
-                        {this.props.room.location.cityname}
-                    </div>
-
-                    <div className="mt-2 mb-2">
-                        {this.props.room.description}
-                        {/* Lorem Ipsum is simply dummy text of the printing and typesetting  */}
-                        {/* industry. Lorem Ipsum has been the industry's standard dummy text eve */}
-                    </div>
-
-                    <div className="d-flex justify-content-between border">
-                        <div className="d-flex align-items-center border">
-                            <Button color="link" onClick={this.toggle} >
-                                Περισσότερα
-                            </Button>
-                        </div>
-
-                        <div className="d-flex">
-                            <Header classes="d-flex align-items-center mr-3">
-                                {this.props.room.price} {" "} €
-                            </Header>
-
-                            <div onClick={this.props.bookRoomHandler}>
-                                <SubmitBtn >
-                                    Κράτηση
-                                </SubmitBtn>
-                            </div>
-                        </div>
-                    </div>
-                
-                </Col>
-
-                {/* <Col md="1" className="p-0 m-0 d-flex flex-column border">
-                    <div className="">
-                        <p className="float-right">8.6 @</p>
-                    </div>
-
-                    <div className="">
-                        <p className="float-right">300 $</p>
-                    </div>
-                </Col> */}
-                    {/* <Row className={styles['row-style']}>
-                        <Col sm={6}>
-                            <p>Περιοχή: {props.room.location.cityname}</p>
+                <Container fluid className="border">
+                    <Row className="border">
+                        <Col md="4" className="p-0 m-0 border">
+                            <img src={photo} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>
-                        <Col sm={6}>
-                            <p className={styles['price-par']}>Τιμή: {props.room.price}</p>
+
+                        <Col md="8" className="p-0 m-0 pl-2 d-flex-column border">
+                            <div className="d-flex align-items-center">
+                                <Header classes="d-flex flex-shrink-1 border">
+                                    {this.props.room.provider.providername}
+                                </Header>
+
+                                <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
+                                    {stars}
+                                </div>
+                            </div>
+
+                            <div className={styles.sub_header}> 
+                                {this.props.room.roomName}
+                            </div>
+
+                            <div className="text-muted small"> 
+                                <i className="fas fa-map-marker-alt mr-2"></i>
+                                {this.props.room.location.cityname}
+                            </div>
+
+                            <div className="mt-2 mb-2">
+                                {this.props.room.description}
+                                {/* Lorem Ipsum is simply dummy text of the printing and typesetting  */}
+                                {/* industry. Lorem Ipsum has been the industry's standard dummy text eve */}
+                            </div>
+
+                            <div className="d-flex justify-content-between border">
+                                <div className="d-flex align-items-center border">
+                                    <Button color="link" onClick={this.toggleCollapse} >
+                                        {!this.state.collapse ? "Περισσότερα" : "Λιγότερα"}
+                                    </Button>
+                                </div>
+
+                                <div className="d-flex">
+                                    <Header classes="d-flex align-items-center mr-3">
+                                        {this.props.room.price} {" "} €
+                                    </Header>
+
+                                    <div onClick={this.props.bookRoomHandler}>
+                                        <SubmitBtn >
+                                            Κράτηση
+                                        </SubmitBtn>
+                                    </div>
+                                </div>
+                            </div>
+                        
                         </Col>
                     </Row>
-                    <Row className={styles['row-style']}>
-                        <Col sm={6}>
-                            <p>Διαθεσιμότητα: {props.room.capacity}</p>
-                        </Col>
-                        <Col sm={6}>
-                            <Button onClick={props.bookRoomHandler} className={styles['reservation-btn']} color="primary">Κράτηση</Button>
-                        </Col>
-                    </Row> */}
-                {/* <RoomInfo/> */}
+
+                    <Row className="border">
+                        <Collapse isOpen={this.state.collapse}>
+                            {   this.state.expanded ?
+                                (
+                                    <p>
+                                    Anim pariatur cliche reprehenderit,
+                                    enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                                    anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                    nesciunt sapiente ea proident.
+                                    </p>
+                                )
+                                : null
+                            }
+                        </Collapse>
+                    </Row>
+                </Container>
             </Row>
         );
     }
