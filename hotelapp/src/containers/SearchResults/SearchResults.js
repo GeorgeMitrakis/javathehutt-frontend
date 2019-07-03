@@ -304,7 +304,7 @@ class SearchResults extends React.Component {
         const res = checkValidity(searchFilters.searchText, rules);
         if (!res.report)
         {
-            alert("NOT VALID");
+            // alert("NOT VALID");
             return;
         }
 

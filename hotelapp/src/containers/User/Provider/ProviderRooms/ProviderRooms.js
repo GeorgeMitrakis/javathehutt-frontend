@@ -4,7 +4,6 @@ import { Get, Post } from 'react-axios';
 import { Spinner } from 'reactstrap';
 import produce from 'immer';
 import RoomForm from '../../../Room/RoomForm/RoomForm';
-import Room from '../../../Room/Room';
 import FetchProviderRooms from './FetchProviderRooms/FetchProviderRooms'
 import { createQueryParams} from '../../../../Utility/Utility';
 import axios from 'axios';
@@ -42,13 +41,13 @@ class ProviderRooms extends Component {
 	}
 
 	editRoomModalHandler = (room) => {
-		alert(room.id)
+        alert(room.id)
+        this.toggleRoomFormModal();
 		this.setState(
             produce(draft => {
 				draft.room = room;
             })
 		);
-		this.toggleRoomFormModal();
 	}
 
 	//----delete
@@ -63,13 +62,13 @@ class ProviderRooms extends Component {
 	}
 
 	deleteRoomModalHandler = (room) => {
-		alert(room.id)
+        alert(room.id)
+        this.toggleDeleteRoomModal();
 		this.setState(
             produce(draft => {
 				draft.room = room;
             })
 		);
-		this.toggleDeleteRoomModal();
 	}
 	
 
