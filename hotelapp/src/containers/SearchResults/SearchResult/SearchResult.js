@@ -107,16 +107,30 @@ class SearchResult extends React.Component {
                                     </Button>
                                 </div>
 
-                                <div className="d-flex">
+                                <div className="d-flex p-0 m-0">
                                     <Header classes="d-flex align-items-center mr-3">
                                         {this.props.room.price} {" "} €
                                     </Header>
 
-                                    <div onClick={this.props.bookRoomHandler}>
-                                        <SubmitBtn >
-                                            Κράτηση
-                                        </SubmitBtn>
-                                    </div>
+                                    { !this.props.renderProvFunc ?
+                                        (   <div className="d-flex justify-content-end border">
+                                                <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2">
+                                                    <i className="fas fa-pencil-alt"></i>           
+                                                </Button>
+
+                                                <Button style={{color: "black"}} color="danger" className="font-weight-bold">
+                                                    <i className="fas fa-trash-alt"></i>
+                                                </Button>
+                                            </div>
+                                        ) : 
+                                        (
+                                            <div onClick={this.props.bookRoomHandler}>
+                                                <SubmitBtn >
+                                                    Κράτηση
+                                                </SubmitBtn>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         
