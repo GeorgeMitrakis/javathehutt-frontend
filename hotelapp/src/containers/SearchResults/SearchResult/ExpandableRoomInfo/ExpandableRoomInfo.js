@@ -81,9 +81,46 @@ class ExpandableRoomInfo extends React.Component {
                     </NavItem>
                 </Nav>
                 
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId="facilities">
-                        <Row>
+                <TabContent className="border p-2 " activeTab={this.state.activeTab}>
+                    <TabPane className="border" tabId="facilities">
+                        <Container className="border">
+                            {this.props.room.breakfast ?
+                                (<Row className="border pl-3 align-items-center">
+                                    <i className="fas fa-coffee mr-3"></i> Πρωινό
+                                </Row>
+                                ) : null
+                            }
+
+                            {this.props.room.shauna ?
+                                (<Row className="border pl-3 align-items-center">
+                                    <i className="fas fa-hot-tub mr-3"></i> Σάουνα
+                                </Row>
+                                ) : null
+                            }
+
+                            {this.props.room.pool ?
+                                (<Row className="border pl-3 align-items-center">
+                                    <i className="fas fa-swimming-pool mr-3"></i> Πισίνα
+                                </Row>
+                                ) : null
+                            }
+
+                            {this.props.room.wifi ?
+                                (<Row className="border pl-3 align-items-center">
+                                    <i className="fas fa-wifi mr-3"></i> WiFi
+                                </Row>
+                                ) : null
+                            }
+
+                            {!this.props.room.wifi && !this.props.room.shauna && !this.props.room.breakfast && !this.props.room.pool ?
+                                (<Row className="border pl-3 align-items-center text-muted font-italic">
+                                    Δεν είναι διαθέσιμες ειδικές παροχές
+                                </Row>
+                                ) : null
+                            }
+
+                        </Container>
+                    </TabPane>
                         <Col sm="12">
                             <h4>Tab 1 paroxes</h4>
                         </Col>
