@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
-import { UncontrolledCarousel, Container, Col, Row, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-    DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+import { Container, Col,  Modal, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
-    import GoogleMapReact from 'google-map-react';
-    import { Checkbox } from 'pretty-checkbox-react';
-    import produce from 'immer';
-    import qs from "querystring";
-    import styles from './Myrooms.module.css'
-    import { createQueryParams} from '../../../../Utility/Utility';
-    import { Get, Post } from 'react-axios';
+import GoogleMapReact from 'google-map-react';
+import { Checkbox } from 'pretty-checkbox-react';
+import axios from 'axios';
+import produce from 'immer';
+import qs from "querystring";
+import styles from './Myrooms.module.css'
+import { getUserInfo} from '../../../../Utility/Utility';
+
+const facilities = {
+	breakfast:  false,
+	wifi: false,
+	pool: false,
+	shauna: false
+}
+
+const coords = {
+	cordX: "",
+	cordY: ""
+}
 
 class RoomForms extends Component{
     constructor(props){
@@ -75,9 +85,10 @@ class RoomForms extends Component{
                     type: "textarea",
                     placeholder: "Προσθέστε κάτι σχετικό με το δωμάτιο",
                 }
-            }
+			},
+			mapModal: false
         }
-        mapModal: false,
+        
         this.mapToggle = this.mapToggle.bind(this)
     }
    
@@ -149,7 +160,8 @@ class RoomForms extends Component{
             }
             else
             {        
-                alert("Επιτυχής Κράτηση!");
+				alert("Επιτυχία!");
+				this.props.roomsChangedHandler();//of Myrooms.js
                 this.props.history.replace("/");
             }
         })
@@ -160,35 +172,38 @@ class RoomForms extends Component{
 	
     
     render(){
-
+		if(!getUserInfo('userInfo').role ==="provider"){
+			return(
+				<div>How tf did u get here?!??</div>
+			);
+		}
         const formElementsArray = [];
         for ( let key in this.state.formControls ) {
 			let obj = this.state.formControls[key]
-			if(this.state.deletedRoom){
-				if(key === 'cityName'){
-					obj['value'] = this.state.deletedRoom.location['cityname']
-				}
-				else{
-					obj['value'] = this.state.deletedRoom[key]
-				}
-			}
+			// if(this.state.deletedRoom){
+			// 	if(key === 'cityName'){
+			// 		obj['value'] = this.state.deletedRoom.location['cityname']
+			// 	}
+			// 	else{
+			// 		obj['value'] = this.state.deletedRoom[key]
+			// 	}
+			// }
             formElementsArray.push( {
                 id: key,
                 config: obj
             });
         }
         let formFields = formElementsArray.map( formElement => (
-			<FormGroup row>
+			<FormGroup row	key={formElement.id}>
 			<Label for={formElement.config.id} sm={2}>{formElement.config.name}</Label>
 			<Col sm={10}>
 				<Input 
-				key={formElement.id}
-                id={formElement.config.id}
-                name={formElement.config.name}
-				onChange={( event ) => this.inputChangedHandler( event, formElement.id )}
-                type={formElement.config.type}
-				value={formElement.config.value}
-                placeholder={formElement.config.placeholder}
+					id={formElement.config.id}
+					name={formElement.config.name}
+					onChange={( event ) => this.inputChangedHandler( event, formElement.id )}
+					type={formElement.config.type}
+					value={formElement.config.value}
+					placeholder={formElement.config.placeholder}
                 />
 			</Col>
 			</FormGroup>
@@ -231,7 +246,10 @@ class RoomForms extends Component{
                 <Label for="map" sm={2}>Τοποθεσία στο Χάρτη</Label>
                 <Col sm={10}>
                     {googleMap}
-                    <Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
+					<Modal className="modal-lg" centered fade 
+						isOpen={this.state.mapModal} 
+						toggle={this.mapToggle} 
+					>
                         <div className={styles.box_border} style={{height: "75vh"}}>
                             {googleMap}
                         </div>
@@ -245,5 +263,7 @@ class RoomForms extends Component{
         );
     }
 }
+
+
 
 export default RoomForms;
