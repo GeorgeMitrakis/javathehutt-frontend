@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col,  Modal, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Container, Col,  Modal, Form, FormGroup, Label, Input, FormText, Row, Button } from 'reactstrap';
 
 import GoogleMapReact from 'google-map-react';
 import { Checkbox } from 'pretty-checkbox-react';
@@ -259,6 +259,16 @@ class RoomForm extends Component{
                     </FormText>
                 </Col>
                 </FormGroup>
+                <Row className={styles['footer-row']}>
+                    <hr className={styles['footer-line']} />
+                </Row>
+                <Row >
+                <Col xs="12" sm="12" md="12" lg="12" className={styles['btn-col']}>
+                    <Button className={styles['form-buttons']} color="primary" onClick={this.submitForm}>Προσθήκη</Button>
+                    <Button className={styles['form-buttons']} color="secondary" onClick={this.props.addRoomToggle}>Ακύρωση</Button>
+                </Col>
+                
+                </Row>
             </Form>
         );
     }
