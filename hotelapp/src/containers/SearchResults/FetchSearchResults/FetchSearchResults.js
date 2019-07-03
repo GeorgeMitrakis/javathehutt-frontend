@@ -112,7 +112,7 @@ class FetchSearchResults extends React.Component {
 			params['cityName'] = this.props.searchInfo.destination ;
 		}
 		else{
-			if(pointX != null && pointY != null){
+			if(this.props.searchFilters.pointX != null && this.props.searchFilters.pointY != null){
 				params['pointX'] = 53.430957 ;
 				params['pointY'] = -2.960476 ;
 			}
