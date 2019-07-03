@@ -100,8 +100,7 @@ class FetchSearchResults extends React.Component {
 
 		params['minPrice'] = this.props.searchFilters.minPrice;
 		params['maxPrice'] = this.props.searchFilters.maxPrice;
-		params['maxDist'] = this.props.searchFilters.maxDist;
-
+		
 		params['hasPool'] = this.props.searchFilters.facilities.pool;
 		params['hasWifi'] = this.props.searchFilters.facilities.wifi;
         params['hasShauna'] = this.props.searchFilters.facilities.sauna;
@@ -116,6 +115,7 @@ class FetchSearchResults extends React.Component {
 			params['cityName'] = this.props.searchInfo.destination ;
 		}
 		else{
+			params['maxDist'] = this.props.searchFilters.maxDist;
 			if(this.props.searchFilters.pointX != null && this.props.searchFilters.pointY != null){
 				params['pointX'] = 53.430957 ;
 				params['pointY'] = -2.960476 ;
