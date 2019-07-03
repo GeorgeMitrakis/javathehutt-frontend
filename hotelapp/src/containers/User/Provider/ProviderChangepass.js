@@ -3,7 +3,8 @@ import { getUserInfo, checkValidity } from '../../../Utility/Utility';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import MyInput from '../../../components/UI/MyInput/MyInput'
-import { Card, CardHeader, CardBody, Container, Form, FormGroup, Input, Row, Col } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Form,  
+	 Row, Col, Alert } from 'reactstrap';
 import classes from './Provider.module.css';
 import qs from 'querystring';
 import produce from 'immer';
@@ -40,8 +41,15 @@ class VisitorPassword extends Component {
 				},
                 feedback: null,
                 validity: ''
+			},
+			alert:{
+				color:'',
+				visible: false,
+				message:''
 			}
 		}
+
+		this.onDismiss = this.onDismiss.bind(this);
 	}
 
 	submitHandler = (event) => {
@@ -92,8 +100,8 @@ class VisitorPassword extends Component {
 
 		let params = {
 			'userId' : getUserInfo('userInfo').id,
-			'oldpassword' : this.oldpassword.current.value,
-			'newpassword' : this.newpassword.current.value
+			'oldPassword' : this.oldpassword.current.value,
+			'newPassword' : this.newpassword.current.value
 		}
 
 		axios.put(
@@ -107,11 +115,15 @@ class VisitorPassword extends Component {
 			console.log(result);
 			if(result.data.success){
 				console.log(result.data);
+				window.scrollTo(0, 0);
 				this.setState(
 					produce( draft => {
-						draft.oldpassword.feedback = "Ο κωδικός σας άλλαξε με επιτυχία";
-						draft.oldpassword.validity = "is-valid";
+						draft.alert.color="success";
+						draft.alert.message = "Ο Κωδικός Πρόσβασης άλλαξε με επιτυχία!";
+						draft.alert.visible = true;
 						
+						draft.oldpassword.feedback = null;
+						draft.oldpassword.validity = '';
 					})
 				)
 			}
@@ -119,7 +131,11 @@ class VisitorPassword extends Component {
 				console.log(result.data.message);
 				this.setState(
 					produce( draft => {
-						draft.oldpassword.feedback = "Λάθος κωδικός";
+						draft.alert.color="danger";
+						draft.alert.message = "Ο Κωδικός Πρόσβασης είναι λάθος";
+						draft.alert.visible = true;
+
+						//draft.oldpassword.feedback = "Λάθος κωδικός";
 						draft.oldpassword.validity = "is-invalid";
 						
 					})
@@ -176,11 +192,24 @@ class VisitorPassword extends Component {
 		}
 	}
 
+	onDismiss = () => {
+		this.setState(
+			produce( draft => {
+				draft.alert.visible = false;
+			})
+		)
+	}
+
 	render(){
 		return(
 			<Container fluid id={classes.content} >
 				<Row className="justify-content-center">
-					<Col className="align-self-center p-0" xs="auto" lg="4" xl="3">
+					<Alert color={this.state.alert.color} isOpen={this.state.alert.visible} toggle={() => (this.onDismiss())}>
+						{this.state.alert.message}
+					</Alert>
+				</Row>
+				<Row className="justify-content-center">
+					<Col className="align-self-center p-0" xs="auto" lg="4" xl="3">						
 						<Card>
 							<CardHeader>
 								<Header>
