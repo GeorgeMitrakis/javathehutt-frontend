@@ -277,7 +277,7 @@ class SearchResults extends React.Component {
 	}
 	
 	handleEnterPress = (key, searchFilters, searchInfo) => {
-		if(key==13){//enter pressed
+		if(key===13){//enter pressed
 			console.log("enter pressed", searchFilters);
 			this.performSearchText(null, searchFilters, searchInfo);
 		}		

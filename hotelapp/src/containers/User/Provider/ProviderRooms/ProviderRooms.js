@@ -41,7 +41,7 @@ class ProviderRooms extends Component {
 	}
 
 	editRoomModalHandler = (room) => {
-        alert(room.id)
+        // alert(room.id)
         this.toggleRoomFormModal();
 		this.setState(
             produce(draft => {
@@ -62,7 +62,7 @@ class ProviderRooms extends Component {
 	}
 
 	deleteRoomModalHandler = (room) => {
-        alert(room.id)
+        // alert(room.id)
         this.toggleDeleteRoomModal();
 		this.setState(
             produce(draft => {

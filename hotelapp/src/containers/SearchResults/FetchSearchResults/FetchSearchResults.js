@@ -91,7 +91,7 @@ class FetchSearchResults extends React.Component {
 	}
 
 	render() {
-		//alert("PALIII");
+		// alert("PALIII");
 		console.log("-> Fetch Search Results rendering");
 		console.log(this.props);
 
@@ -100,18 +100,22 @@ class FetchSearchResults extends React.Component {
 
 		params['minPrice'] = this.props.searchFilters.minPrice;
 		params['maxPrice'] = this.props.searchFilters.maxPrice;
-		params['maxDist'] = this.props.searchFilters.maxDist;
+		
+		params['hasPool'] = this.props.searchFilters.facilities.pool;
+		params['hasWifi'] = this.props.searchFilters.facilities.wifi;
+        params['hasShauna'] = this.props.searchFilters.facilities.sauna;
+        params['hasBreakfast'] = this.props.searchFilters.facilities.breakfast;
 
-		params['hasPool'] = this.props.searchFilters.facilities.hasPool;
-		params['hasWifi'] = this.props.searchFilters.facilities.hasWifi;
-		params['hasShauna'] = this.props.searchFilters.facilities.hasShauna;
-
-		params['people'] = Number(this.props.searchInfo.adults) + Number(this.props.searchInfo.children);
+        params['startDate'] = this.props.searchInfo.fromDate;
+        params['endDate'] = this.props.searchInfo.toDate;
+                                                                    
+		params['occupants'] = this.props.searchInfo.adults + this.props.searchInfo.children;
 
 		if(this.props.searchInfo.destination.trim() !== ""){
 			params['cityName'] = this.props.searchInfo.destination ;
 		}
 		else{
+			params['maxDist'] = this.props.searchFilters.maxDist;
 			if(this.props.searchFilters.pointX != null && this.props.searchFilters.pointY != null){
 				params['pointX'] = 53.430957 ;
 				params['pointY'] = -2.960476 ;
