@@ -3,7 +3,7 @@ import { getUserInfo, checkValidity } from '../../../Utility/Utility';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import MyInput from '../../../components/UI/MyInput/MyInput'
-import { Card, CardHeader, CardBody, Container, Form, Row, Col } from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Form, Row, Col, Alert } from 'reactstrap';
 import classes from './Visitor.module.css';
 import qs from 'querystring';
 import produce from 'immer';
@@ -46,8 +46,14 @@ class VisitorProfile extends Component {
 				feedback: null,
 				validity: ''
 
+			},
+			alert:{
+				visible: false,
+				message:''
 			}
 		};
+
+		this.onDismiss = this.onDismiss.bind(this);
 	}
 
 	inputChangedHandler = (field, value) => {
@@ -146,6 +152,9 @@ class VisitorProfile extends Component {
 						draft.email.value = u.email;					
 						draft.name.value = u.name;					
 						draft.surname.value = u.surname;
+
+						draft.alert.message = "Τα στοιχεία σας άλλαξαν με επιτυχία!";
+						draft.alert.visible = true;
 				}));  
 			}
 			else{
@@ -164,9 +173,24 @@ class VisitorProfile extends Component {
 			console.log(err+".err()"); 
 		})
 	}
+
+	onDismiss = () => {
+		this.setState(
+			produce( draft => {
+				draft.alert.visible = false;
+			})
+		)
+	}
+
+
 	render(){
 		return(
 			<Container fluid id={classes.content} >
+				<Row className="justify-content-center">
+					<Alert color="success" isOpen={this.state.alert.visible} toggle={() => (this.onDismiss())}>
+						{this.state.alert.message}
+					</Alert>
+				</Row>
 				<Row className="justify-content-center">
 					<Col className="align-self-center p-0" xs="auto" lg="4" xl="3">
 						<Card>
