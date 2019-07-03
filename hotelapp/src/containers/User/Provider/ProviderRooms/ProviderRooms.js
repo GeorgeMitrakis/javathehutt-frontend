@@ -7,7 +7,7 @@ import RoomForm from '../../../Room/RoomForm/RoomForm';
 import FetchProviderRooms from './FetchProviderRooms/FetchProviderRooms'
 import { createQueryParams} from '../../../../Utility/Utility';
 import axios from 'axios';
-
+import Header from '../../../../components/UI/Header/Header'
 
 import styles from './ProviderRooms.module.css'
 
@@ -115,7 +115,7 @@ class ProviderRooms extends Component {
 
 	render(){
 
-        alert("RENDER PROVIDER ROOMS");
+        // alert("RENDER PROVIDER ROOMS");
 		console.log("===> inside ProviderRooms Render - state:",  this.state)
 
 		return(
@@ -139,7 +139,11 @@ class ProviderRooms extends Component {
 
 
 				<Modal isOpen={this.state.roomFormModal} toggle={this.toggleRoomFormModal} className="modal-lg">
-					<ModalHeader toggle={this.toggleRoomFormModal}> {this.state.room ? "Επεξεργασία Δωματίου "+this.state.room.roomName : "Προσθήκη Δωματίου"} </ModalHeader>
+					<ModalHeader toggle={this.toggleRoomFormModal}>
+						<Header> 
+							{this.state.room ? "Επεξεργασία Δωματίου "+this.state.room.roomName : "Προσθήκη Δωματίου"}
+						</Header>
+					</ModalHeader>
 					<ModalBody>
                         <RoomForm 
                             room={this.state.room} 

@@ -9,6 +9,7 @@ import qs from "querystring";
 import styles from './RoomForm.module.css'
 import { getUserInfo} from '../../../Utility/Utility';
 
+
 // const facilities = {
 // 	breakfast:  false,
 // 	wifi: false,
@@ -91,7 +92,7 @@ class RoomForm extends Component{
                 cordY: this.props.room ? this.props.room.location['cordY'] : ""
             },
             facilities: {
-                breakfast:  this.props.room ? this.props.room['brekafast'] : false,
+                breakfast:  this.props.room ? this.props.room['breakfast'] : false,
                 wifi: this.props.room ? this.props.room['wifi'] : false,
                 pool: this.props.room ? this.props.room['pool'] : false,
                 shauna: this.props.room ? this.props.room['shauna'] : false
