@@ -29,3 +29,11 @@
     font-size: calc(7px + 2vmin);
     color: rgb(40, 30, 182);
 }
+
+.expand_btn {
+    color: rgb(48, 34, 238);
+}
+
+.expand_btn:hover {
+    color: rgb(40, 30, 182);
+}

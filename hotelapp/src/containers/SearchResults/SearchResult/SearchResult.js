@@ -85,9 +85,9 @@ class SearchResult extends React.Component {
         }
 
         return (
-            <Row className={"mb-4 p-2 " + styles.room}>
+            <Row className={"mb-4 " + styles.room}>
                 <Container fluid className="border">
-                    <Row className="border">
+                    <Row className="border p-2">
                         <Col md="4" className="p-0 m-0 border">
                             <img src={photo} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>
@@ -120,7 +120,7 @@ class SearchResult extends React.Component {
 
                             <div className="d-flex justify-content-between border">
                                 <div className="d-flex align-items-center border">
-                                    <Button color="link" onClick={this.toggleCollapse} >
+                                    <Button className="p-0 m-0" color="link" onClick={this.toggleCollapse} >
                                         {!this.state.collapse ? "Περισσότερα" : "Λιγότερα"}
                                     </Button>
                                 </div>
@@ -142,7 +142,7 @@ class SearchResult extends React.Component {
                     </Row>
 
                     <Row className="border">
-                        <Collapse isOpen={this.state.collapse}>
+                        <Collapse className="w-100" isOpen={this.state.collapse}>
                             <ExpandableRoomInfo 
                                 room={this.props.room}
                                 renderFlag={this.state.expanded}
