@@ -4,6 +4,7 @@ import { Get, Post } from 'react-axios';
 import { Spinner } from 'reactstrap';
 import produce from 'immer';
 import RoomForm from '../../../Room/RoomForm/RoomForm';
+import Room from '../../../Room/Room';
 
 import styles from './ProviderRooms.module.css'
 
@@ -68,19 +69,19 @@ class ProviderRooms extends Component {
 						else if (response !== null) {
 							console.log("Sto Myrooms to response2\n-------------------");
 							console.log(response);
-							// const myrooms = response.data.data.rooms.map(room =>
-							// 	<ProviderRooms 
-							// 		details={room} 
-							// 		editHandler={(event) => this.editRoomToggle(event, room)} 
-							// 		deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
-							// 	/>
-							// 	// <SearchResult 
-							// 	// 	details={room} 
-							// 	// 	editHandler={(event) => this.editRoomToggle(event, room)} 
-							// 	// 	deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
-							// 	// />
-							// );
-							// return myrooms;
+							const myrooms = response.data.data.rooms.map(room =>
+								<Room 
+									details={room} 
+									editHandler={(event) => this.editRoomToggle(event, room)} 
+									deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
+								/>
+								// <SearchResult 
+								// 	details={room} 
+								// 	editHandler={(event) => this.editRoomToggle(event, room)} 
+								// 	deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
+								// />
+							);
+							return myrooms;
 						}
 						return null;
 					}}

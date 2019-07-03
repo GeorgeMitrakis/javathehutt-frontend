@@ -7,11 +7,38 @@ import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
 
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
+import produce from 'immer';
 
 
 class RoomPresentation extends React.Component {
 
+    constructor(props) {
+        super(props);
 
+        this.toggleCollapse = this.toggleCollapse.bind(this);
+
+        this.state = { 
+            expanded: false,
+            collapse: false 
+        };
+    }
+    
+    toggleCollapse() {
+        // this.setState(state => (
+        //     { collapse: !state.collapse }
+        // ));
+
+        this.setState(
+            produce(draft => {
+                draft.collapse = !draft.collapse;
+                if (!draft.expanded)
+                {
+                    // alert("EXPANEDED ");
+                    draft.expanded = true;
+                }
+            })
+        );
+    }
 
     render() {
         
