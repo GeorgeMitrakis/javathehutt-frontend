@@ -37,7 +37,7 @@ const filtersTab = (props) => {
                 />
             </Container>
             <Container className={styles['price_range']}>
-                <p>Εύρος Περοχής Αναζήτησης (km)</p>
+                <p>Εύρος Περιοχής Αναζήτησης (km)</p>
                 <AreaRange 
                     searchFilters = {props.searchFilters}
                     searchInfo = {props.searchInfo}
