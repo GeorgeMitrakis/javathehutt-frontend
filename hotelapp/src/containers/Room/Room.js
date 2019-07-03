@@ -25,7 +25,7 @@ class Room extends React.Component {
         // this.setState(state => (
         //     { roomFormModal: !state.roomFormModal }
         // ));
-
+        alert("edit");
         this.setState(
             produce(draft => {
                 draft.roomFormModal = !draft.roomFormModal;
@@ -34,6 +34,7 @@ class Room extends React.Component {
     }
 
     toggleDeleteRoom() {
+        alert("delete");
         this.setState(
             produce(draft => {
                 draft.deleteRoomModal = !draft.deleteRoomModal;
@@ -46,6 +47,8 @@ class Room extends React.Component {
             <RoomPresentation
                 renderProvFuncs={this.props.renderProvFuncs}
                 room={this.props.room}
+                deleteFunc = {this.toggleDeleteRoom}
+                editFunc = {this.toggleRoomForm}
             />
         );
         

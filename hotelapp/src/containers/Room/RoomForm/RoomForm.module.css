@@ -22,3 +22,16 @@
     box-shadow: 1px 1px 8px 2px #ccc;
     border-radius: 5px;
 }
+
+.footer-row{
+    margin-top: 25px;
+}
+
+.footer-line{
+    width: 100%
+}
+
+.form-buttons{
+    float: right;
+    margin-left: 5px;
+}
