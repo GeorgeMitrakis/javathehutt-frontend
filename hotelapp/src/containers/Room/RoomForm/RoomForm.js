@@ -6,8 +6,8 @@ import { Checkbox } from 'pretty-checkbox-react';
 import axios from 'axios';
 import produce from 'immer';
 import qs from "querystring";
-import styles from './Myrooms.module.css'
-import { getUserInfo} from '../../../../Utility/Utility';
+import styles from './RoomForm.module.css'
+import { getUserInfo} from '../../../Utility/Utility';
 
 const facilities = {
 	breakfast:  false,
@@ -21,7 +21,7 @@ const coords = {
 	cordY: ""
 }
 
-class RoomForms extends Component{
+class RoomForm extends Component{
     constructor(props){
         super(props)
 
@@ -266,4 +266,4 @@ class RoomForms extends Component{
 
 
 
-export default RoomForms;
+export default RoomForm;

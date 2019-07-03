@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import { Container, Col, Row, Button,  Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import { Get, Post } from 'react-axios';
 import { Spinner } from 'reactstrap';
-import ProviderRooms from './ProviderRooms';
 import produce from 'immer';
-import RoomForms from './RoomForms';
+import RoomForm from '../../../Room/RoomForm/RoomForm';
 
-import styles from './Myrooms.module.css'
+import styles from './ProviderRooms.module.css'
 
 
-class Myrooms extends Component {
+class ProviderRooms extends Component {
 	constructor(props){
 		super(props);
 		
@@ -69,19 +68,19 @@ class Myrooms extends Component {
 						else if (response !== null) {
 							console.log("Sto Myrooms to response2\n-------------------");
 							console.log(response);
-							const myrooms = response.data.data.rooms.map(room =>
-								<ProviderRooms 
-									details={room} 
-									editHandler={(event) => this.editRoomToggle(event, room)} 
-									deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
-								/>
-								// <SearchResult 
-								// 	details={room} 
-								// 	editHandler={(event) => this.editRoomToggle(event, room)} 
-								// 	deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
-								// />
-							);
-							return myrooms;
+							// const myrooms = response.data.data.rooms.map(room =>
+							// 	<ProviderRooms 
+							// 		details={room} 
+							// 		editHandler={(event) => this.editRoomToggle(event, room)} 
+							// 		deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
+							// 	/>
+							// 	// <SearchResult 
+							// 	// 	details={room} 
+							// 	// 	editHandler={(event) => this.editRoomToggle(event, room)} 
+							// 	// 	deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
+							// 	// />
+							// );
+							// return myrooms;
 						}
 						return null;
 					}}
@@ -91,7 +90,7 @@ class Myrooms extends Component {
 				<Modal isOpen={this.state.addRoomModal} toggle={this.addRoomToggle} className="modal-lg">
 					<ModalHeader toggle={this.addRoomToggle}>Προσθήκη Δωματίου</ModalHeader>
 					<ModalBody>
-						<RoomForms/>
+						<RoomForm/>
 						{/* <Form onSubmit={this.submitForm}>
 							{formFields}
 							<FormGroup row>
@@ -138,4 +137,4 @@ class Myrooms extends Component {
 	}
 }
 
-export default Myrooms;
+export default ProviderRooms;
