@@ -91,7 +91,7 @@ class FetchSearchResults extends React.Component {
 	}
 
 	render() {
-		//alert("PALIII");
+		// alert("PALIII");
 		console.log("-> Fetch Search Results rendering");
 		console.log(this.props);
 
@@ -102,11 +102,12 @@ class FetchSearchResults extends React.Component {
 		params['maxPrice'] = this.props.searchFilters.maxPrice;
 		params['maxDist'] = this.props.searchFilters.maxDist;
 
-		params['hasPool'] = this.props.searchFilters.facilities.hasPool;
-		params['hasWifi'] = this.props.searchFilters.facilities.hasWifi;
-		params['hasShauna'] = this.props.searchFilters.facilities.hasShauna;
+		params['hasPool'] = this.props.searchFilters.facilities.pool;
+		params['hasWifi'] = this.props.searchFilters.facilities.wifi;
+        params['hasShauna'] = this.props.searchFilters.facilities.sauna;
+        params['hasBreakfast'] = this.props.searchFilters.facilities.breakfast;
 
-		params['people'] = Number(this.props.searchInfo.adults) + Number(this.props.searchInfo.children);
+		params['occupants'] = this.props.searchInfo.adults + this.props.searchInfo.children;
 
 		if(this.props.searchInfo.destination.trim() !== ""){
 			params['cityName'] = this.props.searchInfo.destination ;
