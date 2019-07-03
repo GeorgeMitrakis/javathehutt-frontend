@@ -71,6 +71,7 @@ class ProviderRooms extends Component {
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
                                 <Room 
+                                    key={room.id}
                                     renderProvFuncs={true}
 									room={room} 
 									editHandler={(event) => this.editRoomToggle(event, room)} 
