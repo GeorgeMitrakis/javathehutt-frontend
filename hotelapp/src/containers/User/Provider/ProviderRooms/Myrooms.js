@@ -1,33 +1,13 @@
 import React, { Component } from 'react';
-import { UncontrolledCarousel, Container, Col, Row, Button,  Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText, InputGroup, InputGroupAddon,
-    InputGroupText, InputGroupButtonDropdown, InputGroupDropdown,  Dropdown, DropdownToggle,
-	DropdownMenu, DropdownItem, Nav, NavItem, NavLink } from 'reactstrap';
+import { Container, Col, Row, Button,  Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import { Get, Post } from 'react-axios';
-import axios from 'axios';
 import { Spinner } from 'reactstrap';
-import { error } from 'util';
-import { createQueryParams} from '../../../../Utility/Utility';
 import ProviderRooms from './ProviderRooms';
-import GoogleMapReact from 'google-map-react';
-import { Checkbox } from 'pretty-checkbox-react';
 import produce from 'immer';
-import qs from "querystring";
+import RoomForms from './RoomForms';
 
 import styles from './Myrooms.module.css'
 
-
-const facilities = {
-   
-	breakfast: false,
-	wifi: false,
-	pool: false,
-	shauna: false
-}
-
-const coords = {
-	cordX: "",
-	cordY: ""
-}
 
 class Myrooms extends Component {
 	constructor(props){
@@ -48,112 +28,22 @@ class Myrooms extends Component {
         }));
 	}
 
-	handleCheckBoxChange = (label) => {
-        console.log("[FiltersTab.js]");
-        console.log("Allakse kati se checkbox sto " + label);
-        facilities[label] = !facilities[label];
-        console.log(facilities);
-    }
+	// handleCheckBoxChange = (label) => {
+    //     console.log("[FiltersTab.js]");
+    //     console.log("Allakse kati se checkbox sto " + label);
+    //     facilities[label] = !facilities[label];
+    //     console.log(facilities);
+    // }
 	
-	submitForm = (event) => {
-		event.preventDefault();
-		
-		let formData = {};
-		formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
-		for ( let key in this.state.formControls ) {
-            formData[key] = this.state.formControls[key].value;
-		}
-		
-		for(let key in facilities){
-			formData[key] = facilities[key];
-		}
-
-		
-		for(let key in coords){
-			formData[key] = coords[key];
-		}
-
-		console.log("---Form Data---");
-		console.log(formData);
-		console.log(facilities); 
-		console.log(coords);    
-        console.log("---------------");
-		
-		axios.post(
-            "http://localhost:8765/app/api/rooms",
-            qs.stringify(formData),
-            {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        )
-        .then((result) => {
-            console.log(result);
-            if (!result.data.success)
-            {
-                alert(result.data.message);
-            }
-            else
-            {        
-                alert("Επιτυχής Κράτηση!");
-                this.props.history.replace("/");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+	roomsChangedHandler = () => {		
+		this.setState(
+			produce( draft => {
+				draft.roomAdded = !this.state.roomAdded;
+			})
+		)
 	}
 
 	render(){
-		const formElementsArray = [];
-        for ( let key in this.state.formControls ) {
-			let obj = this.state.formControls[key]
-			if(this.state.deletedRoom){
-				if(key === 'cityName'){
-					obj['value'] = this.state.deletedRoom.location['cityname']
-				}
-				else{
-					obj['value'] = this.state.deletedRoom[key]
-				}
-			}
-            formElementsArray.push( {
-                id: key,
-                config: obj
-            });
-		}
-
-		console.log(formElementsArray)
-		console.log("-------------")
-		console.log((this.state.deletedRoom))
-
-		let formFields = formElementsArray.map( formElement => (
-			<FormGroup row>
-			<Label for={formElement.config.id} sm={2}>{formElement.config.name}</Label>
-			<Col sm={10}>
-				<Input 
-				key={formElement.id}
-                id={formElement.config.id}
-                name={formElement.config.name}
-				onChange={( event ) => this.inputChangedHandler( event, formElement.id )}
-                type={formElement.config.type}
-				value={formElement.config.value}
-                placeholder={formElement.config.placeholder}
-                />
-			</Col>
-			</FormGroup>
-        ));
-		
-		const googleMap =  (<GoogleMapReact
-			onClick={this.mapClickedHandler}
-			bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
-			defaultCenter={{
-				lat: 53.430957,
-				lng: -2.960476
-			}}
-			defaultZoom={11}
-		>
-		{/* <p> "My Marker" </p> */}
-		</GoogleMapReact>
-		);
 
 		return(
 			<>
@@ -180,7 +70,16 @@ class Myrooms extends Component {
 							console.log("Sto Myrooms to response2\n-------------------");
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
-								<ProviderRooms details={room} editHandler={(event) => this.editRoomToggle(event, room)} deleteHandler = {(event) => this.deleteRoomToggle(event, room)}/>
+								<ProviderRooms 
+									details={room} 
+									editHandler={(event) => this.editRoomToggle(event, room)} 
+									deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
+								/>
+								// <SearchResult 
+								// 	details={room} 
+								// 	editHandler={(event) => this.editRoomToggle(event, room)} 
+								// 	deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
+								// />
 							);
 							return myrooms;
 						}
@@ -192,7 +91,8 @@ class Myrooms extends Component {
 				<Modal isOpen={this.state.addRoomModal} toggle={this.addRoomToggle} className="modal-lg">
 					<ModalHeader toggle={this.addRoomToggle}>Προσθήκη Δωματίου</ModalHeader>
 					<ModalBody>
-						<Form onSubmit={this.submitForm}>
+						<RoomForms/>
+						{/* <Form onSubmit={this.submitForm}>
 							{formFields}
 							<FormGroup row>
 							<Label for="extras" sm={2}>Παροχές</Label>
@@ -210,14 +110,28 @@ class Myrooms extends Component {
 									Πισίνα
 								</Checkbox>
 							</Container>
-							</FormGroup>							
-						</Form>
+							</FormGroup>
+							<FormGroup row>
+							<Label for="map" sm={2}>Τοποθεσία στο Χάρτη</Label>
+							<Col sm={10}>
+								{googleMap}
+								<Modal className="modal-lg" centered fade isOpen={this.state.mapModal} toggle={this.mapToggle} >
+									<div className={styles.box_border} style={{height: "75vh"}}>
+										{googleMap}
+									</div>
+								</Modal>
+								<FormText color="muted">
+									Επιλέξτε σημείο στο χάρτη, τοποθετώντας το στίγμα στο σημείο που επιθυμείτε 
+								</FormText>
+							</Col>
+							</FormGroup>
+						</Form> */}
 					</ModalBody>
 					<ModalFooter>
 						<Button color="primary" onClick={this.submitForm}>Προσθήκη</Button>
 						<Button color="secondary" onClick={this.addRoomToggle}>Ακύρωση</Button>
 					</ModalFooter>
-				</Modal>				
+				</Modal>			
 			</>
 			
 		);
