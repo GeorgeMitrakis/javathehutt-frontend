@@ -20,6 +20,11 @@ class FetchSearchResults extends React.Component {
         console.log("----------------");
         console.log("nextProps: ", nextProps);
 
+        if (nextProps.performSearchText !== this.props.performSearchText)
+        {
+            return true;
+        }
+
         let performUpdate = false;
 
         Object.keys(nextProps.searchInfo).forEach(filterId => { 
@@ -38,35 +43,38 @@ class FetchSearchResults extends React.Component {
 
         Object.keys(nextProps.searchFilters).forEach(filterId => { 
             
-            if (filterId === "facilities")
+            if (filterId !== "searchText")
             {
-                Object.keys(nextProps.searchFilters.facilities).forEach(facId => {
-                    if (nextProps.searchFilters.facilities[facId] !== this.props.searchFilters.facilities[facId])
-                    {
-                        // alert("edw 1");
-                        performUpdate = true;
-                        return;
-                    }
-                });
-
-                // if (performUpdate)
-                // {
-                //     return;
-                // }
-            }
-            else
-            {
-                if (nextProps.searchFilters[filterId] !== this.props.searchFilters[filterId])
+                if (filterId === "facilities")
                 {
-                    // alert("edw 2");
-                    performUpdate = true;
-                    // return;
-                }
-            }
+                    Object.keys(nextProps.searchFilters.facilities).forEach(facId => {
+                        if (nextProps.searchFilters.facilities[facId] !== this.props.searchFilters.facilities[facId])
+                        {
+                            // alert("edw 1");
+                            performUpdate = true;
+                            return;
+                        }
+                    });
 
-            if (performUpdate)
-            {
-                return;
+                    // if (performUpdate)
+                    // {
+                    //     return;
+                    // }
+                }
+                else
+                {
+                    if (nextProps.searchFilters[filterId] !== this.props.searchFilters[filterId])
+                    {
+                        // alert("edw 2");
+                        performUpdate = true;
+                        // return;
+                    }
+                }
+
+                if (performUpdate)
+                {
+                    return;
+                }
             }
 
         });
@@ -84,7 +92,7 @@ class FetchSearchResults extends React.Component {
     }
 
     render() {
-        // alert("PALIII");
+        //alert("PALIII");
         console.log("-> Fetch Search Results rendering");
         console.log(this.props);
         return (
