@@ -24,7 +24,8 @@ const filtersTab = (props) => {
                 <Input placeholder="Αναζήτηση.." 
                     value = {props.searchFilters.searchText}
                     onChange={(event) => props.handleSearchText(event, props.searchFilters, props.searchInfo)}
-               />
+					onKeyPress={(target) => props.handleEnterPress(target.charCode, props.searchFilters, props.searchInfo)}
+			   />
                 <InputGroupAddon addonType="append">
                     <Button onClick={(event) => props.performSearchText(event, props.searchFilters, props.searchInfo)} className="border" color="link">
                         <FontAwesomeIcon  icon={faSearch}  />

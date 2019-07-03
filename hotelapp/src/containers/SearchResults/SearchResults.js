@@ -284,7 +284,14 @@ class SearchResults extends React.Component {
         });
         console.log("changed searchText", searchFilters);
         this.updateURL(searchFilters, searchInfo);
-    }
+	}
+	
+	handleEnterPress = (key, searchFilters, searchInfo) => {
+		if(key==13){//enter pressed
+			console.log("enter pressed", searchFilters);
+			this.performSearchText(null, searchFilters, searchInfo);
+		}		
+	}
 
     performSearchText = (event, searchFilters, searchInfo) => {
         //toogle functionality
@@ -406,7 +413,8 @@ class SearchResults extends React.Component {
         const filtersTab = (<FiltersTab  
                                 handlePriceRangeChange = {this.handlePriceRangeChange}
                                 handleAreaRangeChange = {this.handleAreaRangeChange}
-                                handleSearchText = {this.handleSearchText}
+								handleSearchText = {this.handleSearchText}
+								handleEnterPress = {this.handleEnterPress}
                                 performSearchText = {this.performSearchText}
                                 handleCheckBoxChange = {this.handleCheckBoxChange}
 

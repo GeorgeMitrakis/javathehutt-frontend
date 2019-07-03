@@ -92,7 +92,7 @@ class FetchSearchResults extends React.Component {
     }
 
     render() {
-        alert("PALIII");
+        //alert("PALIII");
         console.log("-> Fetch Search Results rendering");
         console.log(this.props);
         return (
