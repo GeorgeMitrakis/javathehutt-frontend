@@ -126,7 +126,7 @@ class SearchForm extends React.Component {
 		
 	}
 	handleKeyPress = (key) => {
-		if(key==13){//enter pressed
+		if(key===13){//enter pressed
 			this.handleRedirect();
 		}
 	}
