@@ -6,7 +6,7 @@ import { Container, Col, Row, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
 import { Get, Post } from 'react-axios';
-import { createQueryParams, getQueryParams, todayIs, tomorrowIs, isLegitDate, cmpDates } from '../../Utility/Utility';
+import { createQueryParams, getQueryParams, todayIs, tomorrowIs, isLegitDate, cmpDates, checkValidity } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
@@ -61,7 +61,7 @@ class SearchResults extends React.Component {
         this.state = {
             filtersModal: false,
             mapModal: false,
-            searchText: "",
+            performSearchText: false,
             filtersMoved: false
         };
     
@@ -202,11 +202,22 @@ class SearchResults extends React.Component {
                 });
                 searchFilters["facilities"] = facilities;
             }
-            else
-            {
+            else if (filterId !== "searchText")
+            { //filter is numeric
                 if ((queryParams[filterId]) && (!isNaN(queryParams[filterId])) && (queryParams[filterId] >=0 ))
                 {
                     searchFilters[filterId] = Number(queryParams[filterId]);
+                }
+                else
+                {
+                    searchFilters[filterId] = searchFiltersDefaults[filterId];
+                }
+            }
+            else
+            { //filter is searchText
+                if (queryParams[filterId])
+                {
+                    searchFilters[filterId] = queryParams[filterId];
                 }
                 else
                 {
@@ -274,10 +285,26 @@ class SearchResults extends React.Component {
         this.updateURL(searchFilters, searchInfo);
     }
 
-    searchCritics = () => {
-        // console.log("Αναζητηση Critics");
-        // console.log(this.state);
-        //axios request to send the search input
+    performSearchText = (event, searchFilters, searchInfo) => {
+        //toogle functionality
+        const rules = {
+            required: true,
+            minLength: 4,
+            maxLength: 30
+        };
+
+        const res = checkValidity(searchFilters.searchText, rules);
+        if (!res.report)
+        {
+            alert("NOT VALID");
+            return;
+        }
+
+        this.setState(
+            produce(draft => {
+                draft.performSearchText = !draft.performSearchText;
+            })
+        );
     }
 
     handleCheckBoxChange = (label, searchFilters, searchInfo) => {
@@ -379,7 +406,8 @@ class SearchResults extends React.Component {
                                 handlePriceRangeChange = {this.handlePriceRangeChange}
                                 handleAreaRangeChange = {this.handleAreaRangeChange}
                                 handleSearchText = {this.handleSearchText}
-                                handlecheckBoxChange = {this.handleCheckBoxChange}
+                                performSearchText = {this.performSearchText}
+                                handleCheckBoxChange = {this.handleCheckBoxChange}
 
                                 searchFilters = {searchFilters}
                                 searchInfo = {searchInfo}
@@ -448,6 +476,7 @@ class SearchResults extends React.Component {
                     <Col xs="12" md="8" lg="7">
 
                         <FetchSearchResults
+                            performSearchText={this.state.performSearchText}
                             bookRoomHandler={this.bookRoomHandler}
                             searchFilters={searchFilters}
                             searchInfo={searchInfo}
