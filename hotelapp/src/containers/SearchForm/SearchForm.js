@@ -17,7 +17,13 @@ class SearchForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.toggleDropDown = this.toggleDropDown.bind(this);
+		this.toggleDropDown = this.toggleDropDown.bind(this);
+		this.handleRedirect = this.handleRedirect.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
+
+		//used only for input focus on homepage 
+		this.textInputRef = React.createRef();
+
         const fulldate = todayIs();
         this.state = {
             searchText: !this.props.searchInfo ? "" : this.props.searchInfo.destination,
@@ -26,29 +32,37 @@ class SearchForm extends React.Component {
             dropdownOpen: false,
             dropdownUnits: !this.props.searchInfo ? 
                 {
-                    rooms: 1,
+                    // rooms: 1,
                     adults: 1,
                     children: 0
                 } 
                 : 
                 {
-                    rooms: this.props.searchInfo.rooms,
+                    //rooms: this.props.searchInfo.rooms,
                     adults: this.props.searchInfo.adults,
                     children: this.props.searchInfo.children
                 }
         };
 
         //console.log(this.constructFromDate());
-    }
+	}
+	
+	componentDidMount(){
+		//console.log(this.props.location.pathname );
+		if(this.props.location.pathname === "/"){
+			this.textInputRef.current.focus();
+		}
+	}
 
     handleSearchText(event) {
-        this.insertSearchText((event.target.value));//the things I do for an immutable state...
-    }
-
-    insertSearchText(text){
-        this.setState(
+		console.log(event);
+		console.log(event.target);
+		console.log(event.target.value);
+		let text = event.target.value;
+		
+		this.setState(
             produce(draft => {
-                draft.searchText = text;//this happens because event.target is not visible from draft
+                draft.searchText = text;
             })
         );
     }
@@ -85,18 +99,16 @@ class SearchForm extends React.Component {
     decreaseUnit(event, unit) {
         event.preventDefault();
 
-        if ((unit === "rooms") && (this.state.dropdownUnits.rooms === 1))
-        {
+        // if ((unit === "rooms") && (this.state.dropdownUnits.rooms === 1))
+        // {
+        //     return;
+        // }
+
+        if ((unit === "adults") && (this.state.dropdownUnits.adults === 1)){
             return;
         }
 
-        if ((unit === "adults") && (this.state.dropdownUnits.adults === 1))
-        {
-            return;
-        }
-
-        if ((unit === "children") && (this.state.dropdownUnits.children === 0))
-        {
+        if ((unit === "children") && (this.state.dropdownUnits.children === 0)){
             return;
         }
 
@@ -107,27 +119,26 @@ class SearchForm extends React.Component {
         );
     }
 
-    //this method applies default values to the form fields if they are empty before submission
-    // setDefaultsIfEmpty(){
-    //     if(this.state.fromDate == ""){
-    //         this.setState(
-    //             produce(draft => {
-    //                 draft.fromDate = this.todayIs();
-    //             })
-    //         );
-    //     }
-    // }
+	
+    submitForm (event)  {
+		event.preventDefault();		
+		this.handleRedirect();
+		
+	}
+	handleKeyPress = (key) => {
+		if(key==13){//enter pressed
+			this.handleRedirect();
+		}
+	}
 
-    submitForm = (event) => {
-        event.preventDefault();
-        console.log(this.state);
+	handleRedirect(){
 
         //this.setDefaultsIfEmpty();
         let params = {};
         params["destination"] = this.state.searchText;
         params["fromDate"] = this.state.fromDate; 
         params["toDate"] = this.state.toDate; 
-        params["rooms"] = this.state.dropdownUnits.rooms;
+        // params["rooms"] = this.state.dropdownUnits.rooms;
         params["adults"] = this.state.dropdownUnits.adults;
         params["children"] = this.state.dropdownUnits.children;
 
@@ -149,7 +160,9 @@ class SearchForm extends React.Component {
         // return;
 
         this.props.history.push("/searchresults?" + queryParams);
-    }
+	}
+
+	
 
     render() {
         return (
@@ -164,14 +177,15 @@ class SearchForm extends React.Component {
                                 </InputGroupText> 
                             </InputGroupAddon> 
                             <Input
-                                required
                                 type="text"
                                 className="form-control border-0 p-0 rm_hl"
                                 id="destination"
                                 placeholder="Που θέλετε να πάτε;"
                                 value={this.state.searchText}
                                 onChange={this.handleSearchText.bind(this)}//save change in searched text to state
-                            />
+								onKeyPress={(value) => this.handleKeyPress(value.charCode)}
+						   		innerRef={this.textInputRef}
+						   />
                         </InputGroup> 
                     </Col>
 
@@ -187,7 +201,9 @@ class SearchForm extends React.Component {
                         value={this.state.fromDate}
 
                         //binds date inserted to state
-                        change={this.handleDate.bind(this, 'fromDate')}
+						change={this.handleDate.bind(this, 'fromDate')}
+						
+
 
 
                     />
@@ -205,7 +221,9 @@ class SearchForm extends React.Component {
                         value={this.state.toDate}
 
                         //binds date inserted to state
-                        change={this.handleDate.bind(this, 'toDate')}
+						change={this.handleDate.bind(this, 'toDate')}
+						
+
                     />
 
 
@@ -217,14 +235,14 @@ class SearchForm extends React.Component {
                             </DropdownToggle> 
                             <DropdownMenu className="p-2">
 
-                                <DropDownUnit
+                                {/* <DropDownUnit
                                     unitName={"Δωμάτια"}
                                     unitAmount={this.state.dropdownUnits.rooms}
                                     inc={( event ) => this.increaseUnit( event, 'rooms' )} 
                                     dec={( event ) => this.decreaseUnit( event, 'rooms' )}
                                 />
 
-                                <DropdownItem divider />
+                                <DropdownItem divider /> */}
 
                                 <DropDownUnit
                                     unitName={"Ενήλικες"}

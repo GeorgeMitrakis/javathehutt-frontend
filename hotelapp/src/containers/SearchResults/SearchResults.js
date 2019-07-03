@@ -32,12 +32,13 @@ const searchInfoDefaults = {
     destination: "",
     fromDate: todayIs(),
     toDate: tomorrowIs(),
-    rooms: 1,
+    //rooms: 1,
     adults: 1,
     children: 0
 }
 
-const numSearchInfo = ["rooms", "adults", "children"];
+//const numSearchInfo = ["rooms", "adults", "children"];
+const numSearchInfo = ["adults", "children"];
 const datesSearchInfo = ["fromDate", "toDate"];
 
 

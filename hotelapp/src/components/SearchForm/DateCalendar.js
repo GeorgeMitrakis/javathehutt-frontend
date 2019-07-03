@@ -19,7 +19,8 @@ const dateCalendar = (props) =>{
                     id={props.id}
                     min={props.min}
                     value={props.value}
-                    onChange={props.change}
+					onChange={props.change}
+					onKeyPress={props.onKeyPress} 
                 />
             </InputGroup>
         </Col>
