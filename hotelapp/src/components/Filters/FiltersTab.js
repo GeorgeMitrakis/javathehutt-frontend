@@ -22,10 +22,14 @@ const filtersTab = (props) => {
             <Container>
             <InputGroup className={styles['searchArea']}>
                 <Input placeholder="Αναζήτηση.." 
-                    value = {props.searchText}
+                    value = {props.searchFilters.searchText}
                     onChange={(event) => props.handleSearchText(event, props.searchFilters, props.searchInfo)}
-                />
-                <InputGroupAddon addonType="append"><Button className="border" color="link"><FontAwesomeIcon  icon={faSearch}  /></Button></InputGroupAddon>
+               />
+                <InputGroupAddon addonType="append">
+                    <Button onClick={(event) => props.performSearchText(event, props.searchFilters, props.searchInfo)} className="border" color="link">
+                        <FontAwesomeIcon  icon={faSearch}  />
+                    </Button>
+                </InputGroupAddon>
             </InputGroup>
             </Container>
             <Container className={styles['price_range']}>
@@ -44,16 +48,16 @@ const filtersTab = (props) => {
                     handleAreaRangeChange = {props.handleAreaRangeChange}/>
             </Container>
             <Container>
-            <Checkbox checked={props.searchFilters.facilities["breakfast"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handlecheckBoxChange("breakfast", props.searchFilters, props.searchInfo)}>
+            <Checkbox checked={props.searchFilters.facilities["breakfast"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handleCheckBoxChange("breakfast", props.searchFilters, props.searchInfo)}>
                 Πρωινό
             </Checkbox>
-            <Checkbox checked={props.searchFilters.facilities["wifi"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handlecheckBoxChange("wifi", props.searchFilters, props.searchInfo)}>
+            <Checkbox checked={props.searchFilters.facilities["wifi"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handleCheckBoxChange("wifi", props.searchFilters, props.searchInfo)}>
                 Wi-Fi
             </Checkbox>
-            <Checkbox checked={props.searchFilters.facilities["sauna"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handlecheckBoxChange('sauna', props.searchFilters, props.searchInfo)}>
+            <Checkbox checked={props.searchFilters.facilities["sauna"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handleCheckBoxChange('sauna', props.searchFilters, props.searchInfo)}>
                 Σάουνα
             </Checkbox>
-            <Checkbox checked={props.searchFilters.facilities["pool"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handlecheckBoxChange('pool', props.searchFilters, props.searchInfo)}>
+            <Checkbox checked={props.searchFilters.facilities["pool"]} className={styles['checkbox']} shape="curve" color="primary" animation="smooth" onChange = {() => props.handleCheckBoxChange('pool', props.searchFilters, props.searchInfo)}>
                 Πίσίνα
             </Checkbox>
             </Container>

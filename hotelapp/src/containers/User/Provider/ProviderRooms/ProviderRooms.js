@@ -53,7 +53,7 @@ class ProviderRooms extends Component {
 							<h3 className={styles['title']}>My rooms</h3>
 						</Col>
 						<Col xs="4" sm="4" md="2" lg="2">
-							<Button className={styles['room-add-btn']} color="info" size="sm" onClick={this.addRoomToggle}>Προσθήκη Δωματίου</Button>
+							<Button className={styles['room-add-btn']} color="success" size="sm" onClick={this.addRoomToggle}>Προσθήκη Δωματίου</Button>
 						</Col>
 					</Row>
 					
@@ -71,10 +71,9 @@ class ProviderRooms extends Component {
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
                                 <Room 
+                                    key={room.id}
                                     renderProvFuncs={true}
 									room={room} 
-									editHandler={(event) => this.editRoomToggle(event, room)} 
-									deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
 								/>
 								// <SearchResult 
 								// 	details={room} 
@@ -92,7 +91,7 @@ class ProviderRooms extends Component {
 				<Modal isOpen={this.state.addRoomModal} toggle={this.addRoomToggle} className="modal-lg">
 					<ModalHeader toggle={this.addRoomToggle}>Προσθήκη Δωματίου</ModalHeader>
 					<ModalBody>
-						<RoomForm/>
+						<RoomForm addRoomToggle = {() => this.addRoomToggle()}/>
 						{/* <Form onSubmit={this.submitForm}>
 							{formFields}
 							<FormGroup row>
@@ -128,10 +127,10 @@ class ProviderRooms extends Component {
 							</FormGroup>
 						</Form> */}
 					</ModalBody>
-					<ModalFooter>
+					{/* <ModalFooter>
 						<Button color="primary" onClick={this.submitForm}>Προσθήκη</Button>
 						<Button color="secondary" onClick={this.addRoomToggle}>Ακύρωση</Button>
-					</ModalFooter>
+					</ModalFooter> */}
 				</Modal>			
 			</>
 			
