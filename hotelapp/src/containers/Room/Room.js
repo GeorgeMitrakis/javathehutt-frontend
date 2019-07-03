@@ -43,7 +43,9 @@ class Room extends React.Component {
 
     render() {
         return (
-            <RoomPresentation/>
+            <RoomPresentation
+                room={this.props.room}
+            />
         );
         
     }

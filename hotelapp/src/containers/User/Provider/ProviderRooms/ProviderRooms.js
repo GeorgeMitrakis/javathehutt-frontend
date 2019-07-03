@@ -71,7 +71,7 @@ class ProviderRooms extends Component {
 							console.log(response);
 							const myrooms = response.data.data.rooms.map(room =>
 								<Room 
-									details={room} 
+									room={room} 
 									editHandler={(event) => this.editRoomToggle(event, room)} 
 									deleteHandler = {(event) => this.deleteRoomToggle(event, room)}
 								/>
