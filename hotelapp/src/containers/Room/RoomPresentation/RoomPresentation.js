@@ -8,6 +8,7 @@ import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import produce from 'immer';
+import FetchPreviewPhoto from './FetchPreviewPhoto/FetchPreviewPhoto';
 
 
 class RoomPresentation extends React.Component {
@@ -55,7 +56,7 @@ class RoomPresentation extends React.Component {
                 <Container fluid className="border">
                     <Row className="border p-2">
                         <Col md="4" className="p-0 m-0 border">
-                            <img src={photo} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
+                            <img src={"http://localhost:8765/app/api/img?roomId=" + this.props.room.id} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>
 
                         <Col md="8" className="p-0 m-0 pl-2 d-flex-column border">
@@ -64,9 +65,9 @@ class RoomPresentation extends React.Component {
                                     {this.props.room.provider.providername}
                                 </Header>
 
-                                <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
+                                {/* <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
                                     {stars}
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className={styles.sub_header}> 

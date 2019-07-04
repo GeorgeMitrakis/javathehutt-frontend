@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Button,  Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import { Get, Post } from 'react-axios';
+import { Get } from 'react-axios';
 import { Spinner } from 'reactstrap';
 import produce from 'immer';
 import RoomForm from '../../../../Room/RoomForm/RoomForm';
 import RoomPresentation from '../../../../Room/RoomPresentation/RoomPresentation';
 import { getUserInfoField } from '../../../../../Utility/Utility';
+import styles from '../ProviderRooms.module.css';
 
 
 
@@ -57,7 +58,7 @@ class FetchProviderRooms extends React.Component{
                             // alert(response.data.data.results[0].id);
                             // response.data.data = null;
                         const noResults = (
-                            <Row className={"justify-content-center p-4 "}>
+                            <Row className={"justify-content-center p-4 " + styles.box_border}>
                                 <div className="text-muted align-self-center"> Δεν βρέθηκαν καταχωρημένα δωμάτια. </div>
                             </Row>
                         );
