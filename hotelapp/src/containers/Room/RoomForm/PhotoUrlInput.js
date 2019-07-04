@@ -76,7 +76,7 @@ class PhotoUrlInput extends Component {
                         <Col xs={10} sm={10} style={{'margin-bottom': '7px'}}>
                             <Input
                                 type="text"
-                                placeholder={`Photo #${idx + 1}`}
+                                placeholder={`Paste link of photo #${idx + 1}`}
                                 value={shareholder.name}
                                 onChange={this.handleUrlChange(idx)}
                             />
