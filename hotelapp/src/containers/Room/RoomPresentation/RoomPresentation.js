@@ -54,7 +54,7 @@ class RoomPresentation extends React.Component {
         return (
             <Row className={"mb-4 " + styles.room}>
                 <Container fluid className="border">
-                    <Row className="border p-2">
+                    <Row className="border p-0">
                         <Col md="4" className="p-0 m-0 border">
                             <img src={"http://localhost:8765/app/api/img?roomId=" + this.props.room.id} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>

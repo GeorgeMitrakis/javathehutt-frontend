@@ -8,6 +8,7 @@ import FetchProviderRooms from './FetchProviderRooms/FetchProviderRooms'
 import { createQueryParams} from '../../../../Utility/Utility';
 import axios from 'axios';
 import Header from '../../../../components/UI/Header/Header'
+import classes from './ProviderRooms.module.css';
 
 import styles from './ProviderRooms.module.css'
 
@@ -154,13 +155,22 @@ class ProviderRooms extends Component {
 				</Modal>
 
 
-				<Modal isOpen={this.state.deleteRoomModal} toggle={this.toggleDeleteRoomModal} className="modal-lg">
-					<ModalHeader toggle={this.toggleDeleteRoomModal}> Διαγραφή Δωματίου</ModalHeader>
+				<Modal 
+					isOpen={this.state.deleteRoomModal} 
+					toggle={this.toggleDeleteRoomModal} 
+					size="lg"    			    
+					centered
+				>
+					<ModalHeader toggle={this.toggleDeleteRoomModal}> 
+						<Header> 
+							Διαγραφή Δωματίου
+						</Header>
+					</ModalHeader>
 					<ModalBody>
 						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου:   
-						{this.state.room ? this.state.room.roomName : null} 
+						{this.state.room ? <span id={classes.room_name}><b>{' '+this.state.room.roomName+' ;'}</b></span> : null} 
 					</ModalBody>
-					<ModalFooter>
+					<ModalFooter className="p-2">
 						<Button color="secondary" onClick={this.toggleDeleteRoomModal}>Ακύρωση</Button>
 						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
 					</ModalFooter>
