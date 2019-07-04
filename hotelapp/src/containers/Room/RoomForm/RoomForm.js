@@ -234,6 +234,7 @@ class RoomForm extends Component{
             );
             return;
         }
+         
 
 		console.log("---Form Data---");
 		console.log(formData);
@@ -255,10 +256,31 @@ class RoomForm extends Component{
                 alert(result.data.message);
             }
             else
-            {        
-				alert("Επιτυχία!");
-                this.props.toggleRoomFormModal();//of Myrooms.js
-                this.props.toggleReFetchRooms();
+            {   
+                let imageForm = {}
+                imageForm['roomId'] = result.data.data.room['id'];
+                imageForm['url'] = this.state.formControls['url'].value;
+                console.log(imageForm)
+                // alert("deutero request")
+                axios.post("http://localhost:8765/app/api/img",
+                qs.stringify(imageForm),
+                {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+                ).then((result2) => {
+                    console.log(result);
+                    if (!result2.data.success)
+                    {
+                        alert(result2.data.message);
+                    }
+                    else{
+                        alert("Επιτυχία!");
+                        this.props.toggleRoomFormModal();//of Myrooms.js
+                        this.props.toggleReFetchRooms();
+                    }
+                }).catch((err2) => {
+                    console.log(err2);
+                })    
             }
         })
         .catch((err) => {
