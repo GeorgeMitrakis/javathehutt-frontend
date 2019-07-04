@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import classes from './Administration.module.css';
 
-import { Card, Row, Col, CardHeader } from 'reactstrap';
+import { Card, Row, Col, CardHeader, Alert } from 'reactstrap';
 import Header from '../../../components/UI/Header/Header';
 import produce from 'immer';
 import NavigationItem from '../../../components/Navigation/NavigationItem/NavigationItem'
@@ -22,7 +22,11 @@ class Administration extends React.Component {
         super();
         
         this.state = {
-            activeTab: 'usersTab'
+            activeTab: 'usersTab',
+			alert:{
+				visible: false,
+				message:''
+			}
         };
         
         
@@ -37,12 +41,35 @@ class Administration extends React.Component {
             })
         );
         
-    }
+	}
+
+	onAlert = (message) => {
+		this.setState(
+			produce(draft =>{
+				//draft.alert.message = "Ο χρήστης με email :\""+u.email+"\" πήρε σφυράκι!";
+				draft.alert.message = message;
+				draft.alert.visible = true;
+			})
+		)	
+	}
+	
+	onDismiss = () => {
+		this.setState(
+			produce( draft => {
+				draft.alert.visible = false;
+			})
+		)
+	}
 
     render() {       
         return (
 			<div id={classes.content} className="h-100 col-lg-8 offset-lg-2">
 
+				<Row className="justify-content-center">
+					<Alert color="success" isOpen={this.state.alert.visible} toggle={() => (this.onDismiss())}>
+						{this.state.alert.message}
+					</Alert>
+				</Row>
 				<Row className="justify-content-center mt-5 mb-5" > 				
 					<Header>Διαχείριση Πλατφόρμας</Header>
 				</Row>
@@ -66,7 +93,7 @@ class Administration extends React.Component {
 	
 				<Card outline color="secondary" className="bg-light scrollbar h-75" id={classes.frame}>
 					<Switch>
-						<Route path="/admin/administration/userview" component={UserView} />
+						<Route path="/admin/administration/userview" render={() => <UserView alert={this.onAlert} dismiss={this.onDismiss}/>} />
 						<Route path="/admin/administration/transactions" component={Transactions} />
 						<Redirect to="/admin/administration/userview" />
 					</Switch>
