@@ -13,14 +13,14 @@ class RoomCritic extends React.Component {
         }        
 
         return (
-            <div className="d-flex justify-content-between align-items-center border">
+            <div className="d-flex justify-content-between align-items-center ">
                 <Container fluid>
-                    <Row className="border">
-                        <Col xs="10" className="border p-0">
+                    <Row className="">
+                        <Col xs="10" className=" p-0">
                             {this.props.roomCritic.comment}
                         </Col>
 
-                        <Col xs="2" className="border p-0 sec_color">
+                        <Col xs="2" className=" p-0 sec_color">
                             {stars}
                         </Col>
                     </Row>
