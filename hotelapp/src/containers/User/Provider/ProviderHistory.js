@@ -4,7 +4,7 @@ import { Row, Col, Container, Card, CardHeader } from 'reactstrap';
 import produce from 'immer';
 import classes from './Provider.module.css';
 import Header from '../../../components/UI/Header/Header';
-import { getUserInfo, getUserInfoField } from '../../../Utility/Utility';
+import { getUserInfo } from '../../../Utility/Utility';
 
 class ProviderHistory extends Component {
 	constructor(props){

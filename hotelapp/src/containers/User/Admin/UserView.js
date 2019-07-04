@@ -2,7 +2,7 @@ import React from 'react';
 //import { Route } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'querystring';
-import { Row, Col, Container, Alert} from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 //import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 //import myInput from '../../../components/UI/MyInput/MyInput';

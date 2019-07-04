@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Col,  Modal, Form, FormGroup, Label, Input, FormText, Row, Button } from 'reactstrap';
+import { Col, FormGroup, Label, Input,
+	Row, Button } from 'reactstrap';
 
-import MyInput from '../../../components/UI/MyInput/MyInput'
+//import MyInput from '../../../components/UI/MyInput/MyInput'
 
 class PhotoUrlInput extends Component {
 
