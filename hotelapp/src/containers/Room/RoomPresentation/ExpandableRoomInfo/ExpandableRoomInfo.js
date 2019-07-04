@@ -125,7 +125,7 @@ class ExpandableRoomInfo extends React.Component {
 
                     <TabPane tabId="photos">
                         <FetchRoomPhotos
-                        
+                            roomId = {this.props.room.id}
                         />
                     </TabPane>
 
