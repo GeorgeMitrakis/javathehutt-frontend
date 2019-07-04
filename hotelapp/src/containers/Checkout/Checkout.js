@@ -27,7 +27,7 @@ class Checkout extends Component{
             
             card: {
                 id: {
-					value:null,
+					value:'',
 					rules:{
 						required: true,
 						minLength: 16,
@@ -38,7 +38,7 @@ class Checkout extends Component{
 					validity: ''
 				},
                 csc: {
-					value:null,
+					value:'',
 					rules:{
 						required: true,
 						minLength: 3,
@@ -49,7 +49,7 @@ class Checkout extends Component{
 					validity: ''
 				},
                 expdate:{
-					value: null,
+					value: '',
 					rules:{
 						required: true
 					},
@@ -160,7 +160,36 @@ class Checkout extends Component{
 
     submitForm = (event, bookingInfo) => {
 		event.preventDefault();
+
+		const resid = checkValidity(this.state.card.id.value, this.state.card.id.rules);
+		const rescsc = checkValidity(this.state.card.csc.value, this.state.card.csc.rules);
+		const resexpdate = checkValidity(this.state.card.expdate.value, this.state.card.expdate.rules);
 		
+
+		const res = {
+			id: resid,
+		 	csc: rescsc,
+		 	expdate: resexpdate
+		}
+
+		if(!resid.report || !rescsc.report || !resexpdate.report){
+			this.setState(
+				produce(draft => {
+					for(let i in this.state.card && i !== 'type'){
+						if(!res[i].report){
+							draft.card[i].feedback = res[i].msg;
+							draft.card[i].validity = "is-invalid";
+						}
+						else{
+							draft.card[i].feedback = null;
+							draft.card[i].validity = '';
+						}
+					}				
+				})
+			);
+			return;
+		}
+
         console.log(this.state);
 		console.log(bookingInfo);
 
@@ -354,7 +383,7 @@ class Checkout extends Component{
 												<MyInput
 													name='ID:'
 													type='text'
-													placeholder="1111222233334444"
+													placeholder="π.χ. 1111222233334444"
 													feedback={this.state.card.id.feedback}
 													validity={this.state.card.id.validity}
 													changed={this.handleCardId.bind(this)}
@@ -365,7 +394,7 @@ class Checkout extends Component{
 												<MyInput
 													name="Αρ.Ασφαλείας:"
 													type="text"
-													placeholder="123"
+													placeholder="π.χ. 123"
 													feedback={this.state.card.csc.feedback}
 													validity={this.state.card.csc.validity}
 													onChange={this.handleCSC.bind(this)}
