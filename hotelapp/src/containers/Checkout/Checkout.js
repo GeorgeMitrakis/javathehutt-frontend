@@ -3,6 +3,7 @@ import produce from 'immer';
 import { withRouter } from 'react-router-dom';
 import Header from '../../components/UI/Header/Header';
 import MyInput from '../../components/UI/MyInput/MyInput';
+import { checkValidity } from '../../Utility/Utility';
 import { Row, Col, Form, FormGroup, Container, Label,
     Input, InputGroup, InputGroupText, 
 	InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
@@ -23,14 +24,39 @@ class Checkout extends Component{
         this.toggleDropDown = this.toggleDropDown.bind(this);
         this.state={
             dropdownOpen: false,
-            room: {
-                name: null,
-                price: null
-            },
+            
             card: {
-                id: null,
-                expdate: null,
-                csc: null,
+                id: {
+					value:null,
+					rules:{
+						required: true,
+						minLength: 16,
+						maxLength: 16,
+						isNumeric: true
+					},
+					feedback: null,
+					validity: ''
+				},
+                csc: {
+					value:null,
+					rules:{
+						required: true,
+						minLength: 3,
+						maxLength: 3,
+						isNumeric: true
+					},
+					feedback: null,
+					validity: ''
+				},
+                expdate:{
+					value: null,
+					rules:{
+						required: true
+					},
+					feedback: null,
+					validity: ''
+				},
+
                 type: "Visa",
 			},
 			roomName: null,
@@ -54,27 +80,54 @@ class Checkout extends Component{
 
     handleCardId(event){
         let id=event.target.value;
-        this.setState(
+        const res = checkValidity(id, this.state.card.id.rules);
+		this.setState(
             produce(draft => {
-                draft.card.id = id;
+				draft.card.id.value = id;
+				if(!res.report){
+					draft.card.id.feedback = res.msg;
+					draft.card.id.validity = "is-invalid";
+				}
+				else{
+					draft.card.id.feedback = null;
+					draft.card.id.validity = '';
+				}
             })
         );
     }
 
     handleCSC(event){
         let csc=event.target.value;
+        const res = checkValidity(csc, this.state.card.csc.rules);
         this.setState(
             produce(draft => {
-                draft.card.csc = csc;
+				draft.card.csc.value = csc;
+				if(!res.report){
+					draft.card.csc.feedback = res.msg;
+					draft.card.csc.validity = "is-invalid";
+				}
+				else{
+					draft.card.csc.feedback = null;
+					draft.card.csc.validity = '';
+				}
             })
         );
     }
 
     handleCardExpdate(event){
         let expdate=event.target.value;
+        const res = checkValidity(expdate, this.state.card.expdate.rules);
         this.setState(
             produce(draft => {
-                draft.card.expdate = expdate;
+				draft.card.expdate.value = expdate;
+				if(!res.report){
+					draft.card.expdate.feedback = res.msg;
+					draft.card.expdate.validity = "is-invalid";
+				}
+				else{
+					draft.card.expdate.feedback = null;
+					draft.card.expdate.validity = '';
+				}
             })
         );
     }
@@ -106,9 +159,10 @@ class Checkout extends Component{
     
 
     submitForm = (event, bookingInfo) => {
-        event.preventDefault();
+		event.preventDefault();
+		
         console.log(this.state);
-        console.log(bookingInfo);
+		console.log(bookingInfo);
 
         let formData = {};
         formData["userId"] = getUserInfoField("id");
@@ -193,15 +247,18 @@ class Checkout extends Component{
 		else{
 			return(
 				<Container fluid id={classes.content}>
-					<Row className="justify-content-center">					
-						<Col xs="auto" lg="6" xl="4">
+					<Row className="justify-content-center">
 						<Alert 
-							color="danger" 
-							isOpen={this.state.alert.visible} 
-							toggle={() => (this.onDismiss())}
+								color="danger" 
+								isOpen={this.state.alert.visible} 
+								toggle={() => (this.onDismiss())}
 						>
 							{this.state.alert.message}
 						</Alert>
+					</Row>
+					<Row className="justify-content-center">	
+										
+						<Col xs="auto" lg="6" xl="4">						
 							<Card >
 								<CardHeader >
 									<Row className="d-flex justify-content-center">
@@ -298,16 +355,20 @@ class Checkout extends Component{
 													name='ID:'
 													type='text'
 													placeholder="1111222233334444"
+													feedback={this.state.card.id.feedback}
+													validity={this.state.card.id.validity}
 													changed={this.handleCardId.bind(this)}
 												
 												/>	
 											</Col>
 											<Col>
 												<MyInput
-														name="Αρ.Ασφαλείας:"
-														type="text"
-														placeholder="123"
-														onChange={this.handleCSC.bind(this)}
+													name="Αρ.Ασφαλείας:"
+													type="text"
+													placeholder="123"
+													feedback={this.state.card.csc.feedback}
+													validity={this.state.card.csc.validity}
+													onChange={this.handleCSC.bind(this)}
 												/>
 											</Col>
 										</Row>
@@ -361,6 +422,8 @@ class Checkout extends Component{
 													name="Ημερομηνία λήξης:"
 													type="date"
 													min={this.todayIs()}
+													feedback={this.state.card.expdate.feedback}
+													validity={this.state.card.expdate.validity}
 													onChange={this.handleCardExpdate.bind(this)}
 												/>
 											</Col>
