@@ -157,7 +157,7 @@ class ProviderRooms extends Component {
 				<Modal isOpen={this.state.deleteRoomModal} toggle={this.toggleDeleteRoomModal} className="modal-lg">
 					<ModalHeader toggle={this.toggleDeleteRoomModal}> Διαγραφή Δωματίου</ModalHeader>
 					<ModalBody>
-						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου: 
+						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου:   
 						{this.state.room ? this.state.room.roomName : null} 
 					</ModalBody>
 					<ModalFooter>

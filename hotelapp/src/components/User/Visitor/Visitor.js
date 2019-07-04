@@ -8,7 +8,6 @@ import VisitorChangepass from '../../../containers/User/Visitor/VisitorChangepas
 const visitor = (props) => {
 	return(
 		<Switch>
-			<Route path="/visitor/favorites" component={Favorites} />
 			<Route path="/visitor/history" component={VisitorHistory}/>
 			<Route path="/visitor/profile" component={VisitorProfile}/>
 			<Route path="/visitor/changepass" component={VisitorChangepass} />

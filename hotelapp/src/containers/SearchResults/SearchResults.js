@@ -242,7 +242,7 @@ class SearchResults extends React.Component {
         // alert(roomID);        
         if(this.props.isAuth){
             const params = {
-                hotel_id: "123456",
+                //hotel_id: "123456",
                 ...roomInfo,
 				...searchInfo,
 				cityname:roomInfo.location.cityname,

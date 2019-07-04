@@ -31,8 +31,6 @@ class NavBar extends React.Component {
 		return(
 			<>
 				<NavigationItem link="/admin"> Διαχείριση Πλατφόρμας </NavigationItem>
-				{/* <NavigationItem link="/admin/profile"> Επεξεργασία Προφίλ </NavigationItem>
-				<NavigationItem link="/admin/changepass"> Αλλαγή Κωδικού </NavigationItem>		 */}
 				<NavigationItem link="/logout"> Αποσύνδεση </NavigationItem>								
 			</>
 		);
@@ -41,7 +39,6 @@ class NavBar extends React.Component {
 	visitorNav = () => {
 		return(
 			<>
-				<NavigationItem link="/visitor/favorites"> Αγαπημένα </NavigationItem>
 				<NavigationItem link="/visitor/history"> Ιστορικό Κρατήσεων </NavigationItem>
 				<NavigationItem link="/visitor/profile"> Επεξεργασία Προφίλ </NavigationItem>
 				<NavigationItem link="/visitor/changepass"> Αλλαγή Κωδικού </NavigationItem>		
