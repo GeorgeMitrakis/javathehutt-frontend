@@ -14,7 +14,6 @@ import axios from 'axios';
 import { getQueryParams, getUserInfoField } from '../../Utility/Utility';
 import qs from "querystring";
 import BookSuccess from './BookSuccess';
-//http://localhost:3000/book?hotel_id=123456&id=26&providerId=5&locationId=29&price=16&capacity=2&wifi=true&pool=true&shauna=false&roomName=superrooa&description=just%20adding%20test%20rooms&location=%5Bobject%20Object%5D&maxOccupants=3&provider=%5Bobject%20Object%5D&destination=a&startDate=2019-07-02&endDate=2019-07-03&rooms=1&adults=1&children=0
 
 class Checkout extends Component{
 

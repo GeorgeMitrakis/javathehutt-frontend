@@ -139,7 +139,7 @@ class App extends Component {
 				/>
 
 				<Route
-					path={ ["/visitor", "/visitor/favorites", "/visitor/history", "/visitor/profile", "/visitor/changepass"] }
+					path={ ["/visitor", "/visitor/history", "/visitor/profile", "/visitor/changepass"] }
 					exact
 					render={() => ( <Visitor/> )}
 				/>
