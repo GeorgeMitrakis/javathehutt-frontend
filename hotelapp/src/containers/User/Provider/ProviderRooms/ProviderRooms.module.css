@@ -33,3 +33,9 @@
 	left: 50%;
 	transform: translate(-50%, -50%) !important;
 } */
+
+.header {
+    border: 3px solid rgb(40, 30, 182);
+    border-radius: 4px;
+    /* background-color:  rgb(236, 190, 90); */
+}

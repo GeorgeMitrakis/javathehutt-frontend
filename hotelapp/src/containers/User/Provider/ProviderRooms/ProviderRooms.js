@@ -155,8 +155,12 @@ class ProviderRooms extends Component {
 		return(
 				<>
 				<Container className={styles['results-container']}>
-					<Row className={styles['top-row']+"d-flex justify-content-between"}>
-						<h3 className={styles['title']}>My rooms</h3>
+					<Row className={styles['top-row']+"d-flex justify-content-center"}>
+                        <div className={"pr-2 pl-2 mr-2 " + styles.header}>
+                        <Header>
+                            Καταχωρημένα δωμάτια
+                        </Header>
+                        </div>
 						<Button className={styles['room-add-btn']} color="success" size="sm" onClick={this.toggleRoomFormModal}>Προσθήκη Δωματίου</Button>
 					</Row>
 					<Row className="mt-5"/>
