@@ -1,0 +1,11 @@
+#content{
+    height: 100vh;
+    padding-top: 15vh;
+    padding-bottom: 2vh;
+}
+
+#login_form {
+    max-width: 300px;
+    border-color :rgb(40, 30, 182);
+    box-shadow: 1px 1px 8px 2px #ccc;
+}

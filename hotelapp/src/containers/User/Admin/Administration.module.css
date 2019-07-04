@@ -1,0 +1,18 @@
+#content{
+    position: relative;
+    top: 10%;
+}
+
+.activeTab{
+    background-color: red;
+}
+
+#frame{
+    overflow-y: scroll !important;
+    
+}
+
+#userframe{
+    
+    height: 80%;
+}
