@@ -4,6 +4,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col, Container } from 
 import classnames from 'classnames';
 import produce from 'immer';
 import FetchRoomPhotos from './FetchRoomPhotos/FetchRoomPhotos';
+import FetchRoomCritics from './FetchRoomCritics/FetchRoomCritics';
 
 
 class ExpandableRoomInfo extends React.Component {
@@ -119,17 +120,13 @@ class ExpandableRoomInfo extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="photos">
-                        <FetchRoomPhotos
-                            roomId = {this.props.room.id}
-                        />
+                        <FetchRoomPhotos roomId = {this.props.room.id} />
                     </TabPane>
 
                     <TabPane tabId="critics">
-                         <Row>
-                        <Col sm="12">
-                            <h4>Tab 3 critics</h4>
-                        </Col>
-                        </Row>
+                        <div className="d-flex-column border">
+                            <FetchRoomCritics roomId = {this.props.room.id} />
+                        </div>
                     </TabPane>
 
                 </TabContent>
