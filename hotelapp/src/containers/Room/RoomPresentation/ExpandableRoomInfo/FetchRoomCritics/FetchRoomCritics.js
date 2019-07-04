@@ -16,7 +16,7 @@ class FetchRoomCritics extends React.Component {
 
             {
                 stars: 5,
-                comment: "Search for the keywords to learn more about each warning.To ignore, add // eslint-disable-next-line to the line before."
+                comment: "Search for the keywords to learn more about each warning.To ignore, add //Search for the keywords to learn more about each warning.ToSearch for the keywords to learn more about each warning.To eslint-disable-next-line to the line before."
             },
 
             {
@@ -63,10 +63,11 @@ class FetchRoomCritics extends React.Component {
                             </Row>
                         );
 
-                        if ( true || ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length)))
+                        // if ( true || ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length)))
+                        if ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length))
                         {
-                            const roomCritics = dummyCritics.map( (roomCritic, i) =>
-                            // const roomCritics = response.data.data.ratings.map( (critic, i) =>
+                            // const roomCritics = dummyCritics.map( (roomCritic, i) =>
+                            const roomCritics = response.data.data.ratings.map( (roomCritic, i) =>
                                 <RoomCritic 
                                     key={this.props.roomId + "_" + i}
                                     roomCritic={roomCritic}
