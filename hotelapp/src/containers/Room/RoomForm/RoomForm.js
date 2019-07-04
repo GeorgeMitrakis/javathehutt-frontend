@@ -8,6 +8,8 @@ import produce from 'immer';
 import qs from "querystring";
 import styles from './RoomForm.module.css'
 import { getUserInfo} from '../../../Utility/Utility';
+import {checkValidity} from '../../../Utility/Utility';
+import MyInput from '../../../components/UI/MyInput/MyInput'
 
 
 // const facilities = {
@@ -37,54 +39,53 @@ class RoomForm extends Component{
                     value: this.props.room ? this.props.room['roomName'] : "",
                     type: "text",
                     placeholder: "Όνομα Δωματιου",
+                    feedback: null,
+                    validity: ''
                 },
                 price: {
                     rules: {
-                        required: true
+                        isNumeric: true
                     },
                     id: "price",
                     name: "Τιμή",
                     value: this.props.room ? this.props.room['price'] : "",
                     type: "number",
                     placeholder: "150€",
-                },
-                capacity: {
-                    rules: {
-                        required: true
-                    },
-                    id: "capacity",
-                    name: "Δωμάτια",
-                    value: 1,
-                    type: "number",
-                    placeholder: "1",
+                    feedback: null,
+                    validity: ''
                 },
                 maxOccupants: {
                     rules: {
-                        required: true
+                        isNumeric: true
                     },
                     id: "maxOccupants",
                     name: "Κλίνες",
                     value: this.props.room ? this.props.room['maxOccupants'] : "",
                     type: "number",
                     placeholder: "2",
+                    feedback: null,
+                    validity: ''
                 },
                 cityName: {
                     rules: {
                         required: true
                     },
-                    id: "roomName",
+                    id: "cityName",
                     name: "Πόλη",
                     value: this.props.room ? this.props.room.location['cityname'] : "",
                     type: "text",
                     placeholder: "Athens",
+                    feedback: null,
+                    validity: ''
                 },
                 description: {
-        
                     id: "descr",
                     name: "Περιγραφή Δωματίου",
                     value: this.props.room ? this.props.room['description'] : "",
                     type: "textarea",
                     placeholder: "Προσθέστε κάτι σχετικό με το δωμάτιο",
+                    feedback: null,
+                    validity: ''
                 }
             },
             coords: {
@@ -111,13 +112,14 @@ class RoomForm extends Component{
 	
 	mapClickedHandler = (mapProps, map, e) => {
         console.log(this.state.coords);
+        this.mapToggle();
         this.setState(
             produce(draft => {
                 draft.coords['cordX'] = mapProps.lat;
                 draft.coords['cordY'] = mapProps.lng;
             })
         );
-		this.mapToggle();
+		
         console.log(mapProps);
         console.log("egine toggle");
         console.log(this.state.coords);
@@ -129,7 +131,21 @@ class RoomForm extends Component{
         // );
 		// coords['cordX'] = mapProps.lat;
 		// coords['cordY'] = mapProps.lng;
-	}
+    }
+    
+    setFormWithError = () => {
+        this.setState(
+            produce(draft => {
+                draft.formControls.price.value = '';
+                draft.formControls.price.feedback = "Εισάγατε λανθασμένα στοιχεία";
+                draft.formControls.price.validity = "is-invalid";
+          
+                draft.formControls.maxOccupants.value = '';
+                draft.formControls.maxOccupants.feedback = "Εισάγατε λανθασμένα στοιχεία";
+                draft.formControls.maxOccupants.validity = "is-invalid";
+            })
+        );
+    }
 
 	handleCheckBoxChange = (label) => {
         console.log("[FiltersTab.js]");
@@ -143,21 +159,55 @@ class RoomForm extends Component{
         console.log(this.state.facilities);
     }
 
+    setFormField = (controlName, feedback, validity, value) => {
+        this.setState(
+            produce(draft => {
+                draft.formControls[controlName].feedback = feedback;
+                draft.formControls[controlName].validity = validity;
+                if (value)
+                {
+                    draft.formControls[controlName].value = value;
+                }
+            })
+        );
+    }
+
     inputChangedHandler= (event, controlName) => {
+        
 		const value = event.target.value;
 		this.setState( 
             produce(draft => { 
                 draft.formControls[controlName].value = value; 
             }) 
-        ); 
+        );
+        
+        const res = checkValidity(value, this.state.formControls[controlName].rules);
+        if (res.report)
+        {
+            //console.log("ola eginan ok");
+            this.setFormField(controlName, null, '', null);
+        }
+        else
+        {
+            this.setFormField(controlName, res.msg, "is-invalid", null);
+        }    
     }
 
     submitForm = (event) => {
 		event.preventDefault();
 		
-		let formData = {};
-		formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
+        let formData = {};
+        let formIsValid = true;
+        let errFeedBack = {};
+        formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
+        formData['capacity'] = 1;
 		for ( let key in this.state.formControls ) {
+            const res = checkValidity(this.state.formControls[key].value, this.state.formControls[key].rules);
+            if (!res.report)
+            {
+                formIsValid = false;
+                errFeedBack[key] = res.msg;
+            }
             formData[key] = this.state.formControls[key].value;
 		}
 		
@@ -168,7 +218,21 @@ class RoomForm extends Component{
 		
 		for(let key in this.state.coords){
 			formData[key] = this.state.coords[key];
-		}
+        }
+        
+        if (!formIsValid)
+        {
+            this.setState(
+                produce(draft => {
+                    for ( let key in errFeedBack ) 
+                    {
+                        draft.formControls[key].feedback = errFeedBack[key];
+                        draft.formControls[key].validity = "is-invalid";
+                    }
+                })
+            );
+            return;
+        }
 
 		console.log("---Form Data---");
 		console.log(formData);
@@ -203,10 +267,19 @@ class RoomForm extends Component{
     
     editRoomHandler = () => {
 
-		let formData = {};
+        let formData = {};
+        let formIsValid = true;
+        let errFeedBack = {};
 		// formData['providerId'] = JSON.parse(localStorage.getItem('userInfo'))["id"];
-		formData['roomId'] = this.props.room['id'];
+        formData['roomId'] = this.props.room['id'];
+        formData['capacity'] = 1;
 		for ( let key in this.state.formControls ) {
+            const res = checkValidity(this.state.formControls[key].value, this.state.formControls[key].rules);
+            if (!res.report)
+            {
+                formIsValid = false;
+                errFeedBack[key] = res.msg;
+            }
             formData[key] = this.state.formControls[key].value;
 		}
 		
@@ -216,7 +289,22 @@ class RoomForm extends Component{
 
 		for(let key in this.state.coords){
 			formData[key] = this.state.coords[key];
-		}
+        }
+        
+        
+        if (!formIsValid)
+        {
+            this.setState(
+                produce(draft => {
+                    for ( let key in errFeedBack ) 
+                    {
+                        draft.formControls[key].feedback = errFeedBack[key];
+                        draft.formControls[key].validity = "is-invalid";
+                    }
+                })
+            );
+            return;
+        }
 
 		console.log("---Form Data---");
 		console.log(formData);
@@ -248,7 +336,6 @@ class RoomForm extends Component{
             console.log(err);
         })
 		
-		// alert("Kanw edit");
 	}
 	
     
@@ -261,14 +348,6 @@ class RoomForm extends Component{
         const formElementsArray = [];
         for ( let key in this.state.formControls ) {
 			let obj = this.state.formControls[key]
-			// if(this.state.deletedRoom){
-			// 	if(key === 'cityName'){
-			// 		obj['value'] = this.state.deletedRoom.location['cityname']
-			// 	}
-			// 	else{
-			// 		obj['value'] = this.state.deletedRoom[key]
-			// 	}
-			// }
             formElementsArray.push( {
                 id: key,
                 config: obj
@@ -276,15 +355,18 @@ class RoomForm extends Component{
         }
         let formFields = formElementsArray.map( formElement => (
 			<FormGroup row	key={formElement.id}>
-			<Label for={formElement.config.id} sm={2}>{formElement.config.name}</Label>
-			<Col sm={10}>
-				<Input 
+			{/* <Label for={formElement.config.id} sm={2}>{formElement.config.name}</Label> */}
+			<Col sm={12}>
+				<MyInput
+                    key={formElement.id} 
 					id={formElement.config.id}
 					name={formElement.config.name}
-					onChange={( event ) => this.inputChangedHandler( event, formElement.id )}
+					changed={( event ) => this.inputChangedHandler( event, formElement.id )}
 					type={formElement.config.type}
 					value={formElement.config.value}
 					placeholder={formElement.config.placeholder}
+                    feedback={formElement.config.feedback}
+                    validity={formElement.config.validity}
                 />
 			</Col>
 			</FormGroup>
