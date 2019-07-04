@@ -79,7 +79,7 @@ class Checkout extends Component{
 
     handleCardId(event){
         let id=event.target.value;
-        const res = checkValidity(id, this.state.card.id.rules);
+        let res = checkValidity(id, this.state.card.id.rules);
 		this.setState(
             produce(draft => {
 				draft.card.id.value = id;
@@ -97,7 +97,7 @@ class Checkout extends Component{
 
     handleCSC(event){
         let csc=event.target.value;
-        const res = checkValidity(csc, this.state.card.csc.rules);
+        let res = checkValidity(csc, this.state.card.csc.rules);
         this.setState(
             produce(draft => {
 				draft.card.csc.value = csc;
@@ -115,7 +115,7 @@ class Checkout extends Component{
 
     handleCardExpdate(event){
         let expdate=event.target.value;
-        const res = checkValidity(expdate, this.state.card.expdate.rules);
+        let res = checkValidity(expdate, this.state.card.expdate.rules);
         this.setState(
             produce(draft => {
 				draft.card.expdate.value = expdate;
@@ -160,21 +160,22 @@ class Checkout extends Component{
     submitForm = (event, bookingInfo) => {
 		event.preventDefault();
 
-		const resid = checkValidity(this.state.card.id.value, this.state.card.id.rules);
-		const rescsc = checkValidity(this.state.card.csc.value, this.state.card.csc.rules);
-		const resexpdate = checkValidity(this.state.card.expdate.value, this.state.card.expdate.rules);
+		let resid = checkValidity(this.state.card.id.value, this.state.card.id.rules);
+		let rescsc = checkValidity(this.state.card.csc.value, this.state.card.csc.rules);
+		let resexpdate = checkValidity(this.state.card.expdate.value, this.state.card.expdate.rules);
 		
 
 		const res = {
 			id: resid,
-		 	csc: rescsc,
+			csc: rescsc,
 		 	expdate: resexpdate
 		}
-
+		console.log(res);
+		console.log(this.state);
 		if(!resid.report || !rescsc.report || !resexpdate.report){
 			this.setState(
 				produce(draft => {
-					for(let i in this.state.card && i !== 'type'){
+					for(let i in res){
 						if(!res[i].report){
 							draft.card[i].feedback = res[i].msg;
 							draft.card[i].validity = "is-invalid";
@@ -194,7 +195,7 @@ class Checkout extends Component{
 
         let formData = {};
         formData["userId"] = getUserInfoField("id");
-        formData["roomId"] = bookingInfo.id;
+        formData["roomId"] = bookingInfo.roomId;
         formData["startDate"] = bookingInfo.startDate;
         formData["endDate"] = bookingInfo.endDate;
         formData["occupants"] = Number(bookingInfo.adults) + Number(bookingInfo.children);
@@ -383,6 +384,7 @@ class Checkout extends Component{
 													name='ID:'
 													type='text'
 													placeholder="π.χ. 1111222233334444"
+													value={this.state.card.id.value}
 													feedback={this.state.card.id.feedback}
 													validity={this.state.card.id.validity}
 													changed={this.handleCardId.bind(this)}
@@ -394,9 +396,10 @@ class Checkout extends Component{
 													name="Αρ.Ασφαλείας:"
 													type="text"
 													placeholder="π.χ. 123"
+													value={this.state.card.csc.value}
 													feedback={this.state.card.csc.feedback}
 													validity={this.state.card.csc.validity}
-													onChange={this.handleCSC.bind(this)}
+													changed={this.handleCSC.bind(this)}
 												/>
 											</Col>
 										</Row>
@@ -450,9 +453,10 @@ class Checkout extends Component{
 													name="Ημερομηνία λήξης:"
 													type="date"
 													min={this.todayIs()}
+													value={this.state.card.expdate.value}
 													feedback={this.state.card.expdate.feedback}
 													validity={this.state.card.expdate.validity}
-													onChange={this.handleCardExpdate.bind(this)}
+													changed={this.handleCardExpdate.bind(this)}
 												/>
 											</Col>
 										</Row>							
