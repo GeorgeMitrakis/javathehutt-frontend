@@ -64,9 +64,9 @@ class RoomPresentation extends React.Component {
                                     {this.props.room.provider.providername}
                                 </Header>
 
-                                <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
+                                {/* <div className="d-flex flex-grow-1 font-weight-bold sec_color border">
                                     {stars}
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className={styles.sub_header}> 
