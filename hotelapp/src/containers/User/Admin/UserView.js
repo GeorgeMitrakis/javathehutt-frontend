@@ -2,7 +2,7 @@ import React from 'react';
 //import { Route } from 'react-router-dom';
 import axios from 'axios';
 import qs from 'querystring';
-import { Row, Col, Container} from 'reactstrap';
+import { Row, Col, Container, Alert} from 'reactstrap';
 //import Button from 'reactstrap/lib/Button';
 import produce from 'immer';
 //import myInput from '../../../components/UI/MyInput/MyInput';
@@ -87,7 +87,7 @@ class UserView extends React.Component {
 
     ban(u){
         //const id = e.target.value;
-        if(!window.confirm(`Ban user ${u.email}?`)) return;
+        if(!window.confirm(`Μπανάρισμα του χρήστη ${u.email}?`)) return;
         let data = {
             'option':"ban",
             "id":u.id
@@ -102,7 +102,9 @@ class UserView extends React.Component {
         )
         .then((result) => {
             if(result.data.success){
-                alert("ban Submitted - ok");
+				//window.scrollTo(0, 0);
+				this.props.alert("Ο χρήστης με email :\""+u.email+"\" δικάστηκε.");
+
 				this.searchUsers();
             }else{
                 alert("ban Submitted - fail");
@@ -118,7 +120,7 @@ class UserView extends React.Component {
     }
 
     unban(u){
-        if(!window.confirm(`Unban user ${u.email}?`)) return;
+        if(!window.confirm(`Ξε-μπανάρισμα του χρήστη ${u.email}?`)) return;
         let data = {
             'option':"unban",
             "id":u.id
@@ -133,7 +135,8 @@ class UserView extends React.Component {
         .then((result) => {
            
             if(result.data.success){
-                alert("Unban Submitted - ok");
+				this.props.alert("Ο χρήστης με email :\""+u.email+"\" πήρε δεύτερη ευκαιρία.");
+				
 				this.searchUsers();
             }else{
                 alert("Unban Submitted - fail");
@@ -148,7 +151,7 @@ class UserView extends React.Component {
 
     promote(u){
         //const id = e.target.value;
-        if(!window.confirm(`Promote user ${u.email}?`)) return;
+        if(!window.confirm(`Προαγωγή του χρήστη ${u.email} σε διαχειριστή;`)) return;
         let data = {
             'option':"promote",
             "id":u.id
@@ -163,7 +166,9 @@ class UserView extends React.Component {
         .then((result) => {
             console.log(result);
             if(result.data.success){
-                alert("prom Submitted - ok");
+				//alert("prom Submitted - ok");
+				this.props.alert("Ο χρήστης με email :\""+u.email+"\" πήρε σφυράκι.");
+					
 				this.searchUsers();
             }else{
                 alert("prom Submitted - fail.\nReason:"+result.data.message);
@@ -177,7 +182,7 @@ class UserView extends React.Component {
 		
     }
 	
-
+	
 
     render() {
 

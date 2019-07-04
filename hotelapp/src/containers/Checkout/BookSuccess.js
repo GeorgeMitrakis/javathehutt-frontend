@@ -51,6 +51,7 @@ class BookSuccess extends Component{
 						<Row className="d-flex justify-content-center" xs="auto">
 							<Button 
 								size="sm"
+								color="info"
 								xs="auto" lg="3" xl="3"
 								onClick={(event) => this.clickHandler(event)}
 								>

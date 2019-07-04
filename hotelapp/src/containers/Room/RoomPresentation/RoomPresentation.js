@@ -8,7 +8,6 @@ import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import produce from 'immer';
-import FetchRoomPhotos from './ExpandableRoomInfo/FetchRoomPhotos/FetchRoomPhotos';
 
 
 class RoomPresentation extends React.Component {
@@ -54,7 +53,7 @@ class RoomPresentation extends React.Component {
         return (
             <Row className={"mb-4 " + styles.room}>
                 <Container fluid className="border">
-                    <Row className="border p-2">
+                    <Row className="border p-0">
                         <Col md="4" className="p-0 m-0 border">
                             <img src={"http://localhost:8765/app/api/img?roomId=" + this.props.room.id} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>
@@ -126,10 +125,7 @@ class RoomPresentation extends React.Component {
 
                     <Row className="border">
                         <Collapse className="w-100" isOpen={this.state.collapse}>
-                            <ExpandableRoomInfo 
-                                room={this.props.room}
-                                renderFlag={this.state.expanded}
-                            />
+                            { this.state.expanded ? <ExpandableRoomInfo room={this.props.room}/> : null}
                         </Collapse>
                     </Row>
                 </Container>
