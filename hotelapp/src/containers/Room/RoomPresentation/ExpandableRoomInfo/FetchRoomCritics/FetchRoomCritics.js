@@ -3,23 +3,61 @@ import { withRouter } from 'react-router-dom';
 import { Row, Spinner } from 'reactstrap';
 import { Get } from 'react-axios';
 import RoomCritic from './RoomCritic/RoomCritic';
+import produce from 'immer';
+import axios from 'axios';
 
 
 class FetchRoomCritics extends React.Component {
 
+    state = {
+        reFetchCritics: false
+    }
+
+    toggleReFetchCritics = () => {
+		this.setState(
+            produce(draft => {
+				draft.reFetchCritics = ! draft.reFetchCritics;
+            })
+        );
+    }
+    
+    deleteCriticHandler = (criticId) => {
+        // alert(criticId);
+
+        axios.delete('http://localhost:8765/app/api/ratings', {
+            params: {
+                ratingId: criticId
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+            if (response.data.success)
+            {
+                this.toggleReFetchCritics();
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    }
+
     render() {
         const dummyCritics = [
             {
+                id: 0,
                 stars: 1,
                 comment: "Search for the keywords to learn more about each warning.To ignore, add // eslint-disable-next-line to the line before."
             },
 
             {
+                id: 1,
                 stars: 5,
                 comment: "Search for the keywords to learn more about each warning.To ignore, add //Search for the keywords to learn more about each warning.ToSearch for the keywords to learn more about each warning.To eslint-disable-next-line to the line before."
             },
 
             {
+                id: 2,
                 stars: 3,
                 comment: "Search for the keywords to learn more about each warning.To ignore, add // eslint-disable-next-line to the line before."
             }
@@ -28,7 +66,7 @@ class FetchRoomCritics extends React.Component {
 
         return (
 
-            <Get url="http://localhost:8765/app/api/ratings" params={{roomId: this.props.roomId}}>
+            <Get url="http://localhost:8765/app/api/ratings" params={{roomId: this.props.roomId, reFetch: this.state.reFetchCritics}}>
                 {(error, response, isLoading, makeRequest, axios) => {
                     if (error) {
                         const feedback = (
@@ -69,6 +107,7 @@ class FetchRoomCritics extends React.Component {
                             // const roomCritics = dummyCritics.map( (roomCritic, i) =>
                             const roomCritics = response.data.data.ratings.map( (roomCritic, i) =>
                                 <RoomCritic 
+                                    deleteCriticHandler = {() => this.deleteCriticHandler(roomCritic.id)}
                                     key={this.props.roomId + "_" + i}
                                     roomCritic={roomCritic}
                                 />
