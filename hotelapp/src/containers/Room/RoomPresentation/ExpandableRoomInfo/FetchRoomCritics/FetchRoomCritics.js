@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { UncontrolledCarousel, Row, Spinner } from 'reactstrap';
+import { Row, Spinner } from 'reactstrap';
 import { Get } from 'react-axios';
 import RoomCritic from './RoomCritic/RoomCritic';
 
@@ -8,7 +8,23 @@ import RoomCritic from './RoomCritic/RoomCritic';
 class FetchRoomCritics extends React.Component {
 
     render() {
-        
+        const dummyCritics = [
+            {
+                stars: 1,
+                comment: "Search for the keywords to learn more about each warning.To ignore, add // eslint-disable-next-line to the line before."
+            },
+
+            {
+                stars: 5,
+                comment: "Search for the keywords to learn more about each warning.To ignore, add //Search for the keywords to learn more about each warning.ToSearch for the keywords to learn more about each warning.To eslint-disable-next-line to the line before."
+            },
+
+            {
+                stars: 3,
+                comment: "Search for the keywords to learn more about each warning.To ignore, add // eslint-disable-next-line to the line before."
+            }
+
+        ];
 
         return (
 
@@ -47,12 +63,14 @@ class FetchRoomCritics extends React.Component {
                             </Row>
                         );
 
+                        // if ( true || ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length)))
                         if ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length))
                         {
-                            const roomCritics = response.data.data.ratings.map( (critic, i) =>
+                            // const roomCritics = dummyCritics.map( (roomCritic, i) =>
+                            const roomCritics = response.data.data.ratings.map( (roomCritic, i) =>
                                 <RoomCritic 
                                     key={this.props.roomId + "_" + i}
-                                    critic={critic}
+                                    roomCritic={roomCritic}
                                 />
                             );
 
@@ -61,7 +79,7 @@ class FetchRoomCritics extends React.Component {
                         else
                         {
                             return noResults;
-                        }
+                        } 
                     }
 
                     return null;

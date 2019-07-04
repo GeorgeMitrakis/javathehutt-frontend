@@ -23,7 +23,8 @@ class ProviderRooms extends Component {
 			deleteRoomModal: false,
 			photoInsertModal: false,
 			reFetchRooms: false,
-			room: null
+			room: null,
+			urls: null
 		};
 
 		this.toggleDeleteRoomModal = this.toggleDeleteRoomModal.bind(this);
@@ -38,20 +39,22 @@ class ProviderRooms extends Component {
 		this.setState(
             produce(draft => {
 				draft.photoInsertModal = !draft.photoInsertModal;
-				draft.room = null;
+				draft.urls = null;
             })
 		);
 	}
 
-	photoInsertHandler = (room) => {
+	photoInsertHandler = (urls) => {
 
 		this.togglePhotoModal();
 		this.setState(
             produce(draft => {
-				draft.room = room;
+				draft.urls = urls;
             })
 		);
-
+		alert("ETOIMOS GIA EIKONES MALAKES");
+		console.log('Tupwnw urls')
+		console.log(urls)
 		// if (!this.state.room)
 		// {
 		// 	alert("PAIXTHKE TROLIA OLO MALAKIES");
