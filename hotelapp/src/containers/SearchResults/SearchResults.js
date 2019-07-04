@@ -32,8 +32,8 @@ const searchFiltersDefaults = {
 
 const searchInfoDefaults = {
     destination: "",
-    fromDate: todayIs(),
-    toDate: tomorrowIs(),
+    startDate: todayIs(),
+    endDate: tomorrowIs(),
     //rooms: 1,
     adults: 1,
     children: 0
@@ -41,7 +41,7 @@ const searchInfoDefaults = {
 
 //const numSearchInfo = ["rooms", "adults", "children"];
 const numSearchInfo = ["adults", "children"];
-const datesSearchInfo = ["fromDate", "toDate"];
+const datesSearchInfo = ["startDate", "endDate"];
 
 
 class SearchResults extends React.Component {
@@ -165,10 +165,10 @@ class SearchResults extends React.Component {
 
         });
 
-        if (cmpDates(searchInfo.fromDate, searchInfo.toDate) >= 0)
+        if (cmpDates(searchInfo.startDate, searchInfo.endDate) >= 0)
         {
-            searchInfo.fromDate = searchInfoDefaults.fromDate;
-            searchInfo.toDate = searchInfoDefaults.toDate;
+            searchInfo.startDate = searchInfoDefaults.startDate;
+            searchInfo.endDate = searchInfoDefaults.endDate;
         }
 
         return searchInfo;
@@ -233,8 +233,17 @@ class SearchResults extends React.Component {
             const params = {
                 hotel_id: "123456",
                 ...roomInfo,
-                ...searchInfo
-            }
+				...searchInfo,
+				cityname:roomInfo.location.cityname,
+				providername:roomInfo.provider.providername
+			}
+			console.log(params);
+			console.log("\n=====\n");
+			console.log(roomInfo);
+			console.log("\n---__---\n");
+			console.log(searchInfo);
+			
+			console.log("////////\n");
             const queryParams = createQueryParams(params);
             console.log("Inside SearchResults. About to redirect to: /book?" + queryParams);
             this.props.history.push("/book?" + queryParams);
