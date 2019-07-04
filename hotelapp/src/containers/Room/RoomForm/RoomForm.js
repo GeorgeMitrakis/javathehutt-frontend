@@ -12,18 +12,6 @@ import {checkValidity} from '../../../Utility/Utility';
 import MyInput from '../../../components/UI/MyInput/MyInput'
 
 
-// const facilities = {
-// 	breakfast:  false,
-// 	wifi: false,
-// 	pool: false,
-// 	shauna: false
-// }
-
-// const coords = {
-// 	cordX: "",
-// 	cordY: ""
-// }
-
 class RoomForm extends Component{
     constructor(props){
         super(props)
@@ -78,6 +66,18 @@ class RoomForm extends Component{
                     feedback: null,
                     validity: ''
                 },
+                url: {
+                    rules: {
+                        required: true
+                    },
+                    id: "url",
+                    name: "Url Φωτογραφίας",
+                    value: this.props.room ? this.props.room['url'] : "",
+                    type: "text",
+                    placeholder: "www.google.gr/photos",
+                    feedback: null,
+                    validity: ''
+                },
                 description: {
                     id: "descr",
                     name: "Περιγραφή Δωματίου",
@@ -86,7 +86,8 @@ class RoomForm extends Component{
                     placeholder: "Προσθέστε κάτι σχετικό με το δωμάτιο",
                     feedback: null,
                     validity: ''
-                }
+                },
+                
             },
             coords: {
                 cordX: this.props.room ? this.props.room.location['cordX'] : "",

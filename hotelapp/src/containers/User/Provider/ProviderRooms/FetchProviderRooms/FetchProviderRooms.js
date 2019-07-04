@@ -71,6 +71,7 @@ class FetchProviderRooms extends React.Component{
                                     renderProvFuncs={true}
                                     deleteRoomModalHandler={ () => this.props.deleteRoomModalHandler(room) }
                                     editRoomModalHandler={ () => this.props.editRoomModalHandler(room) }
+                                    photoInsertHandler={ () => this.props.photoInsertHandler(room)}
                                     room={room} 
                                 />
                             );

@@ -102,7 +102,9 @@ class RoomPresentation extends React.Component {
                                                 <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2" onClick={this.props.editRoomModalHandler}>
                                                     <i className="fas fa-pencil-alt"></i>           
                                                 </Button>
-
+                                                <Button style={{color: "black"}} color="info" className="font-weight-bold mr-2" onClick={this.props.photoInsertHandler}>
+                                                <i className="far fa-image"></i>          
+                                                </Button>
                                                 <Button style={{color: "black"}} color="danger" className="font-weight-bold" onClick={this.props.deleteRoomModalHandler}>
                                                     <i className="fas fa-trash-alt" ></i>
                                                 </Button>
