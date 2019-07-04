@@ -155,21 +155,28 @@ class ProviderRooms extends Component {
 		return(
 				<>
 				<Container className={styles['results-container']}>
-					<Row className={styles['top-row']}>
-						<Col xs="8" sm="8" md="10" lg="10">
-							<h3 className={styles['title']}>My rooms</h3>
-						</Col>
-						<Col xs="4" sm="4" md="2" lg="2">
-							<Button className={styles['room-add-btn']} color="success" size="sm" onClick={this.toggleRoomFormModal}>Προσθήκη Δωματίου</Button>
-						</Col>
+					<Row className={styles['top-row']+"d-flex justify-content-center"}>
+                        <div className={"pr-2 pl-2 mr-2 " + styles.header}>
+                        <Header>
+                            Καταχωρημένα δωμάτια
+                        </Header>
+                        </div>
+						<Button className={styles['room-add-btn']} color="success" size="sm" onClick={this.toggleRoomFormModal}>Προσθήκη Δωματίου</Button>
 					</Row>
-					
-                    <FetchProviderRooms 
-                        reFetchRooms={this.state.reFetchRooms}
-						editRoomModalHandler={this.editRoomModalHandler}
-						deleteRoomModalHandler={this.deleteRoomModalHandler}
-						photoInsertHandler={this.photoInsertHandler}
-					/>
+					<Row className="mt-5"/>
+					<Row>
+						<Col xs="0" md="0" lg="1" xl="2"/>
+						<Col>
+							<FetchProviderRooms 
+								reFetchRooms={this.state.reFetchRooms}
+								editRoomModalHandler={this.editRoomModalHandler}
+								deleteRoomModalHandler={this.deleteRoomModalHandler}
+								photoInsertHandler={this.photoInsertHandler}
+							/>
+						</Col>
+						<Col xs="0" md="0" lg="1" xl="2"/>
+					</Row>
+                    
 				</Container>
 
 

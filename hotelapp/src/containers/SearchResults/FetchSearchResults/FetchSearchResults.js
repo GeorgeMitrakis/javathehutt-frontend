@@ -96,7 +96,12 @@ class FetchSearchResults extends React.Component {
 		console.log(this.props);
 
 
-		let params ={};
+        let params ={};
+        
+        if (this.props.searchFilters.searchText !== "" )
+        {
+            params['description'] = this.props.searchFilters.searchText;
+        }
 
 		params['minPrice'] = this.props.searchFilters.minPrice;
 		params['maxPrice'] = this.props.searchFilters.maxPrice;

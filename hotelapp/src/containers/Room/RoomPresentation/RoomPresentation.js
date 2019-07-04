@@ -52,15 +52,15 @@ class RoomPresentation extends React.Component {
 
         return (
             <Row className={"mb-4 " + styles.room}>
-                <Container fluid className="border">
-                    <Row className="border p-0">
+                <Container fluid className="">
+                    <Row className=" p-2 border-bottom">
                         <Col md="4" className="p-0 m-0 border">
                             <img src={"http://localhost:8765/app/api/img?roomId=" + this.props.room.id} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>
 
-                        <Col md="8" className="p-0 m-0 pl-2 d-flex-column border">
+                        <Col md="8" className="p-0 m-0 pl-2 d-flex-column ">
                             <div className="d-flex align-items-center">
-                                <Header classes="d-flex flex-shrink-1 border">
+                                <Header classes="d-flex flex-shrink-1 ">
                                     {this.props.room.provider.providername}
                                 </Header>
 
@@ -84,8 +84,8 @@ class RoomPresentation extends React.Component {
                                 {/* industry. Lorem Ipsum has been the industry's standard dummy text eve */}
                             </div>
 
-                            <div className="d-flex justify-content-between border">
-                                <div className="d-flex align-items-center border">
+                            <div className="d-flex justify-content-between ">
+                                <div className="d-flex align-items-center ">
                                     <Button className="p-0 m-0" color="link" onClick={this.toggleCollapse} >
                                         {!this.state.collapse ? "Περισσότερα" : "Λιγότερα"}
                                     </Button>
@@ -97,7 +97,7 @@ class RoomPresentation extends React.Component {
                                     </Header>
 
                                     {  this.props.renderProvFuncs ?
-                                        (   <div className="d-flex justify-content-end border">
+                                        (   <div className="d-flex justify-content-end ">
                                                 <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2" onClick={this.props.editRoomModalHandler}>
                                                     <i className="fas fa-pencil-alt"></i>           
                                                 </Button>
@@ -123,7 +123,7 @@ class RoomPresentation extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row className="border">
+                    <Row className="">
                         <Collapse className="w-100" isOpen={this.state.collapse}>
                             { this.state.expanded ? <ExpandableRoomInfo room={this.props.room}/> : null}
                         </Collapse>

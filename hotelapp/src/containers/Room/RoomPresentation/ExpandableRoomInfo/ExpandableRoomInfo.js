@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import produce from 'immer';
 import FetchRoomPhotos from './FetchRoomPhotos/FetchRoomPhotos';
 import FetchRoomCritics from './FetchRoomCritics/FetchRoomCritics';
+import classes from '../RoomPresentation.module.css';
 
 
 class ExpandableRoomInfo extends React.Component {
@@ -78,39 +79,39 @@ class ExpandableRoomInfo extends React.Component {
                     </NavItem>
                 </Nav>
                 
-                <TabContent className="border p-2 " activeTab={this.state.activeTab}>
-                    <TabPane className="border" tabId="facilities">
-                        <Container className="border">
+                <TabContent className=" p-2 " activeTab={this.state.activeTab}>
+                    <TabPane className="" tabId="facilities">
+                        <Container className="">
                             {this.props.room.breakfast ?
-                                (<Row className="border pl-3 align-items-center">
+                                (<Row className=" pl-3 align-items-center">
                                     <i className="fas fa-coffee mr-3"></i> Πρωινό
                                 </Row>
                                 ) : null
                             }
 
                             {this.props.room.shauna ?
-                                (<Row className="border pl-3 align-items-center">
+                                (<Row className=" pl-3 align-items-center">
                                     <i className="fas fa-hot-tub mr-3"></i> Σάουνα
                                 </Row>
                                 ) : null
                             }
 
                             {this.props.room.pool ?
-                                (<Row className="border pl-3 align-items-center">
+                                (<Row className=" pl-3 align-items-center">
                                     <i className="fas fa-swimming-pool mr-3"></i> Πισίνα
                                 </Row>
                                 ) : null
                             }
 
                             {this.props.room.wifi ?
-                                (<Row className="border pl-3 align-items-center">
+                                (<Row className=" pl-3 align-items-center">
                                     <i className="fas fa-wifi mr-3"></i> WiFi
                                 </Row>
                                 ) : null
                             }
 
                             {!this.props.room.wifi && !this.props.room.shauna && !this.props.room.breakfast && !this.props.room.pool ?
-                                (<Row className="border pl-3 align-items-center text-muted font-italic">
+                                (<Row className=" pl-3 align-items-center text-muted font-italic">
                                     Δεν είναι διαθέσιμες ειδικές παροχές
                                 </Row>
                                 ) : null
@@ -120,11 +121,19 @@ class ExpandableRoomInfo extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="photos">
-                        <FetchRoomPhotos roomId = {this.props.room.id} />
+						<Row id={classes.img_pane}>
+							<Col/>
+							<Col id={classes.img_pane}>
+								<Row>
+									<FetchRoomPhotos roomId = {this.props.room.id} />
+								</Row>
+							</Col>
+							<Col/>
+						</Row>
                     </TabPane>
 
                     <TabPane tabId="critics">
-                        <div className="d-flex-column border">
+                        <div className="d-flex-column ">
                             <FetchRoomCritics roomId = {this.props.room.id} />
                         </div>
                     </TabPane>

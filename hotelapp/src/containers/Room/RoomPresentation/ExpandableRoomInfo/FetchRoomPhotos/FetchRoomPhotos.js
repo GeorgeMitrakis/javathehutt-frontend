@@ -72,6 +72,7 @@ class FetchRoomPhotos extends React.Component {
                                     carouselItems.push({
                                         src: "http://localhost:8765/app/api/img?imgId=" + imgId,
                                         altText: 'Slide ' + (i+1),
+                                        caption: ""
                                     });
                                 });
 
