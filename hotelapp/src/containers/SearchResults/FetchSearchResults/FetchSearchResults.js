@@ -116,9 +116,9 @@ class FetchSearchResults extends React.Component {
 		}
 		else{
 			params['maxDist'] = this.props.searchFilters.maxDist;
-			if(this.props.searchFilters.pointX != null && this.props.searchFilters.pointY != null){
-				params['pointX'] = 53.430957 ;
-				params['pointY'] = -2.960476 ;
+			if(this.props.searchFilters.pointX && this.props.searchFilters.pointY ){
+                params['pointX'] = this.props.searchFilters.pointX ;
+				params['pointY'] = this.props.searchFilters.pointY ;
 			}
 		}
 		return (

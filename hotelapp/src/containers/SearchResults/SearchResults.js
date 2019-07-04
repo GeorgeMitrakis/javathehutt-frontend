@@ -193,6 +193,17 @@ class SearchResults extends React.Component {
                 });
                 searchFilters["facilities"] = facilities;
             }
+            else if ((filterId === "pointX") || (filterId === "pointY"))
+            { //filter is coordinate
+                if ((queryParams[filterId]) && (!isNaN(queryParams[filterId])))
+                {
+                    searchFilters[filterId] = Number(queryParams[filterId]);
+                }
+                else
+                {
+                    searchFilters[filterId] = searchFiltersDefaults[filterId];
+                }
+            }
             else if (filterId !== "searchText")
             { //filter is numeric
                 if ((queryParams[filterId]) && (!isNaN(queryParams[filterId])) && (queryParams[filterId] >=0 ))
@@ -379,21 +390,29 @@ class SearchResults extends React.Component {
     }
 
     mapClickedHandler = (mapProps, searchFilters, searchInfo) => {
-        console.log("apo to maps")
+    
+        if (!this.state.mapModal)
+        {
+            // alert("anoigw to map")
+            this.mapToggle();
+            return;
+        }
+
+        // alert("o xarths einai anoixtos")
+
+         console.log("------>apo to maps")
         console.log(mapProps)
         console.log("----------")
+
+
         searchFilters = produce(searchFilters, draft => {
-            console.log(searchFilters)
-            alert("edw malaka")
             draft.pointX = mapProps.lat;
             draft.pointY = mapProps.lng;
         });
-        console.log("changed Geo Search", searchFilters);
-        this.updateURL(searchFilters, searchInfo);
-        this.mapToggle();
-        console.log("-----------------");
-        console.log("Stoixeia xarth:");
-        console.log(mapProps);
+
+
+        console.log("---->changed Geo Search", searchFilters);
+        this.updateURL(searchFilters, searchInfo);       
     }
 
     render() {
@@ -463,7 +482,7 @@ class SearchResults extends React.Component {
                     <Col xs="12" style={{fontSize: "25px", color: "gray"}} className="d-md-none p-0 m-0">      
                         <MediaQuery maxWidth={767}>
                             <i className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}></i>
-                            <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapClickedHandler}></i>              
+                            <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapToggle}></i>              
                         </MediaQuery>
                     </Col>
                 </Row>
