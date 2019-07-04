@@ -23,11 +23,11 @@ class IndexPage extends React.Component {
                 <div>
 
                     <Row className="justify-content-center">
-                        <h1 className="font-weight-bold"> Hotel App Name</h1>
+                        <h1 className="font-weight-bold"> <span style={{color:"blue"}}>Java</span><span style={{color:"orange"}}>The</span><span style={{color:"red"}}>Hutt</span></h1>
                     </Row>
 
                     <Row className="justify-content-center">
-                        <h2 className="font-weight-bold"> Hotel App Slogan</h2>
+                        <h2 className="font-weight-bold"> Έλα να <a href={"https://www.youtube.com/watch?v=rwmonzAiQ3M"}>την</a> βρείς</h2>
                     </Row>
 
                     <Row className="justify-content-center mr-2 ml-2 mt-5">
