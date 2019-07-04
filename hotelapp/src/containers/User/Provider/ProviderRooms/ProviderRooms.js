@@ -8,6 +8,7 @@ import FetchProviderRooms from './FetchProviderRooms/FetchProviderRooms'
 import { createQueryParams} from '../../../../Utility/Utility';
 import axios from 'axios';
 import Header from '../../../../components/UI/Header/Header'
+import PhotoUrlInput from '../../../Room/RoomForm/PhotoUrlInput'
 
 import styles from './ProviderRooms.module.css'
 
@@ -19,14 +20,43 @@ class ProviderRooms extends Component {
 		this.state = {
 			roomFormModal: false,
 			deleteRoomModal: false,
-			
+			photoInsertModal: false,
 			reFetchRooms: false,
 			room: null
 		};
 
 		this.toggleDeleteRoomModal = this.toggleDeleteRoomModal.bind(this);
 		this.toggleRoomFormModal = this.toggleRoomFormModal.bind(this);
+		this.togglePhotoModal = this.togglePhotoModal.bind(this);
 
+	}
+
+	//--- photo-insert
+
+	togglePhotoModal = () => {
+		this.setState(
+            produce(draft => {
+				draft.photoInsertModal = !draft.photoInsertModal;
+				draft.room = null;
+            })
+		);
+	}
+
+	photoInsertHandler = (room) => {
+
+		this.togglePhotoModal();
+		this.setState(
+            produce(draft => {
+				draft.room = room;
+            })
+		);
+
+		// if (!this.state.room)
+		// {
+		// 	alert("PAIXTHKE TROLIA OLO MALAKIES");
+		// }
+
+		// alert("ETOIMOS GIA EIKONES MALAKES");
 	}
 
 	//--- edit-add room 
@@ -134,6 +164,7 @@ class ProviderRooms extends Component {
                         reFetchRooms={this.state.reFetchRooms}
 						editRoomModalHandler={this.editRoomModalHandler}
 						deleteRoomModalHandler={this.deleteRoomModalHandler}
+						photoInsertHandler={this.photoInsertHandler}
 					/>
 				</Container>
 
@@ -154,15 +185,35 @@ class ProviderRooms extends Component {
 				</Modal>
 
 
-				<Modal isOpen={this.state.deleteRoomModal} toggle={this.toggleDeleteRoomModal} className="modal-lg">
-					<ModalHeader toggle={this.toggleDeleteRoomModal}> Διαγραφή Δωματίου</ModalHeader>
+				<Modal 
+					isOpen={this.state.deleteRoomModal} 
+					toggle={this.toggleDeleteRoomModal} 
+					size="lg"    			    
+					centered
+				>
+					<ModalHeader toggle={this.toggleDeleteRoomModal}> 
+						<Header> 
+							Διαγραφή Δωματίου
+						</Header>
+					</ModalHeader>
 					<ModalBody>
 						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου:   
-						{this.state.room ? this.state.room.roomName : null} 
+						{this.state.room ? <span id={classes.room_name}><b>{' '+this.state.room.roomName+' ;'}</b></span> : null} 
 					</ModalBody>
-					<ModalFooter>
+					<ModalFooter className="p-2">
 						<Button color="secondary" onClick={this.toggleDeleteRoomModal}>Ακύρωση</Button>
 						<Button color="danger" onClick={this.deleteRoomHandler}>Διαγραφή</Button>
+					</ModalFooter>
+				</Modal>
+
+				<Modal isOpen={this.state.photoInsertModal} toggle={this.photoInsertModal} className="modal-lg">
+					<ModalHeader toggle={this.photoInsertModal}> {this.state.room ? "Προσθήκη Φωτογραφιών στο "+this.state.room.roomName : "Προσθήκη Φωτογραφιών"}</ModalHeader>
+					<ModalBody>
+						<PhotoUrlInput />
+					</ModalBody>
+					<ModalFooter>
+						<Button color="secondary" onClick={this.togglePhotoModal}>Ακύρωση</Button>
+						<Button color="primary" onClick={this.photoInsertHandler}>Προσθήκη</Button>
 					</ModalFooter>
 				</Modal>			
 			</>

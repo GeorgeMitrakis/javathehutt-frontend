@@ -22,3 +22,14 @@
     box-shadow: 1px 1px 8px 2px #ccc;
     border-radius: 5px;
 }
+
+#room_name {
+	color: rgb(179, 123, 3); 
+}
+/* 
+.modal-dialog {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
+} */

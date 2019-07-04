@@ -53,7 +53,7 @@ class RoomPresentation extends React.Component {
         return (
             <Row className={"mb-4 " + styles.room}>
                 <Container fluid className="border">
-                    <Row className="border p-2">
+                    <Row className="border p-0">
                         <Col md="4" className="p-0 m-0 border">
                             <img src={"http://localhost:8765/app/api/img?roomId=" + this.props.room.id} style={{height: "100%", width: "100%", maxHeight: "40vh"}} alt="Room Photo" className="img-fluid rounded"/>
                         </Col>
@@ -101,7 +101,9 @@ class RoomPresentation extends React.Component {
                                                 <Button style={{color: "black"}} color="primary" className="font-weight-bold mr-2" onClick={this.props.editRoomModalHandler}>
                                                     <i className="fas fa-pencil-alt"></i>           
                                                 </Button>
-
+                                                <Button style={{color: "black"}} color="info" className="font-weight-bold mr-2" onClick={this.props.photoInsertHandler}>
+                                                <i className="far fa-image"></i>          
+                                                </Button>
                                                 <Button style={{color: "black"}} color="danger" className="font-weight-bold" onClick={this.props.deleteRoomModalHandler}>
                                                     <i className="fas fa-trash-alt" ></i>
                                                 </Button>
