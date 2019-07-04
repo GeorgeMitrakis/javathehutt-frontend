@@ -35,7 +35,7 @@ class IndexPage extends React.Component {
                     </Row>
 
                     <Row  className="justify-content-center mr-2 ml-2 mt-5">
-                        <img style={{width: "95%", height: "45vh"}} src={Venice}/>
+                        <img style={{width: "95%", height: "45vh", "border-radius": "3px"}} src={Venice}/>
                     </Row>
 
                 </div>
