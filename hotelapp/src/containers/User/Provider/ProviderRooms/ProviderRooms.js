@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Button,  Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import { Get, Post } from 'react-axios';
-import { Spinner } from 'reactstrap';
+import { Container, Col, Row, Button,  Modal, 
+	ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+//import { Get, Post } from 'react-axios';
+//import { Spinner } from 'reactstrap';
 import produce from 'immer';
 import RoomForm from '../../../Room/RoomForm/RoomForm';
 import FetchProviderRooms from './FetchProviderRooms/FetchProviderRooms'
@@ -198,7 +199,7 @@ class ProviderRooms extends Component {
 					</ModalHeader>
 					<ModalBody>
 						Είστε σίγουροι πως επιθύμειτε τη διαγραφή του δωματίου:   
-						{this.state.room ? <span id={classes.room_name}><b>{' '+this.state.room.roomName+' ;'}</b></span> : null} 
+						{this.state.room ? <span id={styles.room_name}><b>{' '+this.state.room.roomName+' ;'}</b></span> : null} 
 					</ModalBody>
 					<ModalFooter className="p-2">
 						<Button color="secondary" onClick={this.toggleDeleteRoomModal}>Ακύρωση</Button>
@@ -206,8 +207,17 @@ class ProviderRooms extends Component {
 					</ModalFooter>
 				</Modal>
 
-				<Modal isOpen={this.state.photoInsertModal} toggle={this.photoInsertModal} className="modal-lg">
-					<ModalHeader toggle={this.photoInsertModal}> {this.state.room ? "Προσθήκη Φωτογραφιών στο "+this.state.room.roomName : "Προσθήκη Φωτογραφιών"}</ModalHeader>
+				<Modal 
+					isOpen={this.state.photoInsertModal} 
+					toggle={this.photoInsertModal} 
+					size="lg"    			    
+					centered
+				>
+					<ModalHeader toggle={this.photoInsertModal}>
+						<Header> 
+						 {this.state.room ? "Προσθήκη Φωτογραφιών στο "+this.state.room.roomName : "Προσθήκη Φωτογραφιών"}
+						</Header>
+					</ModalHeader>
 					<ModalBody>
 						<PhotoUrlInput />
 					</ModalBody>

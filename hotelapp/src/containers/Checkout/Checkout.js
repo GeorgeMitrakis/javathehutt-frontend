@@ -5,9 +5,8 @@ import Header from '../../components/UI/Header/Header';
 import MyInput from '../../components/UI/MyInput/MyInput';
 import { checkValidity } from '../../Utility/Utility';
 import { Row, Col, Form, FormGroup, Container, Label,
-    Input, InputGroup, InputGroupText, 
 	InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-	Card, CardHeader, CardBody, Modal, ModalHeader, ModalBody, ModalFooter, Alert} from 'reactstrap';
+	Card, CardHeader, CardBody, Alert } from 'reactstrap';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
 import classes from './Checkout.module.css';
 import axios from 'axios';
