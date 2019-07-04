@@ -3,7 +3,7 @@ import produce from 'immer';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import classes from './Login.module.css';
-import { Card, CardHeader, CardBody, Container, Row, Col, Form} from 'reactstrap';
+import { Card, CardHeader, CardBody, Container, Row, Col, Form, Alert} from 'reactstrap';
 import MyInput from '../../components/UI/MyInput/MyInput';
 import Header from '../../components/UI/Header/Header';
 import SubmitBtn from '../../components/UI/SubmitBtn/SubmitBtn';
@@ -44,9 +44,21 @@ class Login extends React.Component {
                     feedback: null,
                     validity: ''
                 }
-            }
+			},
+			alert:{
+				visible: false,
+				message: ''
+			}
         };
-    }
+	}
+	
+	onDismiss = () => {
+		this.setState(
+			produce( draft => {
+				draft.alert.visible = false;
+			})
+		)
+	}
     
     // closeModal = () => {
     //     // this.setState(
@@ -169,7 +181,13 @@ class Login extends React.Component {
             if (!result.data.success)
             {
                 console.log("login NOT successful");
-                this.setFormWithError();
+				//this.setFormWithError();
+				this.setState(
+					produce( draft => {
+						draft.alert.message = "Ο λογαριασμός δεν υπάρχει ή έχει απενεργοποιηθεί";
+						draft.alert.visible = true;
+					})
+				)
             }
             else
             {
@@ -211,6 +229,15 @@ class Login extends React.Component {
 
         return (               
             <Container fluid id={classes.content}>
+				<Row className="justify-content-center">
+					<Alert 
+							color="danger" 
+							isOpen={this.state.alert.visible} 
+							toggle={() => (this.onDismiss())}
+					>
+						{this.state.alert.message}
+					</Alert>
+				</Row>
                 <Row className="justify-content-center">
                     <Col xs="4"></Col>
                     <Col className="align-self-center p-0" xs="auto">

@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row, Spinner } from 'reactstrap';
 import { Get } from 'react-axios';
-import RoomCritic from './RoomCritic/RoomCritic';
+// import RoomCritic from './RoomCritic/RoomCritic';
 
 
 class FetchRoomCritics extends React.Component {
@@ -79,7 +79,7 @@ class FetchRoomCritics extends React.Component {
                         else
                         {
                             return noResults;
-                        }
+                        } 
                     }
 
                     return null;

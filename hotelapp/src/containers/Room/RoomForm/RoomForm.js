@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Col,  Modal, Form, FormGroup, Label, Input, FormText, Row, Button } from 'reactstrap';
+import { Container, Col,  Modal, Form, FormGroup, Label, FormText, Row, Button } from 'reactstrap';
 
 import GoogleMapReact from 'google-map-react';
 import { Checkbox } from 'pretty-checkbox-react';

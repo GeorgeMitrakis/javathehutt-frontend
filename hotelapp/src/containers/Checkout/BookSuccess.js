@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { Row, Col, Container, Card, CardHeader, CardBody, Button} from 'reactstrap';
 
 class BookSuccess extends Component{
-	constructor(props){
-		super(props);
-	}
+	// constructor(props){
+	// 	super(props);
+	// }
 
 	componentDidMount() {
 		window.scrollTo(0, 0)

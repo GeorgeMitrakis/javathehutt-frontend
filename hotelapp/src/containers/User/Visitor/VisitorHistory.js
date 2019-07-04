@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Row, Col, Container, Card, CardBody } from 'reactstrap';
+import { Row, Col, Container, Card } from 'reactstrap';
 import produce from 'immer';
 import classes from './Visitor.module.css';
 import Header from '../../../components/UI/Header/Header';
-import { getUserInfo, getUserInfoField } from '../../../Utility/Utility';
+import { getUserInfo } from '../../../Utility/Utility';
 
 class VisitorHistory extends Component {
 	constructor(props){

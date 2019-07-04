@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import {  withRouter } from 'react-router-dom';
 import RoomPresentation from '../../Room/RoomPresentation/RoomPresentation';
 import { Get } from 'react-axios';

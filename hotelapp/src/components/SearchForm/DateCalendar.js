@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Label} from "reactstrap";
+import {Col, Input, InputGroup, InputGroupAddon, InputGroupText, Label} from "reactstrap";
 
 const dateCalendar = (props) =>{
 

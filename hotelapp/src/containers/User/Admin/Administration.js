@@ -65,15 +65,15 @@ class Administration extends React.Component {
         return (
 			<div id={classes.content} className="h-100 col-lg-8 offset-lg-2">
 
+				
+				<Row className="justify-content-center mt-5 mb-5" > 				
+					<Header>Διαχείριση Πλατφόρμας</Header>
+				</Row>
 				<Row className="justify-content-center">
 					<Alert color="success" isOpen={this.state.alert.visible} toggle={() => (this.onDismiss())}>
 						{this.state.alert.message}
 					</Alert>
 				</Row>
-				<Row className="justify-content-center mt-5 mb-5" > 				
-					<Header>Διαχείριση Πλατφόρμας</Header>
-				</Row>
-			
 				<Row id={classes.tabs}>
 
 						<Col className="col-lg-3 offset-lg-3">
