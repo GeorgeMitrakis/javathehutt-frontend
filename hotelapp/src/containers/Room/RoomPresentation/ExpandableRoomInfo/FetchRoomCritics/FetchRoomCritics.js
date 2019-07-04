@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { UncontrolledCarousel, Row, Spinner } from 'reactstrap';
 import { Get } from 'react-axios';
-import RoomCritic from './RoomCritic/RoomCritic';
+// import RoomCritic from './RoomCritic/RoomCritic';
 
 
 class FetchRoomCritics extends React.Component {
@@ -47,7 +47,7 @@ class FetchRoomCritics extends React.Component {
                             </Row>
                         );
 
-                        if ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length))
+                        {/* if ((response.data.data) && (response.data.data.ratings) && (response.data.data.ratings.length))
                         {
                             const roomCritics = response.data.data.ratings.map( (critic, i) =>
                                 <RoomCritic 
@@ -61,7 +61,7 @@ class FetchRoomCritics extends React.Component {
                         else
                         {
                             return noResults;
-                        }
+                        } */}
                     }
 
                     return null;

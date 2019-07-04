@@ -10,41 +10,19 @@ class PhotoUrlInput extends Component {
         this.state = { 
             inputList: [{url: ''}] 
         };
-        this.incrementCount = this.incrementCount.bind(this);
-        this.decrementCount = this.decrementCount.bind(this);
     }
 
-    incrementCount() {
-      const inputList = this.state.inputList;
-        this.setState({
-            count: this.state.count + 1,
-            inputList: inputList.concat(<FormGroup row>
-                <Label for="extras" sm={2}>Φωτογραφία {this.count}</Label>
-                <Col sm={10}>
-                    <Input className="add-more"  placeholder="Type1">
-                        
-                    </Input>
-                </Col>
-            </FormGroup>),
-        });
-    }
-    decrementCount() {
-      const inputList = this.state.inputList;
-        this.setState({
-            count: this.state.count - 1,
-            inputList: inputList.concat(
-            ),
-        });
-    }
+    
 
 
     handleUrlChange = idx => evt => {
-        const newUrl = this.state.shareholders.map((shareholder, sidx) => {
-            if (idx !== sidx) return shareholder;
-            return { ...shareholder, name: evt.target.value };
+        const newUrl = this.state.inputList.map((url, sidx) => {
+            if (idx !== sidx) return url;
+            return { ...url, name: evt.target.value };
         });
 
-        this.setState({ url: newUrl });
+        this.setState({ inputList: newUrl });
+        console.log(this.state)
     };
 
 
@@ -55,7 +33,7 @@ class PhotoUrlInput extends Component {
     };
 
     handleUrlChange = idx => event => {
-        const newUrl = this.state.shareholders.map((url, sidx) => {
+        const newUrl = this.state.inputList.map((url, sidx) => {
             if (idx !== sidx) return newUrl;
             return { ...url, url: event.target.value };
         });
@@ -71,13 +49,13 @@ class PhotoUrlInput extends Component {
     render(){
         return (
             <>
-                {this.state.inputList.map((shareholder, idx) => (
-                    <Row className="shareholder">
-                        <Col xs={10} sm={10} style={{'margin-bottom': '7px'}}>
+                {this.state.inputList.map((url, idx) => (
+                    <Row className="url">
+                        <Col xs={10} sm={10} style={{'marginBottom': '7px'}}>
                             <Input
                                 type="text"
                                 placeholder={`Paste link of photo #${idx + 1}`}
-                                value={shareholder.name}
+                                value={url.name}
                                 onChange={this.handleUrlChange(idx)}
                             />
                         </Col>
@@ -87,7 +65,7 @@ class PhotoUrlInput extends Component {
                                 type="button"
                                 onClick={this.handleRemoveUrl(idx)}
                                 className="small"
-                                > <i class="fas fa-minus-circle"></i> </Button>
+                                > <i className="fas fa-minus-circle"></i> </Button>
                     </Col>
                 </Row>
                 ))}
@@ -96,7 +74,7 @@ class PhotoUrlInput extends Component {
                     type="button"
                     onClick={this.handleAddUrl}
                     className="small"
-                ><i class="fas fa-plus-square"></i></Button>
+                ><i className="fas fa-plus-square"></i></Button>
             </>
         );
     }
