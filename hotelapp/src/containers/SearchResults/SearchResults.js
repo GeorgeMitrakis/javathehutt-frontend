@@ -32,8 +32,8 @@ const searchFiltersDefaults = {
 
 const searchInfoDefaults = {
     destination: "",
-    fromDate: todayIs(),
-    toDate: tomorrowIs(),
+    startDate: todayIs(),
+    endDate: tomorrowIs(),
     //rooms: 1,
     adults: 1,
     children: 0
@@ -41,7 +41,7 @@ const searchInfoDefaults = {
 
 //const numSearchInfo = ["rooms", "adults", "children"];
 const numSearchInfo = ["adults", "children"];
-const datesSearchInfo = ["fromDate", "toDate"];
+const datesSearchInfo = ["startDate", "endDate"];
 
 
 class SearchResults extends React.Component {
@@ -165,10 +165,10 @@ class SearchResults extends React.Component {
 
         });
 
-        if (cmpDates(searchInfo.fromDate, searchInfo.toDate) >= 0)
+        if (cmpDates(searchInfo.startDate, searchInfo.endDate) >= 0)
         {
-            searchInfo.fromDate = searchInfoDefaults.fromDate;
-            searchInfo.toDate = searchInfoDefaults.toDate;
+            searchInfo.startDate = searchInfoDefaults.startDate;
+            searchInfo.endDate = searchInfoDefaults.endDate;
         }
 
         return searchInfo;
@@ -192,6 +192,17 @@ class SearchResults extends React.Component {
                     }
                 });
                 searchFilters["facilities"] = facilities;
+            }
+            else if ((filterId === "pointX") || (filterId === "pointY"))
+            { //filter is coordinate
+                if ((queryParams[filterId]) && (!isNaN(queryParams[filterId])))
+                {
+                    searchFilters[filterId] = Number(queryParams[filterId]);
+                }
+                else
+                {
+                    searchFilters[filterId] = searchFiltersDefaults[filterId];
+                }
             }
             else if (filterId !== "searchText")
             { //filter is numeric
@@ -233,8 +244,17 @@ class SearchResults extends React.Component {
             const params = {
                 hotel_id: "123456",
                 ...roomInfo,
-                ...searchInfo
-            }
+				...searchInfo,
+				cityname:roomInfo.location.cityname,
+				providername:roomInfo.provider.providername
+			}
+			console.log(params);
+			console.log("\n=====\n");
+			console.log(roomInfo);
+			console.log("\n---__---\n");
+			console.log(searchInfo);
+			
+			console.log("////////\n");
             const queryParams = createQueryParams(params);
             console.log("Inside SearchResults. About to redirect to: /book?" + queryParams);
             this.props.history.push("/book?" + queryParams);
@@ -379,21 +399,29 @@ class SearchResults extends React.Component {
     }
 
     mapClickedHandler = (mapProps, searchFilters, searchInfo) => {
-        console.log("apo to maps")
+    
+        if (!this.state.mapModal)
+        {
+            // alert("anoigw to map")
+            this.mapToggle();
+            return;
+        }
+
+        // alert("o xarths einai anoixtos")
+
+         console.log("------>apo to maps")
         console.log(mapProps)
         console.log("----------")
+
+
         searchFilters = produce(searchFilters, draft => {
-            console.log(searchFilters)
-            alert("edw malaka")
             draft.pointX = mapProps.lat;
             draft.pointY = mapProps.lng;
         });
-        console.log("changed Geo Search", searchFilters);
-        this.updateURL(searchFilters, searchInfo);
-        this.mapToggle();
-        console.log("-----------------");
-        console.log("Stoixeia xarth:");
-        console.log(mapProps);
+
+
+        console.log("---->changed Geo Search", searchFilters);
+        this.updateURL(searchFilters, searchInfo);       
     }
 
     render() {
@@ -463,7 +491,7 @@ class SearchResults extends React.Component {
                     <Col xs="12" style={{fontSize: "25px", color: "gray"}} className="d-md-none p-0 m-0">      
                         <MediaQuery maxWidth={767}>
                             <i className="fas fa-filter float-right pointer" onClick={this.showFiltersHandler}></i>
-                            <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapClickedHandler}></i>              
+                            <i className="fas fa-map-marked-alt float-right pointer mr-4" onClick={this.mapToggle}></i>              
                         </MediaQuery>
                     </Col>
                 </Row>

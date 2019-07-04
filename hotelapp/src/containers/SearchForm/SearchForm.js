@@ -27,8 +27,8 @@ class SearchForm extends React.Component {
         const fulldate = todayIs();
         this.state = {
             searchText: !this.props.searchInfo ? "" : this.props.searchInfo.destination,
-            fromDate: !this.props.searchInfo ? todayIs() : this.props.searchInfo.fromDate,
-            toDate: !this.props.searchInfo ? tomorrowIs() : this.props.searchInfo.toDate,
+            startDate: !this.props.searchInfo ? todayIs() : this.props.searchInfo.startDate,
+            endDate: !this.props.searchInfo ? tomorrowIs() : this.props.searchInfo.endDate,
             dropdownOpen: false,
             dropdownUnits: !this.props.searchInfo ? 
                 {
@@ -136,8 +136,8 @@ class SearchForm extends React.Component {
         //this.setDefaultsIfEmpty();
         let params = {};
         params["destination"] = this.state.searchText;
-        params["fromDate"] = this.state.fromDate; 
-        params["toDate"] = this.state.toDate; 
+        params["startDate"] = this.state.startDate; 
+        params["endDate"] = this.state.endDate; 
         // params["rooms"] = this.state.dropdownUnits.rooms;
         params["adults"] = this.state.dropdownUnits.adults;
         params["children"] = this.state.dropdownUnits.children;
@@ -198,10 +198,10 @@ class SearchForm extends React.Component {
                         min={todayIs()}
 
                         //stay starting date
-                        value={this.state.fromDate}
+                        value={this.state.startDate}
 
                         //binds date inserted to state
-						change={this.handleDate.bind(this, 'fromDate')}
+						change={this.handleDate.bind(this, 'startDate')}
 						
 
 
@@ -215,13 +215,13 @@ class SearchForm extends React.Component {
                         text={"Έως"}
 
                         //room booking can only end after the starting date
-                        min={nextDayIs(this.state.fromDate)}
+                        min={nextDayIs(this.state.startDate)}
 
                         //stay ending date
-                        value={this.state.toDate}
+                        value={this.state.endDate}
 
                         //binds date inserted to state
-						change={this.handleDate.bind(this, 'toDate')}
+						change={this.handleDate.bind(this, 'endDate')}
 						
 
                     />

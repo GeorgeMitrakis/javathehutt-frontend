@@ -31,8 +31,8 @@ class BookSuccess extends Component{
 							<CardBody>
 								<Col>
 									<Row>
-										<Col className=" p-0" xs="auto" md="auto" lg="auto" xl="auto">Α/Α:</Col> 
-										<Col className="text-right p-0">{this.props.transactionId}</Col>										
+										<Col className=" p-0" xs="auto" md="auto" lg="auto" xl="auto">Δωμάτιο:</Col> 
+										<Col className="text-right p-0">{this.props.roomName}</Col>										
 									</Row>
 									<hr/>
 									<Row>
