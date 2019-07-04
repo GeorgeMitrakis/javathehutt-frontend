@@ -106,10 +106,10 @@ class FetchSearchResults extends React.Component {
         params['hasShauna'] = this.props.searchFilters.facilities.sauna;
         params['hasBreakfast'] = this.props.searchFilters.facilities.breakfast;
 
-        params['startDate'] = this.props.searchInfo.fromDate;
-        params['endDate'] = this.props.searchInfo.toDate;
+        params['startDate'] = this.props.searchInfo.startDate;
+        params['endDate'] = this.props.searchInfo.endDate;
                                                                     
-		params['occupants'] = this.props.searchInfo.adults + this.props.searchInfo.children;
+		params['occupants'] = Number(this.props.searchInfo.adults) + Number(this.props.searchInfo.children);
 
 		if(this.props.searchInfo.destination.trim() !== ""){
 			params['cityName'] = this.props.searchInfo.destination ;

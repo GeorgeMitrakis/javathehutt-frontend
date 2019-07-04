@@ -13,7 +13,7 @@ import axios from 'axios';
 import { getQueryParams, getUserInfoField } from '../../Utility/Utility';
 import qs from "querystring";
 import BookSuccess from './BookSuccess';
-//http://localhost:3000/book?hotel_id=123456&id=26&providerId=5&locationId=29&price=16&capacity=2&wifi=true&pool=true&shauna=false&roomName=superrooa&description=just%20adding%20test%20rooms&location=%5Bobject%20Object%5D&maxOccupants=3&provider=%5Bobject%20Object%5D&destination=a&fromDate=2019-07-02&toDate=2019-07-03&rooms=1&adults=1&children=0
+//http://localhost:3000/book?hotel_id=123456&id=26&providerId=5&locationId=29&price=16&capacity=2&wifi=true&pool=true&shauna=false&roomName=superrooa&description=just%20adding%20test%20rooms&location=%5Bobject%20Object%5D&maxOccupants=3&provider=%5Bobject%20Object%5D&destination=a&startDate=2019-07-02&endDate=2019-07-03&rooms=1&adults=1&children=0
 
 class Checkout extends Component{
 
@@ -33,7 +33,7 @@ class Checkout extends Component{
                 csc: null,
                 type: "Visa",
 			},
-			transactionId: null,
+			roomName: null,
 			alert: {
 				visible: false,
 				message: '',
@@ -113,8 +113,8 @@ class Checkout extends Component{
         let formData = {};
         formData["userId"] = getUserInfoField("id");
         formData["roomId"] = bookingInfo.id;
-        formData["startDate"] = bookingInfo.fromDate;
-        formData["endDate"] = bookingInfo.toDate;
+        formData["startDate"] = bookingInfo.startDate;
+        formData["endDate"] = bookingInfo.endDate;
         formData["occupants"] = Number(bookingInfo.adults) + Number(bookingInfo.children);
 
         console.log("form data: ");;
@@ -139,7 +139,7 @@ class Checkout extends Component{
 				window.scrollTo(0, 0);
 				this.setState(
 					produce( draft => {
-						draft.alert.message = result.data.message;
+						draft.alert.message = "Δωμάτιο μη διαθέσιμο";
 						draft.alert.visible = true;
 					})
 				)
@@ -148,7 +148,7 @@ class Checkout extends Component{
             {        
                 this.setState(
 					produce( draft => {
-						draft.transactionId = result.data.data.transactionId;
+						draft.roomName = bookingInfo.roomName;
 					})
 				)
             }
@@ -181,11 +181,11 @@ class Checkout extends Component{
         console.log(bookingInfo);
         console.log("---------");;
 
-		if(this.state.transactionId){
+		if(this.state.roomName){
 			return (
 				<BookSuccess 
-					transactionId={this.state.transactionId}
-					amount={bookingInfo.price*bookingInfo.rooms}
+					roomName={this.state.roomName}
+					amount={bookingInfo.price}
 					date={this.todayIs()}
 				/>
 			);
@@ -230,9 +230,9 @@ class Checkout extends Component{
 											</Col>
 											<Col>
 												<MyInput readOnly
-													name='Τοποθεσία:'
+													name='Ιδιοκτήτης:'
 													type='text'
-													value={bookingInfo.destination}
+													value={bookingInfo.providername}
 												/>
 											</Col>
 										</Row>
@@ -241,14 +241,14 @@ class Checkout extends Component{
 												<MyInput readOnly
 													name='Από:'
 													type='date'
-													value={bookingInfo.fromDate}
+													value={bookingInfo.startDate}
 												/>
 											</Col>
 											<Col>
 												<MyInput readOnly
 													name='Εώς:'
 													type='date'
-													value={bookingInfo.toDate}
+													value={bookingInfo.endDate}
 												/>
 											</Col>
 										</Row>
@@ -268,22 +268,19 @@ class Checkout extends Component{
 												/>
 											</Col>
 										</Row>
-										<Row>										
+										<Row>	
 											<Col>
 												<MyInput readOnly
-													name='Αριθμός δωματίων:'
+													name='Τοποθεσία:'
 													type='text'
-													value={bookingInfo.rooms}
+													value={bookingInfo.cityname}
 												/>
-											</Col>
+											</Col>									
 											<Col>
 												<MyInput readOnly
 													name='Τιμή:'
 													type='text'
-													value={
-														bookingInfo.price+"€ X "+bookingInfo.rooms+" = "
-														+bookingInfo.price*bookingInfo.rooms+"€"
-													}
+													value={bookingInfo.price+"€"}
 												/>
 											</Col>
 										</Row>
