@@ -8,7 +8,7 @@ import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import produce from 'immer';
-import FetchPreviewPhoto from './FetchPreviewPhoto/FetchPreviewPhoto';
+import FetchRoomPhotos from './ExpandableRoomInfo/FetchRoomPhotos/FetchRoomPhotos';
 
 
 class RoomPresentation extends React.Component {
