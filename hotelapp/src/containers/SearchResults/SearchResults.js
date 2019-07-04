@@ -387,19 +387,22 @@ class SearchResults extends React.Component {
         this.filtersToggle();
     }
 
-    mapClickedHandler = (mapProps, map, e, searchFilters, searchInfo) => {
+    mapClickedHandler = (mapProps, searchFilters, searchInfo) => {
+        console.log("apo to maps")
+        console.log(mapProps)
+        console.log("----------")
+        searchFilters = produce(searchFilters, draft => {
+            console.log(searchFilters)
+            alert("edw malaka")
+            draft.pointX = mapProps.lat;
+            draft.pointY = mapProps.lng;
+        });
+        console.log("changed Geo Search", searchFilters);
+        this.updateURL(searchFilters, searchInfo);
         this.mapToggle();
         console.log("-----------------");
         console.log("Stoixeia xarth:");
         console.log(mapProps);
-        // searchFilters = produce(searchFilters, draft => {
-        //     draft.pointX = mapProps.lat;
-        //     draft.pointY = mapProps.lng;
-        // });
-        // console.log("changed searchText", searchFilters);
-        // this.updateURL(searchFilters, searchInfo);
-        
-
     }
 
     render() {
@@ -431,7 +434,7 @@ class SearchResults extends React.Component {
                             />);
 
         const googleMap =  (<GoogleMapReact
-                                onClick={this.mapClickedHandler}
+                                onClick={ (e) => this.mapClickedHandler(e, searchFilters, searchInfo)}
                                 bootstrapURLKeys={{ key: "AIzaSyDzbz3N1cN0rLnP3WVa2lSkDWJ8uSIj2pA" }}
                                 defaultCenter={{
                                     lat: 53.430957,

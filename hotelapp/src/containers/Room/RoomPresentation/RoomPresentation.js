@@ -14,7 +14,7 @@ class RoomPresentation extends React.Component {
 
     constructor(props) {
         super(props);
-
+        console.log(this.props.room)
         this.toggleCollapse = this.toggleCollapse.bind(this);
 
         this.state = { 
