@@ -243,10 +243,17 @@ class SearchResults extends React.Component {
         if(this.props.isAuth){
             const params = {
                 //hotel_id: "123456",
-                ...roomInfo,
-				...searchInfo,
-				cityname:roomInfo.location.cityname,
-				providername:roomInfo.provider.providername
+                //...roomInfo,
+				//...searchInfo,
+				roomId : roomInfo.id,
+				roomName : roomInfo.roomName,
+				startDate : searchInfo.startDate,
+				endDate : searchInfo.endDate,
+				adults : searchInfo.adults,
+				children : searchInfo.children,
+				cityname : roomInfo.location.cityname,
+				providername : roomInfo.provider.providername,
+				price : roomInfo.price
 			}
 			console.log(params);
 			console.log("\n=====\n");

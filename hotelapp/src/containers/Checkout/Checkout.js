@@ -160,41 +160,41 @@ class Checkout extends Component{
     submitForm = (event, bookingInfo) => {
 		event.preventDefault();
 
-		const resid = checkValidity(this.state.card.id.value, this.state.card.id.rules);
-		const rescsc = checkValidity(this.state.card.csc.value, this.state.card.csc.rules);
-		const resexpdate = checkValidity(this.state.card.expdate.value, this.state.card.expdate.rules);
+		// const resid = checkValidity(this.state.card.id.value, this.state.card.id.rules);
+		// const rescsc = checkValidity(this.state.card.csc.value, this.state.card.csc.rules);
+		// const resexpdate = checkValidity(this.state.card.expdate.value, this.state.card.expdate.rules);
 		
 
-		const res = {
-			id: resid,
-		 	csc: rescsc,
-		 	expdate: resexpdate
-		}
+		// const res = {
+		// 	id: resid,
+		//  	csc: rescsc,
+		//  	expdate: resexpdate
+		// }
 
-		if(!resid.report || !rescsc.report || !resexpdate.report){
-			this.setState(
-				produce(draft => {
-					for(let i in this.state.card && i !== 'type'){
-						if(!res[i].report){
-							draft.card[i].feedback = res[i].msg;
-							draft.card[i].validity = "is-invalid";
-						}
-						else{
-							draft.card[i].feedback = null;
-							draft.card[i].validity = '';
-						}
-					}				
-				})
-			);
-			return;
-		}
+		// if(!resid.report || !rescsc.report || !resexpdate.report){
+		// 	this.setState(
+		// 		produce(draft => {
+		// 			for(let i in res){
+		// 				if(!res[i].report){
+		// 					draft.card[i].feedback = res[i].msg;
+		// 					draft.card[i].validity = "is-invalid";
+		// 				}
+		// 				else{
+		// 					draft.card[i].feedback = null;
+		// 					draft.card[i].validity = '';
+		// 				}
+		// 			}				
+		// 		})
+		// 	);
+		// 	return;
+		// }
 
         console.log(this.state);
 		console.log(bookingInfo);
 
         let formData = {};
         formData["userId"] = getUserInfoField("id");
-        formData["roomId"] = bookingInfo.id;
+        formData["roomId"] = bookingInfo.roomId;
         formData["startDate"] = bookingInfo.startDate;
         formData["endDate"] = bookingInfo.endDate;
         formData["occupants"] = Number(bookingInfo.adults) + Number(bookingInfo.children);
