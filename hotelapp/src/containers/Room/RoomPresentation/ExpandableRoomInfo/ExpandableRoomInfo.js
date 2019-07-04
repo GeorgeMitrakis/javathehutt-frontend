@@ -33,12 +33,7 @@ class ExpandableRoomInfo extends React.Component {
 
     render() {
 
-        if (!this.props.renderFlag)
-        {
-            return null;
-        }
-
-        // alert("paw gia render");
+        // alert("paw gia render EXPANDED");
 
         const activeTabStyle = {
             color: "rgb(40, 30, 182)",

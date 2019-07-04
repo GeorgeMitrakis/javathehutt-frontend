@@ -8,7 +8,6 @@ import ExpandableRoomInfo from './ExpandableRoomInfo/ExpandableRoomInfo';
 import Header from '../../../components/UI/Header/Header';
 import SubmitBtn from '../../../components/UI/SubmitBtn/SubmitBtn';
 import produce from 'immer';
-import FetchRoomPhotos from './ExpandableRoomInfo/FetchRoomPhotos/FetchRoomPhotos';
 
 
 class RoomPresentation extends React.Component {
@@ -124,10 +123,7 @@ class RoomPresentation extends React.Component {
 
                     <Row className="border">
                         <Collapse className="w-100" isOpen={this.state.collapse}>
-                            <ExpandableRoomInfo 
-                                room={this.props.room}
-                                renderFlag={this.state.expanded}
-                            />
+                            { this.state.expanded ? <ExpandableRoomInfo room={this.props.room}/> : null}
                         </Collapse>
                     </Row>
                 </Container>
