@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 // import Login from '../Login/Login';
 
 // import Signup from '../Signup/Signup';
-
+import Venice from '../../assets/images/venice_sunrise-wallpaper-5120x3200.jpg'
 class IndexPage extends React.Component {
 
     
@@ -32,6 +32,10 @@ class IndexPage extends React.Component {
 
                     <Row className="justify-content-center mr-2 ml-2 mt-5">
                         <SearchForm/>
+                    </Row>
+
+                    <Row  className="justify-content-center mr-2 ml-2 mt-5">
+                        <img style={{width: "95%", height: "45vh"}} src={Venice}/>
                     </Row>
 
                 </div>
