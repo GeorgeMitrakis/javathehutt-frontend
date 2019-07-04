@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import produce from 'immer';
 import FetchRoomPhotos from './FetchRoomPhotos/FetchRoomPhotos';
 import FetchRoomCritics from './FetchRoomCritics/FetchRoomCritics';
+import classes from '../RoomPresentation.module.css';
 
 
 class ExpandableRoomInfo extends React.Component {
@@ -120,7 +121,15 @@ class ExpandableRoomInfo extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="photos">
-                        <FetchRoomPhotos roomId = {this.props.room.id} />
+						<Row id={classes.img_pane}>
+							<Col/>
+							<Col id={classes.img_pane}>
+								<Row>
+									<FetchRoomPhotos roomId = {this.props.room.id} />
+								</Row>
+							</Col>
+							<Col/>
+						</Row>
                     </TabPane>
 
                     <TabPane tabId="critics">

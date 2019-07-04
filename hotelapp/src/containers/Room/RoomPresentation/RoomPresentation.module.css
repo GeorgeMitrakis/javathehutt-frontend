@@ -22,3 +22,8 @@
 .expand_btn:hover {
     color: rgb(40, 30, 182);
 }
+
+#img_pane{
+	border-color: black;
+}
+
