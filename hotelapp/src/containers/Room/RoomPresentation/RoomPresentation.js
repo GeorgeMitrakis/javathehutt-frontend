@@ -42,7 +42,7 @@ class RoomPresentation extends React.Component {
 
     render() {
         
-        const photo = "https://s-ec.bstatic.com/images/hotel/max1024x768/731/73118462.jpg";
+        //const photo = "https://s-ec.bstatic.com/images/hotel/max1024x768/731/73118462.jpg";
             
         let stars = [] ;
         for (let i=1; i <= 5; i++)

@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import produce from 'immer';
 import {  withRouter } from 'react-router-dom';
 //import produce from 'immer';
 import { Container, Col, Row, Modal } from 'reactstrap';
 
 import styles from './SearchResults.module.css';
-import { Get, Post } from 'react-axios';
+//import { Get, Post } from 'react-axios';
 import { createQueryParams, getQueryParams, todayIs, tomorrowIs, isLegitDate, cmpDates, checkValidity } from '../../Utility/Utility';
 import SearchForm from '../SearchForm/SearchForm';
 import FiltersTab from '../../components/Filters/FiltersTab';
 import GoogleMapReact from 'google-map-react';
-import { Spinner } from 'reactstrap';
 import MediaQuery from 'react-responsive';
 import FetchSearchResults from './FetchSearchResults/FetchSearchResults';
 

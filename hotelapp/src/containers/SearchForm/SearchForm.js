@@ -24,7 +24,6 @@ class SearchForm extends React.Component {
 		//used only for input focus on homepage 
 		this.textInputRef = React.createRef();
 
-        const fulldate = todayIs();
         this.state = {
             searchText: !this.props.searchInfo ? "" : this.props.searchInfo.destination,
             startDate: !this.props.searchInfo ? todayIs() : this.props.searchInfo.startDate,
