@@ -1,0 +1,14 @@
+#submit_btn {
+    outline: none !important;
+    box-shadow:none !important;
+    background-color: rgb(48, 34, 238);
+    color: white;
+    border-style:  solid; 
+    border-color: rgb(236, 190, 90);
+    border-width: 3px;
+}
+
+#submit_btn:hover {
+    background-color: rgb(40, 30, 182);
+    color: whitesmoke;
+}
