@@ -1,20 +1,32 @@
-# Software_Technologies_front
+# **JavaTheHutt**
 
-## **Java The Hutt**
+A [booking.com](https://www.booking.com/) clone written as a Single Page Web Application using React and a RESTful API implemented in Java.
 
-- Papadopoulos Ioannis _sdi1400144@di.uoa.gr_
-- Anagnou Petros _sdi1500002@di.uoa.gr_
-- Iliakis Markos _sdi1500185@di.uoa.gr_
-- Mitrakis Georgios _sdi1400107@di.uoa.gr_
-- Mpizimis Michalis _sdi1500102@di.uoa.gr_
-- Panteliadi Frini _sdi1400301@di.uoa.gr_
-- Tsapelas Christos _sdi1500161@di.uoa.gr_
+It was a group project required for the 'Software Technology' University Subject (DIT ,NKUA).
+
+The project was split in a Frontend Repo (current) and a [Backend Repo](https://github.com/GeorgeMitrakis/javathehutt-backend).
+
+
+## Team members:
+
+- [Anagnou Petros](https://www.linkedin.com/in/petros-anagnou/) (Backend)
+- [Iliakis Markos](https://www.linkedin.com/in/markos-iliakis-ba88b8135/) (Backend)
+- [Mitrakis Georgios](https://www.linkedin.com/in/george-mitrakis-867b74191/) (Frontend)
+- [Mpizimis Michalis](https://www.linkedin.com/in/michaelbzms/) (Backend)
+- [Papadopoulos Ioannis](https://www.linkedin.com/in/ioannis-papadopoulos-5356b9169/) (Frontend)
+- [Tsapelas Christos](https://www.linkedin.com/in/christos-tsapelas-71686a16b/) (Frontend)
+
+## CLI generated README
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Downloads the dependencies of the project to the 'node_modules' directory.
 
 ### `npm start`
 
