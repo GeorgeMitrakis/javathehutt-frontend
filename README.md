@@ -16,7 +16,7 @@ The project was split in a Frontend Repo (current) and a [Backend Repo](https://
 - [Papadopoulos Ioannis](https://www.linkedin.com/in/ioannis-papadopoulos-5356b9169/) (Frontend)
 - [Tsapelas Christos](https://www.linkedin.com/in/christos-tsapelas-71686a16b/) (Frontend)
 
-## Tutor
+## Tutor:
 
  - [Saidis Kostas](https://www.linkedin.com/in/saiko/)
 
